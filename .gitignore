@@ -1,0 +1,19 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# cache
+.eslintcache
+.jest-cache/
+
+# compiled output
+coverage/
+dist/
+
+# dependencies
+node_modules/
+
+# misc
+*.DS_Store
+
+# logs
+log/
+*npm-debug.log
