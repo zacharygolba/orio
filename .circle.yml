@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: zacharygolba/iter.js-primary:0.0.1
+      - image: node:latest
         environment:
           NODE_ENV: test
     working_directory: ~/iter.js
@@ -13,7 +13,9 @@ jobs:
             - dependency-cache-
       - run:
           name: Install Dependencies
-          command: yarn install
+          command:
+            - apt-get update && apt-get install -y libelf1
+            - yarn install
       - save_cache:
           key: dependency-cache-{{ epoch }}
           paths:

@@ -19,5 +19,5 @@ before_test:
 test_script:
   - yarn lint
   - yarn flow
-  - ps: yarn test -- --colors
+  - yarn test
   - yarn codecov
