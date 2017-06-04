@@ -14,10 +14,7 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
   - yarn install
-before_test:
-  - yarn run clean
 test_script:
   - yarn lint
   - yarn flow
   - yarn test
-  - yarn codecov
