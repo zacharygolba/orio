@@ -1,0 +1,23 @@
+build: off
+image: Visual Studio 2017
+version: '{build}'
+branches:
+  only:
+    - master
+cache:
+  - .jest-cache
+  - node_modules
+platform: x64
+environment:
+  nodejs_version: 8
+  NODE_ENV: test
+install:
+  - ps: Install-Product node $env:nodejs_version $env:platform
+  - yarn install
+before_test:
+  - yarn run clean
+test_script:
+  - yarn lint
+  - yarn flow
+  - ps: yarn test -- --colors
+  - yarn codecov
