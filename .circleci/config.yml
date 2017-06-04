@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: node:latest
+      - image: zacharygolba/iter.js-primary:0.0.1
         environment:
           NODE_ENV: test
     working_directory: ~/iter.js
