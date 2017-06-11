@@ -1,6 +1,7 @@
 /* @flow */
 
-import { DONE, SKIP, consume } from './adapter'
+import { DONE, SKIP } from './constants'
+import { consume } from './adapter'
 import { unimplemented } from './decorators'
 import { isSome, negate } from './utils'
 import type { Filter, Inspect, Iter, Mapper, Nil, Reducer } from './types'

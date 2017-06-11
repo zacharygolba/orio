@@ -1,7 +1,8 @@
 /* @flow */
 
+import { DONE, SKIP } from './constants'
 import Base from './base'
-import { DONE, SKIP, apply, done } from './adapter'
+import { apply, done } from './adapter'
 
 export default class Repeat<T> extends Base<T> {
   item: T

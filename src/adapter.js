@@ -1,9 +1,7 @@
 /* @flow */
 
+import { DONE, SKIP } from './constants'
 import type { Inspect, Iter, Mapper } from './types'
-
-export const DONE: Symbol = Symbol('done')
-export const SKIP: Symbol = Symbol('skip')
 
 type Consumer<T> = Inspect<T>
                  | Mapper<T, false>
