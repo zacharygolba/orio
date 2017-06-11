@@ -1,7 +1,7 @@
 [ignore]
+<PROJECT_ROOT>/coverage/*
 <PROJECT_ROOT>/dist/*
 <PROJECT_ROOT>/node_modules/*
-<PROJECT_ROOT>/__snapshots__/*
 
 [include]
 
@@ -9,9 +9,9 @@
 
 [options]
 emoji=true
-suppress_comment=\\(.\\|\n\\)*\\$FlowIgnore
 
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
+esproposal.decorators=ignore
 
 experimental.const_params=true

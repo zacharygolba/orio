@@ -3,9 +3,6 @@
   "coveragePathIgnorePatterns": [
     "/node_modules/"
   ],
-  "moduleNameMapper": {
-    "src/(.*)$": "<rootDir>/src/$1"
-  },
   "testEnvironment": "node",
-  "testRegex": "\\.test\\.js$"
+  "testRegex": "tests\\/.+\\.js$"
 }

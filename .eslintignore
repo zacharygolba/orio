@@ -2,3 +2,4 @@ coverage/
 dist/
 flow-typed/
 node_modules/
+src/types.js

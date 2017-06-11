@@ -1,9 +1,9 @@
 /* @flow */
 
-import Iter from './iter'
+import * as iter from '../src'
 
 test('#collect()', () => {
-  const result = Iter
+  const result = iter
     .range(1, 5)
     .collect()
 
@@ -11,7 +11,7 @@ test('#collect()', () => {
 })
 
 test('#enumerate()', () => {
-  const result = Iter
+  const result = iter
     .repeat('test')
     .take(5)
     .enumerate()
@@ -21,7 +21,7 @@ test('#enumerate()', () => {
 })
 
 test('#filter()', () => {
-  const result = Iter
+  const result = iter
     .range(1, 10)
     .filter(num => num % 2 === 0)
     .collect()
@@ -31,7 +31,7 @@ test('#filter()', () => {
 
 test('#forEach', () => {
   const value = 'test'
-  const result = Iter
+  const result = iter
     .repeat(value)
     .take(5)
     .forEach(expect(value).toBe)
@@ -40,7 +40,7 @@ test('#forEach', () => {
 })
 
 test('#map()', () => {
-  const result = Iter
+  const result = iter
     .range(1, 10)
     .map(num => num ** 2)
     .collect()
@@ -50,7 +50,7 @@ test('#map()', () => {
 
 test('#next()', () => {
   const value = 'test'
-  const subject = Iter.repeat(value)
+  const subject = iter.repeat(value)
 
   expect(subject.next()).toMatchSnapshot()
   expect(subject.next()).toMatchSnapshot()
@@ -58,11 +58,11 @@ test('#next()', () => {
 })
 
 test('#product()', () => {
-  const a = Iter
+  const a = iter
     .range(1, 5)
     .product()
 
-  const b = Iter
+  const b = iter
     .repeat('test')
     .take(5)
     .product()
@@ -72,11 +72,11 @@ test('#product()', () => {
 })
 
 test('#sum()', () => {
-  const a = Iter
+  const a = iter
     .range(1, 5)
     .sum()
 
-  const b = Iter
+  const b = iter
     .repeat('test')
     .take(5)
     .sum()
@@ -87,12 +87,12 @@ test('#sum()', () => {
 
 
 test('#join()', () => {
-  const a = Iter
+  const a = iter
     .repeat('test')
     .take(5)
     .join(' ')
 
-  const b = Iter
+  const b = iter
     .repeat('test')
     .take(5)
     .join()
@@ -102,9 +102,9 @@ test('#join()', () => {
 })
 
 test('#zip()', () => {
-  const result = Iter
+  const result = iter
     .range(0, 5)
-    .zip(Iter.range(5, 10))
+    .zip(iter.range(5, 10))
     .collect()
 
   expect(result).toMatchSnapshot()
@@ -114,32 +114,32 @@ test('.from()', () => {
   const arr = [1, 2, 3]
   const str = 'test'
   const set = new Set(arr)
-  const map = new Map(Iter
+  const map = new Map(iter
     .repeat(str)
     .enumerate()
     .take(5)
     .collect())
 
-  Iter
+  iter
     .from(arr)
-    .zip(Iter.range(0, 2).map(String))
+    .zip(iter.range(0, 2).map(String))
     .forEach(([value, key]) => {
       expect(arr).toHaveProperty(key, value)
     })
 
-  Iter
+  iter
     .from(str)
     .enumerate()
     .forEach(([idx, char]) => {
       expect(str.charAt(idx)).toBe(char)
     })
 
-  Iter
+  iter
     .from(set)
     .map(set.has.bind(set))
     .forEach(expect(true).toBe)
 
-  Iter
+  iter
     .from(map)
     .forEach(([key, value]) => {
       expect(map.get(key)).toBe(value)
@@ -147,12 +147,12 @@ test('.from()', () => {
 })
 
 test('.range()', () => {
-  expect(Iter.range(1).collect()).toMatchSnapshot()
-  expect(Iter.range(1, 5).collect()).toMatchSnapshot()
-  expect(Iter.range(1, Infinity).take(10).collect()).toMatchSnapshot()
+  expect(iter.range(1).collect()).toMatchSnapshot()
+  expect(iter.range(1, 5).collect()).toMatchSnapshot()
+  expect(iter.range(1, Infinity).take(10).collect()).toMatchSnapshot()
 })
 
 test('.repeat()', () => {
-  expect(Iter.repeat().take(5).collect()).toMatchSnapshot()
-  expect(Iter.repeat('test').take(5).collect()).toMatchSnapshot()
+  expect(iter.repeat().take(5).collect()).toMatchSnapshot()
+  expect(iter.repeat('test').take(5).collect()).toMatchSnapshot()
 })
