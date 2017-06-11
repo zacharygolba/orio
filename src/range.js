@@ -2,7 +2,8 @@
 
 import { DONE, SKIP } from './constants'
 import Base from './base'
-import { apply, done } from './adapter'
+import { apply } from './adapter'
+import type { Result } from './types'
 
 export default class Range extends Base<number> {
   start: number
@@ -20,7 +21,7 @@ export default class Range extends Base<number> {
     return `Range(${this.start}, ${this.end})`
   }
 
-  next(): IteratorResult<number, void> {
+  next(): Result<number> {
     const adapters = this.adapters
     const end = this.end
     let cursor = this.cursor
@@ -28,18 +29,25 @@ export default class Range extends Base<number> {
 
     while (value === SKIP) {
       if (cursor > end) {
-        return done()
+        return {
+          done: true,
+          value: undefined,
+        }
       }
 
       value = apply(adapters, cursor++)
 
       if (value === DONE) {
-        return done()
+        return {
+          done: true,
+          value: undefined,
+        }
       }
     }
 
     this.cursor = cursor
 
+    // $FlowFixMe
     return {
       done: false,
       value,

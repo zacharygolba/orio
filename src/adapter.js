@@ -1,10 +1,9 @@
 /* @flow */
 
 import { DONE, SKIP } from './constants'
-import type { Inspect, Iter, Mapper } from './types'
+import type { Iter, Result } from './types'
 
-type Consumer<T> = Inspect<T>
-                 | Mapper<T, false>
+type Consumer<T> = (value: T) => void | false
 
 export const apply = <T>(adapters: Array<Function>, item: T): Symbol | T => {
   const length = adapters.length
@@ -33,8 +32,12 @@ export const consume = <T>(source: Iter<T>, fn: Consumer<T>): void => {
   }
 }
 
-export const done = <T>(): IteratorResult<T, void> => ({
+export const done = <T>(): Result<T> => ({
   done: true,
   value: undefined,
 })
 
+export const pending = <T>(value: T): Result<T> => ({
+  done: false,
+  value,
+})

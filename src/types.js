@@ -11,7 +11,11 @@ export type Nil = null
 export type Reducer<T, U> = (prev: U, next: T) => U
                           | (prev: void, next: T) => U
 
-export interface Iter<T> {
+export type Result<T> = { done: true, value: void }
+                      | { done: false, value: T }
+
+export interface Iter<T> extends Iterable<T>, Iterator<T> {
+  @@iterator(): Iterator<T>,
   chain<U>(source: Iterable<U>): Iter<T | U>,
   collect(): Array<T>,
   count(): number,
@@ -19,12 +23,12 @@ export interface Iter<T> {
   enumerate(): Iter<[number, T]>,
   every(fn: Filter<T>): boolean,
   filter(fn: Filter<T>): Iter<T>,
-  filterMap(): Iter<T>,
+  filterMap<U>(fn: Mapper<T, U | Nil>): Iter<U>,
   find(fn: Filter<T>): void | T,
   first(): void | T,
   flatMap(): Iter<T>,
   forEach(fn: Inspect<T>): void,
-  fuse<U>(source: Iterable<U>): Iter<T | U>,
+  fuse(): Iter<T>,
   join(seperator?: string): string,
   last(): void | T,
   map<U>(fn: Mapper<T, U>): Iter<U>,
@@ -34,11 +38,11 @@ export interface Iter<T> {
   min(): void | T,
   minBy(): void | T,
   minByKey(): void | T,
-  next(): IteratorResult<T, void>,
-  nth(): void | T,
+  next(): Result<T>,
+  nth(index: number): void | T,
   partition(): Iter<T>,
   product(): number,
-  reduce<U>(fn: Reducer<T, U>, init?: U): U,
+  reduce<U>(fn: Reducer<T, *>, init: U): U,
   scan(): Iter<T>,
   skip(amount: number): Iter<T>,
   skipWhile(fn: Filter<T>): Iter<T>,

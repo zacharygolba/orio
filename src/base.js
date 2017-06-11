@@ -4,8 +4,17 @@ import { DONE, SKIP } from './constants'
 import { consume } from './adapter'
 import { unimplemented } from './decorators'
 import { isSome, negate } from './utils'
-import type { Filter, Inspect, Iter, Mapper, Nil, Reducer } from './types'
+import type {
+  Filter,
+  Inspect,
+  Iter,
+  Mapper,
+  Nil,
+  Reducer,
+  Result,
+} from './types'
 
+// $FlowFixMe
 export default class Base<T> implements Iter<T> {
   adapters: Array<Function>
   cursor: number
@@ -23,7 +32,7 @@ export default class Base<T> implements Iter<T> {
   }
 
   @unimplemented
-  chain<U>(source: Iterable<U>): Iter<T | U> {
+  chain<U>(/* source: Iterable<U> */): Iter<T | U> {
     return this
   }
 
@@ -109,7 +118,7 @@ export default class Base<T> implements Iter<T> {
   }
 
   join(seperator?: string = ','): string {
-    return this.map(String).reduce((prev, next) => {
+    return this.map(String).reduce((prev, next): string => {
       if (prev) {
         return prev + seperator + next
       }
@@ -163,7 +172,7 @@ export default class Base<T> implements Iter<T> {
   }
 
   @unimplemented
-  next(): IteratorResult<T, void> {
+  next(): Result<T> {
     return {
       done: false,
       value: undefined,
@@ -208,6 +217,7 @@ export default class Base<T> implements Iter<T> {
         return false
       }
 
+      // $FlowFixMe
       result *= value
       return undefined
     })
@@ -215,7 +225,7 @@ export default class Base<T> implements Iter<T> {
     return result
   }
 
-  reduce<U>(fn: Reducer<T, U>, init?: U): U {
+  reduce<U>(fn: Reducer<T, *>, init: U): U {
     let result = init
 
     consume(this, value => {
@@ -291,8 +301,11 @@ export default class Base<T> implements Iter<T> {
   }
 
   zip<U>(source: Iterable<U>): Iter<[T, U]> {
+    // $FlowFixMe
+    const iterator = source[Symbol.iterator]()
+
     this.adapters.push(key => {
-      const result = source.next()
+      const result = iterator.next()
 
       if (result.done) {
         return DONE

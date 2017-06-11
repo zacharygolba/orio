@@ -2,7 +2,8 @@
 
 import { DONE, SKIP } from './constants'
 import Base from './base'
-import { apply, done } from './adapter'
+import { apply } from './adapter'
+import type { Result } from './types'
 
 export default class From<T> extends Base<T> {
   iterator: Iterator<T>
@@ -10,6 +11,7 @@ export default class From<T> extends Base<T> {
 
   constructor(source: Iterable<T>) {
     super()
+    // $FlowFixMe
     this.iterator = source[Symbol.iterator]()
     this.source = source
   }
@@ -18,7 +20,7 @@ export default class From<T> extends Base<T> {
     return `Iter(${String(this.source)})`
   }
 
-  next(): IteratorResult<T, void> {
+  next(): Result<T> {
     const adapters = this.adapters
     const iterator = this.iterator
     let value = SKIP
@@ -33,10 +35,14 @@ export default class From<T> extends Base<T> {
       value = apply(adapters, result.value)
 
       if (value === DONE) {
-        return done()
+        return {
+          done: true,
+          value: undefined,
+        }
       }
     }
 
+    // $FlowFixMe
     return {
       done: false,
       value,

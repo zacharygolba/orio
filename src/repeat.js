@@ -2,7 +2,8 @@
 
 import { DONE, SKIP } from './constants'
 import Base from './base'
-import { apply, done } from './adapter'
+import { apply } from './adapter'
+import type { Result } from './types'
 
 export default class Repeat<T> extends Base<T> {
   item: T
@@ -16,7 +17,7 @@ export default class Repeat<T> extends Base<T> {
     return `Repeat(${String(this.item)})`
   }
 
-  next(): IteratorResult<number, void> {
+  next(): Result<T> {
     const adapters = this.adapters
     const item = this.item
     let value = SKIP
@@ -25,10 +26,14 @@ export default class Repeat<T> extends Base<T> {
       value = apply(adapters, item)
 
       if (value === DONE) {
-        return done()
+        return {
+          done: true,
+          value: undefined,
+        }
       }
     }
 
+    // $FlowFixMe
     return {
       done: false,
       value,

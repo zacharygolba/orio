@@ -9,10 +9,11 @@ export const isNil = <T>(value: T): boolean =>
 export const isNull = <T>(value: T): boolean =>
   value === null
 
+export const isSome = <T>(value: T): boolean =>
+  !isNil(value)
+
 export const isUndefined = <T>(value: T): boolean =>
   value === undefined
 
 export const negate = <T>(fn: HasInputs<T>): Negated<T> =>
   (...args) => !fn(...args)
-
-export const isSome = negate(isNil)
