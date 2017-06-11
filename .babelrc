@@ -1,13 +1,26 @@
 {
+  "comments": false,
   "env": {
+    "bench": {
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ],
+      "presets": [
+        "babili"
+      ]
+    },
     "test": {
       "plugins": [
         "transform-es2015-modules-commonjs"
       ]
+    },
+    "release": {
+      "presets": [
+        "babili"
+      ]
     }
   },
   "presets": [
-    "stage-2",
     ["env", {
       "modules": false,
       "targets": {
@@ -16,6 +29,10 @@
     }]
   ],
   "plugins": [
-    "transform-flow-strip-types"
+    "transform-decorators-legacy",
+    "transform-flow-strip-types",
+    ["transform-object-rest-spread", {
+      "useBuiltIns": true
+    }]
   ]
 }
