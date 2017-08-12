@@ -1,5 +1,6 @@
-/* @flow */
+// @flow
 
-import Iter from './iter'
+import * as stream from './stream'
 
-export const { from, range, repeat } = Iter
+export * from './iter'
+export { stream }

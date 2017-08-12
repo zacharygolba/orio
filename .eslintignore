@@ -1,4 +1,7 @@
 coverage/
 dist/
+examples/
 flow-typed/
 node_modules/
+src/impl.js
+**/*.flow

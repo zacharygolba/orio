@@ -1,0 +1,7 @@
+// @flow
+
+export type Reduce<T, U> = (acc: U, item: T) => U | Promise<U>
+
+declare function reduce<T, U>(fn: Reduce<T, U>, init: U, source: AsyncIterator<T>): Promise<U>
+declare function reduce<T>(fn: Reduce<T, T>, init: void, source: AsyncIterator<T>): Promise<T>
+declare export default typeof reduce

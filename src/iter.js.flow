@@ -1,0 +1,40 @@
+// @flow
+
+import type { Filter, ForEach, Map, Reduce } from './fp/iter'
+
+declare class Iter<T> {
+  constructor(source: Iterator<T>): void;
+
+  @@iterator(): Iterator<T>;
+  chain<U>(source: Iterable<U>): Iter<T | U>;
+  count(): number;
+  cycle(): Iter<T>;
+  enumerate(): Iter<[number, T]>;
+  every(fn: Filter<T>): boolean;
+  filter(fn: Filter<T>): Iter<T>;
+  filterMap<U>(fn: Map<T, ?U>): Iter<U>;
+  find(fn: Filter<T>): T | void;
+  first(): T | void;
+  flatMap<U>(fn: Map<T, Iterable<U>>): Iter<U>;
+  forEach(fn: ForEach<T>): void;
+  join(sep?: string): string;
+  last(): T | void;
+  map<U>(fn: Map<T, U>): Iter<U>;
+  next(): IteratorResult<T, void>;
+  nth(index: number): T | void;
+  product(): number;
+  reduce(fn: Reduce<T, T>, init?: void): T;
+  reduce<U>(fn: Reduce<T, U>, init: U): U;
+  skip(amount: number): Iter<T>;
+  skipWhile(fn: Filter<T>): Iter<T>;
+  some(fn: Filter<T>): boolean;
+  sum(): number;
+  take(amount: number): Iter<T>;
+  takeWhile(fn: Filter<T>): Iter<T>;
+  tap(fn: ForEach<T>): Iter<T>;
+  zip<U>(source: Iterable<U>): Iter<[T, U]>;
+}
+
+declare export function from<T>(source: Iterable<T>): Iter<T>;
+declare export function range(start?: number, end?: number): Iter<number>;
+declare export function repeat<T>(value: T): Iter<T>;

@@ -1,120 +1,140 @@
-/* @flow */
+import * as iter from './fp/iter'
 
-import * as seq from './seq'
-
-export default class Iter<T: any> {
-  source: Iterator<T>
-
-  constructor(source: Iterable<T>) {
-    Object.defineProperty(this, 'source', {
-      // $FlowIgnore
-      value: source[Symbol.iterator](),
-      writable: false,
-      enumerable: false,
-      configurable: false,
-    })
+class Iter {
+  constructor(source) {
+    this.source = source
   }
 
-  next(): IteratorResult<T, void> {
+  [Symbol.iterator]() {
+    return this
+  }
+
+  chain(target) {
+    this.source = iter.chain(target)(this.source)
+    return this
+  }
+
+  count() {
+    return iter.count(this)
+  }
+
+  cycle() {
+    this.source = iter.cycle(this.source)
+    return this
+  }
+
+  enumerate() {
+    this.source = iter.enumerate(this.source)
+    return this
+  }
+
+  every(fn) {
+    return iter.every(fn)(this)
+  }
+
+  filter(fn) {
+    this.source = iter.filter(fn)(this.source)
+    return this
+  }
+
+  filterMap(fn) {
+    this.source = iter.filterMap(fn)(this.source)
+    return this
+  }
+
+  find(fn) {
+    return iter.find(fn)(this)
+  }
+
+  first() {
+    return iter.first(this)
+  }
+
+  flatMap(fn) {
+    this.source = iter.flatMap(fn)(this.source)
+    return this
+  }
+
+  forEach(fn) {
+    return iter.forEach(fn)(this)
+  }
+
+  join(sep) {
+    return iter.join(sep)(this)
+  }
+
+  last() {
+    return iter.last(this)
+  }
+
+  map(fn) {
+    this.source = iter.map(fn)(this.source)
+    return this
+  }
+
+  next() {
     return this.source.next()
   }
 
-  enumerate(): Iter<[number, T]> {
-    return new Iter(seq.enumerate(this.source))
+  nth(index) {
+    return iter.nth(index)(this)
   }
 
-  map<U: any>(fn: (value: T) => U): Iter<U> {
-    return new Iter(seq.map(this.source, fn))
+  product() {
+    return iter.product(this)
   }
 
-  filter(fn: (value: T) => boolean): Iter<T> {
-    return new Iter(seq.filter(this.source, fn))
+  reduce(fn, init) {
+    return iter.reduce(fn, init, this)
   }
 
-  take(amount: number): Iter<T> {
-    return new Iter(seq.take(this.source, amount))
+  skip(amount) {
+    this.source = iter.skip(amount)(this.source)
+    return this
   }
 
-  // $FlowIgnore
-  zip<U>(source: Iterable<U>): Iter<[T, U]> {
-    return new Iter(seq.zip(this.source, source))
+  skipWhile(fn) {
+    this.source = iter.skipWhile(fn)(this.source)
+    return this
   }
 
-  sum(): number {
-    let result = 0
-
-    for (const value of this.source) {
-      if (typeof value !== 'number') {
-        return NaN
-      }
-
-      result += value
-    }
-
-    return result
+  some(fn) {
+    return iter.some(fn)(this)
   }
 
-  product(): number {
-    let result = 1
-
-    for (const value of this.source) {
-      if (typeof value !== 'number') {
-        return NaN
-      }
-
-      result *= value
-    }
-
-    return result
+  sum() {
+    return iter.sum(this)
   }
 
-  reduce<U>(fn: (prev: U, next: T) => U, init: U): U {
-    let result = init
-
-    for (const value of this.source) {
-      result = fn(result, value)
-    }
-
-    return result
+  take(amount) {
+    this.source = iter.take(amount)(this.source)
+    return this
   }
 
-  forEach(fn: (value: T) => any): void {
-    for (const value of this.source) {
-      fn(value)
-    }
+  takeWhile(fn) {
+    this.source = iter.takeWhile(fn)(this.source)
+    return this
   }
 
-  collect(): Array<T> {
-    return Array.from(this.source)
+  tap(fn) {
+    this.source = iter.tap(fn)(this.source)
+    return this
   }
 
-  join(seperator?: string = ','): string {
-    return this.map(String).reduce((prev, next) => {
-      if (prev) {
-        return prev + seperator + next
-      }
-      return next
-    }, '')
-  }
-
-  static from<+U>(source: Iterable<U>): Iter<U> {
-    return new Iter(source)
-  }
-
-  static range(from: number, to?: number): Iter<number> {
-    return new Iter(seq.range(from, to))
-  }
-
-  static repeat<+U>(value: U): Iter<U> {
-    return new Iter(seq.repeat(value))
+  zip(target) {
+    this.source = iter.zip(target)(this.source)
+    return this
   }
 }
 
-Object.defineProperty(Iter.prototype, Symbol.iterator, {
-  value() {
-    return this.source
-  },
-  writable: false,
-  enumerable: false,
-  configurable: false,
-})
+export function from(source) {
+  return new Iter(iter.from(source))
+}
+
+export function range(start, end) {
+  return new Iter(iter.range(start, end))
+}
+
+export function repeat(value) {
+  return new Iter(iter.repeat(value))
+}

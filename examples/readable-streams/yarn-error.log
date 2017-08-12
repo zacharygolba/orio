@@ -1,0 +1,41 @@
+Arguments: 
+  /Users/zacharygolba/.nvm/versions/node/v8.3.0/bin/node /usr/local/Cellar/yarn/0.27.5_1/libexec/bin/yarn.js add path:../../
+
+PATH: 
+  /Users/zacharygolba/.rvm/gems/ruby-2.4.0/bin:/Users/zacharygolba/.rvm/gems/ruby-2.4.0@global/bin:/Users/zacharygolba/.rvm/rubies/ruby-2.4.0/bin:/Users/zacharygolba/.opam/4.03.0/bin:/Users/zacharygolba/.nvm/versions/node/v8.3.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/bin:/Users/zacharygolba/.cargo/bin:/usr/local/bin:/Users/zacharygolba/.rvm/bin
+
+Yarn version: 
+  0.27.5
+
+Node version: 
+  8.3.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "readable-streams",
+    "version": "0.0.1",
+    "main": "index.js",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: path:..%2f../: Invalid protocol: path:
+      at Request.init (/usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:114514:31)
+      at new Request (/usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:114184:8)
+      at request (/usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:112782:10)
+      at RequestManager.execute (/usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:58245:17)
+      at RequestManager.shiftQueue (/usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:58272:10)
+      at promise.default (/usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:58049:12)
+      at Promise (<anonymous>)
+      at F (/usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:29304:28)
+      at RequestManager.request (/usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:58047:21)
+      at NpmRegistry.request (/usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:32153:32)

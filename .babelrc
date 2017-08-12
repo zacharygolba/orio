@@ -1,5 +1,10 @@
 {
   "env": {
+    "bench": {
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
+    },
     "test": {
       "plugins": [
         "transform-es2015-modules-commonjs"
@@ -7,7 +12,7 @@
     }
   },
   "presets": [
-    "stage-2",
+    "stage-3",
     ["env", {
       "modules": false,
       "targets": {

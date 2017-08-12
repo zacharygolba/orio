@@ -8,10 +8,6 @@
 [libs]
 
 [options]
-emoji=true
-suppress_comment=\\(.\\|\n\\)*\\$FlowIgnore
-
-esproposal.class_static_fields=enable
-esproposal.class_instance_fields=enable
-
 experimental.const_params=true
+
+module.name_mapper='iter.js' -> '<PROJECT_ROOT>/src/index.js'
