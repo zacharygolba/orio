@@ -1,7 +1,0 @@
-// @flow
-
-export type Reduce<T, U> = (acc: U, item: T) => U
-
-declare function reduce<T, U>(fn: Reduce<T, U>, init: U, source: Iterator<T>): U
-declare function reduce<T>(fn: Reduce<T, T>, init: void, source: Iterator<T>): T
-declare export default typeof reduce

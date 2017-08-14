@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "bench": "NODE_ENV=bench node -r babel-core/register benches",
-    "build": "rollup -c",
+    "build": "NODE_ENV=production rollup -c",
     "clean": "shx rm -rf coverage dist",
     "flow": "flow check",
     "lint": "eslint .",
@@ -16,9 +16,12 @@
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-async-generator-functions": "^6.24.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-minify": "^0.0.0",
     "babel-preset-stage-3": "^6.24.1",
     "benchmark": "^2.1.4",
     "codecov": "^2.3.0",

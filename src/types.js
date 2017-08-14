@@ -15,6 +15,11 @@ import type {
   Zip,
 } from './adapters'
 
+export interface IndexedCollection<T> {
+  [key: number]: T;
+  length: number;
+}
+
 export interface Iter<T> extends Iterator<T> {
   chain<U>(source: Iterable<U>): Chain<T, U>;
   collect(): Array<T>;
@@ -45,10 +50,3 @@ export interface Iter<T> extends Iterator<T> {
   tap(fn: (T) => void): Tap<T>;
   zip<U>(source: Iterable<U>): Zip<T, U>;
 }
-
-export interface IntoIter<T> {
-  next(): IteratorResult<T, void>;
-  sizeHint(): number;
-}
-
-declare export function impl<T, I: IntoIter<T>>(Target: Class<I>): Class<I & Iter<T>>;

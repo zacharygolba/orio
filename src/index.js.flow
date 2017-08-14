@@ -1,0 +1,20 @@
+// @flow
+
+import Cycle from './cycle'
+import { IndexedIterator, UnboundedIterator } from './iterator'
+import Range from './range'
+import Repeat from './repeat'
+import type { Iter, IndexedCollection } from './types'
+
+declare export function cycle<T>(source: IndexedCollection<T>): Cycle<T>
+
+declare function from<T>(source: IndexedCollection<T>): IndexedIterator<T>
+declare function from<T>(source?: T): IndexedIterator<T>
+declare function from<T>(source: Iterable<T>): UnboundedIterator<T>
+declare export var from: typeof from
+
+declare function range(start?: number, end?: number): Iter<number>
+declare function range(start: string, end: string): Iter<number>
+declare export var range: typeof range
+
+declare export function repeat<T>(value: T): Repeat<T>

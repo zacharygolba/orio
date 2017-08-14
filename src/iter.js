@@ -1,140 +1,169 @@
-import * as iter from './fp/iter'
+import {
+  Chain,
+  Enumerate,
+  FilterMap,
+  Filter,
+  FlatMap,
+  Map,
+  SkipWhile,
+  Skip,
+  TakeWhile,
+  Take,
+  Tap,
+  Zip,
+} from './adapters'
 
-class Iter {
-  constructor(source) {
-    this.source = source
+export function impl(Target) {
+  return class extends Target {
+    [Symbol.iterator]() {
+      return this
+    }
+
+    chain(target) {
+      return new Chain(this, target)
+    }
+
+    collect() {
+      const length = this.sizeHint()
+      const items = new Array(length)
+      let i = 0
+
+      for (; i < length; i++) {
+        const result = this.next()
+
+        if (result.done) {
+          break
+        }
+
+        items[i] = result.value
+      }
+
+      items.length = i
+      return items
+    }
+
+    count() {
+      return this.reduce(acc => acc + 1, 0)
+    }
+
+    enumerate() {
+      return new Enumerate(this)
+    }
+
+    every(fn) {
+      return this.map(fn).find(value => !value) || true
+    }
+
+    filterMap(fn) {
+      return new FilterMap(this, fn)
+    }
+
+    filter(fn) {
+      return new Filter(this, fn)
+    }
+
+    find(fn) {
+      return this.filter(fn).first()
+    }
+
+    first() {
+      return this.take(1).reduce((_, next) => next, undefined)
+    }
+
+    flatMap(fn) {
+      return new FlatMap(this, fn)
+    }
+
+    forEach(fn) {
+      const length = this.sizeHint()
+
+      for (let i = 0; i < length; i++) {
+        const { done, value } = this.next()
+
+        if (done) {
+          break
+        }
+
+        fn(value)
+      }
+    }
+
+    join(sep) {
+      return this.reduce((prev, next) => prev ? (prev + sep + next) : (prev + next), '')
+    }
+
+    last() {
+      return this.reduce((_, next) => next, undefined)
+    }
+
+    map(fn) {
+      return new Map(this, fn)
+    }
+
+    nth(idx) {
+      const [lastIdx, value] = this.enumerate().take(idx + 1).last()
+
+      if (idx === lastIdx) {
+        return value
+      }
+
+      // If the last index is not equal to the input index, the input index was
+      // out of bounds.
+      return undefined
+    }
+
+    product() {
+      const { value = NaN } = this.next()
+      return this.reduce((prev, next) => prev + next, value)
+    }
+
+    reduce(fn, init) {
+      const length = this.sizeHint()
+      let acc = init
+
+      for (let i = 0; i < length; i++) {
+        const { done, value } = this.next()
+
+        if (done) {
+          break
+        }
+
+        acc = fn(acc, value)
+      }
+
+      return acc
+    }
+
+    skip(amount) {
+      return new Skip(this, amount)
+    }
+
+    skipWhile(fn) {
+      return new SkipWhile(this, fn)
+    }
+
+    some(fn) {
+      return this.map(fn).find(Boolean) || false
+    }
+
+    sum() {
+      return this.reduce((acc, next) => acc + next, 0)
+    }
+
+    take(amount) {
+      return new Take(this, amount)
+    }
+
+    takeWhile(fn) {
+      return new TakeWhile(this, fn)
+    }
+
+    tap(fn) {
+      return new Tap(this, fn)
+    }
+
+    zip(source) {
+      return new Zip(this, source)
+    }
   }
-
-  [Symbol.iterator]() {
-    return this
-  }
-
-  chain(target) {
-    this.source = iter.chain(target)(this.source)
-    return this
-  }
-
-  count() {
-    return iter.count(this)
-  }
-
-  cycle() {
-    this.source = iter.cycle(this.source)
-    return this
-  }
-
-  enumerate() {
-    this.source = iter.enumerate(this.source)
-    return this
-  }
-
-  every(fn) {
-    return iter.every(fn)(this)
-  }
-
-  filter(fn) {
-    this.source = iter.filter(fn)(this.source)
-    return this
-  }
-
-  filterMap(fn) {
-    this.source = iter.filterMap(fn)(this.source)
-    return this
-  }
-
-  find(fn) {
-    return iter.find(fn)(this)
-  }
-
-  first() {
-    return iter.first(this)
-  }
-
-  flatMap(fn) {
-    this.source = iter.flatMap(fn)(this.source)
-    return this
-  }
-
-  forEach(fn) {
-    return iter.forEach(fn)(this)
-  }
-
-  join(sep) {
-    return iter.join(sep)(this)
-  }
-
-  last() {
-    return iter.last(this)
-  }
-
-  map(fn) {
-    this.source = iter.map(fn)(this.source)
-    return this
-  }
-
-  next() {
-    return this.source.next()
-  }
-
-  nth(index) {
-    return iter.nth(index)(this)
-  }
-
-  product() {
-    return iter.product(this)
-  }
-
-  reduce(fn, init) {
-    return iter.reduce(fn, init, this)
-  }
-
-  skip(amount) {
-    this.source = iter.skip(amount)(this.source)
-    return this
-  }
-
-  skipWhile(fn) {
-    this.source = iter.skipWhile(fn)(this.source)
-    return this
-  }
-
-  some(fn) {
-    return iter.some(fn)(this)
-  }
-
-  sum() {
-    return iter.sum(this)
-  }
-
-  take(amount) {
-    this.source = iter.take(amount)(this.source)
-    return this
-  }
-
-  takeWhile(fn) {
-    this.source = iter.takeWhile(fn)(this.source)
-    return this
-  }
-
-  tap(fn) {
-    this.source = iter.tap(fn)(this.source)
-    return this
-  }
-
-  zip(target) {
-    this.source = iter.zip(target)(this.source)
-    return this
-  }
-}
-
-export function from(source) {
-  return new Iter(iter.from(source))
-}
-
-export function range(start, end) {
-  return new Iter(iter.range(start, end))
-}
-
-export function repeat(value) {
-  return new Iter(iter.repeat(value))
 }

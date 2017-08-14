@@ -47,6 +47,7 @@
       "never"
     ],
     "strict": 0,
+    "no-plusplus": 0,
     // "max-len": ["error", 80],
     "arrow-parens": 0,
     "comma-dangle": [

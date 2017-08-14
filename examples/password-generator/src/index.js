@@ -1,12 +1,10 @@
 const iter = require('iter.js')
 
+const CODES = [...iter.range(32, 126)]
+
 exports.generate = ({ pattern, length }) => iter
-  // start with a range of ascii char codes
-  .range(32, 126)
-  // convert the char code to a string
+  .cycle(CODES)
   .map(String.fromCharCode)
-  // infinitely repeat this sequence
-  .cycle()
   // filter chars that don't match the input pattern (default: [0-9A-Za-z])
   .filter(char => pattern.test(char))
   // filter by a random boolean for increased randomness
