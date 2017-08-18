@@ -2,9 +2,14 @@
 
 import { impl } from './iter'
 import { IndexedIterator } from './iterator'
-import type { IndexedCollection } from './types'
+import type { IndexedCollection } from './iterator'
+import type { Iter } from './iter'
 
-export default impl(class Cycle<T> {
+export default function cycle<T: any>(source: IndexedCollection<T>): Iter<T> {
+  return new Cycle(source)
+}
+
+const Cycle = impl(class CycleIterator<T> {
   original: IndexedCollection<T>
   source: Iterator<T>
 

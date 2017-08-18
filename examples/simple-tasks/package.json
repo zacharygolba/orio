@@ -1,0 +1,10 @@
+{
+  "name": "simple-tasks",
+  "version": "0.0.1",
+  "main": "src/index.js",
+  "author": "Zachary Golba",
+  "license": "MIT",
+  "dependencies": {
+    "iter.js": "file:../../"
+  }
+}

@@ -5,24 +5,20 @@ import sizeOf from '../utils/size-of'
 
 import Filter from './filter'
 
-const createFilter = fn => {
-  let willSkip = true
-
-  return value => {
-    if (!willSkip) {
-      willSkip = !fn(value)
-      return false
-    }
-
-    return true
-  }
-}
-
 export default impl(class SkipWhile<T> {
-  source: Filter<T>
+  source: Iterator<T>
 
   constructor(source: Iterator<T>, fn: (T) => boolean) {
-    this.source = new Filter(source, createFilter(fn))
+    let willSkip = true
+
+    this.source = new Filter(source, value => {
+      if (willSkip) {
+        willSkip = fn(value)
+        return !willSkip
+      }
+
+      return true
+    })
   }
 
   next(): IteratorResult<T, void> {

@@ -11,7 +11,7 @@ import {
   Take,
   Tap,
   Zip,
-} from './adapters'
+} from '../adapters'
 
 export function impl(Target) {
   return class extends Target {
@@ -24,26 +24,15 @@ export function impl(Target) {
     }
 
     collect() {
-      const length = this.sizeHint()
-      const items = new Array(length)
-      let i = 0
-
-      for (; i < length; i++) {
-        const result = this.next()
-
-        if (result.done) {
-          break
-        }
-
-        items[i] = result.value
-      }
-
-      items.length = i
-      return items
+      return this.reduce((acc, next) => {
+        acc.push(next)
+        return acc
+      }, [])
     }
 
     count() {
-      return this.reduce(acc => acc + 1, 0)
+      const size = this.sizeHint()
+      return Number.isFinite(size) ? this.reduce(acc => acc + 1, 0) : Infinity
     }
 
     enumerate() {
@@ -51,7 +40,7 @@ export function impl(Target) {
     }
 
     every(fn) {
-      return this.map(fn).find(value => !value) || true
+      return this.map(fn).find(value => !value) === undefined
     }
 
     filterMap(fn) {
@@ -61,7 +50,6 @@ export function impl(Target) {
     filter(fn) {
       return new Filter(this, fn)
     }
-
     find(fn) {
       return this.filter(fn).first()
     }
@@ -75,20 +63,20 @@ export function impl(Target) {
     }
 
     forEach(fn) {
-      const length = this.sizeHint()
+      const size = this.sizeHint()
 
-      for (let i = 0; i < length; i++) {
-        const { done, value } = this.next()
+      for (let i = 0; i < size; i++) {
+        const result = this.next()
 
-        if (done) {
+        if (result.done) {
           break
         }
 
-        fn(value)
+        fn(result.value)
       }
     }
 
-    join(sep) {
+    join(sep = ',') {
       return this.reduce((prev, next) => prev ? (prev + sep + next) : (prev + next), '')
     }
 
@@ -113,22 +101,24 @@ export function impl(Target) {
     }
 
     product() {
-      const { value = NaN } = this.next()
-      return this.reduce((prev, next) => prev + next, value)
+      const iter = this.map(Number)
+      const { value = NaN } = iter.next()
+
+      return iter.reduce((acc, next) => acc * next, value)
     }
 
     reduce(fn, init) {
-      const length = this.sizeHint()
+      const size = this.sizeHint()
       let acc = init
 
-      for (let i = 0; i < length; i++) {
-        const { done, value } = this.next()
+      for (let i = 0; i < size; i++) {
+        const result = this.next()
 
-        if (done) {
+        if (result.done) {
           break
         }
 
-        acc = fn(acc, value)
+        acc = fn(acc, result.value)
       }
 
       return acc
@@ -143,11 +133,11 @@ export function impl(Target) {
     }
 
     some(fn) {
-      return this.map(fn).find(Boolean) || false
+      return this.map(fn).find(Boolean) !== undefined
     }
 
     sum() {
-      return this.reduce((acc, next) => acc + next, 0)
+      return this.map(Number).reduce((acc, next) => acc + next, 0)
     }
 
     take(amount) {

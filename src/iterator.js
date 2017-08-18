@@ -1,21 +1,48 @@
 // @flow
 
 import { impl } from './iter'
-import type { IndexedCollection } from './types'
 
-export const IndexedIterator = impl(class Indexed<T> {
-  index: number
-  length: number
-  source: IndexedCollection<T>
+export interface IndexedCollection<T> {
+  [key: number]: T;
+  length: number;
+}
 
-  constructor(source: IndexedCollection<T>) {
-    this.index = 0
-    this.source = source
-    this.length = source.length
+export interface SizedCollection<T> extends Iterable<T> {
+  size: number;
+}
+
+export const CollectionIterator = impl(class Collection<T> {
+  size: number
+  source: Iterator<T>
+
+  constructor(source: SizedCollection<T>) {
+    this.size = source.size
+    // $FlowFixMe
+    this.source = source[Symbol.iterator]()
   }
 
   next(): IteratorResult<T, void> {
-    if (this.index >= this.length) {
+    return this.source.next()
+  }
+
+  sizeHint(): number {
+    return this.size
+  }
+})
+
+export const IndexedIterator = impl(class Indexed<T> {
+  source: IndexedCollection<T>
+  size: number
+  state: number
+
+  constructor(source: IndexedCollection<T>) {
+    this.source = source
+    this.size = source.length
+    this.state = 0
+  }
+
+  next(): IteratorResult<T, void> {
+    if (this.state >= this.size) {
       return {
         done: true,
         value: undefined,
@@ -24,12 +51,12 @@ export const IndexedIterator = impl(class Indexed<T> {
 
     return {
       done: false,
-      value: this.source[this.index++],
+      value: this.source[this.state++],
     }
   }
 
-  sizeHint() {
-    return this.length
+  sizeHint(): number {
+    return this.size
   }
 })
 

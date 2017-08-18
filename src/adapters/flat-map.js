@@ -1,7 +1,16 @@
 // @flow
 
 import { impl } from '../iter'
+import intoIter from '../utils/into-iter'
 import sizeOf from '../utils/size-of'
+
+function* flatMap(source, fn) {
+  for (const item of source) {
+    for (const value of intoIter(fn(item))) {
+      yield value
+    }
+  }
+}
 
 export default impl(class FlatMap<T, U> {
   fn: (T) => Iterable<U>
@@ -9,7 +18,7 @@ export default impl(class FlatMap<T, U> {
 
   constructor(source: Iterator<T>, fn: (T) => Iterable<U>) {
     this.fn = fn
-    this.source = source
+    this.source = flatMap(source, fn)
   }
 
   next(): IteratorResult<U, void> {
@@ -27,6 +36,6 @@ export default impl(class FlatMap<T, U> {
   }
 
   sizeHint(): number {
-    return sizeOf(this.source)
+    return Infinity
   }
 })

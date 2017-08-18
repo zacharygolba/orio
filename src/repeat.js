@@ -1,8 +1,13 @@
 // @flow
 
 import { impl } from './iter'
+import type { Iter } from './iter'
 
-export default impl(class Repeat<T> {
+export default function repeat<T: any>(value: T): Iter<T> {
+  return new Repeat(value)
+}
+
+const Repeat = impl(class RepeatIterator<T> {
   value: T
 
   constructor(value: T) {

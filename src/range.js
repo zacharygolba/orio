@@ -2,6 +2,13 @@
 
 import { impl } from './iter'
 import sizeOf from './utils/size-of'
+import type { Iter } from './iter'
+
+type Item = number | string
+
+export default function range(start?: Item = 0, end?: Item = Infinity): Iter<Item> {
+  return new Range(start, end)
+}
 
 const CharRange = impl(class {
   source: Iterator<number>
@@ -14,10 +21,7 @@ const CharRange = impl(class {
     const result = this.source.next()
 
     if (result.done) {
-      return {
-        done: true,
-        value: undefined,
-      }
+      return result
     }
 
     return {
@@ -34,7 +38,7 @@ const CharRange = impl(class {
 const NumberRange = impl(class {
   source: Iterator<number>
 
-  constructor(start?: number = 0, end?: number = Infinity) {
+  constructor(start: number, end: number) {
     if (start > end) {
       this.source = new DescNumberRange(start, end)
     } else {
@@ -77,7 +81,7 @@ const AscNumberRange = impl(class {
   }
 
   sizeHint(): number {
-    return Math.abs(this.end - this.start)
+    return Math.abs(this.end - this.start) + 1
   }
 })
 
@@ -107,22 +111,22 @@ const DescNumberRange = impl(class {
   }
 
   sizeHint(): number {
-    return Math.abs(this.start - this.end)
+    return Math.abs(this.start - this.end) + 1
   }
 })
 
-export default impl(class Range<T: number | string> {
-  source: Iterator<T>
+const Range = impl(class {
+  source: Iterator<Item>
 
-  constructor(start: T, end: T) {
+  constructor(start: Item, end: Item) {
     if (typeof start === 'string' && typeof end === 'string') {
       this.source = new CharRange(start, end)
-    } else if (typeof start === 'number' && typeof end === 'number') {
-      this.source = new NumberRange(start, end)
+    } else {
+      this.source = new NumberRange(Number(start), Number(end))
     }
   }
 
-  next(): IteratorResult<T, void> {
+  next(): IteratorResult<Item, void> {
     return this.source.next()
   }
 

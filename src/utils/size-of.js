@@ -5,9 +5,5 @@ type MaybeIter = {
 }
 
 export default function sizeOf<I: MaybeIter>(iter: I): number {
-  if (typeof iter.sizeHint === 'function') {
-    return iter.sizeHint()
-  }
-
-  return Infinity
+  return typeof iter.sizeHint === 'function' ? iter.sizeHint() : Infinity
 }

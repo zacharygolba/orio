@@ -4,12 +4,12 @@ import { impl } from '../iter'
 import sizeOf from '../utils/size-of'
 
 export default impl(class Enumerate<T> {
-  index: number
   source: Iterator<T>
+  state: number
 
   constructor(source: Iterator<T>) {
-    this.index = 0
     this.source = source
+    this.state = 0
   }
 
   next(): IteratorResult<[number, T], void> {
@@ -21,7 +21,7 @@ export default impl(class Enumerate<T> {
 
     return {
       done: false,
-      value: [this.index++, result.value],
+      value: [this.state++, result.value],
     }
   }
 

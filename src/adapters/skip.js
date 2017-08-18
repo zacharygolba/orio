@@ -28,6 +28,6 @@ export default impl(class Skip<T> {
   }
 
   sizeHint(): number {
-    return sizeOf(this.source) - this.amount
+    return Math.max(sizeOf(this.source) - this.amount, 0)
   }
 })

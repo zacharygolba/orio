@@ -10,7 +10,7 @@ const isNone = value => value === null || value === undefined
 const isSome = value => !isNone(value)
 
 export default impl(class FilterMap<T, U> {
-  source: Filter<?U>
+  source: Iterator<?U>
 
   constructor(source: Iterator<T>, fn: (T) => ?U) {
     this.source = new Filter(new Map(source, fn), isSome)
@@ -18,7 +18,7 @@ export default impl(class FilterMap<T, U> {
 
   // $FlowFixMe
   next(): IteratorResult<U, void> {
-    this.source.next()
+    return this.source.next()
   }
 
   sizeHint(): number {

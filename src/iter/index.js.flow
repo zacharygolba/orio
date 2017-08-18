@@ -1,0 +1,42 @@
+// @flow
+
+declare export class Iter<T> {
+  constructor(...args: Array<*>): void;
+  @@iterator(): Iterator<T>;
+  chain<U>(source: Iterable<U>): Iter<T | U>;
+  collect(): Array<T>;
+  count(): number;
+  enumerate(): Iter<[number, T]>;
+  every(fn: (T) => boolean): boolean;
+  filter(fn: (T) => boolean): Iter<T>;
+  filterMap<U>(fn: (T) => ?U): Iter<U>;
+  find(fn: (T) => boolean): T | void;
+  first(): T | void;
+  flatMap<U>(fn: (T) => U | Iterable<U>): Iter<U>;
+  forEach(fn: (T) => void): void;
+  join(sep?: string): string;
+  last(): T | void;
+  map<U>(fn: (T) => U): Iter<U>;
+  next(): IteratorResult<T, *>;
+  nth(index: number): T | void;
+  product(): number;
+  reduce(fn: (T, T) => T, init?: void): T;
+  reduce<U>(fn: (U, T) => U, init: U): U;
+  sizeHint(): number;
+  skip(amount: number): Iter<T>;
+  skipWhile(fn: (T) => boolean): Iter<T>;
+  some(fn: (T) => boolean): boolean;
+  sum(): number;
+  take(amount: number): Iter<T>;
+  takeWhile(fn: (T) => boolean): Iter<T>;
+  tap(fn: (T) => void): Iter<T>;
+  zip<U>(source: Iterable<U>): Iter<[T, U]>;
+}
+
+export interface IntoIter<T> {
+  constructor(...args: Array<*>): void;
+  next(): IteratorResult<T, void>;
+  sizeHint(): [number, number];
+}
+
+declare export function impl<T>(Target: any): Class<Iter<T>>;

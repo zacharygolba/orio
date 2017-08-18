@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#next() 1`] = `
+Object {
+  "done": false,
+  "value": "test",
+}
+`;
+
+exports[`#next() 2`] = `
+Object {
+  "done": false,
+  "value": "test",
+}
+`;
+
+exports[`#next() 3`] = `
+Object {
+  "done": false,
+  "value": "test",
+}
+`;
+
+exports[`#next() 4`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;

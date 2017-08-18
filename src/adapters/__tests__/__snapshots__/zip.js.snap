@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#next() 1`] = `
+Object {
+  "done": false,
+  "value": Array [
+    "test",
+    1,
+  ],
+}
+`;
+
+exports[`#next() 2`] = `
+Object {
+  "done": false,
+  "value": Array [
+    "test",
+    2,
+  ],
+}
+`;
+
+exports[`#next() 3`] = `
+Object {
+  "done": false,
+  "value": Array [
+    "test",
+    3,
+  ],
+}
+`;
+
+exports[`#next() 4`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#next() 5`] = `
+Object {
+  "done": false,
+  "value": Array [
+    1,
+    "test",
+  ],
+}
+`;
+
+exports[`#next() 6`] = `
+Object {
+  "done": false,
+  "value": Array [
+    2,
+    "test",
+  ],
+}
+`;
+
+exports[`#next() 7`] = `
+Object {
+  "done": false,
+  "value": Array [
+    3,
+    "test",
+  ],
+}
+`;
+
+exports[`#next() 8`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;

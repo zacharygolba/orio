@@ -1,25 +1,6 @@
 {
-  "env": {
-    "bench": {
-      "plugins": [
-        "transform-es2015-modules-commonjs"
-      ]
-    },
-    "test": {
-      "plugins": [
-        "transform-es2015-modules-commonjs"
-      ]
-    },
-    "production": {
-      "plugins": [
-        "external-helpers"
-      ]
-    }
-  },
   "presets": [
-    "stage-3",
     ["env", {
-      "modules": false,
       "targets": {
         "node": "current"
       }
