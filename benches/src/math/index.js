@@ -48,3 +48,15 @@ new Suite('Primes')
     console.log(`Fastest is ${this.filter('fastest').map('name')}`)
   })
   .run()
+
+new Suite('Product')
+  .add('iter.js', () => iter.from([3, 4, 2]).iproduct())
+  .add('lazy.js', () => Lazy([3, 4, 2]).reduce((x, y) => x * y))
+  // .add('lodash', lodash)
+  .on('cycle', ({ target }) => {
+    console.log(String(target))
+  })
+  .on('complete', function _() {
+    console.log(`Fastest is ${this.filter('fastest').map('name')}`)
+  })
+  .run()

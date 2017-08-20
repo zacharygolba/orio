@@ -14,6 +14,7 @@ import {
   TapAdapter,
   ZipAdapter,
 } from './adapter'
+import * as ops from './ops'
 import type { Producer } from './producer'
 import type { IntoIterator, FromIterator } from './types'
 
@@ -137,8 +138,19 @@ export default class Iter<T> implements Producer<T> {
   }
 
   product(): number {
-    // $FlowFixMe
-    return this.sizeHint() === 0 ? 0 : this.reduce((acc, next) => acc * next, 1)
+    if (this.sizeHint() === 0) {
+      return 0
+    }
+
+    return this.reduce(ops.mul, 1)
+  }
+
+  iproduct(): number {
+    if (this.sizeHint() === 0) {
+      return 0
+    }
+
+    return this.reduce(ops.imul, 1)
   }
 
   reduce<U>(fn: (U, T) => U, init: U): U {
@@ -176,7 +188,7 @@ export default class Iter<T> implements Producer<T> {
   }
 
   sum(): number {
-    return this.map(Number).reduce((acc, next) => acc + next, 0)
+    return this.reduce(ops.add, 0)
   }
 
   take(amount: number): Iter<T> {
