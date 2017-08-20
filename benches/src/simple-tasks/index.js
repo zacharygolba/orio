@@ -32,6 +32,18 @@ new Suite('FizzBuzz')
   })
   .run()
 
+new Suite('Primes')
+  .add('iter.js', () => tasks.primes(100).collect())
+  .add('lazy.js', () => lazy.primes(100).toArray())
+  // .add('lodash', lodash)
+  .on('cycle', ({ target }) => {
+    console.log(String(target))
+  })
+  .on('complete', function _() {
+    console.log(`Fastest is ${this.filter('fastest').map('name')}`)
+  })
+  .run()
+
 new Suite('Map Filter Reduce')
   .add('iter.js', () => {
     iter

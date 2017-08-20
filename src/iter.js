@@ -63,7 +63,7 @@ export default class Iter<T> implements Producer<T> {
   }
 
   every(fn: (T) => boolean): boolean {
-    return this.map(fn).find(value => !value) === undefined
+    return this.find(item => !fn(item)) === undefined
   }
 
   filterMap<U>(fn: (T) => ?U): Iter<U> {
@@ -177,7 +177,7 @@ export default class Iter<T> implements Producer<T> {
   }
 
   some(fn: (T) => boolean): boolean {
-    return this.map(fn).find(Boolean) !== undefined
+    return this.find(fn) !== undefined
   }
 
   sum(): number {

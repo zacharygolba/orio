@@ -29,6 +29,14 @@ function fizzBuzz() /*: Lazy */ {
     })
 }
 
+function primes(amount /*: number */) /*: number */ {
+  return Lazy
+    .range(0, Infinity)
+    .filter(num => !Lazy.range(num - 1, 1).some(div => num % div === 0))
+    .take(amount)
+}
+
 exports.MAX_FACTORIAL = MAX_FACTORIAL
 exports.factorial = factorial
 exports.fizzBuzz = fizzBuzz
+exports.primes = primes
