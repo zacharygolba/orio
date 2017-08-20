@@ -1,18 +1,9 @@
-// @flow
-
 const { EOL } = require('os')
 
 const iter = require('iter.js')
 const yargs = require('yargs')
 
 const { version } = require('../package.json')
-
-/*::
-type Options = {
-  length: number,
-  pattern: RegExp,
-}
-*/
 
 const { argv } = yargs
   .version(version)
