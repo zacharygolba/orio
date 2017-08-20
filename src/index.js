@@ -1,6 +1,39 @@
 // @flow
 
-export { default as cycle } from './cycle'
-export { default as from } from './utils/into-iter'
-export { default as range } from './range'
-export { default as repeat } from './repeat'
+import Iter from './iter'
+import {
+  createProducer,
+  CharProducer,
+  CycleProducer,
+  NumberProducer,
+  RepeatProducer,
+} from './producer'
+import type { IndexedCollection } from './producer'
+
+export type { default as Iter } from './iter'
+export type { FromIterator } from './types'
+
+export function cycle<T>(source: IndexedCollection<T>): Iter<T> {
+  const producer = new CycleProducer(source)
+  return new Iter(producer)
+}
+
+export function from(source: any): Iter<*> {
+  const producer = createProducer(source)
+  return new Iter(producer)
+}
+
+export function repeat<T>(value: T): Iter<T> {
+  const producer = new RepeatProducer(value)
+  return new Iter(producer)
+}
+
+export function range<T: number | string>(start: T, end: T): Iter<T> {
+  if (typeof start === 'string' && typeof end === 'string') {
+    const producer = new CharProducer(start, end)
+    return new Iter(producer)
+  }
+
+  const producer = new NumberProducer(Number(start), Number(end))
+  return new Iter(producer)
+}

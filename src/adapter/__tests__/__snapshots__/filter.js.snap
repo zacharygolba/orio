@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#@@iterator() 1`] = `2`;
+
+exports[`#@@iterator() 2`] = `3`;
+
+exports[`#next() 1`] = `
+Object {
+  "done": false,
+  "value": 2,
+}
+`;
+
+exports[`#next() 2`] = `
+Object {
+  "done": false,
+  "value": 3,
+}
+`;
+
+exports[`#next() 3`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#next() 4`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;

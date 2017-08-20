@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+// @flow
+
+const yargs = require('yargs')
+
+const { version } = require('../package.json')
+const main = require('../')
+
+const { argv } = yargs
+  .version(version)
+  .alias('d', 'directory')
+  .default('d', process.cwd(), 'the current directory')
+  .alias('f', 'filter')
+  .coerce('f', RegExp)
+  .default('f', '.+', 'filter lines with a regular expression')
+  .alias('p', 'pattern')
+  .coerce('p', RegExp)
+  .default('p', '.+', 'filter file names with a regular expression')
+  .help('help')
+
+process.stdout.write(`${main(argv)} lines\n`)

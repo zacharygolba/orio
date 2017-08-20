@@ -1,10 +1,13 @@
 {
   "name": "simple-tasks",
   "version": "0.0.1",
-  "main": "src/index.js",
-  "author": "Zachary Golba",
+  "repository": "https://github.com/zacharygolba/iter.js",
+  "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
+  "private": true,
+  "main": "src/index.js",
   "dependencies": {
-    "iter.js": "file:../../"
+    "iter.js": "file:../..",
+    "yargs": "^8.0.2"
   }
 }

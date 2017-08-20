@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+// @flow
+
+const iter = require('iter.js')
+const yargs = require('yargs')
+
+const { version } = require('../package.json')
+const generate = require('../')
+
+const { argv } = yargs
+  .version(version)
+  .alias('l', 'length')
+  .coerce('l', Number)
+  .default('l', '48', 'sets the length desired password length')
+  .alias('p', 'pattern')
+  .coerce('p', RegExp)
+  .default('p', '[0-9A-Za-z]', 'filter characters with a regular expression')
+  .help('help')
+
+generate(argv)
+  .chain(iter.from('\n'))
+  .forEach(chunk => process.stdout.write(chunk))

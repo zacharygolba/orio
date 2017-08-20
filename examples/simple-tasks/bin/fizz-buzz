@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+// @flow
+
+const iter = require('iter.js')
+const yargs = require('yargs')
+
+const { version } = require('../package.json')
+const { fizzBuzz } = require('../')
+
+const _ = yargs
+  .version(version)
+  .help('help')
+  .argv
+
+fizzBuzz()
+  .zip(iter.repeat('\n'))
+  .flatten()
+  .forEach(chunk => process.stdout.write(chunk))

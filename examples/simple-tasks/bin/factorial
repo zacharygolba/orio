@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+// @flow
+
+const yargs = require('yargs')
+
+const { version } = require('../package.json')
+const { factorial } = require('../')
+
+const { argv } = yargs
+  .version(version)
+  .help('help')
+
+process.stdout.write(`${factorial(Number(argv[0]))}\n`)

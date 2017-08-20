@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#@@iterator() 1`] = `
+Array [
+  "test",
+  1,
+]
+`;
+
+exports[`#@@iterator() 2`] = `
+Array [
+  "test",
+  2,
+]
+`;
+
+exports[`#@@iterator() 3`] = `
+Array [
+  "test",
+  3,
+]
+`;
+
+exports[`#next() with a bound lhs and an unbound rhs 1`] = `
+Object {
+  "done": false,
+  "value": Array [
+    1,
+    "test",
+  ],
+}
+`;
+
+exports[`#next() with a bound lhs and an unbound rhs 2`] = `
+Object {
+  "done": false,
+  "value": Array [
+    2,
+    "test",
+  ],
+}
+`;
+
+exports[`#next() with a bound lhs and an unbound rhs 3`] = `
+Object {
+  "done": false,
+  "value": Array [
+    3,
+    "test",
+  ],
+}
+`;
+
+exports[`#next() with a bound lhs and an unbound rhs 4`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#next() with a self reference to bound lhs 1`] = `
+Object {
+  "done": false,
+  "value": Array [
+    1,
+    2,
+  ],
+}
+`;
+
+exports[`#next() with a self reference to bound lhs 2`] = `
+Object {
+  "done": false,
+  "value": Array [
+    3,
+    4,
+  ],
+}
+`;
+
+exports[`#next() with a self reference to bound lhs 3`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#next() with a self reference to bound lhs 4`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#next() with an unbound lhs and a bound rhs 1`] = `
+Object {
+  "done": false,
+  "value": Array [
+    "test",
+    1,
+  ],
+}
+`;
+
+exports[`#next() with an unbound lhs and a bound rhs 2`] = `
+Object {
+  "done": false,
+  "value": Array [
+    "test",
+    2,
+  ],
+}
+`;
+
+exports[`#next() with an unbound lhs and a bound rhs 3`] = `
+Object {
+  "done": false,
+  "value": Array [
+    "test",
+    3,
+  ],
+}
+`;
+
+exports[`#next() with an unbound lhs and a bound rhs 4`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;

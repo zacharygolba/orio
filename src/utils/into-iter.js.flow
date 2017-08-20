@@ -1,7 +1,0 @@
-// @flow
-
-import type { Iter } from '../iter'
-
-declare function intoIter<T>(source: Iterable<T>): Iter<T>;
-declare function intoIter<T>(source: T): Iter<T>;
-declare export default typeof intoIter;

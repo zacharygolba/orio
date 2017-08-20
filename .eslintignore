@@ -1,9 +1,5 @@
+*.flow
 coverage/
 dist/
-examples/
 flow-typed/
 node_modules/
-src/iterator/types.js
-src/impl.js
-**/*.flow
-**/types.js

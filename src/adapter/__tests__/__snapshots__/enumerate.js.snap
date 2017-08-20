@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#@@iterator() 1`] = `
+Array [
+  0,
+  1,
+]
+`;
+
+exports[`#@@iterator() 2`] = `
+Array [
+  1,
+  2,
+]
+`;
+
+exports[`#@@iterator() 3`] = `
+Array [
+  2,
+  3,
+]
+`;
+
+exports[`#next() 1`] = `
+Object {
+  "done": false,
+  "value": Array [
+    0,
+    1,
+  ],
+}
+`;
+
+exports[`#next() 2`] = `
+Object {
+  "done": false,
+  "value": Array [
+    1,
+    2,
+  ],
+}
+`;
+
+exports[`#next() 3`] = `
+Object {
+  "done": false,
+  "value": Array [
+    2,
+    3,
+  ],
+}
+`;
+
+exports[`#next() 4`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;

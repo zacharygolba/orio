@@ -3,7 +3,6 @@
 declare class String {
   [key: number]: string;
   length: number;
-
   @@iterator(): Iterator<string>;
   anchor(name: string): string;
   charAt(pos: number): string;

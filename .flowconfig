@@ -1,15 +1,21 @@
 [ignore]
-<PROJECT_ROOT>/benches/*
-<PROJECT_ROOT>/dist/*
-<PROJECT_ROOT>/examples/*
-<PROJECT_ROOT>/node_modules/*
-<PROJECT_ROOT>/__snapshots__/*
+.*/__old_tests__/*
+.*/dist/.*
+.*/node_modules/.*
+<PROJECT_ROOT>/benches/.*
+<PROJECT_ROOT>/examples/.*
 
 [include]
 
 [libs]
 
-[options]
-experimental.const_params=true
+[lints]
 
-module.name_mapper='iter.js' -> '<PROJECT_ROOT>/src/index.js'
+[options]
+
+max_header_tokens=2
+
+module.use_strict=true
+
+suppress_comment=\\(.\\|\n\\)*\\$ExpectError
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
