@@ -15,7 +15,7 @@ import {
   ZipAdapter,
 } from './adapter'
 import * as ops from './ops'
-import type { Collectable } from './types'
+import type { FromIterator } from './types'
 import type { Producer } from './producer'
 
 export default class Iter<T> implements Producer<T> {
@@ -36,7 +36,7 @@ export default class Iter<T> implements Producer<T> {
     return new Iter(adapter)
   }
 
-  collect(Target?: Class<Collectable<T>> = Array): Collectable<T> {
+  collect(Target?: Class<FromIterator<T>> = Array): FromIterator<T> {
     if (Target === Array) {
       return this.reduce((acc, next) => {
         acc.push(next)
