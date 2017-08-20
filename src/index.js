@@ -28,7 +28,9 @@ export function repeat<T>(value: T): Iter<T> {
   return new Iter(producer)
 }
 
-export function range<T: number | string>(start: T, end: T): Iter<T> {
+type Item = number | string
+
+export function range(start?: Item = 0, end?: Item = Infinity): Iter<Item> {
   if (typeof start === 'string' && typeof end === 'string') {
     const producer = new CharProducer(start, end)
     return new Iter(producer)

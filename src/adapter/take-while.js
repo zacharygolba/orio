@@ -1,6 +1,5 @@
 // @flow
 
-import * as bounds from '../bounds'
 import * as result from '../result'
 import type { Producer } from '../producer'
 
@@ -30,6 +29,6 @@ export default class TakeWhileAdapter<T> implements Producer<T> {
   }
 
   sizeHint(): number {
-    return bounds.sizeOf(this.producer)
+    return this.producer.sizeHint()
   }
 }

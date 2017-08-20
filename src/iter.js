@@ -89,9 +89,8 @@ export default class Iter<T> implements Producer<T> {
     return new Iter(adapter)
   }
 
-  flatten(): Iter<T> {
-    const adapter = new FlatMapAdapter(this.producer, item => item)
-    return new Iter(adapter)
+  flatten(): Iter<*> {
+    return this.flatMap(item => item)
   }
 
   forEach(fn: (T) => void): void {

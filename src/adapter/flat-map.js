@@ -1,6 +1,5 @@
 // @flow
 
-import * as bounds from '../bounds'
 import * as result from '../result'
 import { createProducer } from '../producer'
 import type { Producer } from '../producer'
@@ -16,7 +15,7 @@ export default class FlatMapAdapter<T, U> implements Producer<U> {
   constructor(producer: Producer<T>, fn: (T) => IntoIterator<U>) {
     this.fn = fn
     this.parent = producer
-    this.size = bounds.sizeOf(this.parent)
+    this.size = this.parent.sizeHint()
   }
 
   // $FlowFixMe
@@ -37,7 +36,7 @@ export default class FlatMapAdapter<T, U> implements Producer<U> {
       const child = createProducer(this.fn(nextChild.value))
 
       this.child = child
-      this.size += bounds.sizeOf(child) - 1
+      this.size += child.sizeHint() - 1
 
       next = child.next()
     }

@@ -1,6 +1,5 @@
 // @flow
 
-import * as bounds from '../bounds'
 import type { Producer } from '../producer'
 
 export default class SkipAdapter<T> implements Producer<T> {
@@ -34,6 +33,6 @@ export default class SkipAdapter<T> implements Producer<T> {
   }
 
   sizeHint(): number {
-    return Math.max(bounds.sizeOf(this.producer) - this.amount, 0)
+    return Math.max(this.producer.sizeHint() - this.amount, 0)
   }
 }

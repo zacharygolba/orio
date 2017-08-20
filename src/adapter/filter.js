@@ -1,6 +1,5 @@
 // @flow
 
-import * as bounds from '../bounds'
 import type { Producer } from '../producer'
 
 export default class FilterAdapter<T> implements Producer<T> {
@@ -29,6 +28,6 @@ export default class FilterAdapter<T> implements Producer<T> {
   }
 
   sizeHint(): number {
-    return bounds.sizeOf(this.producer)
+    return this.producer.sizeHint()
   }
 }

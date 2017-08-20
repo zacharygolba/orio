@@ -1,6 +1,5 @@
 // @flow
 
-import * as bounds from '../bounds'
 import * as result from '../result'
 import { createProducer } from '../producer'
 import type { Producer } from '../producer'
@@ -32,6 +31,6 @@ export default class ChainAdapter<T, U> implements Producer<T | U> {
   }
 
   sizeHint(): number {
-    return bounds.sizeOf(this.producerA) + bounds.sizeOf(this.producerB)
+    return this.producerA.sizeHint() + this.producerB.sizeHint()
   }
 }

@@ -1,6 +1,5 @@
 // @flow
 
-import * as bounds from '../bounds'
 import * as result from '../result'
 import { createProducer } from '../producer'
 import type { Producer } from '../producer'
@@ -17,7 +16,7 @@ export default class ZipAdapter<T, U> implements Producer<[T, U]> {
     this.producerB = createProducer(producerB)
 
     if (producerA === producerB) {
-      const size = bounds.sizeOf(producerA)
+      const size = producerA.sizeHint()
       this.size = Number.isFinite(size) ? Math.floor(size / 2) : Infinity
     }
   }
@@ -39,6 +38,13 @@ export default class ZipAdapter<T, U> implements Producer<[T, U]> {
   }
 
   sizeHint(): number {
-    return this.size || Math.min(bounds.sizeOf(this.producerA), bounds.sizeOf(this.producerB))
+    if (this.size) {
+      return this.size
+    }
+
+    return Math.min(
+      this.producerA.sizeHint(),
+      this.producerB.sizeHint(),
+    )
   }
 }

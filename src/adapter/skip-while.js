@@ -1,6 +1,5 @@
 // @flow
 
-import * as bounds from '../bounds'
 import type { Producer } from '../producer'
 
 import Filter from './filter'
@@ -32,6 +31,6 @@ export default class SkipWhileAdapter<T> implements Producer<T> {
   }
 
   sizeHint(): number {
-    return bounds.sizeOf(this.producer)
+    return this.producer.sizeHint()
   }
 }
