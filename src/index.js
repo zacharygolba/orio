@@ -23,7 +23,7 @@ export function cycle<T>(source: IndexedCollection<T>): Iter<T> {
   return new Iter(producer)
 }
 
-export function from(source: any): Iter<*> {
+export function from<T>(source: Iterable<T> | T): Iter<T> {
   const producer = createProducer(source)
   return new Iter(producer)
 }

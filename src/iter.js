@@ -31,7 +31,7 @@ export default class Iter<T> implements Producer<T> {
     return this
   }
 
-  chain<U>(producer: Iterable<U>): Iter<T | U> {
+  chain<U>(producer: Iterable<U> | U): Iter<T | U> {
     const adapter = new ChainAdapter(this.producer, producer)
     return new Iter(adapter)
   }
@@ -83,8 +83,7 @@ export default class Iter<T> implements Producer<T> {
     return this.take(1).reduce((_, next) => next, undefined)
   }
 
-  // $FlowFixMe
-  flatMap<U>(fn: (T) => Iterable<U>): Iter<U> {
+  flatMap<U>(fn: (T) => Iterable<U> | U): Iter<U> {
     const adapter = new FlatMapAdapter(this.producer, fn)
     return new Iter(adapter)
   }

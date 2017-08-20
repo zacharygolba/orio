@@ -9,7 +9,7 @@ export default class ChainAdapter<T, U> implements Producer<T | U> {
   producerB: Producer<U>
   /*:: @@iterator: () => Iterator<T | U> */
 
-  constructor(producerA: Producer<T>, producerB: Iterable<U>) {
+  constructor(producerA: Producer<T>, producerB: Iterable<U> | U) {
     this.producerA = producerA
     this.producerB = createProducer(producerB)
   }

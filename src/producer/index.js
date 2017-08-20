@@ -1,7 +1,6 @@
 // @flow
 
 import Iter from '../iter'
-// import type { IntoIterator } from '../types'
 
 import { CharProducer, NumberProducer } from './range'
 import { IndexedProducer, MapProducer, SetProducer } from './collection'
@@ -17,7 +16,6 @@ export { default as RepeatProducer } from './repeat'
 export { default as UnboundProducer } from './unbound'
 export type { IndexedCollection, Producer } from './types'
 
-/*:: declare function createProducer<T>(any): Producer<T> */
 export function createProducer<T>(source: any): Producer<T> {
   if (source == null) {
     return new IndexedProducer([])

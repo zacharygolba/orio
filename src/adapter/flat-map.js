@@ -6,12 +6,12 @@ import type { Producer } from '../producer'
 
 export default class FlatMapAdapter<T, U> implements Producer<U> {
   child: ?Producer<U>
-  fn: (T) => Iterable<U>
+  fn: (T) => Iterable<U> | U
   parent: Producer<T>
   size: number
   /*:: @@iterator: () => Iterator<U> */
 
-  constructor(producer: Producer<T>, fn: (T) => Iterable<U>) {
+  constructor(producer: Producer<T>, fn: (T) => Iterable<U> | U) {
     this.fn = fn
     this.parent = producer
     this.size = this.parent.sizeHint()
