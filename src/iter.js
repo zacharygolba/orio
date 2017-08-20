@@ -16,9 +16,7 @@ import {
 } from './adapter'
 import * as ops from './ops'
 import type { Producer } from './producer'
-import type { IntoIterator, FromIterator } from './types'
-
-export const isIter = (value: mixed): %checks => value instanceof Iter
+import type { FromIterator } from './types'
 
 export default class Iter<T> implements Producer<T> {
   producer: Producer<T>
@@ -33,7 +31,7 @@ export default class Iter<T> implements Producer<T> {
     return this
   }
 
-  chain<U>(producer: IntoIterator<U>): Iter<T | U> {
+  chain<U>(producer: Iterable<U>): Iter<T | U> {
     const adapter = new ChainAdapter(this.producer, producer)
     return new Iter(adapter)
   }
@@ -206,7 +204,7 @@ export default class Iter<T> implements Producer<T> {
     return new Iter(adapter)
   }
 
-  zip(producer?: IntoIterator<*>): Iter<[T, *]> {
+  zip(producer?: Iterable<*>): Iter<[T, *]> {
     const adapter = new ZipAdapter(this.producer, producer || this.producer)
     return new Iter(adapter)
   }

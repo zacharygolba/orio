@@ -3,14 +3,13 @@
 import * as result from '../result'
 import { createProducer } from '../producer'
 import type { Producer } from '../producer'
-import type { IntoIterator } from '../types'
 
 export default class ChainAdapter<T, U> implements Producer<T | U> {
   producerA: Producer<T>
   producerB: Producer<U>
   /*:: @@iterator: () => Iterator<T | U> */
 
-  constructor(producerA: Producer<T>, producerB: IntoIterator<U>) {
+  constructor(producerA: Producer<T>, producerB: Iterable<U>) {
     this.producerA = producerA
     this.producerB = createProducer(producerB)
   }
