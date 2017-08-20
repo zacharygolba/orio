@@ -41,7 +41,7 @@ export default class ZipAdapter<T, U> implements Producer<[T, U]> {
   }
 
   sizeHint(): number {
-    if (this.size) {
+    if (this.size != null) {
       return this.size
     }
 
