@@ -34,7 +34,10 @@ export default class ZipAdapter<T, U> implements Producer<[T, U]> {
       return result.done()
     }
 
-    return result.next([nextA.value, nextB.value])
+    return result.next([
+      nextA.value,
+      nextB.value,
+    ])
   }
 
   sizeHint(): number {

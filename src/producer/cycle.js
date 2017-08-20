@@ -1,5 +1,7 @@
 // @flow
 
+import * as result from '../result'
+
 import type { IndexedCollection, Producer } from './types'
 
 export default class CycleProducer<T> implements Producer<T> {
@@ -22,10 +24,7 @@ export default class CycleProducer<T> implements Producer<T> {
       this.state = 0
     }
 
-    return {
-      done: false,
-      value: this.source[this.state++],
-    }
+    return result.next(this.source[this.state++])
   }
 
   sizeHint(): number {

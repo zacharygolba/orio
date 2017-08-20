@@ -16,7 +16,7 @@ function factorial(n /*: number */) /*: number */ {
 
 function fizzBuzz() /*: Lazy */ {
   return Lazy
-    .range(0, 101)
+    .range(1, 101)
     .map(n => {
       if (n % 15 === 0) {
         return 'FizzBuzz'

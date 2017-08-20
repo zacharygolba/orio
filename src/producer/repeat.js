@@ -1,5 +1,7 @@
 // @flow
 
+import * as result from '../result'
+
 import type { Producer } from './types'
 
 export default class RepeatProducer<T> implements Producer<T> {
@@ -16,10 +18,7 @@ export default class RepeatProducer<T> implements Producer<T> {
   }
 
   next(): IteratorResult<T, void> {
-    return {
-      done: false,
-      value: this.value,
-    }
+    return result.next(this.value)
   }
 
   sizeHint(): number {

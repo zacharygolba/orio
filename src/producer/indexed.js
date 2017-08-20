@@ -1,5 +1,7 @@
 // @flow
 
+import * as result from '../result'
+
 import type { IndexedCollection, Producer } from './types'
 
 export default class IndexedProducer<T> implements Producer<T> {
@@ -21,16 +23,10 @@ export default class IndexedProducer<T> implements Producer<T> {
 
   next(): IteratorResult<T, void> {
     if (this.state >= this.size) {
-      return {
-        done: true,
-        value: undefined,
-      }
+      return result.done()
     }
 
-    return {
-      done: false,
-      value: this.source[this.state++],
-    }
+    return result.next(this.source[this.state++])
   }
 
   sizeHint(): number {
