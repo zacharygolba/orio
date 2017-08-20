@@ -1,20 +1,18 @@
 [ignore]
-.*/__old_tests__/*
-.*/dist/.*
-.*/node_modules/.*
 <PROJECT_ROOT>/benches/.*
+<PROJECT_ROOT>/coverage/.*
+<PROJECT_ROOT>/dist/.*
 <PROJECT_ROOT>/examples/.*
+<PROJECT_ROOT>/node_modules/.*
 
 [include]
 
 [libs]
 
 [lints]
-
 all=warn
 
 [options]
-
 include_warnings=true
 max_header_tokens=2
 
