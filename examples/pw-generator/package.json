@@ -5,12 +5,8 @@
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
   "private": true,
-  "main": "src/index.js",
-  "bin": {
-    "pw": "bin/pw"
-  },
+  "main": "index.js",
   "dependencies": {
-    "iter.js": "file:../..",
     "yargs": "^8.0.2"
   }
 }
