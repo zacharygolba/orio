@@ -1,15 +1,20 @@
 // @flow
 
+const assert = require('assert')
+
 const { Suite } = require('benchmark')
 const iter = require('iter.js')
 const Lazy = require('lazy.js')
-const tasks = require('simple-tasks')
+const math = require('math-examples')
 
 const lazy = require('./lazy')
 // const lodash = require('./lodash')
 
+assert.equal(math.MAX_FACTORIAL, lazy.MAX_FACTORIAL)
+// assert.equal(math.MAX_FACTORIAL, lodash.MAX_FACTORIAL)
+
 new Suite('Factorial')
-  .add('iter.js', () => tasks.factorial(tasks.MAX_FACTORIAL))
+  .add('iter.js', () => math.factorial(math.MAX_FACTORIAL))
   .add('lazy.js', () => lazy.factorial(lazy.MAX_FACTORIAL))
   // .add('lodash', lodash)
   .on('cycle', ({ target }) => {
@@ -21,8 +26,8 @@ new Suite('Factorial')
   .run()
 
 new Suite('FizzBuzz')
-  .add('iter.js', () => tasks.fizzBuzz().collect())
-  .add('lazy.js', () => lazy.fizzBuzz().toArray())
+  .add('iter.js', math.fizzBuzz)
+  .add('lazy.js', lazy.fizzBuzz)
   // .add('lodash', lodash)
   .on('cycle', ({ target }) => {
     console.log(String(target))
@@ -33,30 +38,8 @@ new Suite('FizzBuzz')
   .run()
 
 new Suite('Primes')
-  .add('iter.js', () => tasks.primes(100).collect())
-  .add('lazy.js', () => lazy.primes(100).toArray())
-  // .add('lodash', lodash)
-  .on('cycle', ({ target }) => {
-    console.log(String(target))
-  })
-  .on('complete', function _() {
-    console.log(`Fastest is ${this.filter('fastest').map('name')}`)
-  })
-  .run()
-
-new Suite('Map Filter Reduce')
-  .add('iter.js', () => {
-    iter
-      .range(1, 1000)
-      .filter(num => num % 2)
-      .reduce((acc, num) => acc + num, 0)
-  })
-  .add('lazy.js', () => {
-    Lazy
-      .range(1, 1000)
-      .filter(num => num % 2)
-      .reduce((acc, num) => acc + num, 0)
-  })
+  .add('iter.js', () => math.primes(100))
+  .add('lazy.js', () => lazy.primes(100))
   // .add('lodash', lodash)
   .on('cycle', ({ target }) => {
     console.log(String(target))

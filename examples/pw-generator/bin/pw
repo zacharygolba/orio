@@ -17,6 +17,4 @@ const { argv } = yargs
   .default('p', '[0-9A-Za-z]', 'filter characters with a regular expression')
   .help('help')
 
-generate(argv)
-  .chain(iter.from('\n'))
-  .forEach(chunk => process.stdout.write(chunk))
+console.log(generate(argv))

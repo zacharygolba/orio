@@ -10,7 +10,7 @@
     "iter.js": "file:..",
     "lazy.js": "^0.5.0",
     "lodash": "^4.17.4",
-    "microtime": "^2.1.6",
-    "simple-tasks": "file:../examples/simple-tasks"
+    "math-examples": "file:../examples/math",
+    "microtime": "^2.1.6"
   }
 }

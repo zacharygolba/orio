@@ -19,7 +19,7 @@ test('#range()', () => {
   expect(iter.range()).toBeInstanceOf(Iter)
   expect(iter.range(1)).toBeInstanceOf(Iter)
   expect(iter.range(1, 2)).toBeInstanceOf(Iter)
-  expect(iter.range('a', 'b')).toBeInstanceOf(Iter)
+  expect(iter.chars('a', 'b')).toBeInstanceOf(Iter)
 })
 
 test('#repeat()', () => {

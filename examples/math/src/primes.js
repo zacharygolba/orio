@@ -9,4 +9,5 @@ module.exports = function primes(amount /*: number */) /*: number */ {
     .range(0, Infinity)
     .filter(num => !iter.range(num - 1, 2).some(div => num % div === 0))
     .take(amount)
+    .collect()
 }

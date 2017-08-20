@@ -12,10 +12,7 @@ export default class NumberProducer implements Producer<*> {
   step: number
   /*:: @@iterator: () => Iterator<number> */
 
-  constructor(s?: number = 0, e?: number = Infinity) {
-    const start = Number(s)
-    const end = Number(e)
-
+  constructor(start?: number = 0, end?: number = Infinity) {
     this.size = Math.abs(start - end) + 1
 
     if (Number.isNaN(start) || Number.isNaN(end) || this.size === 0) {

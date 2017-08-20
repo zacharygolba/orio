@@ -12,7 +12,4 @@ const _ = yargs
   .help('help')
   .argv
 
-fizzBuzz()
-  .zip(iter.repeat('\n'))
-  .flatten()
-  .forEach(chunk => process.stdout.write(chunk))
+fizzBuzz().forEach(item => console.log(item))

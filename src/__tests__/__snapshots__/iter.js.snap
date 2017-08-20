@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Methods #collect() 1`] = `
+Array [
+  "t",
+  "e",
+  "s",
+  "t",
+]
+`;
+
+exports[`Methods #collect() 2`] = `
+Set {
+  "t",
+  "e",
+  "s",
+}
+`;

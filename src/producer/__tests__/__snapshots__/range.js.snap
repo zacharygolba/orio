@@ -170,12 +170,11 @@ NumberProducer {
 
 exports[`NumberProducer -> #constructor() 5`] = `
 NumberProducer {
-  "done": true,
-  "end": 0,
+  "end": "cat",
   "size": NaN,
-  "start": 0,
-  "state": 0,
-  "step": 0,
+  "start": 9007199254740991,
+  "state": 9007199254740991,
+  "step": -1,
 }
 `;
 

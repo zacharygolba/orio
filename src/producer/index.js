@@ -4,20 +4,18 @@ import Iter from '../iter'
 // import type { IntoIterator } from '../types'
 
 import { CharProducer, NumberProducer } from './range'
-import { MapProducer, SetProducer } from './collection'
+import { IndexedProducer, MapProducer, SetProducer } from './collection'
 import CycleProducer from './cycle'
-import IndexedProducer from './indexed'
 import RepeatProducer from './repeat'
 import UnboundProducer from './unbound'
 import type { Producer } from './types'
 
-export type { IndexedCollection, Producer } from './types'
-export { MapProducer, SetProducer } from './collection'
+export * from './range'
+export * from './collection'
 export { default as CycleProducer } from './cycle'
-export { default as IndexedProducer } from './indexed'
-export { CharProducer, NumberProducer } from './range'
 export { default as RepeatProducer } from './repeat'
 export { default as UnboundProducer } from './unbound'
+export type { IndexedCollection, Producer } from './types'
 
 /*:: declare function createProducer<T>(any): Producer<T> */
 export function createProducer<T>(source: any): Producer<T> {

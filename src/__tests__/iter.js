@@ -149,9 +149,14 @@ describe('Methods', () => {
   })
 
   test('#collect()', () => {
-    const source = 'test'
+    class HashSet extends Set {
+      static from(producer) {
+        return new HashSet(producer.collect())
+      }
+    }
 
-    expect(iter.from(source).collect()).toEqual([...source])
+    expect(iter.from('test').collect()).toMatchSnapshot()
+    expect(iter.from('test').collect(HashSet)).toMatchSnapshot()
   })
 
   test('#count()', () => {
@@ -178,12 +183,12 @@ describe('Methods', () => {
   test('#find()', () => {
     const fn = jest.fn(char => char === 'c')
 
-    expect(iter.range('a', 'z').find(fn)).toBe('c')
+    expect(iter.chars('a', 'z').find(fn)).toBe('c')
     expect(fn).toHaveBeenCalledTimes(3)
   })
 
   test('#first()', () => {
-    expect(iter.range('a', 'z').first()).toBe('a')
+    expect(iter.chars('a', 'z').first()).toBe('a')
   })
 
   test('#forEach()', () => {
@@ -214,21 +219,21 @@ describe('Methods', () => {
   })
 
   test('#last()', () => {
-    expect(iter.range('a', 'z').last()).toBe('z')
+    expect(iter.chars('a', 'z').last()).toBe('z')
   })
 
   test('#nth()', () => {
-    expect(iter.range('a', 'z').nth(0)).toBe('a')
-    expect(iter.range('a', 'z').nth(1)).toBe('b')
-    expect(iter.range('a', 'z').nth(2)).toBe('c')
-    expect(iter.range('a', 'z').nth(-1)).toBeUndefined()
-    expect(iter.range('a', 'z').nth(27)).toBeUndefined()
+    expect(iter.chars('a', 'z').nth(0)).toBe('a')
+    expect(iter.chars('a', 'z').nth(1)).toBe('b')
+    expect(iter.chars('a', 'z').nth(2)).toBe('c')
+    expect(iter.chars('a', 'z').nth(-1)).toBeUndefined()
+    expect(iter.chars('a', 'z').nth(27)).toBeUndefined()
   })
 
   test('#product()', () => {
+    expect(iter.from([]).product()).toBe(0)
     expect(iter.range(2, 4).product()).toBe(2 * 3 * 4)
-    expect(Number.isNaN(iter.from([]).product())).toBe(true)
-    expect(Number.isNaN(iter.range('a', 'z').product())).toBe(true)
+    expect(Number.isNaN(iter.chars('a', 'z').product())).toBe(true)
   })
 
   test('#reduce()', () => {
@@ -259,6 +264,6 @@ describe('Methods', () => {
   test('#sum()', () => {
     expect(iter.from([]).sum()).toBe(0)
     expect(iter.range(1, 4).sum()).toBe(1 + 2 + 3 + 4)
-    expect(Number.isNaN(iter.range('a', 'z').sum())).toBe(true)
+    expect(Number.isNaN(iter.chars('a', 'z').sum())).toBe(true)
   })
 })

@@ -19,4 +19,5 @@ module.exports = function fizzBuzz() /*: Iter<string> */ {
       }
       return n.toString()
     })
+    .collect()
 }

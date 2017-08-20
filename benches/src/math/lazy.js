@@ -27,6 +27,7 @@ function fizzBuzz() /*: Lazy */ {
       }
       return n.toString()
     })
+    .toArray()
 }
 
 function primes(amount /*: number */) /*: number */ {
@@ -34,6 +35,7 @@ function primes(amount /*: number */) /*: number */ {
     .range(0, Infinity)
     .filter(num => !Lazy.range(num - 1, 1).some(div => num % div === 0))
     .take(amount)
+    .toArray()
 }
 
 exports.MAX_FACTORIAL = MAX_FACTORIAL

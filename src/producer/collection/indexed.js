@@ -1,8 +1,7 @@
 // @flow
 
-import * as result from '../result'
-
-import type { IndexedCollection, Producer } from './types'
+import * as result from '../../result'
+import type { IndexedCollection, Producer } from '../types'
 
 export default class IndexedProducer<T> implements Producer<T> {
   source: IndexedCollection<T>

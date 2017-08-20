@@ -32,7 +32,7 @@
     "jest": "^20.0.4",
     "jest-cli": "^20.0.4",
     "mz": "^2.6.0",
-    "rollup": "^0.47.6",
+    "rollup": "^0.48.2",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-cleanup": "^1.0.1",
     "rollup-plugin-node-resolve": "^3.0.0",

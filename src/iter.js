@@ -37,16 +37,12 @@ export default class Iter<T> implements Producer<T> {
     return new Iter(adapter)
   }
 
-  collect(): Array<T> {
-    return this.reduce((acc, next) => {
-      acc.push(next)
-      return acc
-    }, [])
-  }
-
-  collectInto(target?: Class<FromIterator<T>>): FromIterator<T> {
-    if (target == null) {
-      return this.collect()
+  collect(target?: Class<FromIterator<T>> = Array): FromIterator<T> {
+    if (target === Array) {
+      return this.reduce((acc, next) => {
+        acc.push(next)
+        return acc
+      }, [])
     }
 
     return target.from(this)
@@ -84,7 +80,8 @@ export default class Iter<T> implements Producer<T> {
     return this.take(1).reduce((_, next) => next, undefined)
   }
 
-  flatMap<U>(fn: (T) => IntoIterator<U>): Iter<U> {
+  // $FlowFixMe
+  flatMap<U>(fn: (T) => Iterable<U>): Iter<U> {
     const adapter = new FlatMapAdapter(this.producer, fn)
     return new Iter(adapter)
   }
@@ -140,10 +137,8 @@ export default class Iter<T> implements Producer<T> {
   }
 
   product(): number {
-    const iter = this.map(Number)
-    const { value = NaN } = iter.next()
-
-    return iter.reduce((acc, next) => acc * next, value)
+    // $FlowFixMe
+    return this.sizeHint() === 0 ? 0 : this.reduce((acc, next) => acc * next, 1)
   }
 
   reduce<U>(fn: (U, T) => U, init: U): U {

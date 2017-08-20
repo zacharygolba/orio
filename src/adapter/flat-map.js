@@ -3,16 +3,15 @@
 import * as result from '../result'
 import { createProducer } from '../producer'
 import type { Producer } from '../producer'
-import type { IntoIterator } from '../types'
 
 export default class FlatMapAdapter<T, U> implements Producer<U> {
   child: ?Producer<U>
-  fn: (T) => IntoIterator<U>
+  fn: (T) => Iterable<U>
   parent: Producer<T>
   size: number
   /*:: @@iterator: () => Iterator<U> */
 
-  constructor(producer: Producer<T>, fn: (T) => IntoIterator<U>) {
+  constructor(producer: Producer<T>, fn: (T) => Iterable<U>) {
     this.fn = fn
     this.parent = producer
     this.size = this.parent.sizeHint()

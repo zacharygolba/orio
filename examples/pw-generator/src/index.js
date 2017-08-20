@@ -26,4 +26,5 @@ module.exports = function main({ pattern, length } /*: Options */) /*: Iter<stri
     .filter(() => Math.floor(Math.random() * 7) === 3)
     // take n number of values from this iterator (default: 48)
     .take(length)
+    .join('')
 }
