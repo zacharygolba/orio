@@ -15,8 +15,8 @@ import {
   ZipAdapter,
 } from './adapter'
 import * as ops from './ops'
+import type { Collectable } from './types'
 import type { Producer } from './producer'
-import type { FromIterator } from './types'
 
 export default class Iter<T> implements Producer<T> {
   producer: Producer<T>
@@ -36,15 +36,19 @@ export default class Iter<T> implements Producer<T> {
     return new Iter(adapter)
   }
 
-  collect(target?: Class<FromIterator<T>> = Array): FromIterator<T> {
-    if (target === Array) {
+  collect(Target?: Class<Collectable<T>> = Array): Collectable<T> {
+    if (Target === Array) {
       return this.reduce((acc, next) => {
         acc.push(next)
         return acc
       }, [])
     }
 
-    return target.from(this)
+    if (typeof Target.from === 'function') {
+      return Target.from(this)
+    }
+
+    return new Target(this)
   }
 
   count(): number {
@@ -136,19 +140,7 @@ export default class Iter<T> implements Producer<T> {
   }
 
   product(): number {
-    if (this.sizeHint() === 0) {
-      return 0
-    }
-
-    return this.reduce(ops.mul, 1)
-  }
-
-  iproduct(): number {
-    if (this.sizeHint() === 0) {
-      return 0
-    }
-
-    return this.reduce(ops.imul, 1)
+    return this.sizeHint() === 0 ? 0 : this.reduce(ops.mul, 1)
   }
 
   reduce<U>(fn: (U, T) => U, init: U): U {
