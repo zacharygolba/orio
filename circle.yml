@@ -3,8 +3,6 @@ jobs:
   build:
     docker:
       - image: node:latest
-        environment:
-          NODE_ENV: test
     working_directory: ~/iter.js
     steps:
       - checkout
@@ -16,7 +14,7 @@ jobs:
           command: |
             apt-get update && \
             apt-get install -y libelf1 && \
-            yarn install
+            yarn
       - save_cache:
           key: dependency-cache-{{ epoch }}
           paths:

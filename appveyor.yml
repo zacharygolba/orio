@@ -10,11 +10,10 @@ cache:
 platform: x64
 environment:
   nodejs_version: 8
-  NODE_ENV: test
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
-  - yarn install
+  - ps: yarn
 test_script:
-  - yarn lint
-  - yarn flow
-  - yarn test
+  - ps: yarn lint
+  - ps: yarn flow
+  - ps: yarn test
