@@ -31,7 +31,6 @@
     "flow-typed": "^2.1.5",
     "jest": "^20.0.4",
     "jest-cli": "^20.0.4",
-    "mz": "^2.6.0",
     "rollup": "^0.48.2",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-cleanup": "^1.0.1",
