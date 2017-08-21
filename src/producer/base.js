@@ -6,12 +6,12 @@ export default class ProducerBase<T> implements Producer<T> {
   // eslint-disable-next-line prettier/prettier
   /*:: @@iterator: () => Iterator<T>; */
 
-  // $FlowFixMe
+  // $FlowIgnore
   get [Symbol.toStringTag](): string {
     return this.constructor.name
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<T> {
     return this
   }
