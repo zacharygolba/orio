@@ -1,5 +1,6 @@
 // See https://babeljs.io/docs/usage/babelrc for more information on .babelrc files.
 {
+  "comments": false,
   "env": {
     "test": {
       "plugins": [

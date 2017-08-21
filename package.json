@@ -46,7 +46,7 @@
     "prettier": "^1.5.3",
     "rollup": "^0.48.2",
     "rollup-plugin-babel": "^3.0.2",
-    "rollup-plugin-cleanup": "^1.0.1",
+    "rollup-plugin-json": "^2.3.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "shx": "^0.2.2"
   }

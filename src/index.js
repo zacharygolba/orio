@@ -1,5 +1,6 @@
 // @flow
 
+import * as pkg from '../package.json'
 import Iter from './iter'
 import {
   createProducer,
@@ -11,6 +12,8 @@ import {
 import type { IndexedCollection } from './producer'
 
 export type { default as Iter, FromIterator } from './iter'
+
+export const VERSION: string = pkg.version
 
 export function chars(start?: string, end?: string): Iter<string> {
   const producer = new CharProducer(start, end)

@@ -1,7 +1,7 @@
 import * as path from 'path'
 
+import json from 'rollup-plugin-json'
 import babel from 'rollup-plugin-babel'
-import cleanup from 'rollup-plugin-cleanup'
 import resolve from 'rollup-plugin-node-resolve'
 
 export default {
@@ -18,12 +18,6 @@ export default {
       sourcemap: true,
     },
   ],
-  plugins: [
-    resolve(),
-    babel(),
-    cleanup({
-      comments: 'none',
-    }),
-  ],
+  plugins: [json(), babel(), resolve()],
   preferConst: true,
 }
