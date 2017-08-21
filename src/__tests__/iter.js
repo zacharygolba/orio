@@ -4,6 +4,8 @@ describe('Combinators', () => {
   jest.resetModules()
   jest.doMock('../adapter')
 
+  /* eslint-disable global-require */
+
   const iter = require('../')
   const {
     ChainAdapter,
@@ -19,6 +21,8 @@ describe('Combinators', () => {
     TapAdapter,
     ZipAdapter,
   } = require('../adapter')
+
+  /* eslint-enable global-require */
 
   afterEach(() => {
     jest.resetAllMocks()
@@ -138,6 +142,7 @@ describe('Methods', () => {
   jest.dontMock('../adapter')
   jest.resetModules()
 
+  // eslint-disable-next-line global-require
   const iter = require('../')
 
   test('#@@iterator()', () => {

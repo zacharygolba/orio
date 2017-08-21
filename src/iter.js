@@ -114,12 +114,13 @@ export default class Iter<T> implements Producer<T> {
   }
 
   join(sep?: string = ','): string {
-    return this
-      .map(String)
-      .reduce(
-        (prev, next) => prev.length ? (prev + sep + next) : (prev + next),
-        '',
-      )
+    return this.reduce((prev, next) => {
+      if (prev.length > 0) {
+        return prev + sep + String(next)
+      }
+
+      return String(next)
+    }, '')
   }
 
   last(): ?T {

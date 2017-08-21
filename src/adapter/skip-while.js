@@ -11,7 +11,7 @@ export default class SkipWhileAdapter<T> implements Producer<T> {
   constructor(producer: Producer<T>, fn: (T) => boolean) {
     let willSkip = true
 
-    this.producer = new Filter(producer, value => {
+    this.producer = new Filter(producer, (value) => {
       if (willSkip) {
         willSkip = fn(value)
         return !willSkip
