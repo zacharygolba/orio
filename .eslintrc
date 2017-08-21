@@ -1,3 +1,4 @@
+// See https://eslint.org/docs/user-guide/configuring for more information on .eslintrc files.
 {
   "extends": [
     "airbnb-base",

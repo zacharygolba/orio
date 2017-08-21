@@ -1,3 +1,4 @@
+# See https://www.appveyor.com/docs/appveyor-yml for appveyor documention.
 build: off
 image: Visual Studio 2017
 version: '{build}'

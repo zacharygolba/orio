@@ -1,9 +1,11 @@
+# See https://flow.org/en/docs/config for more information on .flowconfig files.
+
 [ignore]
-<PROJECT_ROOT>/benches/.*
-<PROJECT_ROOT>/coverage/.*
-<PROJECT_ROOT>/dist/.*
-<PROJECT_ROOT>/examples/.*
-<PROJECT_ROOT>/node_modules/.*
+.*/benches/.*
+.*/coverage/.*
+.*/dist/.*
+.*/examples/.*
+.*/node_modules/.*
 
 [include]
 

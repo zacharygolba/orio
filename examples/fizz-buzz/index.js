@@ -1,12 +1,6 @@
-// @flow
-
-/*::
-import type { Iter } from 'iter.js'
-*/
-
 const iter = require('iter.js')
 
-module.exports = function fizzBuzz() /*: Iter<string> */ {
+module.exports = function fizzBuzz() {
   return iter
     .range(1, 100)
     .map(n => {

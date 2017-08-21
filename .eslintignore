@@ -1,7 +1,14 @@
-*.flow
+# See https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories
+# for more about ignoring files and directories.
+
+# compiled output
 coverage/
 dist/
+
+# dependencies
 flow-typed/
 node_modules/
+
+# misc
 benches/
 examples/

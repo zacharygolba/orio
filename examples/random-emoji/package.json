@@ -5,8 +5,5 @@
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
   "private": true,
-  "main": "src/index.js",
-  "dependencies": {
-    "yargs": "^8.0.2"
-  }
+  "main": "src/index.js"
 }

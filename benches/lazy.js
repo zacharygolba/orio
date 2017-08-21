@@ -1,20 +1,13 @@
-// @flow
-
 const Lazy = require('lazy.js')
 
-const MAX_FACTORIAL /*: number */ = Lazy
-  .range(1, Infinity)
-  .map(n => [n, Lazy.range(n, 0).reduce((a, b) => a * b)])
-  .takeWhile(([, f]) => f < Infinity)
-  .map(([n]) => n)
-  .last()
+const { MAX_FACTORIAL } = require('factorial')
 
-function factorial(n /*: number */) /*: number */ {
+function factorial(n) {
   const start = n === 0 ? 1 : Math.abs(n)
   return start > MAX_FACTORIAL ? Infinity : Lazy.range(start, 1).reduce((x, y) => x * y)
 }
 
-function fizzBuzz() /*: Lazy */ {
+function fizzBuzz() {
   return Lazy
     .range(1, 101)
     .map(n => {
@@ -30,15 +23,26 @@ function fizzBuzz() /*: Lazy */ {
     .toArray()
 }
 
-function primes(amount /*: number */) /*: number */ {
+function isComposite(n) {
+  const abs = Math.abs(n)
+
+  if (abs === 0 || abs === 1 || abs === 2) {
+    return false
+  }
+
+  return Lazy
+    .range(abs - 1, 2)
+    .some(div => abs % div === 0)
+}
+
+function primes(size) {
   return Lazy
     .range(0, Infinity)
-    .filter(num => !Lazy.range(num - 1, 1).some(div => num % div === 0))
-    .take(amount)
+    .filter(n => !isComposite(n))
+    .take(size)
     .toArray()
 }
 
-exports.MAX_FACTORIAL = MAX_FACTORIAL
 exports.factorial = factorial
 exports.fizzBuzz = fizzBuzz
 exports.primes = primes
