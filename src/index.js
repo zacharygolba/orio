@@ -1,6 +1,7 @@
 // @flow
 
 import * as pkg from '../package.json'
+
 import Iter from './iter'
 import {
   createProducer,
