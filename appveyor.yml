@@ -5,9 +5,6 @@ version: '{build}'
 branches:
   only:
     - master
-cache:
-  - .jest-cache
-  - node_modules
 platform: x64
 environment:
   nodejs_version: 8
