@@ -3,7 +3,7 @@ const { EOL } = require('os')
 const iter = require('iter.js')
 const yargs = require('yargs')
 
-const { version } = require('../package.json')
+const { version } = require('./package.json')
 
 const { argv } = yargs
   .version(version)
@@ -25,11 +25,11 @@ iter
       .collect()
   )
   // filter chars that don't match the input pattern (default: [0-9A-Za-z])
-  .filter(char => pattern.test(char))
+  .filter(char => argv.pattern.test(char))
   // filter by a random boolean for increased randomness
   .filter(() => Math.floor(Math.random() * 7) === 3)
   // take n number of values from this iterator (default: 48)
-  .take(length)
+  .take(argv.length)
   // append a line ending to this sequence
   .chain(EOL)
   // append a line ending to this sequence
