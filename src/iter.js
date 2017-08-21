@@ -31,11 +31,6 @@ export default class Iter<T> extends ProducerBase<T> {
     this.producer = producer
   }
 
-  // $FlowIgnore
-  get [Symbol.toStringTag](): string {
-    return 'Iter'
-  }
-
   chain<U>(producer: Iterable<U> | U): Iter<T | U> {
     const adapter = new ChainAdapter(this.producer, producer)
     return new Iter(adapter)

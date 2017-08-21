@@ -2,22 +2,25 @@
 
 import type { Producer } from './'
 
-import * as result from '../result'
-
 export default class ProducerBase<T> implements Producer<T> {
   // eslint-disable-next-line prettier/prettier
   /*:: @@iterator: () => Iterator<T>; */
 
   // $FlowFixMe
-  [Symbol.iterator]() {
+  get [Symbol.toStringTag](): string {
+    return this.constructor.name
+  }
+
+  // $FlowFixMe
+  [Symbol.iterator](): Iterator<T> {
     return this
   }
 
   next(): IteratorResult<T, void> {
-    return result.done()
+    throw new Error('unimplemented')
   }
 
   sizeHint(): number {
-    return 0
+    throw new Error('unimplemented')
   }
 }

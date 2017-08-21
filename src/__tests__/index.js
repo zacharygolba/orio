@@ -12,6 +12,7 @@ test('#cycle()', () => {
 })
 
 test('#from()', () => {
+  expect(iter.from()).toBeInstanceOf(Iter)
   expect(iter.from([1, 2, 3])).toBeInstanceOf(Iter)
 })
 
