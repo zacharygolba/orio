@@ -196,8 +196,8 @@ export default class Iter<T> extends ProducerBase<T> {
     return new Iter(adapter)
   }
 
-  zip(producer?: Iterable<*>): Iter<[T, *]> {
-    const adapter = new ZipAdapter(this.producer, producer || this.producer)
+  zip(producer?: Iterable<*> = this.producer): Iter<[T, *]> {
+    const adapter = new ZipAdapter(this.producer, producer)
     return new Iter(adapter)
   }
 }
