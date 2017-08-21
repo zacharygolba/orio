@@ -89,6 +89,11 @@ describe('CharProducer', () => {
       producer = new CharProducer('c', 'a')
     })
 
+    test('#constructor()', () => {
+      expect(producer).toMatchSnapshot()
+      expect(new CharProducer()).toMatchSnapshot()
+    })
+
     test('#@@iterator()', () => {
       for (const item of producer) {
         expect(item).toMatchSnapshot()

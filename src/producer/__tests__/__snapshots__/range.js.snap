@@ -6,6 +6,32 @@ exports[`CharProducer <- #@@iterator() 2`] = `"b"`;
 
 exports[`CharProducer <- #@@iterator() 3`] = `"a"`;
 
+exports[`CharProducer <- #constructor() 1`] = `
+CharProducer {
+  "size": 3,
+  "source": NumberProducer {
+    "end": 97,
+    "size": 3,
+    "start": 99,
+    "state": 99,
+    "step": -1,
+  },
+}
+`;
+
+exports[`CharProducer <- #constructor() 2`] = `
+CharProducer {
+  "size": 1114112,
+  "source": NumberProducer {
+    "end": 1114111,
+    "size": 1114112,
+    "start": 0,
+    "state": 0,
+    "step": 1,
+  },
+}
+`;
+
 exports[`CharProducer <- #next() 1`] = `
 Object {
   "done": false,
@@ -170,11 +196,12 @@ NumberProducer {
 
 exports[`NumberProducer -> #constructor() 5`] = `
 NumberProducer {
-  "end": "cat",
+  "done": true,
+  "end": 0,
   "size": NaN,
-  "start": 9007199254740991,
-  "state": 9007199254740991,
-  "step": -1,
+  "start": 0,
+  "state": 0,
+  "step": 0,
 }
 `;
 

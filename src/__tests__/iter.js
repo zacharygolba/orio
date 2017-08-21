@@ -149,14 +149,10 @@ describe('Methods', () => {
   })
 
   test('#collect()', () => {
-    class HashSet extends Set {
-      static from(producer) {
-        return new HashSet(producer.collect())
-      }
-    }
-
     expect(iter.from('test').collect()).toMatchSnapshot()
-    expect(iter.from('test').collect(HashSet)).toMatchSnapshot()
+    expect(iter.from('test').collect(Set)).toMatchSnapshot()
+    expect(iter.range(0, 255).collect(Uint8Array)).toMatchSnapshot()
+    expect(iter.from('test').enumerate().collect(Map)).toMatchSnapshot()
   })
 
   test('#count()', () => {
@@ -265,5 +261,9 @@ describe('Methods', () => {
     expect(iter.from([]).sum()).toBe(0)
     expect(iter.range(1, 4).sum()).toBe(1 + 2 + 3 + 4)
     expect(Number.isNaN(iter.chars('a', 'z').sum())).toBe(true)
+  })
+
+  test('#toString()', () => {
+    expect(iter.from([]).toString()).toBe('[object Iter]')
   })
 })
