@@ -1,7 +1,6 @@
-const { Suite } = require('benchmark')
-
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
 
+const { Suite } = require('benchmark')
 const { MAX_FACTORIAL, factorial } = require('factorial')
 const fizzBuzz = require('fizz-buzz')
 const primes = require('calculate-primes')
