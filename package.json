@@ -1,10 +1,11 @@
 {
   "name": "iter.js",
   "version": "0.0.1",
-  "main": "dist/index.js",
   "repository": "github:zacharygolba/iter.js",
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "scripts": {
     "bench": "node benches",
     "build": "rollup -c",
