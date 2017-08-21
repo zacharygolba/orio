@@ -1,12 +1,12 @@
 const { Suite } = require('benchmark')
 
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
 
 const { MAX_FACTORIAL, factorial } = require('factorial')
 const fizzBuzz = require('fizz-buzz')
 const primes = require('calculate-primes')
 
-/* eslint-enable import/no-extraneous-dependencies */
+/* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 
 const lazy = require('./lazy')
 const lodash = require('./lodash')

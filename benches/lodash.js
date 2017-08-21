@@ -1,7 +1,9 @@
-const _ = require('lodash')
+/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
 
-// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved
+const _ = require('lodash')
 const { MAX_FACTORIAL } = require('factorial')
+
+/* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 
 function factorial(n) {
   const start = n === 0 ? 1 : Math.abs(n)
