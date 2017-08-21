@@ -26,7 +26,12 @@ export default class Iter<T> implements Producer<T> {
     this.producer = producer
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
+  get [Symbol.toStringTag](): string {
+    return 'Iter'
+  }
+
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<T> {
     return this
   }

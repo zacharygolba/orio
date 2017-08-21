@@ -20,3 +20,4 @@ module.use_strict=true
 
 suppress_comment=\\(.\\|\n\\)*\\$ExpectError
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
+suppress_comment=\\(.\\|\n\\)*\\$FlowIgnore
