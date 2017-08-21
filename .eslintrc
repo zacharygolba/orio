@@ -1,0 +1,57 @@
+// See https://eslint.org/docs/user-guide/configuring for more information on .eslintrc files.
+{
+  "extends": [
+    "airbnb-base",
+    "prettier",
+    "prettier/flowtype",
+    "plugin:flowtype/recommended",
+    "plugin:jest/recommended"
+  ],
+  "env": {
+    "jest": true,
+    "shared-node-browser": true
+  },
+  "globals": {
+    "Class": true,
+    "Iterable": true,
+    "Iterator": true,
+    "IteratorResult": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true
+    }
+  },
+  "plugins": [
+    "flowtype",
+    "jest",
+    "prettier"
+  ],
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    }
+  },
+  "rules": {
+    "class-methods-use-this": "off",
+    "comma-dangle": [
+      "error",
+      "only-multiline"
+    ],
+    "no-restricted-syntax": [
+      "error",
+      "ForInStatement",
+      "WithStatement"
+    ],
+    "prettier/prettier": ["error", {
+      "parser": "flow",
+      "semi": false,
+      "singleQuote": true,
+      "trailingComma": "all"
+    }],
+    "spaced-comment": "off"
+  }
+}

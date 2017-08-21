@@ -1,0 +1,9 @@
+{
+  "name": "factorial",
+  "version": "0.0.1",
+  "repository": "github:zacharygolba/iter.js",
+  "author": "Zachary Golba <zachary.golba@postlight.com>",
+  "license": "MIT",
+  "private": true,
+  "main": "index.js"
+}

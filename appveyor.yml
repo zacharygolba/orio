@@ -1,0 +1,20 @@
+# See https://www.appveyor.com/docs/appveyor-yml for appveyor documention.
+build: off
+image: Visual Studio 2017
+version: '{build}'
+branches:
+  only:
+    - master
+cache:
+  - .jest-cache
+  - node_modules
+platform: x64
+environment:
+  nodejs_version: 8
+install:
+  - ps: Install-Product node $env:nodejs_version $env:platform
+  - ps: yarn
+test_script:
+  - ps: yarn lint
+  - ps: yarn flow
+  - yarn test -- --coverage

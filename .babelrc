@@ -1,0 +1,21 @@
+// See https://babeljs.io/docs/usage/babelrc for more information on .babelrc files.
+{
+  "env": {
+    "test": {
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
+    }
+  },
+  "presets": [
+    ["env", {
+      "modules": false,
+      "targets": {
+        "node": "current"
+      }
+    }]
+  ],
+  "plugins": [
+    "transform-flow-strip-types"
+  ]
+}

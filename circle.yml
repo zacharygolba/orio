@@ -1,0 +1,41 @@
+# See https://circleci.com/docs/2.0 for circleci documention.
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:latest
+    working_directory: ~/iter.js
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dependency-cache-
+      - run:
+          name: Install Dependencies
+          command: |
+            apt-get update && \
+            apt-get install -y libelf1 && \
+            yarn
+      - save_cache:
+          key: dependency-cache-{{ epoch }}
+          paths:
+            - ~/.yarn
+            - ~/.yarn-cache
+      - run:
+          name: Lint
+          command: yarn lint
+      - run:
+          name: Check Types
+          command: yarn flow
+      - restore_cache:
+          key: jest-cache-
+      - run:
+          name: Test
+          command: yarn test -- --coverage
+      - save_cache:
+          key: jest-cache-{{ epoch }}
+          paths:
+            - ~/iter.js/.jest-cache
+      - run:
+          name: Report Coverage
+          command: yarn codecov

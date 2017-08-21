@@ -1,0 +1,52 @@
+{
+  "name": "iter.js",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "repository": "github:zacharygolba/iter.js",
+  "author": "Zachary Golba <zachary.golba@postlight.com>",
+  "license": "MIT",
+  "scripts": {
+    "bench": "node benches",
+    "build": "rollup -c",
+    "clean": "shx rm -rf coverage dist",
+    "flow-typed": "shx rm -rf flow-typed/npm && flow-typed install",
+    "flow": "flow check",
+    "format": "eslint . --fix",
+    "lint": "eslint .",
+    "precommit": "lint-staged",
+    "test": "jest"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-env": "^1.6.0",
+    "codecov": "^2.3.0",
+    "eslint": "^4.4.1",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-flowtype": "^2.35.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jest": "^20.0.3",
+    "eslint-plugin-prettier": "^2.2.0",
+    "flow-bin": "^0.53.1",
+    "flow-typed": "^2.1.5",
+    "husky": "^0.14.3",
+    "jest": "^20.0.4",
+    "jest-cli": "^20.0.4",
+    "lint-staged": "^4.0.3",
+    "prettier": "^1.5.3",
+    "rollup": "^0.48.2",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-cleanup": "^1.0.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "shx": "^0.2.2"
+  }
+}

@@ -1,0 +1,24 @@
+# See https://flow.org/en/docs/config for more information on .flowconfig files.
+[ignore]
+.*/benches/.*
+.*/coverage/.*
+.*/dist/.*
+.*/examples/.*
+.*/node_modules/.*
+
+[include]
+
+[libs]
+
+[lints]
+all=warn
+
+[options]
+include_warnings=true
+max_header_tokens=2
+
+module.use_strict=true
+
+suppress_comment=\\(.\\|\n\\)*\\$ExpectError
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
+suppress_comment=\\(.\\|\n\\)*\\$FlowIgnore

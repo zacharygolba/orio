@@ -1,0 +1,22 @@
+# See https://help.github.com/articles/ignoring-files
+# for more about ignoring files and directories.
+
+# cache
+.eslintcache
+.jest-cache/
+
+# compiled output
+coverage/
+dist/
+
+# dependencies
+node_modules/
+
+# logs
+log/
+*.log
+
+# misc
+.vscode/
+*.DS_Store
+package-lock.json
