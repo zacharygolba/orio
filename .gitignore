@@ -12,11 +12,11 @@ dist/
 # dependencies
 node_modules/
 
-# misc
-*.DS_Store
-.vscode/
-package-lock.json
-
 # logs
 log/
-*npm-debug.log
+*.log
+
+# misc
+.vscode/
+*.DS_Store
+package-lock.json

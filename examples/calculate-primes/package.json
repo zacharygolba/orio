@@ -1,7 +1,7 @@
 {
   "name": "calculate-primes",
   "version": "0.0.1",
-  "repository": "https://github.com/zacharygolba/iter.js",
+  "repository": "github:zacharygolba/iter.js",
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
   "private": true,
