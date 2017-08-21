@@ -2,21 +2,17 @@
 
 import * as result from '../result'
 
-import type { IndexedCollection, Producer } from './'
+import ProducerBase from './base'
+import type { IndexedCollection } from './'
 
-export default class CycleProducer<T> implements Producer<T> {
+export default class CycleProducer<T> extends ProducerBase<T> {
   source: IndexedCollection<T>
   state: number
-  /*:: @@iterator: () => Iterator<T> */
 
   constructor(source: IndexedCollection<T>) {
+    super()
     this.source = source
     this.state = 0
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<T> {
-    return this
   }
 
   next(): IteratorResult<T, void> {

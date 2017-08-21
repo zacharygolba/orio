@@ -1,20 +1,15 @@
 // @flow
 
-import type { Producer } from '../'
+import ProducerBase from '../base'
 
-export default class SetProducer<T> implements Producer<T> {
+export default class SetProducer<T> extends ProducerBase<T> {
   size: number
   source: Iterator<T>
-  /*:: @@iterator: () => Iterator<T> */
 
   constructor(source: Set<T>) {
+    super()
     this.size = source.size
     this.source = source.values()
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<T> {
-    return this
   }
 
   next(): IteratorResult<T, void> {

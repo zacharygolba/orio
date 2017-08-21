@@ -1,15 +1,17 @@
 const Lazy = require('lazy.js')
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 const { MAX_FACTORIAL } = require('factorial')
 
 function factorial(n) {
   const start = n === 0 ? 1 : Math.abs(n)
-  return start > MAX_FACTORIAL ? Infinity : Lazy.range(start, 1).reduce((x, y) => x * y)
+  return start > MAX_FACTORIAL
+    ? Infinity
+    : Lazy.range(start, 1).reduce((x, y) => x * y)
 }
 
 function fizzBuzz() {
-  return Lazy
-    .range(1, 101)
+  return Lazy.range(1, 101)
     .map(n => {
       if (n % 15 === 0) {
         return 'FizzBuzz'
@@ -30,14 +32,11 @@ function isComposite(n) {
     return false
   }
 
-  return Lazy
-    .range(abs - 1, 2)
-    .some(div => abs % div === 0)
+  return Lazy.range(abs - 1, 2).some(div => abs % div === 0)
 }
 
 function primes(size) {
-  return Lazy
-    .range(0, Infinity)
+  return Lazy.range(0, Infinity)
     .filter(n => !isComposite(n))
     .take(size)
     .toArray()

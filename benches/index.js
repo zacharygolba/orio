@@ -1,10 +1,17 @@
 const { Suite } = require('benchmark')
+
+/* eslint-disable import/no-extraneous-dependencies */
+
 const { MAX_FACTORIAL, factorial } = require('factorial')
 const fizzBuzz = require('fizz-buzz')
 const primes = require('calculate-primes')
 
+/* eslint-enable import/no-extraneous-dependencies */
+
 const lazy = require('./lazy')
 const lodash = require('./lodash')
+
+/* eslint-disable no-console */
 
 function onCycle({ target }) {
   console.log(String(target))
@@ -13,6 +20,8 @@ function onCycle({ target }) {
 function onComplete() {
   console.log(`Fastest is ${this.filter('fastest').map('name')}`)
 }
+
+/* eslint-enable no-console */
 
 new Suite('Factorial')
   .add('iter.js', () => factorial(MAX_FACTORIAL))

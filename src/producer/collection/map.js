@@ -1,20 +1,15 @@
 // @flow
 
-import type { Producer } from '../'
+import ProducerBase from '../base'
 
-export default class MapProducer<K, V> implements Producer<*> {
+export default class MapProducer<K, V> extends ProducerBase<*> {
   size: number
   source: Iterator<[K, V]>
-  /*:: @@iterator: () => Iterator<[K, V]> */
 
   constructor(source: Map<K, V>) {
+    super()
     this.size = source.size
     this.source = source.entries()
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<[K, V]> {
-    return this
   }
 
   next(): IteratorResult<[K, V], void> {

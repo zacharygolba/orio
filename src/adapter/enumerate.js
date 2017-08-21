@@ -1,21 +1,17 @@
 // @flow
 
 import * as result from '../result'
+import { ProducerBase } from '../producer'
 import type { Producer } from '../producer'
 
-export default class EnumerateAdapter<T> implements Producer<[number, T]> {
+export default class EnumerateAdapter<T> extends ProducerBase<[number, T]> {
   producer: Producer<T>
   state: number
-  /*:: @@iterator: () => Iterator<[number, T]> */
 
   constructor(producer: Producer<T>) {
+    super()
     this.producer = producer
     this.state = 0
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<[number, T]> {
-    return this
   }
 
   next(): IteratorResult<[number, T], void> {

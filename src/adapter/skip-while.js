@@ -1,17 +1,19 @@
 // @flow
 
+import { ProducerBase } from '../producer'
 import type { Producer } from '../producer'
 
 import Filter from './filter'
 
-export default class SkipWhileAdapter<T> implements Producer<T> {
+export default class SkipWhileAdapter<T> extends ProducerBase<T> {
   producer: Producer<T>
-  /*:: @@iterator: () => Iterator<T> */
 
-  constructor(producer: Producer<T>, fn: (T) => boolean) {
+  constructor(producer: Producer<T>, fn: T => boolean) {
+    super()
+
     let willSkip = true
 
-    this.producer = new Filter(producer, (value) => {
+    this.producer = new Filter(producer, value => {
       if (willSkip) {
         willSkip = fn(value)
         return !willSkip
@@ -19,11 +21,6 @@ export default class SkipWhileAdapter<T> implements Producer<T> {
 
       return true
     })
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<T> {
-    return this
   }
 
   next(): IteratorResult<T, void> {

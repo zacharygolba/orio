@@ -1,20 +1,16 @@
 // @flow
 
+import { ProducerBase } from '../producer'
 import type { Producer } from '../producer'
 
-export default class FilterAdapter<T> implements Producer<T> {
-  fn: (T) => boolean
+export default class FilterAdapter<T> extends ProducerBase<T> {
+  fn: T => boolean
   producer: Producer<T>
-  /*:: @@iterator: () => Iterator<T> */
 
-  constructor(producer: Producer<T>, fn: (T) => boolean) {
+  constructor(producer: Producer<T>, fn: T => boolean) {
+    super()
     this.fn = fn
     this.producer = producer
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<T> {
-    return this
   }
 
   next(): IteratorResult<T, void> {

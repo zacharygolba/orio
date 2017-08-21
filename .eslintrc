@@ -2,6 +2,8 @@
 {
   "extends": [
     "airbnb-base",
+    "prettier",
+    "prettier/flowtype",
     "plugin:flowtype/recommended",
     "plugin:jest/recommended"
   ],
@@ -24,8 +26,9 @@
     }
   },
   "plugins": [
+    "flowtype",
     "jest",
-    "flowtype"
+    "prettier"
   ],
   "settings": {
     "flowtype": {
@@ -43,10 +46,12 @@
       "ForInStatement",
       "WithStatement"
     ],
-    "semi": [
-      "error",
-      "never"
-    ],
+    "prettier/prettier": ["error", {
+      "parser": "flow",
+      "semi": false,
+      "singleQuote": true,
+      "trailingComma": "all"
+    }],
     "spaced-comment": "off"
   }
 }

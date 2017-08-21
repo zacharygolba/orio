@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const iter = require('iter.js')
 
 exports.MAX_FACTORIAL = iter

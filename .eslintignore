@@ -10,5 +10,4 @@ flow-typed/
 node_modules/
 
 # misc
-benches/
-examples/
+*.flow

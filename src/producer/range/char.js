@@ -1,26 +1,21 @@
 // @flow
 
 import * as result from '../../result'
-import type { Producer } from '../'
+import ProducerBase from '../base'
 
 import NumberProducer from './number'
 
 export const MIN_CHAR: string = String.fromCodePoint(0)
 export const MAX_CHAR: string = String.fromCodePoint(0x10ffff)
 
-export default class CharProducer implements Producer<*> {
+export default class CharProducer extends ProducerBase<string> {
   source: NumberProducer
   size: number
-  /*:: @@iterator: () => Iterator<string> */
 
   constructor(start?: string = MIN_CHAR, end?: string = MAX_CHAR) {
+    super()
     this.source = new NumberProducer(start.codePointAt(0), end.codePointAt(0))
     this.size = this.source.size
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<string> {
-    return this
   }
 
   next(): IteratorResult<string, void> {

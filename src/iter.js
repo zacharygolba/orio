@@ -15,6 +15,7 @@ import {
   ZipAdapter,
 } from './adapter'
 import * as ops from './ops'
+import { ProducerBase } from './producer'
 import type { Producer } from './producer'
 
 export interface FromIterator<T> {
@@ -22,22 +23,17 @@ export interface FromIterator<T> {
   static from(source: Iterator<T>): FromIterator<T>,
 }
 
-export default class Iter<T> implements Producer<T> {
+export default class Iter<T> extends ProducerBase<T> {
   producer: Producer<T>
-  /*:: @@iterator: () => Iterator<T> */
 
   constructor(producer: Producer<T>) {
+    super()
     this.producer = producer
   }
 
   // $FlowIgnore
   get [Symbol.toStringTag](): string {
     return 'Iter'
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<T> {
-    return this
   }
 
   chain<U>(producer: Iterable<U> | U): Iter<T | U> {
@@ -70,21 +66,21 @@ export default class Iter<T> implements Producer<T> {
     return new Iter(adapter)
   }
 
-  every(fn: (T) => boolean): boolean {
+  every(fn: T => boolean): boolean {
     return this.find(item => !fn(item)) === undefined
   }
 
-  filterMap<U>(fn: (T) => ?U): Iter<U> {
+  filterMap<U>(fn: T => ?U): Iter<U> {
     const adapter = new FilterMapAdapter(this.producer, fn)
     return new Iter(adapter)
   }
 
-  filter(fn: (T) => boolean): Iter<T> {
+  filter(fn: T => boolean): Iter<T> {
     const adapter = new FilterAdapter(this.producer, fn)
     return new Iter(adapter)
   }
 
-  find(fn: (T) => boolean): ?T {
+  find(fn: T => boolean): ?T {
     return this.filter(fn).first()
   }
 
@@ -92,7 +88,7 @@ export default class Iter<T> implements Producer<T> {
     return this.take(1).reduce((_, next) => next, undefined)
   }
 
-  flatMap<U>(fn: (T) => Iterable<U> | U): Iter<U> {
+  flatMap<U>(fn: T => Iterable<U> | U): Iter<U> {
     const adapter = new FlatMapAdapter(this.producer, fn)
     return new Iter(adapter)
   }
@@ -101,7 +97,7 @@ export default class Iter<T> implements Producer<T> {
     return this.flatMap(item => item)
   }
 
-  forEach(fn: (T) => void): void {
+  forEach(fn: T => void): void {
     for (let i = 0; i < this.sizeHint(); i += 1) {
       const result = this.next()
 
@@ -127,7 +123,7 @@ export default class Iter<T> implements Producer<T> {
     return this.reduce((_, next) => next, undefined)
   }
 
-  map<U>(fn: (T) => U): Iter<U> {
+  map<U>(fn: T => U): Iter<U> {
     const adapter = new MapAdapter(this.producer, fn)
     return new Iter(adapter)
   }
@@ -177,12 +173,12 @@ export default class Iter<T> implements Producer<T> {
     return new Iter(adapter)
   }
 
-  skipWhile(fn: (T) => boolean): Iter<T> {
+  skipWhile(fn: T => boolean): Iter<T> {
     const adapter = new SkipWhileAdapter(this.producer, fn)
     return new Iter(adapter)
   }
 
-  some(fn: (T) => boolean): boolean {
+  some(fn: T => boolean): boolean {
     return this.find(fn) !== undefined
   }
 
@@ -195,12 +191,12 @@ export default class Iter<T> implements Producer<T> {
     return new Iter(adapter)
   }
 
-  takeWhile(fn: (T) => boolean): Iter<T> {
+  takeWhile(fn: T => boolean): Iter<T> {
     const adapter = new TakeWhileAdapter(this.producer, fn)
     return new Iter(adapter)
   }
 
-  tap(fn: (T) => void): Iter<T> {
+  tap(fn: T => void): Iter<T> {
     const adapter = new TapAdapter(this.producer, fn)
     return new Iter(adapter)
   }

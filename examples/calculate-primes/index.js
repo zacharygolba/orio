@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const iter = require('iter.js')
 
 function isComposite(n) {
@@ -7,15 +8,9 @@ function isComposite(n) {
     return false
   }
 
-  return iter
-    .range(abs - 1, 2)
-    .some(div => abs % div === 0)
+  return iter.range(abs - 1, 2).some(div => abs % div === 0)
 }
 
 module.exports = function primes(size) {
-  return iter
-    .range()
-    .filter(n => !isComposite(n))
-    .take(size)
-    .collect()
+  return iter.range().filter(n => !isComposite(n)).take(size).collect()
 }

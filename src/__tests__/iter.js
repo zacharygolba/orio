@@ -71,7 +71,10 @@ describe('Combinators', () => {
     const subj = iter.range()
 
     subj.flatten()
-    expect(FlatMapAdapter).toHaveBeenLastCalledWith(subj.producer, expect.any(Function))
+    expect(FlatMapAdapter).toHaveBeenLastCalledWith(
+      subj.producer,
+      expect.any(Function),
+    )
   })
 
   test('#map()', () => {

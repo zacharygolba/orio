@@ -1,22 +1,17 @@
 // @flow
 
 import * as result from '../result'
-import { createProducer } from '../producer'
+import { createProducer, ProducerBase } from '../producer'
 import type { Producer } from '../producer'
 
-export default class ChainAdapter<T, U> implements Producer<T | U> {
+export default class ChainAdapter<T, U> extends ProducerBase<T | U> {
   producerA: Producer<T>
   producerB: Producer<U>
-  /*:: @@iterator: () => Iterator<T | U> */
 
   constructor(producerA: Producer<T>, producerB: Iterable<U> | U) {
+    super()
     this.producerA = producerA
     this.producerB = createProducer(producerB)
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<T | U> {
-    return this
   }
 
   next(): IteratorResult<T | U, void> {

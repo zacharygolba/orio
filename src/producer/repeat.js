@@ -2,19 +2,14 @@
 
 import * as result from '../result'
 
-import type { Producer } from './'
+import ProducerBase from './base'
 
-export default class RepeatProducer<T> implements Producer<T> {
+export default class RepeatProducer<T> extends ProducerBase<T> {
   value: T
-  /*:: @@iterator: () => Iterator<T> */
 
   constructor(value: T) {
+    super()
     this.value = value
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<T> {
-    return this
   }
 
   next(): IteratorResult<T, void> {

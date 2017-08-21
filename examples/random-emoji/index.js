@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const iter = require('iter.js')
 
 const EMOJI = require('./emoji')
@@ -9,8 +10,5 @@ function randomIndex() {
 module.exports = function randomEmoji() {
   const magicNumber = randomIndex()
 
-  return iter
-    .cycle(EMOJI)
-    .filter(() => magicNumber === randomIndex())
-    .first()
+  return iter.cycle(EMOJI).filter(() => magicNumber === randomIndex()).first()
 }

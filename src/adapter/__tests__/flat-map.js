@@ -30,7 +30,8 @@ test('#sizeHint()', () => {
   expect(subj.sizeHint()).toEqual(3)
 
   // eslint-disable-next-line no-empty, no-unused-vars
-  for (const _ of subj) {}
+  for (const _ of subj) {
+  }
 
   expect(subj.sizeHint()).toEqual(6)
 })

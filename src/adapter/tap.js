@@ -1,20 +1,16 @@
 // @flow
 
+import { ProducerBase } from '../producer'
 import type { Producer } from '../producer'
 
-export default class TapAdapter<T> implements Producer<T> {
-  fn: (T) => void
+export default class TapAdapter<T> extends ProducerBase<T> {
+  fn: T => void
   producer: Producer<T>
-  /*:: @@iterator: () => Iterator<T> */
 
-  constructor(producer: Producer<T>, fn: (T) => void) {
+  constructor(producer: Producer<T>, fn: T => void) {
+    super()
     this.fn = fn
     this.producer = producer
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<T> {
-    return this
   }
 
   next(): IteratorResult<T, void> {

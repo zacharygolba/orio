@@ -1,18 +1,19 @@
 // @flow
 
 import * as result from '../../result'
-import type { Producer } from '../'
+import ProducerBase from '../base'
 
-export default class NumberProducer implements Producer<*> {
+export default class NumberProducer extends ProducerBase<number> {
   done: boolean
   end: number
   size: number
   start: number
   state: number
   step: number
-  /*:: @@iterator: () => Iterator<number> */
 
   constructor(s?: number = 0, e?: number = Infinity) {
+    super()
+
     const start = Number(s)
     const end = Number(e)
 
@@ -34,11 +35,6 @@ export default class NumberProducer implements Producer<*> {
     }
 
     this.state = this.start
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<number> {
-    return this
   }
 
   next(): IteratorResult<number, void> {

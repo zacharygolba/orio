@@ -1,25 +1,20 @@
 // @flow
 
 import * as result from '../result'
-import { createProducer } from '../producer'
+import { createProducer, ProducerBase } from '../producer'
 import type { Producer } from '../producer'
 
-export default class FlatMapAdapter<T, U> implements Producer<U> {
+export default class FlatMapAdapter<T, U> extends ProducerBase<U> {
   child: ?Producer<U>
-  fn: (T) => Iterable<U> | U
+  fn: T => Iterable<U> | U
   parent: Producer<T>
   size: number
-  /*:: @@iterator: () => Iterator<U> */
 
-  constructor(producer: Producer<T>, fn: (T) => Iterable<U> | U) {
+  constructor(producer: Producer<T>, fn: T => Iterable<U> | U) {
+    super()
     this.fn = fn
     this.parent = producer
     this.size = this.parent.sizeHint()
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<U> {
-    return this
   }
 
   next(): IteratorResult<U, void> {

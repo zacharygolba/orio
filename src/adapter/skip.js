@@ -1,22 +1,18 @@
 // @flow
 
+import { ProducerBase } from '../producer'
 import type { Producer } from '../producer'
 
-export default class SkipAdapter<T> implements Producer<T> {
+export default class SkipAdapter<T> extends ProducerBase<T> {
   amount: number
   producer: Producer<T>
   state: number
-  /*:: @@iterator: () => Iterator<T> */
 
   constructor(producer: Producer<T>, amount: number) {
+    super()
     this.amount = amount
     this.producer = producer
     this.state = 0
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<T> {
-    return this
   }
 
   next(): IteratorResult<T, void> {

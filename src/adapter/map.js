@@ -1,21 +1,17 @@
 // @flow
 
 import * as result from '../result'
+import { ProducerBase } from '../producer'
 import type { Producer } from '../producer'
 
-export default class MapAdapter<T, U> implements Producer<U> {
-  fn: (T) => U
+export default class MapAdapter<T, U> extends ProducerBase<U> {
+  fn: T => U
   producer: Producer<T>
-  /*:: @@iterator: () => Iterator<U> */
 
-  constructor(producer: Producer<T>, fn: (T) => U) {
+  constructor(producer: Producer<T>, fn: T => U) {
+    super()
     this.fn = fn
     this.producer = producer
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<U> {
-    return this
   }
 
   next(): IteratorResult<U, void> {

@@ -49,7 +49,8 @@ describe('#createProducer()', () => {
     expect(producer.sizeHint()).toBe(0)
   })
 
-  ;[1, true, Symbol('test'), {}].forEach((source) => {
+  // prettier-ignore
+  ;[1, true, Symbol('test'), {}].forEach(source => {
     const type = String(source)
 
     test(`${type} => IndexedProducer<${type}>`, () => {
@@ -60,7 +61,7 @@ describe('#createProducer()', () => {
       expect(producer.next()).toEqual(
         expect.objectContaining({
           value: source,
-        })
+        }),
       )
     })
   })

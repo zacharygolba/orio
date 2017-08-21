@@ -1,16 +1,17 @@
 // @flow
 
 import * as result from '../result'
-import { createProducer } from '../producer'
+import { createProducer, ProducerBase } from '../producer'
 import type { Producer } from '../producer'
 
-export default class ZipAdapter<T, U> implements Producer<[T, U]> {
+export default class ZipAdapter<T, U> extends ProducerBase<[T, U]> {
   producerA: Producer<T>
   producerB: Producer<U>
   size: ?number
-  /*:: @@iterator: () => Iterator<[T, U]> */
 
   constructor(producerA: Producer<T>, producerB: Iterable<U>) {
+    super()
+
     this.producerA = producerA
     this.producerB = createProducer(producerB)
 
@@ -18,11 +19,6 @@ export default class ZipAdapter<T, U> implements Producer<[T, U]> {
       const size = producerA.sizeHint()
       this.size = Number.isFinite(size) ? Math.floor(size / 2) : Infinity
     }
-  }
-
-  // $FlowIgnore
-  [Symbol.iterator](): Iterator<[T, U]> {
-    return this
   }
 
   next(): IteratorResult<[T, U], void> {
@@ -33,10 +29,7 @@ export default class ZipAdapter<T, U> implements Producer<[T, U]> {
       return result.done()
     }
 
-    return result.next([
-      nextA.value,
-      nextB.value,
-    ])
+    return result.next([nextA.value, nextB.value])
   }
 
   sizeHint(): number {
@@ -44,9 +37,6 @@ export default class ZipAdapter<T, U> implements Producer<[T, U]> {
       return this.size
     }
 
-    return Math.min(
-      this.producerA.sizeHint(),
-      this.producerB.sizeHint(),
-    )
+    return Math.min(this.producerA.sizeHint(), this.producerB.sizeHint())
   }
 }
