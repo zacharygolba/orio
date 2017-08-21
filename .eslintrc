@@ -5,8 +5,8 @@
     "plugin:jest/recommended"
   ],
   "env": {
-    "es6": true,
-    "jest": true
+    "jest": true,
+    "shared-node-browser": true
   },
   "globals": {
     "Class": true,
@@ -19,8 +19,7 @@
     "ecmaVersion": 2017,
     "sourceType": "module",
     "ecmaFeatures": {
-      "impliedStrict": true,
-      "experimentalObjectRestSpread": true
+      "impliedStrict": true
     }
   },
   "plugins": [
@@ -33,22 +32,20 @@
     }
   },
   "rules": {
-    "class-methods-use-this": 0,
+    "class-methods-use-this": "off",
     "comma-dangle": [
       "error",
       "only-multiline"
     ],
-    "no-plusplus": 0,
+    "no-restricted-syntax": [
+      "error",
+      "ForInStatement",
+      "WithStatement"
+    ],
     "semi": [
       "error",
       "never"
     ],
-    "spaced-comment": 0,
-    "no-restricted-syntax": [
-      "error",
-      "ForInStatement",
-      "LabeledStatement",
-      "WithStatement"
-    ]
+    "spaced-comment": "off"
   }
 }

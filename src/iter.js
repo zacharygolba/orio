@@ -102,7 +102,7 @@ export default class Iter<T> implements Producer<T> {
   }
 
   forEach(fn: (T) => void): void {
-    for (let i = 0; i < this.sizeHint(); i++) {
+    for (let i = 0; i < this.sizeHint(); i += 1) {
       const result = this.next()
 
       if (result.done) {
@@ -155,7 +155,7 @@ export default class Iter<T> implements Producer<T> {
   reduce<U>(fn: (U, T) => U, init: U): U {
     let acc = init
 
-    for (let i = 0; i < this.sizeHint(); i++) {
+    for (let i = 0; i < this.sizeHint(); i += 1) {
       const result = this.next()
 
       if (result.done) {

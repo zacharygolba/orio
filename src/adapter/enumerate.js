@@ -20,7 +20,15 @@ export default class EnumerateAdapter<T> implements Producer<[number, T]> {
 
   next(): IteratorResult<[number, T], void> {
     const next = this.producer.next()
-    return next.done ? next : result.next([this.state++, next.value])
+
+    if (next.done) {
+      return next
+    }
+
+    const state = this.state
+    this.state += 1
+
+    return result.next([state, next.value])
   }
 
   sizeHint(): number {

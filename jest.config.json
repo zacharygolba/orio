@@ -1,6 +1,0 @@
-{
-  "collectCoverage": true,
-  "coveragePathIgnorePatterns": [
-    "/(dist|examples|node_modules)/"
-  ]
-}

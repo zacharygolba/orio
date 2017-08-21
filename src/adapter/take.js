@@ -26,8 +26,8 @@ export default class TakeAdapter<T> implements Producer<T> {
     }
 
     const next = this.producer.next()
+    this.state += 1
 
-    this.state++
     return next
   }
 

@@ -17,11 +17,12 @@ test('#@@iterator()', () => {
   let i = 0
 
   for (const item of producer) {
-    expect(item).toBe(ITEM)
-
-    if (i++ > 3) {
+    if (i > 3) {
       break
     }
+
+    expect(item).toBe(ITEM)
+    i += 1
   }
 })
 

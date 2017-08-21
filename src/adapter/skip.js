@@ -25,7 +25,7 @@ export default class SkipAdapter<T> implements Producer<T> {
     if (this.state < this.amount) {
       while (!next.done && this.state < this.amount) {
         next = this.producer.next()
-        this.state++
+        this.state += 1
       }
     }
 

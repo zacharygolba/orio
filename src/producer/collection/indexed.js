@@ -30,7 +30,10 @@ export default class IndexedProducer<T> implements Producer<T> {
       return result.done()
     }
 
-    return result.next(this.source[this.state++])
+    const value = this.source[this.state]
+
+    this.state += 1
+    return result.next(value)
   }
 
   sizeHint(): number {

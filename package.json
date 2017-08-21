@@ -12,7 +12,7 @@
     "flow-typed": "shx rm -rf flow-typed/npm && flow-typed install",
     "flow": "flow check",
     "lint": "eslint .",
-    "test": "jest --config jest.config.json"
+    "test": "jest"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

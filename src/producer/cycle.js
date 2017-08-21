@@ -24,7 +24,10 @@ export default class CycleProducer<T> implements Producer<T> {
       this.state = 0
     }
 
-    return result.next(this.source[this.state++])
+    const state = this.state
+    this.state += 1
+
+    return result.next(this.source[state])
   }
 
   sizeHint(): number {
