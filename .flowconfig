@@ -1,5 +1,4 @@
 # See https://flow.org/en/docs/config for more information on .flowconfig files.
-
 [ignore]
 .*/benches/.*
 .*/coverage/.*
