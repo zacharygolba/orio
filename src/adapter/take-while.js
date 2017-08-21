@@ -13,7 +13,7 @@ export default class TakeWhileAdapter<T> implements Producer<T> {
     this.producer = producer
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<T> {
     return this
   }

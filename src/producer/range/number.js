@@ -1,7 +1,7 @@
 // @flow
 
 import * as result from '../../result'
-import type { Producer } from '../types'
+import type { Producer } from '../'
 
 export default class NumberProducer implements Producer<*> {
   done: boolean
@@ -33,7 +33,7 @@ export default class NumberProducer implements Producer<*> {
     this.state = this.start
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<number> {
     return this
   }

@@ -12,7 +12,7 @@ export default class FilterAdapter<T> implements Producer<T> {
     this.producer = producer
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<T> {
     return this
   }

@@ -1,17 +1,17 @@
 // @flow
 
-import type { Producer } from './types'
+import type { Producer } from './'
 
 export default class UnboundProducer<T> implements Producer<T> {
   source: Iterator<T>
   /*:: @@iterator: () => Iterator<T> */
 
   constructor(source: Iterable<T>) {
-    // $FlowFixMe
+    // $FlowIgnore
     this.source = source[Symbol.iterator]()
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<T> {
     return this
   }

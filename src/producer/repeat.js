@@ -2,7 +2,7 @@
 
 import * as result from '../result'
 
-import type { Producer } from './types'
+import type { Producer } from './'
 
 export default class RepeatProducer<T> implements Producer<T> {
   value: T
@@ -12,7 +12,7 @@ export default class RepeatProducer<T> implements Producer<T> {
     this.value = value
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<T> {
     return this
   }

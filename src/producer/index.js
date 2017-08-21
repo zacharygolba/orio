@@ -7,14 +7,16 @@ import { IndexedProducer, MapProducer, SetProducer } from './collection'
 import CycleProducer from './cycle'
 import RepeatProducer from './repeat'
 import UnboundProducer from './unbound'
-import type { Producer } from './types'
 
 export * from './range'
 export * from './collection'
 export { default as CycleProducer } from './cycle'
 export { default as RepeatProducer } from './repeat'
 export { default as UnboundProducer } from './unbound'
-export type { IndexedCollection, Producer } from './types'
+
+export interface Producer<T> extends Iterator<T> {
+  sizeHint(): number,
+}
 
 export function createProducer<T>(source: any): Producer<T> {
   if (source == null) {

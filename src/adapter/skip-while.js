@@ -21,7 +21,7 @@ export default class SkipWhileAdapter<T> implements Producer<T> {
     })
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<T> {
     return this
   }

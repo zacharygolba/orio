@@ -1,7 +1,7 @@
 // @flow
 
 import * as result from '../../result'
-import type { Producer } from '../types'
+import type { Producer } from '../'
 
 import NumberProducer from './number'
 
@@ -18,7 +18,7 @@ export default class CharProducer implements Producer<*> {
     this.size = this.source.size
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<string> {
     return this
   }

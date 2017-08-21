@@ -13,7 +13,7 @@ export default class FilterMapAdapter<T, U> implements Producer<U> {
     this.producer = producer
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<U> {
     return this
   }

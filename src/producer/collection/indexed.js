@@ -1,7 +1,12 @@
 // @flow
 
 import * as result from '../../result'
-import type { IndexedCollection, Producer } from '../types'
+import type { Producer } from '../'
+
+export interface IndexedCollection<T> extends Iterable<T> {
+  [key: number]: T,
+  length: number,
+}
 
 export default class IndexedProducer<T> implements Producer<T> {
   source: IndexedCollection<T>
@@ -15,7 +20,7 @@ export default class IndexedProducer<T> implements Producer<T> {
     this.state = 0
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<T> {
     return this
   }

@@ -15,8 +15,12 @@ import {
   ZipAdapter,
 } from './adapter'
 import * as ops from './ops'
-import type { FromIterator } from './types'
 import type { Producer } from './producer'
+
+export interface FromIterator<T> {
+  constructor(source: Iterator<T>): FromIterator<T>,
+  static from(source: Iterator<T>): FromIterator<T>,
+}
 
 export default class Iter<T> implements Producer<T> {
   producer: Producer<T>

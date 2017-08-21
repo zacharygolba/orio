@@ -13,7 +13,7 @@ export default class EnumerateAdapter<T> implements Producer<[number, T]> {
     this.state = 0
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<[number, T]> {
     return this
   }

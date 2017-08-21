@@ -2,7 +2,7 @@
 
 import * as result from '../result'
 
-import type { IndexedCollection, Producer } from './types'
+import type { IndexedCollection, Producer } from './'
 
 export default class CycleProducer<T> implements Producer<T> {
   source: IndexedCollection<T>
@@ -14,7 +14,7 @@ export default class CycleProducer<T> implements Producer<T> {
     this.state = 0
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<T> {
     return this
   }

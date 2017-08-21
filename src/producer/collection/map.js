@@ -1,6 +1,6 @@
 // @flow
 
-import type { Producer } from '../types'
+import type { Producer } from '../'
 
 export default class MapProducer<K, V> implements Producer<*> {
   size: number
@@ -12,7 +12,7 @@ export default class MapProducer<K, V> implements Producer<*> {
     this.source = source.entries()
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<[K, V]> {
     return this
   }

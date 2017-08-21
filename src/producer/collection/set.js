@@ -1,6 +1,6 @@
 // @flow
 
-import type { Producer } from '../types'
+import type { Producer } from '../'
 
 export default class SetProducer<T> implements Producer<T> {
   size: number
@@ -12,7 +12,7 @@ export default class SetProducer<T> implements Producer<T> {
     this.source = source.values()
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<T> {
     return this
   }

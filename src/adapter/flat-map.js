@@ -17,7 +17,7 @@ export default class FlatMapAdapter<T, U> implements Producer<U> {
     this.size = this.parent.sizeHint()
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<U> {
     return this
   }

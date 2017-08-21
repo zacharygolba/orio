@@ -14,7 +14,7 @@ export default class ChainAdapter<T, U> implements Producer<T | U> {
     this.producerB = createProducer(producerB)
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<T | U> {
     return this
   }

@@ -20,7 +20,7 @@ export default class ZipAdapter<T, U> implements Producer<[T, U]> {
     }
   }
 
-  // $FlowFixMe
+  // $FlowIgnore
   [Symbol.iterator](): Iterator<[T, U]> {
     return this
   }
