@@ -1,6 +1,6 @@
 const _ = require('lodash')
 
-// eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved
 const { MAX_FACTORIAL } = require('factorial')
 
 function factorial(n) {
