@@ -16,4 +16,4 @@ install:
 test_script:
   - ps: yarn lint
   - ps: yarn flow
-  - ps: yarn test
+  - yarn test
