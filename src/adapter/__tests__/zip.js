@@ -7,7 +7,7 @@ let subj
 
 beforeEach(() => {
   const producerA = iter.repeat('test').producer
-  const producerB = iter.from([1, 2, 3]).producer
+  const producerB = iter.of(1, 2, 3).producer
   subj = new Zip(producerA, producerB)
 })
 
@@ -26,7 +26,7 @@ describe('#next()', () => {
   })
 
   test('with a bound lhs and an unbound rhs', () => {
-    const producerA = iter.from([1, 2, 3]).producer
+    const producerA = iter.of(1, 2, 3).producer
     const producerB = iter.repeat('test').producer
     subj = new Zip(producerA, producerB)
 
@@ -37,7 +37,7 @@ describe('#next()', () => {
   })
 
   test('with a self reference to bound lhs', () => {
-    const { producer } = iter.from([1, 2, 3, 4])
+    const { producer } = iter.of(1, 2, 3, 4)
     subj = new Zip(producer, producer)
 
     expect(subj.next()).toMatchSnapshot()
@@ -53,7 +53,7 @@ describe('#sizeHint()', () => {
   })
 
   test('with a bound lhs and an unbound rhs', () => {
-    const producerA = iter.from([1, 2, 3]).producer
+    const producerA = iter.of(1, 2, 3).producer
     const producerB = iter.repeat('test').producer
     subj = new Zip(producerA, producerB)
 
@@ -70,14 +70,14 @@ describe('#sizeHint()', () => {
 
   test('with a self reference to bound lhs', () => {
     {
-      const { producer } = iter.from([1, 2, 3])
+      const { producer } = iter.of(1, 2, 3)
       subj = new Zip(producer, producer)
     }
 
     expect(subj.sizeHint()).toBe(1)
 
     {
-      const { producer } = iter.from([1, 2, 3, 4])
+      const { producer } = iter.of(1, 2, 3, 4)
       subj = new Zip(producer, producer)
     }
 

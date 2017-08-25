@@ -7,7 +7,7 @@ const fn = jest.fn()
 let subj
 
 beforeEach(() => {
-  const { producer } = iter.from([1, 2, 3])
+  const { producer } = iter.of(1, 2, 3)
   subj = new Tap(producer, fn)
 })
 

@@ -6,8 +6,8 @@ import * as iter from '../../'
 let subj
 
 beforeEach(() => {
-  const producerA = iter.from([1, 2, 3]).producer
-  const producerB = iter.from([4, 5, 6]).producer
+  const producerA = iter.of(1, 2, 3).producer
+  const producerB = iter.of(4, 5, 6).producer
   subj = new Chain(producerA, producerB)
 })
 

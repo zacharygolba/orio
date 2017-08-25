@@ -30,7 +30,7 @@ describe('Combinators', () => {
 
   test('#chain()', () => {
     const source = [4, 5, 6]
-    const subj = iter.from([1, 2, 3])
+    const subj = iter.of(1, 2, 3)
 
     subj.chain(source)
     expect(ChainAdapter).toHaveBeenLastCalledWith(subj.producer, source)
@@ -235,7 +235,7 @@ describe('Methods', () => {
   })
 
   test('#product()', () => {
-    expect(iter.from([]).product()).toBe(0)
+    expect(iter.of().product()).toBe(0)
     expect(iter.range(2, 4).product()).toBe(2 * 3 * 4)
     expect(Number.isNaN(iter.chars('a', 'z').product())).toBe(true)
   })
@@ -266,12 +266,12 @@ describe('Methods', () => {
   })
 
   test('#sum()', () => {
-    expect(iter.from([]).sum()).toBe(0)
+    expect(iter.of().sum()).toBe(0)
     expect(iter.range(1, 4).sum()).toBe(1 + 2 + 3 + 4)
     expect(Number.isNaN(iter.chars('a', 'z').sum())).toBe(true)
   })
 
   test('#toString()', () => {
-    expect(iter.from([]).toString()).toBe('[object Iter]')
+    expect(iter.of().toString()).toBe('[object Iter]')
   })
 })
