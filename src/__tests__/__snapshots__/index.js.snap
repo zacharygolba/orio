@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`#of() 1`] = `
+exports[`.of() 1`] = `
 IndexedProducer {
   "size": 3,
   "source": Array [
