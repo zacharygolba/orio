@@ -6,7 +6,7 @@ import * as iter from '../../'
 let subj
 
 beforeEach(() => {
-  const { producer } = iter.from([1, 2, 3])
+  const { producer } = iter.of(1, 2, 3)
   subj = new Filter(producer, value => value > 1)
 })
 

@@ -16,6 +16,17 @@ test('#from()', () => {
   expect(iter.from([1, 2, 3])).toBeInstanceOf(Iter)
 })
 
+test('#of()', () => {
+  expect(iter.of()).toBeInstanceOf(Iter)
+
+  {
+    const it = iter.of(1, 2, 3)
+
+    expect(it).toBeInstanceOf(Iter)
+    expect(it.producer).toMatchSnapshot()
+  }
+})
+
 test('#range()', () => {
   expect(iter.range()).toBeInstanceOf(Iter)
   expect(iter.range(1)).toBeInstanceOf(Iter)

@@ -6,7 +6,7 @@ import * as iter from '../../'
 let subj
 
 beforeEach(() => {
-  const { producer } = iter.from([1, 2, 3, 4, 5, 6])
+  const { producer } = iter.of(1, 2, 3, 4, 5, 6)
   subj = new SkipWhile(producer, value => value <= 3)
 })
 

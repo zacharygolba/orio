@@ -9,7 +9,7 @@ module.exports = function generate(length = LENGTH, pattern = PATTERN) {
       // create an inifinitely repeating iterator of all valid chars [0-9A-Za-z]
       .cycle(
         iter
-          .from()
+          .of()
           .chain(iter.chars('0', '9'))
           .chain(iter.chars('A', 'Z'))
           .chain(iter.chars('a', 'z'))

@@ -6,7 +6,7 @@ import * as iter from '../../'
 let subj
 
 beforeEach(() => {
-  const { producer } = iter.from([1, null, 2, undefined, 3])
+  const { producer } = iter.of(1, null, 2, undefined, 3)
   subj = new FilterMap(producer, value => value)
 })
 

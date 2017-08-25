@@ -7,6 +7,7 @@ import {
   createProducer,
   CharProducer,
   CycleProducer,
+  IndexedProducer,
   NumberProducer,
   RepeatProducer,
 } from './producer'
@@ -28,6 +29,11 @@ export function cycle<T>(source: IndexedCollection<T>): Iter<T> {
 
 export function from<T>(source?: Iterable<T> | T = []): Iter<T> {
   const producer = createProducer(source)
+  return new Iter(producer)
+}
+
+export function of<T>(...items: Array<T>): Iter<T> {
+  const producer = new IndexedProducer(items)
   return new Iter(producer)
 }
 
