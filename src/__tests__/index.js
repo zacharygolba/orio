@@ -1,22 +1,34 @@
 // @flow
 
-import { CycleProducer } from '../producer'
+import { CharProducer, CycleProducer, NumberProducer } from '../producer'
 import Iter from '../iter'
 import * as iter from '../'
 
-test('#cycle()', () => {
+test('.chars()', () => {
+  expect(iter.chars()).toBeInstanceOf(Iter)
+  expect(iter.chars('a')).toBeInstanceOf(Iter)
+  expect(iter.chars('a', 'z')).toBeInstanceOf(Iter)
+
+  {
+    const it = iter.chars('a', 'z')
+
+    expect(it.producer).toBeInstanceOf(CharProducer)
+  }
+})
+
+test('.cycle()', () => {
   const it = iter.cycle([1, 2, 3])
 
   expect(it).toBeInstanceOf(Iter)
   expect(it.producer).toBeInstanceOf(CycleProducer)
 })
 
-test('#from()', () => {
+test('.from()', () => {
   expect(iter.from()).toBeInstanceOf(Iter)
   expect(iter.from([1, 2, 3])).toBeInstanceOf(Iter)
 })
 
-test('#of()', () => {
+test('.of()', () => {
   expect(iter.of()).toBeInstanceOf(Iter)
 
   {
@@ -27,13 +39,18 @@ test('#of()', () => {
   }
 })
 
-test('#range()', () => {
+test('.range()', () => {
   expect(iter.range()).toBeInstanceOf(Iter)
   expect(iter.range(1)).toBeInstanceOf(Iter)
   expect(iter.range(1, 2)).toBeInstanceOf(Iter)
-  expect(iter.chars('a', 'b')).toBeInstanceOf(Iter)
+
+  {
+    const it = iter.range(1, 2)
+
+    expect(it.producer).toBeInstanceOf(NumberProducer)
+  }
 })
 
-test('#repeat()', () => {
+test('.repeat()', () => {
   expect(iter.repeat()).toBeInstanceOf(Iter)
 })
