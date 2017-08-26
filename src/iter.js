@@ -134,9 +134,6 @@ export default class Iter<T> extends ProducerBase<T> {
     return this.sizeHint() === 0 ? 0 : this.reduce(ops.mul, 1)
   }
 
-  /* eslint-disable no-unused-vars, no-dupe-class-members */
-
-  reduce(fn: (T, T) => T): T {}
   reduce<U>(fn: (U, T) => U, init: U): U {
     const size = this.sizeHint()
     let acc = init
@@ -153,8 +150,6 @@ export default class Iter<T> extends ProducerBase<T> {
 
     return acc
   }
-
-  /* eslint-enable no-unused-vars, no-dupe-class-members */
 
   sizeHint(): number {
     return this.producer.sizeHint()
