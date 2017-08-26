@@ -165,7 +165,6 @@ describe('Methods', () => {
 
   test('#count()', () => {
     expect(iter.range(1, 10).count()).toBe(10)
-    expect(iter.range(1).count()).toBe(Infinity)
   })
 
   test('#every()', () => {

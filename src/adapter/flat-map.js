@@ -8,13 +8,11 @@ export default class FlatMapAdapter<T, U> extends ProducerBase<U> {
   child: ?Producer<U>
   fn: T => Iterable<U> | U
   parent: Producer<T>
-  size: number
 
   constructor(producer: Producer<T>, fn: T => Iterable<U> | U) {
     super()
     this.fn = fn
     this.parent = producer
-    this.size = this.parent.sizeHint()
   }
 
   next(): IteratorResult<U, void> {
@@ -28,10 +26,7 @@ export default class FlatMapAdapter<T, U> extends ProducerBase<U> {
       }
 
       const child = createProducer(this.fn(nextChild.value))
-
       this.child = child
-      this.size += child.sizeHint() - 1
-
       next = child.next()
     }
 
@@ -39,6 +34,6 @@ export default class FlatMapAdapter<T, U> extends ProducerBase<U> {
   }
 
   sizeHint(): number {
-    return this.size
+    return Infinity
   }
 }
