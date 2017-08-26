@@ -52,8 +52,7 @@ export default class Iter<T> extends ProducerBase<T> {
   }
 
   count(): number {
-    const size = this.sizeHint()
-    return Number.isFinite(size) ? this.reduce(acc => acc + 1, 0) : Infinity
+    return this.reduce(acc => acc + 1, 0)
   }
 
   enumerate(): Iter<[number, T]> {
@@ -139,9 +138,10 @@ export default class Iter<T> extends ProducerBase<T> {
 
   reduce(fn: (T, T) => T): T {}
   reduce<U>(fn: (U, T) => U, init: U): U {
+    const size = this.sizeHint()
     let acc = init
 
-    for (let i = 0; i < this.sizeHint(); i += 1) {
+    for (let i = 0; i < size; i += 1) {
       const result = this.next()
 
       if (result.done) {
