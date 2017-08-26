@@ -80,7 +80,7 @@ export default class Iter<T> extends ProducerBase<T> {
   }
 
   first(): ?T {
-    return this.take(1).reduce((_, next) => next, undefined)
+    return this.take(1).reduce((_, next) => next)
   }
 
   flatMap<U>(fn: T => Iterable<U> | U): Iter<U> {
@@ -93,15 +93,7 @@ export default class Iter<T> extends ProducerBase<T> {
   }
 
   forEach(fn: T => void): void {
-    for (let i = 0; i < this.sizeHint(); i += 1) {
-      const result = this.next()
-
-      if (result.done) {
-        break
-      }
-
-      fn(result.value)
-    }
+    this.reduce((_, item) => fn(item))
   }
 
   join(sep?: string = ','): string {
@@ -115,7 +107,7 @@ export default class Iter<T> extends ProducerBase<T> {
   }
 
   last(): ?T {
-    return this.reduce((_, next) => next, undefined)
+    return this.reduce((_, next) => next)
   }
 
   map<U>(fn: T => U): Iter<U> {
@@ -143,6 +135,9 @@ export default class Iter<T> extends ProducerBase<T> {
     return this.sizeHint() === 0 ? 0 : this.reduce(ops.mul, 1)
   }
 
+  /* eslint-disable no-unused-vars, no-dupe-class-members */
+
+  reduce(fn: (T, T) => T): T {}
   reduce<U>(fn: (U, T) => U, init: U): U {
     let acc = init
 
@@ -158,6 +153,8 @@ export default class Iter<T> extends ProducerBase<T> {
 
     return acc
   }
+
+  /* eslint-enable no-unused-vars, no-dupe-class-members */
 
   sizeHint(): number {
     return this.producer.sizeHint()
