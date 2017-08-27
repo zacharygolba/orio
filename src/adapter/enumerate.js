@@ -2,13 +2,12 @@
 
 import * as result from '../result'
 import { ProducerBase } from '../producer'
-import type { Producer } from '../producer'
 
 export default class EnumerateAdapter<T> extends ProducerBase<[number, T]> {
-  producer: Producer<T>
+  producer: Iterator<T>
   state: number
 
-  constructor(producer: Producer<T>) {
+  constructor(producer: Iterator<T>) {
     super()
     this.producer = producer
     this.state = 0
@@ -25,9 +24,5 @@ export default class EnumerateAdapter<T> extends ProducerBase<[number, T]> {
     this.state += 1
 
     return result.next([state, next.value])
-  }
-
-  sizeHint(): number {
-    return this.producer.sizeHint()
   }
 }

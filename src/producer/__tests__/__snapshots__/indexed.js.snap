@@ -8,13 +8,12 @@ exports[`IndexedProducer source array #@@iterator() 3`] = `3`;
 
 exports[`IndexedProducer source array #constructor() 1`] = `
 IndexedProducer {
-  "size": 3,
+  "index": 0,
   "source": Array [
     1,
     2,
     3,
   ],
-  "state": 0,
 }
 `;
 
@@ -28,42 +27,7 @@ exports[`IndexedProducer source string #@@iterator() 4`] = `"t"`;
 
 exports[`IndexedProducer source string #constructor() 1`] = `
 IndexedProducer {
-  "size": 4,
+  "index": 0,
   "source": "test",
-  "state": 0,
-}
-`;
-
-exports[`MapProducer #@@iterator() 1`] = `
-Array [
-  1,
-  2,
-]
-`;
-
-exports[`MapProducer #@@iterator() 2`] = `
-Array [
-  3,
-  4,
-]
-`;
-
-exports[`MapProducer #constructor() 1`] = `
-MapProducer {
-  "size": 2,
-  "source": Object {},
-}
-`;
-
-exports[`SetProducer #@@iterator() 1`] = `1`;
-
-exports[`SetProducer #@@iterator() 2`] = `2`;
-
-exports[`SetProducer #@@iterator() 3`] = `3`;
-
-exports[`SetProducer #constructor() 1`] = `
-SetProducer {
-  "size": 3,
-  "source": Object {},
 }
 `;

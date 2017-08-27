@@ -1,14 +1,13 @@
 // @flow
 
 import { ProducerBase } from '../producer'
-import type { Producer } from '../producer'
 
 import Filter from './filter'
 
 export default class SkipWhileAdapter<T> extends ProducerBase<T> {
-  producer: Producer<T>
+  producer: Iterator<T>
 
-  constructor(producer: Producer<T>, fn: T => boolean) {
+  constructor(producer: Iterator<T>, fn: T => boolean) {
     super()
 
     let willSkip = true
@@ -25,9 +24,5 @@ export default class SkipWhileAdapter<T> extends ProducerBase<T> {
 
   next(): IteratorResult<T, void> {
     return this.producer.next()
-  }
-
-  sizeHint(): number {
-    return this.producer.sizeHint()
   }
 }

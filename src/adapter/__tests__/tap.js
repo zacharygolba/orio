@@ -32,7 +32,3 @@ test('#next()', () => {
   expect(subj.next()).toMatchSnapshot()
   expect(fn).toHaveBeenCalledTimes(3)
 })
-
-test('#sizeHint()', () => {
-  expect(subj.sizeHint()).toEqual(3)
-})

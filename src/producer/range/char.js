@@ -27,8 +27,4 @@ export default class CharProducer extends ProducerBase<string> {
 
     return result.next(String.fromCodePoint(next.value))
   }
-
-  sizeHint(): number {
-    return this.size
-  }
 }

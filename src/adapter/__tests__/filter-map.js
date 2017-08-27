@@ -24,7 +24,3 @@ test('#next()', () => {
   expect(subj.next()).toMatchSnapshot()
   expect(subj.next()).toMatchSnapshot()
 })
-
-test('#sizeHint()', () => {
-  expect(subj.sizeHint()).toEqual(5)
-})

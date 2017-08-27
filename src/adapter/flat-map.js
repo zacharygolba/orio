@@ -2,14 +2,13 @@
 
 import * as result from '../result'
 import { createProducer, ProducerBase } from '../producer'
-import type { Producer } from '../producer'
 
 export default class FlatMapAdapter<T, U> extends ProducerBase<U> {
-  child: ?Producer<U>
+  child: ?Iterator<U>
   fn: T => Iterable<U> | U
-  parent: Producer<T>
+  parent: Iterator<T>
 
-  constructor(producer: Producer<T>, fn: T => Iterable<U> | U) {
+  constructor(producer: Iterator<T>, fn: T => Iterable<U> | U) {
     super()
     this.fn = fn
     this.parent = producer
@@ -30,9 +29,5 @@ export default class FlatMapAdapter<T, U> extends ProducerBase<U> {
     }
 
     return next
-  }
-
-  sizeHint(): number {
-    return Infinity
   }
 }

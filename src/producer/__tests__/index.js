@@ -1,13 +1,7 @@
 // @flow
 
 import Iter from '../../iter'
-import {
-  createProducer,
-  IndexedProducer,
-  MapProducer,
-  SetProducer,
-  UnboundProducer,
-} from '../'
+import { createProducer, IndexedProducer, UnboundProducer } from '../'
 
 describe('#createProducer()', () => {
   test('Array<T> => IndexedProducer<T>', () => {
@@ -20,14 +14,20 @@ describe('#createProducer()', () => {
     expect(producer).toBeInstanceOf(IndexedProducer)
   })
 
-  test('Map<K, V> => MapProducer<[K, V]>', () => {
-    const producer = createProducer(new Map([['test', 'test']]))
-    expect(producer).toBeInstanceOf(MapProducer)
+  test('Map<K, V> => MapIterator<[K, V]>', () => {
+    const entry = ['test', 'test']
+    const producer = createProducer(new Map([entry]))
+
+    expect(producer[Symbol.iterator]).toEqual(expect.any(Function))
+    expect(producer.next()).toHaveProperty('value', entry)
   })
 
-  test('Set<T> => SetProducer<T>', () => {
-    const producer = createProducer(new Set(['test', 'test']))
-    expect(producer).toBeInstanceOf(SetProducer)
+  test('Set<T> => SetIterator<T>', () => {
+    const value = 'test'
+    const producer = createProducer(new Set([value]))
+
+    expect(producer[Symbol.iterator]).toEqual(expect.any(Function))
+    expect(producer.next()).toHaveProperty('value', value)
   })
 
   test('Iter<T> => Iter<T>.producer', () => {
@@ -46,7 +46,6 @@ describe('#createProducer()', () => {
     const producer = createProducer()
 
     expect(producer).toBeInstanceOf(IndexedProducer)
-    expect(producer.sizeHint()).toBe(0)
   })
 
   // prettier-ignore
@@ -57,7 +56,6 @@ describe('#createProducer()', () => {
       const producer = createProducer(source)
 
       expect(producer).toBeInstanceOf(IndexedProducer)
-      expect(producer.sizeHint()).toBe(1)
       expect(producer.next()).toEqual(
         expect.objectContaining({
           value: source,

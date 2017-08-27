@@ -1,7 +1,7 @@
 // @flow
 
-import * as result from '../../result'
-import ProducerBase from '../base'
+import * as result from '../result'
+import ProducerBase from './base'
 
 export interface IndexedCollection<T> extends Iterable<T> {
   [key: number]: T,
@@ -9,29 +9,24 @@ export interface IndexedCollection<T> extends Iterable<T> {
 }
 
 export default class IndexedProducer<T> extends ProducerBase<T> {
+  index: number
   source: IndexedCollection<T>
-  size: number
-  state: number
 
   constructor(source: IndexedCollection<T>) {
     super()
+    this.index = 0
     this.source = source
-    this.size = source.length
-    this.state = 0
   }
 
   next(): IteratorResult<T, void> {
-    if (this.state >= this.size) {
+    const index = this.index
+    const source = this.source
+
+    if (index >= source.length) {
       return result.done()
     }
 
-    const value = this.source[this.state]
-
-    this.state += 1
-    return result.next(value)
-  }
-
-  sizeHint(): number {
-    return this.size
+    this.index += 1
+    return result.next(source[index])
   }
 }

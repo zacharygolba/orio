@@ -11,7 +11,3 @@ beforeEach(() => {
 test('#next()', () => {
   expect(subj.next).toThrow('unimplemented')
 })
-
-test('#sizeHint()', () => {
-  expect(subj.sizeHint).toThrow('unimplemented')
-})

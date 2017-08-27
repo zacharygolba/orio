@@ -1,21 +1,18 @@
 // @flow
 
-import { IndexedProducer, MapProducer, SetProducer } from './collection'
+import IndexedProducer from './indexed'
 import ProducerBase from './base'
 import UnboundProducer from './unbound'
 
 export * from './range'
-export * from './collection'
-export { default as ProducerBase } from './base'
 export { default as CycleProducer } from './cycle'
+export { default as IndexedProducer } from './indexed'
+export { default as ProducerBase } from './base'
 export { default as RepeatProducer } from './repeat'
 export { default as UnboundProducer } from './unbound'
+export type { IndexedCollection } from './indexed'
 
-export interface Producer<T> extends Iterator<T> {
-  sizeHint(): number,
-}
-
-export function createProducer<T>(source: any): Producer<T> {
+export function createProducer<T>(source: any): Iterator<T> {
   if (source == null) {
     return new IndexedProducer([])
   }
@@ -29,11 +26,11 @@ export function createProducer<T>(source: any): Producer<T> {
   }
 
   if (source instanceof Set) {
-    return new SetProducer(source)
+    return source.values()
   }
 
   if (source instanceof Map) {
-    return new MapProducer(source)
+    return source.entries()
   }
 
   if (typeof source[Symbol.iterator] === 'function') {
