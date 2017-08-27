@@ -17,6 +17,12 @@ export default {
       format: 'es',
       sourcemap: true,
     },
+    {
+      file: path.join(__dirname, 'dist', 'index.iife.js'),
+      format: 'iife',
+      name: 'iter',
+      sourcemap: true,
+    },
   ],
   plugins: [json(), babel(), resolve()],
   preferConst: true,
