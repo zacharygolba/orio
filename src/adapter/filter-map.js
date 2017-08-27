@@ -15,16 +15,16 @@ export default class FilterMapAdapter<T, U> extends ProducerBase<U> {
   }
 
   next(): IteratorResult<U, void> {
-    let value
+    const next = this.producer.next()
 
-    while (value == null) {
-      const next = this.producer.next()
+    if (next.done) {
+      return next
+    }
 
-      if (next.done) {
-        return next
-      }
+    const value = this.fn(next.value)
 
-      value = this.fn(next.value)
+    if (value == null) {
+      return this.next()
     }
 
     return result.next(value)

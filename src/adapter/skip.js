@@ -16,13 +16,11 @@ export default class SkipAdapter<T> extends ProducerBase<T> {
   }
 
   next(): IteratorResult<T, void> {
-    let next = this.producer.next()
+    const next = this.producer.next()
 
     if (this.state < this.amount) {
-      while (!next.done && this.state < this.amount) {
-        next = this.producer.next()
-        this.state += 1
-      }
+      this.state += 1
+      return this.next()
     }
 
     return next
