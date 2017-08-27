@@ -14,13 +14,13 @@ export default class FilterAdapter<T> extends ProducerBase<T> {
   }
 
   next(): IteratorResult<T, void> {
-    let next = this.producer.next()
+    const next = this.producer.next()
 
-    while (!next.done && !this.fn(next.value)) {
-      next = this.producer.next()
+    if (next.done || this.fn(next.value)) {
+      return next
     }
 
-    return next
+    return this.next()
   }
 
   sizeHint(): number {

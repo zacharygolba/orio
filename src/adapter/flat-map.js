@@ -18,16 +18,15 @@ export default class FlatMapAdapter<T, U> extends ProducerBase<U> {
   next(): IteratorResult<U, void> {
     let next = this.child ? this.child.next() : result.done()
 
-    while (next.done) {
-      const nextChild = this.parent.next()
+    if (next.done) {
+      next = this.parent.next()
 
-      if (nextChild.done) {
+      if (next.done) {
         return next
       }
 
-      const child = createProducer(this.fn(nextChild.value))
-      this.child = child
-      next = child.next()
+      this.child = createProducer(this.fn(next.value))
+      return this.next()
     }
 
     return next

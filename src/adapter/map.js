@@ -16,7 +16,12 @@ export default class MapAdapter<T, U> extends ProducerBase<U> {
 
   next(): IteratorResult<U, void> {
     const next = this.producer.next()
-    return next.done ? next : result.next(this.fn(next.value))
+
+    if (next.done) {
+      return next
+    }
+
+    return result.next(this.fn(next.value))
   }
 
   sizeHint(): number {

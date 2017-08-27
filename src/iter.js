@@ -134,21 +134,14 @@ export default class Iter<T> extends ProducerBase<T> {
     return this.sizeHint() === 0 ? 0 : this.reduce(ops.mul, 1)
   }
 
-  reduce<U>(fn: (U, T) => U, init: U): U {
-    const size = this.sizeHint()
-    let acc = init
+  reduce<U>(fn: (U, T) => U, acc: U): U {
+    const next = this.next()
 
-    for (let i = 0; i < size; i += 1) {
-      const result = this.next()
-
-      if (result.done) {
-        break
-      }
-
-      acc = fn(acc, result.value)
+    if (next.done) {
+      return acc
     }
 
-    return acc
+    return this.reduce(fn, fn(acc, next.value))
   }
 
   sizeHint(): number {
