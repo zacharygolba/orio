@@ -123,8 +123,6 @@ export default class Iter<T> extends ProducerBase<T> {
       return value
     }
 
-    // If the last index is not equal to the input index, the input index was
-    // out of bounds.
     return undefined
   }
 
