@@ -15,8 +15,4 @@ export default class RepeatProducer<T> extends ProducerBase<T> {
   next(): IteratorResult<T, void> {
     return result.next(this.value)
   }
-
-  sizeHint(): number {
-    return Infinity
-  }
 }

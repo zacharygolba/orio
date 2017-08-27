@@ -52,8 +52,4 @@ export default class NumberProducer extends ProducerBase<number> {
 
     return result.next(value)
   }
-
-  sizeHint(): number {
-    return this.size
-  }
 }

@@ -14,8 +14,4 @@ export default class UnboundProducer<T> extends ProducerBase<T> {
   next(): IteratorResult<T, void> {
     return this.source.next()
   }
-
-  sizeHint(): number {
-    return Infinity
-  }
 }

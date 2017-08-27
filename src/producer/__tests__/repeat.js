@@ -25,7 +25,3 @@ test('#@@iterator()', () => {
     i += 1
   }
 })
-
-test('#sizeHint()', () => {
-  expect(producer.sizeHint()).toBe(Infinity)
-})

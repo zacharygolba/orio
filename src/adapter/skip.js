@@ -1,14 +1,13 @@
 // @flow
 
 import { ProducerBase } from '../producer'
-import type { Producer } from '../producer'
 
 export default class SkipAdapter<T> extends ProducerBase<T> {
   amount: number
-  producer: Producer<T>
+  producer: Iterator<T>
   state: number
 
-  constructor(producer: Producer<T>, amount: number) {
+  constructor(producer: Iterator<T>, amount: number) {
     super()
     this.amount = amount
     this.producer = producer
@@ -24,9 +23,5 @@ export default class SkipAdapter<T> extends ProducerBase<T> {
     }
 
     return next
-  }
-
-  sizeHint(): number {
-    return Math.max(this.producer.sizeHint() - this.amount, 0)
   }
 }

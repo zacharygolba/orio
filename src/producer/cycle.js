@@ -25,8 +25,4 @@ export default class CycleProducer<T> extends ProducerBase<T> {
 
     return result.next(this.source[state])
   }
-
-  sizeHint(): number {
-    return Infinity
-  }
 }

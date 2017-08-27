@@ -1,13 +1,12 @@
 // @flow
 
 import { ProducerBase } from '../producer'
-import type { Producer } from '../producer'
 
 export default class TapAdapter<T> extends ProducerBase<T> {
   fn: T => void
-  producer: Producer<T>
+  producer: Iterator<T>
 
-  constructor(producer: Producer<T>, fn: T => void) {
+  constructor(producer: Iterator<T>, fn: T => void) {
     super()
     this.fn = fn
     this.producer = producer
@@ -21,9 +20,5 @@ export default class TapAdapter<T> extends ProducerBase<T> {
     }
 
     return next
-  }
-
-  sizeHint(): number {
-    return this.producer.sizeHint()
   }
 }

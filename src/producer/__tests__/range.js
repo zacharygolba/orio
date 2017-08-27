@@ -55,10 +55,6 @@ describe('NumberProducer', () => {
       expect(producer.next()).toMatchSnapshot()
       expect(producer.next()).toMatchSnapshot()
     })
-
-    test('#sizeHint()', () => {
-      expect(producer.sizeHint()).toEqual(3)
-    })
   })
 })
 
@@ -105,10 +101,6 @@ describe('CharProducer', () => {
       expect(producer.next()).toMatchSnapshot()
       expect(producer.next()).toMatchSnapshot()
       expect(producer.next()).toMatchSnapshot()
-    })
-
-    test('#sizeHint()', () => {
-      expect(producer.sizeHint()).toEqual(3)
     })
   })
 })

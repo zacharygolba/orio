@@ -2,33 +2,26 @@
 
 import * as result from '../result'
 import { ProducerBase } from '../producer'
-import type { Producer } from '../producer'
 
 export default class TakeAdapter<T> extends ProducerBase<T> {
-  size: number
-  producer: Producer<T>
-  state: number
+  amount: number
+  calls: number
+  producer: Iterator<T>
 
-  constructor(producer: Producer<T>, size: number) {
+  constructor(producer: Iterator<T>, amount: number) {
     super()
 
+    this.amount = amount
+    this.calls = 0
     this.producer = producer
-    this.size = size
-    this.state = 0
   }
 
   next(): IteratorResult<T, void> {
-    if (this.state >= this.size) {
+    if (this.calls >= this.amount) {
       return result.done()
     }
 
-    const next = this.producer.next()
-    this.state += 1
-
-    return next
-  }
-
-  sizeHint(): number {
-    return this.size
+    this.calls += 1
+    return this.producer.next()
   }
 }

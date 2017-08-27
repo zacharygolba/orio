@@ -1,8 +1,6 @@
 // @flow
 
-import type { Producer } from './'
-
-export default class ProducerBase<T> implements Producer<T> {
+export default class ProducerBase<T> implements Iterator<T> {
   // eslint-disable-next-line prettier/prettier
   /*:: @@iterator: () => Iterator<T>; */
 
@@ -17,10 +15,6 @@ export default class ProducerBase<T> implements Producer<T> {
   }
 
   next(): IteratorResult<T, void> {
-    throw new Error('unimplemented')
-  }
-
-  sizeHint(): number {
     throw new Error('unimplemented')
   }
 }

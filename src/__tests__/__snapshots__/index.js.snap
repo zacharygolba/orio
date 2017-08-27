@@ -2,12 +2,11 @@
 
 exports[`.of() 1`] = `
 IndexedProducer {
-  "size": 3,
+  "index": 0,
   "source": Array [
     1,
     2,
     3,
   ],
-  "state": 0,
 }
 `;

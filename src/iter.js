@@ -14,9 +14,7 @@ import {
   TapAdapter,
   ZipAdapter,
 } from './adapter'
-import * as ops from './ops'
 import { ProducerBase } from './producer'
-import type { Producer } from './producer'
 
 export interface FromIterator<T> {
   constructor(source: Iterator<T>): FromIterator<T>,
@@ -24,9 +22,9 @@ export interface FromIterator<T> {
 }
 
 export default class Iter<T> extends ProducerBase<T> {
-  producer: Producer<T>
+  producer: Iterator<T>
 
-  constructor(producer: Producer<T>) {
+  constructor(producer: Iterator<T>) {
     super()
     this.producer = producer
   }
@@ -131,7 +129,10 @@ export default class Iter<T> extends ProducerBase<T> {
   }
 
   product(): number {
-    return this.sizeHint() === 0 ? 0 : this.reduce(ops.mul, 1)
+    const lhs = +this.next().value || 0
+    const rhs = +this.next().value || 0
+
+    return this.reduce((acc, item) => acc * +item, lhs * rhs)
   }
 
   reduce<U>(fn: (U, T) => U, acc: U): U {
@@ -142,10 +143,6 @@ export default class Iter<T> extends ProducerBase<T> {
     }
 
     return this.reduce(fn, fn(acc, next.value))
-  }
-
-  sizeHint(): number {
-    return this.producer.sizeHint()
   }
 
   skip(amount: number): Iter<T> {
@@ -163,7 +160,7 @@ export default class Iter<T> extends ProducerBase<T> {
   }
 
   sum(): number {
-    return this.reduce(ops.add, 0)
+    return this.reduce((acc, item) => acc + +item, 0)
   }
 
   take(amount: number): Iter<T> {

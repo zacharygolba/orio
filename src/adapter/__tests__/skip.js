@@ -22,15 +22,3 @@ test('#next()', () => {
   expect(subj.next()).toMatchSnapshot()
   expect(subj.next()).toMatchSnapshot()
 })
-
-describe('#sizeHint()', () => {
-  test('with an exact size', () => {
-    expect(subj.sizeHint()).toEqual(3)
-  })
-
-  test('with an unbound producer', () => {
-    subj.producer = iter.repeat().producer
-
-    expect(subj.sizeHint()).toEqual(Infinity)
-  })
-})
