@@ -18,6 +18,7 @@ describe('#createProducer()', () => {
     const entry = ['test', 'test']
     const producer = createProducer(new Map([entry]))
 
+    // $FlowIgnore
     expect(producer[Symbol.iterator]).toEqual(expect.any(Function))
     expect(producer.next()).toHaveProperty('value', entry)
   })
@@ -26,6 +27,7 @@ describe('#createProducer()', () => {
     const value = 'test'
     const producer = createProducer(new Set([value]))
 
+    // $FlowIgnore
     expect(producer[Symbol.iterator]).toEqual(expect.any(Function))
     expect(producer.next()).toHaveProperty('value', value)
   })
