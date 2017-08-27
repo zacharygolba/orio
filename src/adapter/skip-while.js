@@ -2,27 +2,26 @@
 
 import { ProducerBase } from '../producer'
 
-import Filter from './filter'
-
 export default class SkipWhileAdapter<T> extends ProducerBase<T> {
+  fn: T => boolean
   producer: Iterator<T>
+  skipped: boolean
 
   constructor(producer: Iterator<T>, fn: T => boolean) {
     super()
-
-    let willSkip = true
-
-    this.producer = new Filter(producer, value => {
-      if (willSkip) {
-        willSkip = fn(value)
-        return !willSkip
-      }
-
-      return true
-    })
+    this.fn = fn
+    this.producer = producer
+    this.skipped = false
   }
 
   next(): IteratorResult<T, void> {
-    return this.producer.next()
+    const next = this.producer.next()
+
+    if (next.done || this.skipped) {
+      return next
+    }
+
+    this.skipped = !this.fn(next.value)
+    return this.skipped ? next : this.next()
   }
 }
