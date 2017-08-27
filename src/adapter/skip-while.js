@@ -22,6 +22,6 @@ export default class SkipWhileAdapter<T> extends ProducerBase<T> {
     }
 
     this.skipped = !this.fn(next.value)
-    return this.next()
+    return this.skipped ? next : this.next()
   }
 }
