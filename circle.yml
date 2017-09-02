@@ -32,15 +32,9 @@ jobs:
       - run:
           name: Check Types
           command: yarn flow
-      - restore_cache:
-          key: jest-cache-
       - run:
           name: Test
           command: yarn test -- --coverage
-      - save_cache:
-          key: jest-cache-{{ epoch }}
-          paths:
-            - ~/ouro/.jest-cache
       - run:
           name: Report Coverage
           command: yarn codecov
