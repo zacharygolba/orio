@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Methods #collect() 1`] = `
+exports[`#collect() 1`] = `
 Array [
   "t",
   "e",
@@ -9,7 +9,7 @@ Array [
 ]
 `;
 
-exports[`Methods #collect() 2`] = `
+exports[`#collect() 2`] = `
 Set {
   "t",
   "e",
@@ -17,7 +17,7 @@ Set {
 }
 `;
 
-exports[`Methods #collect() 3`] = `
+exports[`#collect() 3`] = `
 Uint8Array [
   0,
   1,
@@ -278,7 +278,7 @@ Uint8Array [
 ]
 `;
 
-exports[`Methods #collect() 4`] = `
+exports[`#collect() 4`] = `
 Map {
   0 => "t",
   1 => "e",
