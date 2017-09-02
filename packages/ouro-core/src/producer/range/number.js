@@ -1,8 +1,7 @@
 // @flow
 
+import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
-
-import * as result from '../../result'
 
 @ToString
 @AsIterator
