@@ -1,18 +1,26 @@
 // @flow
 
-import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
 import { createProducer } from '../producer'
+import type { Drop } from '../types'
 
 function exec<T, U>(adapter: FlatMap<T, U>): IteratorResult<U, void> {
-  let next = adapter.child ? adapter.child.next() : result.done()
+  {
+    const { child } = adapter
 
-  if (!next.done) {
-    return next
+    if (child != null) {
+      const next = child.next()
+
+      if (!next.done) {
+        return next
+      }
+
+      child.drop()
+    }
   }
 
-  next = adapter.parent.next()
+  const next = adapter.parent.next()
 
   if (next.done) {
     return next
@@ -25,15 +33,19 @@ function exec<T, U>(adapter: FlatMap<T, U>): IteratorResult<U, void> {
 
 @ToString
 @AsIterator
-export default class FlatMap<T, U> implements Iterator<U> {
+export default class FlatMap<T, U> implements Drop, Iterator<U> {
   /*:: @@iterator: () => Iterator<U> */
-  child: ?Iterator<U>
+  child: ?(Drop & Iterator<U>)
   fn: T => Iterable<U> | U
-  parent: Iterator<T>
+  parent: Drop & Iterator<T>
 
-  constructor(producer: Iterator<T>, fn: T => Iterable<U> | U) {
+  constructor(producer: Drop & Iterator<T>, fn: T => Iterable<U> | U) {
     this.fn = fn
     this.parent = producer
+  }
+
+  drop(): void {
+    this.parent.drop()
   }
 
   next(): IteratorResult<U, void> {

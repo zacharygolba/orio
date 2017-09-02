@@ -17,6 +17,20 @@ Indexed {
 }
 `;
 
+exports[`Indexed source array #drop() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`Indexed source array #drop() 2`] = `
+Indexed {
+  "index": 0,
+  "source": Array [],
+}
+`;
+
 exports[`Indexed source string #@@iterator() 1`] = `"t"`;
 
 exports[`Indexed source string #@@iterator() 2`] = `"e"`;
@@ -29,5 +43,19 @@ exports[`Indexed source string #constructor() 1`] = `
 Indexed {
   "index": 0,
   "source": "test",
+}
+`;
+
+exports[`Indexed source string #drop() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`Indexed source string #drop() 2`] = `
+Indexed {
+  "index": 0,
+  "source": Array [],
 }
 `;

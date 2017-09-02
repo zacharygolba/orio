@@ -3,18 +3,24 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
+import type { Drop } from '../types'
+
 @ToString
 @AsIterator
-export default class Take<T> implements Iterator<T> {
+export default class Take<T> implements Drop, Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   amount: number
   calls: number
-  producer: Iterator<T>
+  producer: Drop & Iterator<T>
 
-  constructor(producer: Iterator<T>, amount: number) {
+  constructor(producer: Drop & Iterator<T>, amount: number) {
     this.amount = amount
     this.calls = 0
     this.producer = producer
+  }
+
+  drop(): void {
+    this.producer.drop()
   }
 
   next(): IteratorResult<T, void> {

@@ -25,6 +25,12 @@ describe('Numbers', () => {
       }
     })
 
+    test('#drop()', () => {
+      expect(producer.drop()).toBeUndefined()
+      expect(producer.next()).toMatchSnapshot()
+      expect(producer).toMatchSnapshot()
+    })
+
     test('#next()', () => {
       expect(producer.next()).toMatchSnapshot()
       expect(producer.next()).toMatchSnapshot()
@@ -47,6 +53,12 @@ describe('Numbers', () => {
       for (const item of producer) {
         expect(item).toMatchSnapshot()
       }
+    })
+
+    test('#drop()', () => {
+      expect(producer.drop()).toBeUndefined()
+      expect(producer.next()).toMatchSnapshot()
+      expect(producer).toMatchSnapshot()
     })
 
     test('#next()', () => {
@@ -72,6 +84,12 @@ describe('Chars', () => {
       }
     })
 
+    test('#drop()', () => {
+      expect(producer.drop()).toBeUndefined()
+      expect(producer.next()).toMatchSnapshot()
+      expect(producer).toMatchSnapshot()
+    })
+
     test('#next()', () => {
       expect(producer.next()).toMatchSnapshot()
       expect(producer.next()).toMatchSnapshot()
@@ -94,6 +112,12 @@ describe('Chars', () => {
       for (const item of producer) {
         expect(item).toMatchSnapshot()
       }
+    })
+
+    test('#drop()', () => {
+      expect(producer.drop()).toBeUndefined()
+      expect(producer.next()).toMatchSnapshot()
+      expect(producer).toMatchSnapshot()
     })
 
     test('#next()', () => {

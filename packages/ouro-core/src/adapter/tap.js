@@ -2,16 +2,22 @@
 
 import { AsIterator, ToString } from 'ouro-traits'
 
+import type { Drop } from '../types'
+
 @ToString
 @AsIterator
-export default class Tap<T> implements Iterator<T> {
+export default class Tap<T> implements Drop, Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   fn: T => void
-  producer: Iterator<T>
+  producer: Drop & Iterator<T>
 
-  constructor(producer: Iterator<T>, fn: T => void) {
+  constructor(producer: Drop & Iterator<T>, fn: T => void) {
     this.fn = fn
     this.producer = producer
+  }
+
+  drop(): void {
+    this.producer.drop()
   }
 
   next(): IteratorResult<T, void> {

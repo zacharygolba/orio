@@ -3,14 +3,11 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
-export interface IndexedCollection<T> extends Iterable<T> {
-  [key: number]: T,
-  length: number,
-}
+import type { Drop, IndexedCollection } from '../types'
 
 @ToString
 @AsIterator
-export default class Indexed<T> implements Iterator<T> {
+export default class Indexed<T> implements Drop, Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   index: number
   source: IndexedCollection<T>
@@ -18,6 +15,11 @@ export default class Indexed<T> implements Iterator<T> {
   constructor(source: IndexedCollection<T>) {
     this.index = 0
     this.source = source
+  }
+
+  drop(): void {
+    this.index = 0
+    this.source = []
   }
 
   next(): IteratorResult<T, void> {

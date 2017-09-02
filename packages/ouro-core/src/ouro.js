@@ -16,11 +16,7 @@ import {
   Tap,
   Zip,
 } from './adapter'
-
-export interface FromIterator<T> {
-  constructor(source: Iterator<T>): FromIterator<T>,
-  static from(source: Iterator<T>): FromIterator<T>,
-}
+import type { Drop, FromIterator } from './types'
 
 function reduce<T, U>(fn: (U, T) => U, acc: U, producer: Iterator<T>): U {
   const next = producer.next()
@@ -34,11 +30,11 @@ function reduce<T, U>(fn: (U, T) => U, acc: U, producer: Iterator<T>): U {
 
 @ToString
 @AsIterator
-export default class Ouro<T> implements Iterator<T> {
+export default class Ouro<T> implements Drop, Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
-  producer: Iterator<T>
+  producer: Drop & Iterator<T>
 
-  constructor(producer: Iterator<T>) {
+  constructor(producer: Drop & Iterator<T>) {
     this.producer = producer
   }
 
@@ -64,6 +60,10 @@ export default class Ouro<T> implements Iterator<T> {
 
   count(): number {
     return this.reduce(acc => acc + 1, 0)
+  }
+
+  drop(): void {
+    this.producer.drop()
   }
 
   enumerate(): Ouro<[number, T]> {
@@ -126,7 +126,13 @@ export default class Ouro<T> implements Iterator<T> {
   }
 
   next(): IteratorResult<T, void> {
-    return this.producer.next()
+    const next = this.producer.next()
+
+    if (next.done) {
+      this.drop()
+    }
+
+    return next
   }
 
   nth(idx: number): ?T {
@@ -150,7 +156,7 @@ export default class Ouro<T> implements Iterator<T> {
   }
 
   reduce<U>(fn: (U, T) => U, acc: U): U {
-    return reduce(fn, acc, this.producer)
+    return reduce(fn, acc, this)
   }
 
   skip(amount: number): Ouro<T> {

@@ -2,6 +2,8 @@
 
 import { AsIterator, ToString } from 'ouro-traits'
 
+import type { Drop } from '../types'
+
 function exec<T>(adapter: Skip<T>): IteratorResult<T, void> {
   const next = adapter.producer.next()
 
@@ -16,16 +18,20 @@ function exec<T>(adapter: Skip<T>): IteratorResult<T, void> {
 
 @ToString
 @AsIterator
-export default class Skip<T> implements Iterator<T> {
+export default class Skip<T> implements Drop, Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   amount: number
-  producer: Iterator<T>
+  producer: Drop & Iterator<T>
   calls: number
 
-  constructor(producer: Iterator<T>, amount: number) {
+  constructor(producer: Drop & Iterator<T>, amount: number) {
     this.amount = amount
     this.calls = 0
     this.producer = producer
+  }
+
+  drop(): void {
+    this.producer.drop()
   }
 
   next(): IteratorResult<T, void> {

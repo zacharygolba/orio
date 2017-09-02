@@ -2,6 +2,21 @@
 
 exports[`#constructor() 1`] = `
 Repeat {
+  "done": false,
   "value": "test",
+}
+`;
+
+exports[`#drop() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#drop() 2`] = `
+Repeat {
+  "done": true,
+  "value": undefined,
 }
 `;

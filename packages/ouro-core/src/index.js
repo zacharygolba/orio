@@ -11,9 +11,7 @@ import {
   Numbers,
   Repeat,
 } from './producer'
-import type { IndexedCollection } from './producer'
-
-export type { default as Ouro, FromIterator } from './ouro'
+import type { IndexedCollection } from './types'
 
 export const VERSION: string = pkg.version
 

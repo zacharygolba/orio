@@ -3,17 +3,31 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
+import type { Drop } from '../types'
+
 @ToString
 @AsIterator
-export default class Repeat<T> implements Iterator<T> {
+export default class Repeat<T> implements Drop, Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
+  done: boolean
   value: T
 
   constructor(value: T) {
+    this.done = false
     this.value = value
   }
 
+  drop(): void {
+    this.done = true
+    // $FlowIgnore
+    this.value = undefined
+  }
+
   next(): IteratorResult<T, void> {
+    if (this.done) {
+      return result.done()
+    }
+
     return result.next(this.value)
   }
 }

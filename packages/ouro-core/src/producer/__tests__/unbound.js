@@ -33,3 +33,7 @@ test('#@@iterator()', () => {
     i += 1
   }
 })
+
+test('#drop()', () => {
+  expect(producer.drop()).toBeUndefined()
+})

@@ -3,16 +3,22 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
+import type { Drop } from '../types'
+
 @ToString
 @AsIterator
-export default class Enumerate<T> implements Iterator<[number, T]> {
+export default class Enumerate<T> implements Drop, Iterator<[number, T]> {
   /*:: @@iterator: () => Iterator<[number, T]> */
-  producer: Iterator<T>
+  producer: Drop & Iterator<T>
   state: number
 
-  constructor(producer: Iterator<T>) {
+  constructor(producer: Drop & Iterator<T>) {
     this.producer = producer
     this.state = 0
+  }
+
+  drop(): void {
+    this.producer.drop()
   }
 
   next(): IteratorResult<[number, T], void> {

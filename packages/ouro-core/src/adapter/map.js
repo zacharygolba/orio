@@ -3,16 +3,22 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
+import type { Drop } from '../types'
+
 @ToString
 @AsIterator
-export default class Map<T, U> implements Iterator<U> {
+export default class Map<T, U> implements Drop, Iterator<U> {
   /*:: @@iterator: () => Iterator<U> */
   fn: T => U
-  producer: Iterator<T>
+  producer: Drop & Iterator<T>
 
-  constructor(producer: Iterator<T>, fn: T => U) {
+  constructor(producer: Drop & Iterator<T>, fn: T => U) {
     this.fn = fn
     this.producer = producer
+  }
+
+  drop(): void {
+    this.producer.drop()
   }
 
   next(): IteratorResult<U, void> {
