@@ -5,8 +5,5 @@
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "scripts": {
-    "bench": "node benches"
-  }
+  "module": "dist/index.es.js"
 }

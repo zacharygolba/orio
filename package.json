@@ -40,7 +40,7 @@
     ]
   },
   "scripts": {
-    "bench": "lerna run --stream bench",
+    "bench": "node benches",
     "build": "rollup -c",
     "clean": "shx rm -rf *.log coverage packages/**/*.log packages/**/dist",
     "flow-typed": "shx rm -rf flow-typed/npm && flow-typed install",
