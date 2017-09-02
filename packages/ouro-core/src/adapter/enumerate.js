@@ -22,7 +22,7 @@ export default class EnumerateAdapter<T> implements Iterator<[number, T]> {
       return next
     }
 
-    const state = this.state
+    const { state } = this
     this.state += 1
 
     return result.next([state, next.value])
