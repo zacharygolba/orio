@@ -8,7 +8,7 @@ branches:
 cache:
   - C:\ProgramData\chocolatey\bin -> appveyor.yml
   - C:\ProgramData\chocolatey\lib -> appveyor.yml
-  - '%LOCALAPPDATA%\Yarn' -> appveyor.yml
+  - "%LOCALAPPDATA%\\Yarn" -> appveyor.yml
 platform: x64
 environment:
   nodejs_version: 8
