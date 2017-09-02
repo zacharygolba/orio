@@ -13,6 +13,7 @@ platform: x64
 environment:
   nodejs_version: 8
 install:
+  - ps: Install-Product node $env:nodejs_version $env:platform
   - choco install yarn
   - refreshenv
   - yarn

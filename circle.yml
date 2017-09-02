@@ -21,6 +21,7 @@ jobs:
       - save_cache:
           key: dependency-cache-{{ epoch }}
           paths:
+            - ~/.cache/yarn
             - ~/.yarn
             - ~/.yarn-cache
       - run:
