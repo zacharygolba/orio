@@ -1,16 +1,18 @@
 // @flow
 
-import * as result from '../result'
-import { ProducerBase } from '../producer'
+import { AsIterator, ToString } from 'ouro-traits'
 
-export default class TakeAdapter<T> extends ProducerBase<T> {
+import * as result from '../result'
+
+@ToString
+@AsIterator
+export default class TakeAdapter<T> implements Iterator<T> {
+  /*:: @@iterator: () => Iterator<T> */
   amount: number
   calls: number
   producer: Iterator<T>
 
   constructor(producer: Iterator<T>, amount: number) {
-    super()
-
     this.amount = amount
     this.calls = 0
     this.producer = producer

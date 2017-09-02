@@ -1,14 +1,17 @@
 // @flow
 
-import * as result from '../result'
-import { ProducerBase } from '../producer'
+import { AsIterator, ToString } from 'ouro-traits'
 
-export default class TakeWhileAdapter<T> extends ProducerBase<T> {
+import * as result from '../result'
+
+@ToString
+@AsIterator
+export default class TakeWhileAdapter<T> implements Iterator<T> {
+  /*:: @@iterator: () => Iterator<T> */
   fn: T => boolean
   producer: Iterator<T>
 
   constructor(producer: Iterator<T>, fn: T => boolean) {
-    super()
     this.fn = fn
     this.producer = producer
   }

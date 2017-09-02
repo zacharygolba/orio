@@ -1,13 +1,11 @@
 // @flow
 
 import IndexedProducer from './indexed'
-import ProducerBase from './base'
 import UnboundProducer from './unbound'
 
 export * from './range'
 export { default as CycleProducer } from './cycle'
 export { default as IndexedProducer } from './indexed'
-export { default as ProducerBase } from './base'
 export { default as RepeatProducer } from './repeat'
 export { default as UnboundProducer } from './unbound'
 export type { IndexedCollection } from './indexed'
@@ -19,10 +17,6 @@ export function createProducer<T>(source: any): Iterator<T> {
 
   if (Array.isArray(source) || typeof source === 'string') {
     return new IndexedProducer(source)
-  }
-
-  if (source instanceof ProducerBase) {
-    return source
   }
 
   if (source instanceof Set) {

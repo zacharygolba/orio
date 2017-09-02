@@ -1,14 +1,17 @@
 // @flow
 
-import * as result from '../result'
-import { ProducerBase } from '../producer'
+import { AsIterator, ToString } from 'ouro-traits'
 
-export default class EnumerateAdapter<T> extends ProducerBase<[number, T]> {
+import * as result from '../result'
+
+@ToString
+@AsIterator
+export default class EnumerateAdapter<T> implements Iterator<[number, T]> {
+  /*:: @@iterator: () => Iterator<[number, T]> */
   producer: Iterator<T>
   state: number
 
   constructor(producer: Iterator<T>) {
-    super()
     this.producer = producer
     this.state = 0
   }

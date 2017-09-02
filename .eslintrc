@@ -41,13 +41,14 @@
       "error",
       "only-multiline"
     ],
+    "import/no-extraneous-dependencies": "off",
     "no-restricted-syntax": [
       "error",
       "ForInStatement",
       "WithStatement"
     ],
     "prettier/prettier": ["error", {
-      "parser": "flow",
+      "parser": "babylon",
       "semi": false,
       "singleQuote": true,
       "trailingComma": "all"

@@ -1,12 +1,14 @@
 // @flow
 
-import ProducerBase from './base'
+import { AsIterator, ToString } from 'ouro-traits'
 
-export default class UnboundProducer<T> extends ProducerBase<T> {
+@ToString
+@AsIterator
+export default class UnboundProducer<T> implements Iterator<T> {
+  /*:: @@iterator: () => Iterator<T> */
   source: Iterator<T>
 
   constructor(source: Iterable<T>) {
-    super()
     // $FlowIgnore
     this.source = source[Symbol.iterator]()
   }

@@ -1,19 +1,22 @@
 // @flow
 
+import { AsIterator, ToString } from 'ouro-traits'
+
 import * as result from '../result'
-import ProducerBase from './base'
 
 export interface IndexedCollection<T> extends Iterable<T> {
   [key: number]: T,
   length: number,
 }
 
-export default class IndexedProducer<T> extends ProducerBase<T> {
+@ToString
+@AsIterator
+export default class IndexedProducer<T> implements Iterator<T> {
+  /*:: @@iterator: () => Iterator<T> */
   index: number
   source: IndexedCollection<T>
 
   constructor(source: IndexedCollection<T>) {
-    super()
     this.index = 0
     this.source = source
   }

@@ -30,4 +30,7 @@ const configFor = (name, provides = name) => ({
   preferConst: true,
 })
 
-export default [configFor('ouro-core', 'ouro')]
+export default [
+  configFor('ouro-traits', 'traits'),
+  configFor('ouro-core', 'ouro'),
+]

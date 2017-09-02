@@ -1,14 +1,16 @@
 // @flow
 
-import { ProducerBase } from '../producer'
+import { AsIterator, ToString } from 'ouro-traits'
 
-export default class SkipWhileAdapter<T> extends ProducerBase<T> {
+@ToString
+@AsIterator
+export default class SkipWhileAdapter<T> implements Iterator<T> {
+  /*:: @@iterator: () => Iterator<T> */
   fn: T => boolean
   producer: Iterator<T>
   skipped: boolean
 
   constructor(producer: Iterator<T>, fn: T => boolean) {
-    super()
     this.fn = fn
     this.producer = producer
     this.skipped = false

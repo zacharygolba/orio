@@ -1,15 +1,19 @@
 // @flow
 
-import * as result from '../result'
-import { createProducer, ProducerBase } from '../producer'
+import { AsIterator, ToString } from 'ouro-traits'
 
-export default class FlatMapAdapter<T, U> extends ProducerBase<U> {
+import * as result from '../result'
+import { createProducer } from '../producer'
+
+@ToString
+@AsIterator
+export default class FlatMapAdapter<T, U> implements Iterator<U> {
+  /*:: @@iterator: () => Iterator<U> */
   child: ?Iterator<U>
   fn: T => Iterable<U> | U
   parent: Iterator<T>
 
   constructor(producer: Iterator<T>, fn: T => Iterable<U> | U) {
-    super()
     this.fn = fn
     this.parent = producer
   }
