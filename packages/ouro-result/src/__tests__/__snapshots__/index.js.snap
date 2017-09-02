@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#done() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#done() 2`] = `
+Object {
+  "done": true,
+  "value": "test",
+}
+`;
+
+exports[`#next() 1`] = `
+Object {
+  "done": false,
+  "value": "test",
+}
+`;
