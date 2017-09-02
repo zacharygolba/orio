@@ -2,6 +2,21 @@
 
 import { AsIterator, ToString } from 'ouro-traits'
 
+function exec<T>(adapter: SkipWhileAdapter<T>): IteratorResult<T, void> {
+  const next = adapter.producer.next()
+
+  if (next.done || adapter.skipped || !adapter.fn(next.value)) {
+    if (!adapter.skipped) {
+      // eslint-disable-next-line no-param-reassign
+      adapter.skipped = true
+    }
+
+    return next
+  }
+
+  return exec(adapter)
+}
+
 @ToString
 @AsIterator
 export default class SkipWhileAdapter<T> implements Iterator<T> {
@@ -17,13 +32,6 @@ export default class SkipWhileAdapter<T> implements Iterator<T> {
   }
 
   next(): IteratorResult<T, void> {
-    const next = this.producer.next()
-
-    if (next.done || this.skipped) {
-      return next
-    }
-
-    this.skipped = !this.fn(next.value)
-    return this.skipped ? next : this.next()
+    return exec(this)
   }
 }

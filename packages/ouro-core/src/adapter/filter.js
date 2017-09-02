@@ -2,6 +2,16 @@
 
 import { AsIterator, ToString } from 'ouro-traits'
 
+function exec<T>(adapter: FilterAdapter<T>): IteratorResult<T, void> {
+  const next = adapter.producer.next()
+
+  if (next.done || adapter.fn(next.value)) {
+    return next
+  }
+
+  return exec(adapter)
+}
+
 @ToString
 @AsIterator
 export default class FilterAdapter<T> implements Iterator<T> {
@@ -15,12 +25,6 @@ export default class FilterAdapter<T> implements Iterator<T> {
   }
 
   next(): IteratorResult<T, void> {
-    const next = this.producer.next()
-
-    if (next.done || this.fn(next.value)) {
-      return next
-    }
-
-    return this.next()
+    return exec(this)
   }
 }
