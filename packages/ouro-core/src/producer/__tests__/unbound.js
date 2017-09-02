@@ -36,6 +36,4 @@ test('#@@iterator()', () => {
 
 test('#drop()', () => {
   expect(producer.drop()).toBeUndefined()
-  expect(producer.next()).toMatchSnapshot()
-  expect(producer).toMatchSnapshot()
 })
