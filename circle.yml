@@ -15,8 +15,9 @@ jobs:
           command: |
             apt-get update && \
             apt-get install -y libelf1 && \
-            yarn global add greenkeeper-lockfile@1 && \
-            yarn
+            yarn global add greenkeeper-lockfile@1 lerna && \
+            yarn && \
+            yarn build
       - save_cache:
           key: dependency-cache-{{ epoch }}
           paths:

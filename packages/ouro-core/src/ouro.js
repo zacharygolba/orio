@@ -1,5 +1,7 @@
 // @flow
 
+import { AsIterator, ToString } from 'ouro-traits'
+
 import {
   ChainAdapter,
   EnumerateAdapter,
@@ -14,18 +16,19 @@ import {
   TapAdapter,
   ZipAdapter,
 } from './adapter'
-import { ProducerBase } from './producer'
 
 export interface FromIterator<T> {
   constructor(source: Iterator<T>): FromIterator<T>,
   static from(source: Iterator<T>): FromIterator<T>,
 }
 
-export default class Ouro<T> extends ProducerBase<T> {
+@ToString
+@AsIterator
+export default class Ouro<T> implements Iterator<T> {
+  /*:: @@iterator: () => Iterator<T> */
   producer: Iterator<T>
 
   constructor(producer: Iterator<T>) {
-    super()
     this.producer = producer
   }
 

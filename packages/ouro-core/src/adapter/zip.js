@@ -1,14 +1,18 @@
 // @flow
 
-import * as result from '../result'
-import { createProducer, ProducerBase } from '../producer'
+import { AsIterator, ToString } from 'ouro-traits'
 
-export default class ZipAdapter<T, U> extends ProducerBase<[T, U]> {
+import * as result from '../result'
+import { createProducer } from '../producer'
+
+@ToString
+@AsIterator
+export default class ZipAdapter<T, U> implements Iterator<[T, U]> {
+  /*:: @@iterator: () => Iterator<[T, U]> */
   producerA: Iterator<T>
   producerB: Iterator<U>
 
   constructor(producerA: Iterator<T>, producerB: Iterable<U>) {
-    super()
     this.producerA = producerA
     this.producerB = createProducer(producerB)
   }

@@ -1,9 +1,13 @@
 // @flow
 
-import * as result from '../../result'
-import ProducerBase from '../base'
+import { AsIterator, ToString } from 'ouro-traits'
 
-export default class NumberProducer extends ProducerBase<number> {
+import * as result from '../../result'
+
+@ToString
+@AsIterator
+export default class NumberProducer implements Iterator<number> {
+  /*:: @@iterator: () => Iterator<number> */
   done: boolean
   end: number
   size: number
@@ -12,8 +16,6 @@ export default class NumberProducer extends ProducerBase<number> {
   step: number
 
   constructor(s?: number = 0, e?: number = Infinity) {
-    super()
-
     const start = Number(s)
     const end = Number(e)
 

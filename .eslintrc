@@ -47,7 +47,7 @@
       "WithStatement"
     ],
     "prettier/prettier": ["error", {
-      "parser": "flow",
+      "parser": "babylon",
       "semi": false,
       "singleQuote": true,
       "trailingComma": "all"

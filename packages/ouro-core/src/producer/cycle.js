@@ -1,16 +1,19 @@
 // @flow
 
+import { AsIterator, ToString } from 'ouro-traits'
+
 import * as result from '../result'
 
-import ProducerBase from './base'
 import type { IndexedCollection } from './'
 
-export default class CycleProducer<T> extends ProducerBase<T> {
+@ToString
+@AsIterator
+export default class CycleProducer<T> implements Iterator<T> {
+  /*:: @@iterator: () => Iterator<T> */
   source: IndexedCollection<T>
   state: number
 
   constructor(source: IndexedCollection<T>) {
-    super()
     this.source = source
     this.state = 0
   }

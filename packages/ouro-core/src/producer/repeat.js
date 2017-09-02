@@ -1,14 +1,16 @@
 // @flow
 
+import { AsIterator, ToString } from 'ouro-traits'
+
 import * as result from '../result'
 
-import ProducerBase from './base'
-
-export default class RepeatProducer<T> extends ProducerBase<T> {
+@ToString
+@AsIterator
+export default class RepeatProducer<T> implements Iterator<T> {
+  /*:: @@iterator: () => Iterator<T> */
   value: T
 
   constructor(value: T) {
-    super()
     this.value = value
   }
 

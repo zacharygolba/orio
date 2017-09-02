@@ -1,14 +1,17 @@
 // @flow
 
-import * as result from '../result'
-import { ProducerBase } from '../producer'
+import { AsIterator, ToString } from 'ouro-traits'
 
-export default class MapAdapter<T, U> extends ProducerBase<U> {
+import * as result from '../result'
+
+@ToString
+@AsIterator
+export default class MapAdapter<T, U> implements Iterator<U> {
+  /*:: @@iterator: () => Iterator<U> */
   fn: T => U
   producer: Iterator<T>
 
   constructor(producer: Iterator<T>, fn: T => U) {
-    super()
     this.fn = fn
     this.producer = producer
   }
