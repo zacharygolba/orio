@@ -22,7 +22,7 @@ export default class CycleProducer<T> implements Iterator<T> {
       this.state = 0
     }
 
-    const state = this.state
+    const { state } = this
     this.state += 1
 
     return result.next(this.source[state])

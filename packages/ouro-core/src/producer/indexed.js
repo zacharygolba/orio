@@ -21,8 +21,7 @@ export default class IndexedProducer<T> implements Iterator<T> {
   }
 
   next(): IteratorResult<T, void> {
-    const index = this.index
-    const source = this.source
+    const { index, source } = this
 
     if (index >= source.length) {
       return result.done()
