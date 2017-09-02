@@ -4,7 +4,7 @@ import { AsIterator, ToString } from 'ouro-traits'
 
 @ToString
 @AsIterator
-export default class TapAdapter<T> implements Iterator<T> {
+export default class Tap<T> implements Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   fn: T => void
   producer: Iterator<T>

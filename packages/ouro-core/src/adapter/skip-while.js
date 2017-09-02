@@ -2,7 +2,7 @@
 
 import { AsIterator, ToString } from 'ouro-traits'
 
-function exec<T>(adapter: SkipWhileAdapter<T>): IteratorResult<T, void> {
+function exec<T>(adapter: SkipWhile<T>): IteratorResult<T, void> {
   const next = adapter.producer.next()
 
   if (next.done || adapter.skipped || !adapter.fn(next.value)) {
@@ -19,7 +19,7 @@ function exec<T>(adapter: SkipWhileAdapter<T>): IteratorResult<T, void> {
 
 @ToString
 @AsIterator
-export default class SkipWhileAdapter<T> implements Iterator<T> {
+export default class SkipWhile<T> implements Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   fn: T => boolean
   producer: Iterator<T>

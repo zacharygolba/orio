@@ -5,7 +5,7 @@ import { AsIterator, ToString } from 'ouro-traits'
 
 @ToString
 @AsIterator
-export default class MapAdapter<T, U> implements Iterator<U> {
+export default class Map<T, U> implements Iterator<U> {
   /*:: @@iterator: () => Iterator<U> */
   fn: T => U
   producer: Iterator<T>

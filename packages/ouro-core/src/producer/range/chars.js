@@ -3,20 +3,20 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
-import NumberProducer from './number'
+import Numbers from './numbers'
 
 export const MIN_CHAR: string = String.fromCodePoint(0)
 export const MAX_CHAR: string = String.fromCodePoint(0x10ffff)
 
 @ToString
 @AsIterator
-export default class CharProducer implements Iterator<string> {
+export default class Chars implements Iterator<string> {
   /*:: @@iterator: () => Iterator<string> */
-  source: NumberProducer
+  source: Numbers
   size: number
 
   constructor(start?: string = MIN_CHAR, end?: string = MAX_CHAR) {
-    this.source = new NumberProducer(start.codePointAt(0), end.codePointAt(0))
+    this.source = new Numbers(start.codePointAt(0), end.codePointAt(0))
     this.size = this.source.size
   }
 

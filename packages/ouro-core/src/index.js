@@ -5,11 +5,11 @@ import * as pkg from '../package.json'
 import Ouro from './ouro'
 import {
   createProducer,
-  CharProducer,
-  CycleProducer,
-  IndexedProducer,
-  NumberProducer,
-  RepeatProducer,
+  Chars,
+  Cycle,
+  Indexed,
+  Numbers,
+  Repeat,
 } from './producer'
 import type { IndexedCollection } from './producer'
 
@@ -18,12 +18,12 @@ export type { default as Ouro, FromIterator } from './ouro'
 export const VERSION: string = pkg.version
 
 export function chars(start?: string, end?: string): Ouro<string> {
-  const producer = new CharProducer(start, end)
+  const producer = new Chars(start, end)
   return new Ouro(producer)
 }
 
 export function cycle<T>(source: IndexedCollection<T>): Ouro<T> {
-  const producer = new CycleProducer(source)
+  const producer = new Cycle(source)
   return new Ouro(producer)
 }
 
@@ -33,16 +33,16 @@ export function from<T>(source?: Iterable<T> | T = []): Ouro<T> {
 }
 
 export function of<T>(...items: Array<T>): Ouro<T> {
-  const producer = new IndexedProducer(items)
+  const producer = new Indexed(items)
   return new Ouro(producer)
 }
 
 export function repeat<T>(value: T): Ouro<T> {
-  const producer = new RepeatProducer(value)
+  const producer = new Repeat(value)
   return new Ouro(producer)
 }
 
 export function range(start?: number, end?: number): Ouro<number> {
-  const producer = new NumberProducer(start, end)
+  const producer = new Numbers(start, end)
   return new Ouro(producer)
 }

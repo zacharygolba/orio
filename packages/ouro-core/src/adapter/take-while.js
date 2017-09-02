@@ -5,7 +5,7 @@ import { AsIterator, ToString } from 'ouro-traits'
 
 @ToString
 @AsIterator
-export default class TakeWhileAdapter<T> implements Iterator<T> {
+export default class TakeWhile<T> implements Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   fn: T => boolean
   producer: Iterator<T>

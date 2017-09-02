@@ -5,7 +5,7 @@ import { AsIterator, ToString } from 'ouro-traits'
 
 @ToString
 @AsIterator
-export default class RepeatProducer<T> implements Iterator<T> {
+export default class Repeat<T> implements Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   value: T
 

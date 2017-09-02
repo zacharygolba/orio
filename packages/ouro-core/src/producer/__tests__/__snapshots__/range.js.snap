@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CharProducer <- #@@iterator() 1`] = `"c"`;
+exports[`Chars <- #@@iterator() 1`] = `"c"`;
 
-exports[`CharProducer <- #@@iterator() 2`] = `"b"`;
+exports[`Chars <- #@@iterator() 2`] = `"b"`;
 
-exports[`CharProducer <- #@@iterator() 3`] = `"a"`;
+exports[`Chars <- #@@iterator() 3`] = `"a"`;
 
-exports[`CharProducer <- #constructor() 1`] = `
-CharProducer {
+exports[`Chars <- #constructor() 1`] = `
+Chars {
   "size": 3,
-  "source": NumberProducer {
+  "source": Numbers {
     "end": 97,
     "size": 3,
     "start": 99,
@@ -19,10 +19,10 @@ CharProducer {
 }
 `;
 
-exports[`CharProducer <- #constructor() 2`] = `
-CharProducer {
+exports[`Chars <- #constructor() 2`] = `
+Chars {
   "size": 1114112,
-  "source": NumberProducer {
+  "source": Numbers {
     "end": 1114111,
     "size": 1114112,
     "start": 0,
@@ -32,76 +32,76 @@ CharProducer {
 }
 `;
 
-exports[`CharProducer <- #next() 1`] = `
+exports[`Chars <- #next() 1`] = `
 Object {
   "done": false,
   "value": "c",
 }
 `;
 
-exports[`CharProducer <- #next() 2`] = `
+exports[`Chars <- #next() 2`] = `
 Object {
   "done": false,
   "value": "b",
 }
 `;
 
-exports[`CharProducer <- #next() 3`] = `
+exports[`Chars <- #next() 3`] = `
 Object {
   "done": false,
   "value": "a",
 }
 `;
 
-exports[`CharProducer <- #next() 4`] = `
+exports[`Chars <- #next() 4`] = `
 Object {
   "done": true,
   "value": undefined,
 }
 `;
 
-exports[`CharProducer -> #@@iterator() 1`] = `"a"`;
+exports[`Chars -> #@@iterator() 1`] = `"a"`;
 
-exports[`CharProducer -> #@@iterator() 2`] = `"b"`;
+exports[`Chars -> #@@iterator() 2`] = `"b"`;
 
-exports[`CharProducer -> #@@iterator() 3`] = `"c"`;
+exports[`Chars -> #@@iterator() 3`] = `"c"`;
 
-exports[`CharProducer -> #next() 1`] = `
+exports[`Chars -> #next() 1`] = `
 Object {
   "done": false,
   "value": "a",
 }
 `;
 
-exports[`CharProducer -> #next() 2`] = `
+exports[`Chars -> #next() 2`] = `
 Object {
   "done": false,
   "value": "b",
 }
 `;
 
-exports[`CharProducer -> #next() 3`] = `
+exports[`Chars -> #next() 3`] = `
 Object {
   "done": false,
   "value": "c",
 }
 `;
 
-exports[`CharProducer -> #next() 4`] = `
+exports[`Chars -> #next() 4`] = `
 Object {
   "done": true,
   "value": undefined,
 }
 `;
 
-exports[`NumberProducer <- #@@iterator() 1`] = `3`;
+exports[`Numbers <- #@@iterator() 1`] = `3`;
 
-exports[`NumberProducer <- #@@iterator() 2`] = `2`;
+exports[`Numbers <- #@@iterator() 2`] = `2`;
 
-exports[`NumberProducer <- #@@iterator() 3`] = `1`;
+exports[`Numbers <- #@@iterator() 3`] = `1`;
 
-exports[`NumberProducer <- #constructor() 1`] = `
-NumberProducer {
+exports[`Numbers <- #constructor() 1`] = `
+Numbers {
   "end": 1,
   "size": 3,
   "start": 3,
@@ -110,8 +110,8 @@ NumberProducer {
 }
 `;
 
-exports[`NumberProducer <- #constructor() 2`] = `
-NumberProducer {
+exports[`Numbers <- #constructor() 2`] = `
+Numbers {
   "end": 1,
   "size": Infinity,
   "start": 9007199254740991,
@@ -120,42 +120,42 @@ NumberProducer {
 }
 `;
 
-exports[`NumberProducer <- #next() 1`] = `
+exports[`Numbers <- #next() 1`] = `
 Object {
   "done": false,
   "value": 3,
 }
 `;
 
-exports[`NumberProducer <- #next() 2`] = `
+exports[`Numbers <- #next() 2`] = `
 Object {
   "done": false,
   "value": 2,
 }
 `;
 
-exports[`NumberProducer <- #next() 3`] = `
+exports[`Numbers <- #next() 3`] = `
 Object {
   "done": false,
   "value": 1,
 }
 `;
 
-exports[`NumberProducer <- #next() 4`] = `
+exports[`Numbers <- #next() 4`] = `
 Object {
   "done": true,
   "value": undefined,
 }
 `;
 
-exports[`NumberProducer -> #@@iterator() 1`] = `1`;
+exports[`Numbers -> #@@iterator() 1`] = `1`;
 
-exports[`NumberProducer -> #@@iterator() 2`] = `2`;
+exports[`Numbers -> #@@iterator() 2`] = `2`;
 
-exports[`NumberProducer -> #@@iterator() 3`] = `3`;
+exports[`Numbers -> #@@iterator() 3`] = `3`;
 
-exports[`NumberProducer -> #constructor() 1`] = `
-NumberProducer {
+exports[`Numbers -> #constructor() 1`] = `
+Numbers {
   "end": 9007199254740991,
   "size": Infinity,
   "start": 0,
@@ -164,8 +164,8 @@ NumberProducer {
 }
 `;
 
-exports[`NumberProducer -> #constructor() 2`] = `
-NumberProducer {
+exports[`Numbers -> #constructor() 2`] = `
+Numbers {
   "end": 9007199254740991,
   "size": Infinity,
   "start": 1,
@@ -174,8 +174,8 @@ NumberProducer {
 }
 `;
 
-exports[`NumberProducer -> #constructor() 3`] = `
-NumberProducer {
+exports[`Numbers -> #constructor() 3`] = `
+Numbers {
   "end": 3,
   "size": 3,
   "start": 1,
@@ -184,8 +184,8 @@ NumberProducer {
 }
 `;
 
-exports[`NumberProducer -> #constructor() 4`] = `
-NumberProducer {
+exports[`Numbers -> #constructor() 4`] = `
+Numbers {
   "end": 9007199254740991,
   "size": Infinity,
   "start": 1,
@@ -194,8 +194,8 @@ NumberProducer {
 }
 `;
 
-exports[`NumberProducer -> #constructor() 5`] = `
-NumberProducer {
+exports[`Numbers -> #constructor() 5`] = `
+Numbers {
   "done": true,
   "end": 0,
   "size": NaN,
@@ -205,28 +205,28 @@ NumberProducer {
 }
 `;
 
-exports[`NumberProducer -> #next() 1`] = `
+exports[`Numbers -> #next() 1`] = `
 Object {
   "done": false,
   "value": 1,
 }
 `;
 
-exports[`NumberProducer -> #next() 2`] = `
+exports[`Numbers -> #next() 2`] = `
 Object {
   "done": false,
   "value": 2,
 }
 `;
 
-exports[`NumberProducer -> #next() 3`] = `
+exports[`Numbers -> #next() 3`] = `
 Object {
   "done": false,
   "value": 3,
 }
 `;
 
-exports[`NumberProducer -> #next() 4`] = `
+exports[`Numbers -> #next() 4`] = `
 Object {
   "done": true,
   "value": undefined,

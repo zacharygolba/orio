@@ -1,22 +1,22 @@
 // @flow
 
-import { CharProducer, NumberProducer } from '../range'
+import { Chars, Numbers } from '../range'
 
-describe('NumberProducer', () => {
+describe('Numbers', () => {
   let producer
 
   describe('->', () => {
     beforeEach(() => {
-      producer = new NumberProducer(1, 3)
+      producer = new Numbers(1, 3)
     })
 
     test('#constructor()', () => {
-      expect(new NumberProducer()).toMatchSnapshot()
-      expect(new NumberProducer(1)).toMatchSnapshot()
-      expect(new NumberProducer(1, 3)).toMatchSnapshot()
-      expect(new NumberProducer(1, Infinity)).toMatchSnapshot()
+      expect(new Numbers()).toMatchSnapshot()
+      expect(new Numbers(1)).toMatchSnapshot()
+      expect(new Numbers(1, 3)).toMatchSnapshot()
+      expect(new Numbers(1, Infinity)).toMatchSnapshot()
       // $ExpectError
-      expect(new NumberProducer('dog', 'cat')).toMatchSnapshot()
+      expect(new Numbers('dog', 'cat')).toMatchSnapshot()
     })
 
     test('#@@iterator()', () => {
@@ -35,12 +35,12 @@ describe('NumberProducer', () => {
 
   describe('<-', () => {
     beforeEach(() => {
-      producer = new NumberProducer(3, 1)
+      producer = new Numbers(3, 1)
     })
 
     test('#constructor()', () => {
-      expect(new NumberProducer(3, 1)).toMatchSnapshot()
-      expect(new NumberProducer(Infinity, 1)).toMatchSnapshot()
+      expect(new Numbers(3, 1)).toMatchSnapshot()
+      expect(new Numbers(Infinity, 1)).toMatchSnapshot()
     })
 
     test('#@@iterator()', () => {
@@ -58,12 +58,12 @@ describe('NumberProducer', () => {
   })
 })
 
-describe('CharProducer', () => {
+describe('Chars', () => {
   let producer
 
   describe('->', () => {
     beforeEach(() => {
-      producer = new CharProducer('a', 'c')
+      producer = new Chars('a', 'c')
     })
 
     test('#@@iterator()', () => {
@@ -82,12 +82,12 @@ describe('CharProducer', () => {
 
   describe('<-', () => {
     beforeEach(() => {
-      producer = new CharProducer('c', 'a')
+      producer = new Chars('c', 'a')
     })
 
     test('#constructor()', () => {
       expect(producer).toMatchSnapshot()
-      expect(new CharProducer()).toMatchSnapshot()
+      expect(new Chars()).toMatchSnapshot()
     })
 
     test('#@@iterator()', () => {

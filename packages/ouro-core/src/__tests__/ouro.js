@@ -8,18 +8,18 @@ describe('Combinators', () => {
 
   const ouro = require('../')
   const {
-    ChainAdapter,
-    EnumerateAdapter,
-    FilterAdapter,
-    FilterMapAdapter,
-    FlatMapAdapter,
-    MapAdapter,
-    SkipWhileAdapter,
-    SkipAdapter,
-    TakeWhileAdapter,
-    TakeAdapter,
-    TapAdapter,
-    ZipAdapter,
+    Chain,
+    Enumerate,
+    Filter,
+    FilterMap,
+    FlatMap,
+    Map,
+    SkipWhile,
+    Skip,
+    TakeWhile,
+    Take,
+    Tap,
+    Zip,
   } = require('../adapter')
 
   /* eslint-enable global-require */
@@ -33,14 +33,14 @@ describe('Combinators', () => {
     const subj = ouro.of(1, 2, 3)
 
     subj.chain(source)
-    expect(ChainAdapter).toHaveBeenLastCalledWith(subj.producer, source)
+    expect(Chain).toHaveBeenLastCalledWith(subj.producer, source)
   })
 
   test('#enumerate()', () => {
     const subj = ouro.range()
 
     subj.enumerate()
-    expect(EnumerateAdapter).toHaveBeenLastCalledWith(subj.producer)
+    expect(Enumerate).toHaveBeenLastCalledWith(subj.producer)
   })
 
   test('#filter()', () => {
@@ -48,7 +48,7 @@ describe('Combinators', () => {
     const fn = jest.fn()
 
     subj.filter(fn)
-    expect(FilterAdapter).toHaveBeenLastCalledWith(subj.producer, fn)
+    expect(Filter).toHaveBeenLastCalledWith(subj.producer, fn)
   })
 
   test('#filterMap()', () => {
@@ -56,7 +56,7 @@ describe('Combinators', () => {
     const fn = jest.fn()
 
     subj.filterMap(fn)
-    expect(FilterMapAdapter).toHaveBeenLastCalledWith(subj.producer, fn)
+    expect(FilterMap).toHaveBeenLastCalledWith(subj.producer, fn)
   })
 
   test('#flatMap()', () => {
@@ -64,14 +64,14 @@ describe('Combinators', () => {
     const fn = jest.fn()
 
     subj.flatMap(fn)
-    expect(FlatMapAdapter).toHaveBeenLastCalledWith(subj.producer, fn)
+    expect(FlatMap).toHaveBeenLastCalledWith(subj.producer, fn)
   })
 
   test('#flatten()', () => {
     const subj = ouro.range()
 
     subj.flatten()
-    expect(FlatMapAdapter).toHaveBeenLastCalledWith(
+    expect(FlatMap).toHaveBeenLastCalledWith(
       subj.producer,
       expect.any(Function),
     )
@@ -82,14 +82,14 @@ describe('Combinators', () => {
     const fn = jest.fn()
 
     subj.map(fn)
-    expect(MapAdapter).toHaveBeenLastCalledWith(subj.producer, fn)
+    expect(Map).toHaveBeenLastCalledWith(subj.producer, fn)
   })
 
   test('#skip()', () => {
     const subj = ouro.range()
 
     subj.skip(3)
-    expect(SkipAdapter).toHaveBeenLastCalledWith(subj.producer, 3)
+    expect(Skip).toHaveBeenLastCalledWith(subj.producer, 3)
   })
 
   test('#skipWhile()', () => {
@@ -97,14 +97,14 @@ describe('Combinators', () => {
     const fn = jest.fn()
 
     subj.skipWhile(fn)
-    expect(SkipWhileAdapter).toHaveBeenLastCalledWith(subj.producer, fn)
+    expect(SkipWhile).toHaveBeenLastCalledWith(subj.producer, fn)
   })
 
   test('#take()', () => {
     const subj = ouro.range()
 
     subj.take(5)
-    expect(TakeAdapter).toHaveBeenLastCalledWith(subj.producer, 5)
+    expect(Take).toHaveBeenLastCalledWith(subj.producer, 5)
   })
 
   test('#takeWhile()', () => {
@@ -112,7 +112,7 @@ describe('Combinators', () => {
     const fn = jest.fn()
 
     subj.takeWhile(fn)
-    expect(TakeWhileAdapter).toHaveBeenLastCalledWith(subj.producer, fn)
+    expect(TakeWhile).toHaveBeenLastCalledWith(subj.producer, fn)
   })
 
   test('#tap()', () => {
@@ -120,7 +120,7 @@ describe('Combinators', () => {
     const fn = jest.fn()
 
     subj.tap(fn)
-    expect(TapAdapter).toHaveBeenLastCalledWith(subj.producer, fn)
+    expect(Tap).toHaveBeenLastCalledWith(subj.producer, fn)
   })
 
   test('#zip()', () => {
@@ -129,14 +129,14 @@ describe('Combinators', () => {
       const subj = ouro.range()
 
       subj.zip(source)
-      expect(ZipAdapter).toHaveBeenLastCalledWith(subj.producer, source)
+      expect(Zip).toHaveBeenLastCalledWith(subj.producer, source)
     }
 
     {
       const subj = ouro.range()
 
       subj.zip()
-      expect(ZipAdapter).toHaveBeenLastCalledWith(subj.producer, subj.producer)
+      expect(Zip).toHaveBeenLastCalledWith(subj.producer, subj.producer)
     }
   })
 })

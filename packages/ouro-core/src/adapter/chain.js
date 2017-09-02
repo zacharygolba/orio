@@ -7,7 +7,7 @@ import { createProducer } from '../producer'
 
 @ToString
 @AsIterator
-export default class ChainAdapter<T, U> implements Iterator<T | U> {
+export default class Chain<T, U> implements Iterator<T | U> {
   /*:: @@iterator: () => Iterator<T | U> */
   producerA: Iterator<T>
   producerB: Iterator<U>

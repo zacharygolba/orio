@@ -1,6 +1,6 @@
 // @flow
 
-import { CharProducer, CycleProducer, NumberProducer } from '../producer'
+import { Chars, Cycle, Numbers } from '../producer'
 import Ouro from '../ouro'
 import * as ouro from '../'
 
@@ -12,7 +12,7 @@ test('.chars()', () => {
   {
     const iter = ouro.chars('a', 'z')
 
-    expect(iter.producer).toBeInstanceOf(CharProducer)
+    expect(iter.producer).toBeInstanceOf(Chars)
   }
 })
 
@@ -20,7 +20,7 @@ test('.cycle()', () => {
   const iter = ouro.cycle([1, 2, 3])
 
   expect(iter).toBeInstanceOf(Ouro)
-  expect(iter.producer).toBeInstanceOf(CycleProducer)
+  expect(iter.producer).toBeInstanceOf(Cycle)
 })
 
 test('.from()', () => {
@@ -47,7 +47,7 @@ test('.range()', () => {
   {
     const iter = ouro.range(1, 2)
 
-    expect(iter.producer).toBeInstanceOf(NumberProducer)
+    expect(iter.producer).toBeInstanceOf(Numbers)
   }
 })
 

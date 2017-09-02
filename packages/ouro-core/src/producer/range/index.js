@@ -1,4 +1,4 @@
 // @flow
 
-export { default as CharProducer } from './char'
-export { default as NumberProducer } from './number'
+export { default as Chars } from './chars'
+export { default as Numbers } from './numbers'

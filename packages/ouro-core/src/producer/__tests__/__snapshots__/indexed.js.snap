@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`IndexedProducer source array #@@iterator() 1`] = `1`;
+exports[`Indexed source array #@@iterator() 1`] = `1`;
 
-exports[`IndexedProducer source array #@@iterator() 2`] = `2`;
+exports[`Indexed source array #@@iterator() 2`] = `2`;
 
-exports[`IndexedProducer source array #@@iterator() 3`] = `3`;
+exports[`Indexed source array #@@iterator() 3`] = `3`;
 
-exports[`IndexedProducer source array #constructor() 1`] = `
-IndexedProducer {
+exports[`Indexed source array #constructor() 1`] = `
+Indexed {
   "index": 0,
   "source": Array [
     1,
@@ -17,16 +17,16 @@ IndexedProducer {
 }
 `;
 
-exports[`IndexedProducer source string #@@iterator() 1`] = `"t"`;
+exports[`Indexed source string #@@iterator() 1`] = `"t"`;
 
-exports[`IndexedProducer source string #@@iterator() 2`] = `"e"`;
+exports[`Indexed source string #@@iterator() 2`] = `"e"`;
 
-exports[`IndexedProducer source string #@@iterator() 3`] = `"s"`;
+exports[`Indexed source string #@@iterator() 3`] = `"s"`;
 
-exports[`IndexedProducer source string #@@iterator() 4`] = `"t"`;
+exports[`Indexed source string #@@iterator() 4`] = `"t"`;
 
-exports[`IndexedProducer source string #constructor() 1`] = `
-IndexedProducer {
+exports[`Indexed source string #constructor() 1`] = `
+Indexed {
   "index": 0,
   "source": "test",
 }

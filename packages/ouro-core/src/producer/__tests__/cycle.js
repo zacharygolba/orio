@@ -1,12 +1,12 @@
 // @flow
 
-import CycleProducer from '../cycle'
+import Cycle from '../cycle'
 
 const SOURCE = 'test'
 let producer
 
 beforeEach(() => {
-  producer = new CycleProducer(SOURCE)
+  producer = new Cycle(SOURCE)
 })
 
 test('#constructor()', () => {
