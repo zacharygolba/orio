@@ -172,6 +172,10 @@ describe('Methods', () => {
     expect(ouro.range(1, 10).count()).toBe(10)
   })
 
+  test('#drop()', () => {
+    expect(ouro.range().drop()).toBeUndefined()
+  })
+
   test('#every()', () => {
     {
       const fn = jest.fn(num => num < 10)
