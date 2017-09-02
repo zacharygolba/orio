@@ -5,7 +5,7 @@ import { AsIterator, ToString } from 'ouro-traits'
 
 @ToString
 @AsIterator
-export default class NumberProducer implements Iterator<number> {
+export default class Numbers implements Iterator<number> {
   /*:: @@iterator: () => Iterator<number> */
   done: boolean
   end: number

@@ -3,18 +3,18 @@
 import { AsIterator, ToString } from 'ouro-traits'
 
 import {
-  ChainAdapter,
-  EnumerateAdapter,
-  FilterAdapter,
-  FilterMapAdapter,
-  FlatMapAdapter,
-  MapAdapter,
-  SkipAdapter,
-  SkipWhileAdapter,
-  TakeAdapter,
-  TakeWhileAdapter,
-  TapAdapter,
-  ZipAdapter,
+  Chain,
+  Enumerate,
+  Filter,
+  FilterMap,
+  FlatMap,
+  Map,
+  Skip,
+  SkipWhile,
+  Take,
+  TakeWhile,
+  Tap,
+  Zip,
 } from './adapter'
 
 export interface FromIterator<T> {
@@ -43,7 +43,7 @@ export default class Ouro<T> implements Iterator<T> {
   }
 
   chain<U>(producer: Iterable<U> | U): Ouro<T | U> {
-    const adapter = new ChainAdapter(this.producer, producer)
+    const adapter = new Chain(this.producer, producer)
     return new Ouro(adapter)
   }
 
@@ -67,7 +67,7 @@ export default class Ouro<T> implements Iterator<T> {
   }
 
   enumerate(): Ouro<[number, T]> {
-    const adapter = new EnumerateAdapter(this.producer)
+    const adapter = new Enumerate(this.producer)
     return new Ouro(adapter)
   }
 
@@ -76,12 +76,12 @@ export default class Ouro<T> implements Iterator<T> {
   }
 
   filterMap<U>(fn: T => ?U): Ouro<U> {
-    const adapter = new FilterMapAdapter(this.producer, fn)
+    const adapter = new FilterMap(this.producer, fn)
     return new Ouro(adapter)
   }
 
   filter(fn: T => boolean): Ouro<T> {
-    const adapter = new FilterAdapter(this.producer, fn)
+    const adapter = new Filter(this.producer, fn)
     return new Ouro(adapter)
   }
 
@@ -94,7 +94,7 @@ export default class Ouro<T> implements Iterator<T> {
   }
 
   flatMap<U>(fn: T => Iterable<U> | U): Ouro<U> {
-    const adapter = new FlatMapAdapter(this.producer, fn)
+    const adapter = new FlatMap(this.producer, fn)
     return new Ouro(adapter)
   }
 
@@ -121,7 +121,7 @@ export default class Ouro<T> implements Iterator<T> {
   }
 
   map<U>(fn: T => U): Ouro<U> {
-    const adapter = new MapAdapter(this.producer, fn)
+    const adapter = new Map(this.producer, fn)
     return new Ouro(adapter)
   }
 
@@ -154,12 +154,12 @@ export default class Ouro<T> implements Iterator<T> {
   }
 
   skip(amount: number): Ouro<T> {
-    const adapter = new SkipAdapter(this.producer, amount)
+    const adapter = new Skip(this.producer, amount)
     return new Ouro(adapter)
   }
 
   skipWhile(fn: T => boolean): Ouro<T> {
-    const adapter = new SkipWhileAdapter(this.producer, fn)
+    const adapter = new SkipWhile(this.producer, fn)
     return new Ouro(adapter)
   }
 
@@ -172,22 +172,22 @@ export default class Ouro<T> implements Iterator<T> {
   }
 
   take(amount: number): Ouro<T> {
-    const adapter = new TakeAdapter(this.producer, amount)
+    const adapter = new Take(this.producer, amount)
     return new Ouro(adapter)
   }
 
   takeWhile(fn: T => boolean): Ouro<T> {
-    const adapter = new TakeWhileAdapter(this.producer, fn)
+    const adapter = new TakeWhile(this.producer, fn)
     return new Ouro(adapter)
   }
 
   tap(fn: T => void): Ouro<T> {
-    const adapter = new TapAdapter(this.producer, fn)
+    const adapter = new Tap(this.producer, fn)
     return new Ouro(adapter)
   }
 
   zip(producer?: Iterable<*> = this.producer): Ouro<[T, *]> {
-    const adapter = new ZipAdapter(this.producer, producer)
+    const adapter = new Zip(this.producer, producer)
     return new Ouro(adapter)
   }
 }

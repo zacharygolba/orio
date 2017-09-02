@@ -5,7 +5,7 @@ import { AsIterator, ToString } from 'ouro-traits'
 
 @ToString
 @AsIterator
-export default class TakeAdapter<T> implements Iterator<T> {
+export default class Take<T> implements Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   amount: number
   calls: number

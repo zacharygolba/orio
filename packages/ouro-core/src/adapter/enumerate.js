@@ -5,7 +5,7 @@ import { AsIterator, ToString } from 'ouro-traits'
 
 @ToString
 @AsIterator
-export default class EnumerateAdapter<T> implements Iterator<[number, T]> {
+export default class Enumerate<T> implements Iterator<[number, T]> {
   /*:: @@iterator: () => Iterator<[number, T]> */
   producer: Iterator<T>
   state: number

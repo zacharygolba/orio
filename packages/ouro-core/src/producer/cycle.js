@@ -7,7 +7,7 @@ import type { IndexedCollection } from './'
 
 @ToString
 @AsIterator
-export default class CycleProducer<T> implements Iterator<T> {
+export default class Cycle<T> implements Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   source: IndexedCollection<T>
   state: number

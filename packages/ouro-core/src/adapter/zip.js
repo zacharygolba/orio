@@ -7,7 +7,7 @@ import { createProducer } from '../producer'
 
 @ToString
 @AsIterator
-export default class ZipAdapter<T, U> implements Iterator<[T, U]> {
+export default class Zip<T, U> implements Iterator<[T, U]> {
   /*:: @@iterator: () => Iterator<[T, U]> */
   producerA: Iterator<T>
   producerB: Iterator<U>

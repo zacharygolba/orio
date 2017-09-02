@@ -1,15 +1,15 @@
 // @flow
 
-import IndexedProducer from '../indexed'
+import Indexed from '../indexed'
 
-describe('IndexedProducer', () => {
+describe('Indexed', () => {
   describe('source array', () => {
     let source
     let producer
 
     beforeEach(() => {
       source = [1, 2, 3]
-      producer = new IndexedProducer(source)
+      producer = new Indexed(source)
     })
 
     test('#constructor()', () => {
@@ -29,7 +29,7 @@ describe('IndexedProducer', () => {
 
     beforeEach(() => {
       source = 'test'
-      producer = new IndexedProducer(source)
+      producer = new Indexed(source)
     })
 
     test('#constructor()', () => {

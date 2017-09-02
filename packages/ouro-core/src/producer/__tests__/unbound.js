@@ -1,6 +1,6 @@
 // @flow
 
-import UnboundProducer from '../unbound'
+import Unbound from '../unbound'
 
 function* randomRepeat(value, amount) {
   const exit = Math.round(amount / 2)
@@ -14,7 +14,7 @@ const ITEM = 'test'
 let producer
 
 beforeEach(() => {
-  producer = new UnboundProducer(randomRepeat(ITEM, 5))
+  producer = new Unbound(randomRepeat(ITEM, 5))
 })
 
 test('#constructor()', () => {

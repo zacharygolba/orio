@@ -5,7 +5,7 @@ import { AsIterator, ToString } from 'ouro-traits'
 
 import { createProducer } from '../producer'
 
-function exec<T, U>(adapter: FlatMapAdapter<T, U>): IteratorResult<U, void> {
+function exec<T, U>(adapter: FlatMap<T, U>): IteratorResult<U, void> {
   let next = adapter.child ? adapter.child.next() : result.done()
 
   if (!next.done) {
@@ -25,7 +25,7 @@ function exec<T, U>(adapter: FlatMapAdapter<T, U>): IteratorResult<U, void> {
 
 @ToString
 @AsIterator
-export default class FlatMapAdapter<T, U> implements Iterator<U> {
+export default class FlatMap<T, U> implements Iterator<U> {
   /*:: @@iterator: () => Iterator<U> */
   child: ?Iterator<U>
   fn: T => Iterable<U> | U

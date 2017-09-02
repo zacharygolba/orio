@@ -2,7 +2,7 @@
 
 import { AsIterator, ToString } from 'ouro-traits'
 
-function exec<T>(adapter: SkipAdapter<T>): IteratorResult<T, void> {
+function exec<T>(adapter: Skip<T>): IteratorResult<T, void> {
   const next = adapter.producer.next()
 
   if (adapter.calls >= adapter.amount) {
@@ -16,7 +16,7 @@ function exec<T>(adapter: SkipAdapter<T>): IteratorResult<T, void> {
 
 @ToString
 @AsIterator
-export default class SkipAdapter<T> implements Iterator<T> {
+export default class Skip<T> implements Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   amount: number
   producer: Iterator<T>

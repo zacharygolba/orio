@@ -1,12 +1,12 @@
 // @flow
 
-import RepeatProducer from '../repeat'
+import Repeat from '../repeat'
 
 const ITEM = 'test'
 let producer
 
 beforeEach(() => {
-  producer = new RepeatProducer(ITEM)
+  producer = new Repeat(ITEM)
 })
 
 test('#constructor()', () => {

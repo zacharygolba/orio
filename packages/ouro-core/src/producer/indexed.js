@@ -10,7 +10,7 @@ export interface IndexedCollection<T> extends Iterable<T> {
 
 @ToString
 @AsIterator
-export default class IndexedProducer<T> implements Iterator<T> {
+export default class Indexed<T> implements Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   index: number
   source: IndexedCollection<T>
