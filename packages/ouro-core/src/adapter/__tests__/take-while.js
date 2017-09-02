@@ -1,13 +1,13 @@
 // @flow
 
-import Take from '../take'
-import * as iter from '../../'
+import TakeWhile from '../take-while'
+import * as ouro from '../../'
 
 let subj
 
 beforeEach(() => {
-  const { producer } = iter.repeat('test')
-  subj = new Take(producer, 3)
+  const { producer } = ouro.of(1, 2, 3, 4, 5, 6)
+  subj = new TakeWhile(producer, value => value <= 3)
 })
 
 test('#@@iterator()', () => {

@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved
-const iter = require('iter.js')
+const ouro = require('ouro-core')
 
 module.exports = function fizzBuzz() {
-  return iter
+  return ouro
     .range(1, 100)
     .map(n => {
       if (n % 15 === 0) {

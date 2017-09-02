@@ -1,13 +1,13 @@
 // @flow
 
-import Filter from '../filter'
-import * as iter from '../../'
+import FilterMap from '../filter-map'
+import * as ouro from '../../'
 
 let subj
 
 beforeEach(() => {
-  const { producer } = iter.of(1, 2, 3)
-  subj = new Filter(producer, value => value > 1)
+  const { producer } = ouro.of(1, null, 2, undefined, 3)
+  subj = new FilterMap(producer, value => value)
 })
 
 test('#@@iterator()', () => {
@@ -17,6 +17,8 @@ test('#@@iterator()', () => {
 })
 
 test('#next()', () => {
+  expect(subj.next()).toMatchSnapshot()
+  expect(subj.next()).toMatchSnapshot()
   expect(subj.next()).toMatchSnapshot()
   expect(subj.next()).toMatchSnapshot()
   expect(subj.next()).toMatchSnapshot()

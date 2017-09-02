@@ -1,13 +1,13 @@
 // @flow
 
-import Skip from '../skip'
-import * as iter from '../../'
+import Enumerate from '../enumerate'
+import * as ouro from '../../'
 
 let subj
 
 beforeEach(() => {
-  const { producer } = iter.of(1, 2, 3, 4, 5, 6)
-  subj = new Skip(producer, 3)
+  const { producer } = ouro.of(1, 2, 3)
+  subj = new Enumerate(producer)
 })
 
 test('#@@iterator()', () => {

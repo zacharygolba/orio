@@ -1,14 +1,13 @@
 // @flow
 
-import Chain from '../chain'
-import * as iter from '../../'
+import Map from '../map'
+import * as ouro from '../../'
 
 let subj
 
 beforeEach(() => {
-  const producerA = iter.of(1, 2, 3).producer
-  const producerB = iter.of(4, 5, 6).producer
-  subj = new Chain(producerA, producerB)
+  const { producer } = ouro.of(1, 2, 3)
+  subj = new Map(producer, value => value * 2)
 })
 
 test('#@@iterator()', () => {
@@ -18,9 +17,6 @@ test('#@@iterator()', () => {
 })
 
 test('#next()', () => {
-  expect(subj.next()).toMatchSnapshot()
-  expect(subj.next()).toMatchSnapshot()
-  expect(subj.next()).toMatchSnapshot()
   expect(subj.next()).toMatchSnapshot()
   expect(subj.next()).toMatchSnapshot()
   expect(subj.next()).toMatchSnapshot()

@@ -1,9 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved
-const iter = require('iter.js')
+const ouro = require('ouro-core')
 
-exports.MAX_FACTORIAL = iter
+exports.MAX_FACTORIAL = ouro
   .range()
-  .map(n => [n, iter.range(n, 1).product()])
+  .map(n => [n, ouro.range(n, 1).product()])
   .takeWhile(([, f]) => f < Infinity)
   .map(([n]) => n)
   .last()

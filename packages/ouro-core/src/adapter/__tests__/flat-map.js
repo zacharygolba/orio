@@ -1,13 +1,13 @@
 // @flow
 
-import Map from '../map'
-import * as iter from '../../'
+import FlatMap from '../flat-map'
+import * as ouro from '../../'
 
 let subj
 
 beforeEach(() => {
-  const { producer } = iter.of(1, 2, 3)
-  subj = new Map(producer, value => value * 2)
+  const { producer } = ouro.of(1, 2, 3)
+  subj = new FlatMap(producer, item => ouro.repeat(item).take(2))
 })
 
 test('#@@iterator()', () => {
@@ -17,6 +17,9 @@ test('#@@iterator()', () => {
 })
 
 test('#next()', () => {
+  expect(subj.next()).toMatchSnapshot()
+  expect(subj.next()).toMatchSnapshot()
+  expect(subj.next()).toMatchSnapshot()
   expect(subj.next()).toMatchSnapshot()
   expect(subj.next()).toMatchSnapshot()
   expect(subj.next()).toMatchSnapshot()

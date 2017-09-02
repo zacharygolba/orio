@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       - image: node:latest
-    working_directory: ~/iter.js
+    working_directory: ~/ouro
     steps:
       - checkout
       - restore_cache:
@@ -39,7 +39,7 @@ jobs:
       - save_cache:
           key: jest-cache-{{ epoch }}
           paths:
-            - ~/iter.js/.jest-cache
+            - ~/ouro/.jest-cache
       - run:
           name: Report Coverage
           command: yarn codecov

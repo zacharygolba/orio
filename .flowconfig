@@ -15,7 +15,6 @@ all=warn
 
 [options]
 include_warnings=true
-max_header_tokens=2
 
 module.use_strict=true
 
