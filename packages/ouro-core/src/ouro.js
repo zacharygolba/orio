@@ -14,19 +14,11 @@ import {
   Take,
   TakeWhile,
   Tap,
+  Unique,
   Zip,
 } from './adapter'
+import { identity, reduce } from './utils'
 import type { Drop, FromIterator } from './types'
-
-function reduce<T, U>(fn: (U, T) => U, acc: U, producer: Iterator<T>): U {
-  const next = producer.next()
-
-  if (next.done) {
-    return acc
-  }
-
-  return reduce(fn, fn(acc, next.value), producer)
-}
 
 @ToString
 @AsIterator
@@ -99,7 +91,7 @@ export default class Ouro<T> implements Drop, Iterator<T> {
   }
 
   flatten(): Ouro<*> {
-    return this.flatMap(item => item)
+    return this.flatMap(identity)
   }
 
   forEach(fn: T => void): void {
@@ -189,6 +181,11 @@ export default class Ouro<T> implements Drop, Iterator<T> {
 
   tap(fn: T => void): Ouro<T> {
     const adapter = new Tap(this.producer, fn)
+    return new Ouro(adapter)
+  }
+
+  unique(fn?: T => * = identity): Ouro<T> {
+    const adapter = new Unique(this.producer, fn)
     return new Ouro(adapter)
   }
 
