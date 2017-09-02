@@ -23,7 +23,7 @@ function onComplete() {
 /* eslint-enable no-console */
 
 new Suite('Factorial')
-  .add('iter.js', () => factorial(MAX_FACTORIAL))
+  .add('ouro', () => factorial(MAX_FACTORIAL))
   .add('lazy.js', () => lazy.factorial(MAX_FACTORIAL))
   .add('lodash', () => lodash.factorial(MAX_FACTORIAL))
   .on('cycle', onCycle)
@@ -31,7 +31,7 @@ new Suite('Factorial')
   .run()
 
 new Suite('FizzBuzz')
-  .add('iter.js', fizzBuzz)
+  .add('ouro', fizzBuzz)
   .add('lazy.js', lazy.fizzBuzz)
   .add('lodash', lodash.fizzBuzz)
   .on('cycle', onCycle)
@@ -39,7 +39,7 @@ new Suite('FizzBuzz')
   .run()
 
 new Suite('Primes')
-  .add('iter.js', () => primes(100))
+  .add('ouro', () => primes(100))
   .add('lazy.js', () => lazy.primes(100))
   // .add('lodash', lodash)
   .on('cycle', onCycle)

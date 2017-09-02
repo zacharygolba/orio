@@ -9,7 +9,9 @@ function factorial(n) {
   const start = n === 0 ? 1 : Math.abs(n)
   return start > MAX_FACTORIAL
     ? Infinity
-    : _.chain(_.range(start, 1)).reduce((x, y) => x * y).value()
+    : _.chain(_.range(start, 1))
+        .reduce((x, y) => x * y)
+        .value()
 }
 
 function fizzBuzz() {

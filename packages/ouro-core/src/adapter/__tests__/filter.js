@@ -1,13 +1,13 @@
 // @flow
 
-import Enumerate from '../enumerate'
-import * as iter from '../../'
+import Filter from '../filter'
+import * as ouro from '../../'
 
 let subj
 
 beforeEach(() => {
-  const { producer } = iter.of(1, 2, 3)
-  subj = new Enumerate(producer)
+  const { producer } = ouro.of(1, 2, 3)
+  subj = new Filter(producer, value => value > 1)
 })
 
 test('#@@iterator()', () => {

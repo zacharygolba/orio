@@ -1,0 +1,9 @@
+{
+  "name": "ouro-core",
+  "version": "0.0.1",
+  "repository": "github:zacharygolba/ouro",
+  "author": "Zachary Golba <zachary.golba@postlight.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js"
+}

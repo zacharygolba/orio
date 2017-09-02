@@ -1,17 +1,14 @@
 // @flow
 
-import Tap from '../tap'
-import * as iter from '../../'
+import SkipWhile from '../skip-while'
+import * as ouro from '../../'
 
-const fn = jest.fn()
 let subj
 
 beforeEach(() => {
-  const { producer } = iter.of(1, 2, 3)
-  subj = new Tap(producer, fn)
+  const { producer } = ouro.of(1, 2, 3, 4, 5, 6)
+  subj = new SkipWhile(producer, value => value <= 3)
 })
-
-afterEach(fn.mockReset)
 
 test('#@@iterator()', () => {
   for (const item of subj) {
@@ -21,14 +18,7 @@ test('#@@iterator()', () => {
 
 test('#next()', () => {
   expect(subj.next()).toMatchSnapshot()
-  expect(fn).toHaveBeenCalledWith(1)
-
   expect(subj.next()).toMatchSnapshot()
-  expect(fn).toHaveBeenCalledWith(2)
-
   expect(subj.next()).toMatchSnapshot()
-  expect(fn).toHaveBeenCalledWith(3)
-
   expect(subj.next()).toMatchSnapshot()
-  expect(fn).toHaveBeenCalledTimes(3)
 })

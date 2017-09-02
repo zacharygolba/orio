@@ -1,6 +1,6 @@
 // @flow
 
-import Iter from '../../iter'
+import Ouro from '../../ouro'
 import { createProducer, IndexedProducer, UnboundProducer } from '../'
 
 describe('#createProducer()', () => {
@@ -32,9 +32,9 @@ describe('#createProducer()', () => {
     expect(producer.next()).toHaveProperty('value', value)
   })
 
-  test('Iter<T> => Iter<T>.producer', () => {
+  test('Ouro<T> => Ouro<T>.producer', () => {
     const source = createProducer()
-    const producer = createProducer(new Iter(source))
+    const producer = createProducer(new Ouro(source))
 
     expect(producer).toBe(producer)
   })

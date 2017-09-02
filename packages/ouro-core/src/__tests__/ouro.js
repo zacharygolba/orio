@@ -6,7 +6,7 @@ describe('Combinators', () => {
 
   /* eslint-disable global-require */
 
-  const iter = require('../')
+  const ouro = require('../')
   const {
     ChainAdapter,
     EnumerateAdapter,
@@ -30,21 +30,21 @@ describe('Combinators', () => {
 
   test('#chain()', () => {
     const source = [4, 5, 6]
-    const subj = iter.of(1, 2, 3)
+    const subj = ouro.of(1, 2, 3)
 
     subj.chain(source)
     expect(ChainAdapter).toHaveBeenLastCalledWith(subj.producer, source)
   })
 
   test('#enumerate()', () => {
-    const subj = iter.range()
+    const subj = ouro.range()
 
     subj.enumerate()
     expect(EnumerateAdapter).toHaveBeenLastCalledWith(subj.producer)
   })
 
   test('#filter()', () => {
-    const subj = iter.range()
+    const subj = ouro.range()
     const fn = jest.fn()
 
     subj.filter(fn)
@@ -52,7 +52,7 @@ describe('Combinators', () => {
   })
 
   test('#filterMap()', () => {
-    const subj = iter.range()
+    const subj = ouro.range()
     const fn = jest.fn()
 
     subj.filterMap(fn)
@@ -60,7 +60,7 @@ describe('Combinators', () => {
   })
 
   test('#flatMap()', () => {
-    const subj = iter.range()
+    const subj = ouro.range()
     const fn = jest.fn()
 
     subj.flatMap(fn)
@@ -68,7 +68,7 @@ describe('Combinators', () => {
   })
 
   test('#flatten()', () => {
-    const subj = iter.range()
+    const subj = ouro.range()
 
     subj.flatten()
     expect(FlatMapAdapter).toHaveBeenLastCalledWith(
@@ -78,7 +78,7 @@ describe('Combinators', () => {
   })
 
   test('#map()', () => {
-    const subj = iter.range()
+    const subj = ouro.range()
     const fn = jest.fn()
 
     subj.map(fn)
@@ -86,14 +86,14 @@ describe('Combinators', () => {
   })
 
   test('#skip()', () => {
-    const subj = iter.range()
+    const subj = ouro.range()
 
     subj.skip(3)
     expect(SkipAdapter).toHaveBeenLastCalledWith(subj.producer, 3)
   })
 
   test('#skipWhile()', () => {
-    const subj = iter.range()
+    const subj = ouro.range()
     const fn = jest.fn()
 
     subj.skipWhile(fn)
@@ -101,14 +101,14 @@ describe('Combinators', () => {
   })
 
   test('#take()', () => {
-    const subj = iter.range()
+    const subj = ouro.range()
 
     subj.take(5)
     expect(TakeAdapter).toHaveBeenLastCalledWith(subj.producer, 5)
   })
 
   test('#takeWhile()', () => {
-    const subj = iter.range()
+    const subj = ouro.range()
     const fn = jest.fn()
 
     subj.takeWhile(fn)
@@ -116,7 +116,7 @@ describe('Combinators', () => {
   })
 
   test('#tap()', () => {
-    const subj = iter.range()
+    const subj = ouro.range()
     const fn = jest.fn()
 
     subj.tap(fn)
@@ -125,15 +125,15 @@ describe('Combinators', () => {
 
   test('#zip()', () => {
     {
-      const source = iter.range(Infinity, 0)
-      const subj = iter.range()
+      const source = ouro.range(Infinity, 0)
+      const subj = ouro.range()
 
       subj.zip(source)
       expect(ZipAdapter).toHaveBeenLastCalledWith(subj.producer, source)
     }
 
     {
-      const subj = iter.range()
+      const subj = ouro.range()
 
       subj.zip()
       expect(ZipAdapter).toHaveBeenLastCalledWith(subj.producer, subj.producer)
@@ -146,39 +146,44 @@ describe('Methods', () => {
   jest.resetModules()
 
   // eslint-disable-next-line global-require
-  const iter = require('../')
+  const ouro = require('../')
 
   test('#@@iterator()', () => {
     const source = [1, 2, 3]
 
-    for (const value of iter.from(source)) {
+    for (const value of ouro.from(source)) {
       expect(source.includes(value)).toBe(true)
     }
   })
 
   test('#collect()', () => {
-    expect(iter.from('test').collect()).toMatchSnapshot()
-    expect(iter.from('test').collect(Set)).toMatchSnapshot()
-    expect(iter.range(0, 255).collect(Uint8Array)).toMatchSnapshot()
-    expect(iter.from('test').enumerate().collect(Map)).toMatchSnapshot()
+    expect(ouro.from('test').collect()).toMatchSnapshot()
+    expect(ouro.from('test').collect(Set)).toMatchSnapshot()
+    expect(ouro.range(0, 255).collect(Uint8Array)).toMatchSnapshot()
+    expect(
+      ouro
+        .from('test')
+        .enumerate()
+        .collect(Map),
+    ).toMatchSnapshot()
   })
 
   test('#count()', () => {
-    expect(iter.range(1, 10).count()).toBe(10)
+    expect(ouro.range(1, 10).count()).toBe(10)
   })
 
   test('#every()', () => {
     {
       const fn = jest.fn(num => num < 10)
 
-      expect(iter.range(1, 5).every(fn)).toBe(true)
+      expect(ouro.range(1, 5).every(fn)).toBe(true)
       expect(fn).toHaveBeenCalledTimes(5)
     }
 
     {
       const fn = jest.fn(num => num > 10)
 
-      expect(iter.range(1, 5).every(fn)).toBe(false)
+      expect(ouro.range(1, 5).every(fn)).toBe(false)
       expect(fn).toHaveBeenCalledTimes(1)
     }
   })
@@ -186,18 +191,18 @@ describe('Methods', () => {
   test('#find()', () => {
     const fn = jest.fn(char => char === 'c')
 
-    expect(iter.chars('a', 'z').find(fn)).toBe('c')
+    expect(ouro.chars('a', 'z').find(fn)).toBe('c')
     expect(fn).toHaveBeenCalledTimes(3)
   })
 
   test('#first()', () => {
-    expect(iter.chars('a', 'z').first()).toBe('a')
+    expect(ouro.chars('a', 'z').first()).toBe('a')
   })
 
   test('#forEach()', () => {
     {
       const source = [1, 2, 3]
-      const subj = iter.from(source)
+      const subj = ouro.from(source)
       const fn = jest.fn()
 
       subj.forEach(fn)
@@ -206,7 +211,7 @@ describe('Methods', () => {
     }
 
     {
-      const subj = iter.range(1, 4)
+      const subj = ouro.range(1, 4)
       const fn = jest.fn()
 
       subj.filter(num => num % 2 === 0).forEach(fn)
@@ -217,30 +222,30 @@ describe('Methods', () => {
   })
 
   test('#join()', () => {
-    expect(iter.range(1, 3).join()).toBe('1,2,3')
-    expect(iter.range(1, 3).join(' * ')).toBe('1 * 2 * 3')
+    expect(ouro.range(1, 3).join()).toBe('1,2,3')
+    expect(ouro.range(1, 3).join(' * ')).toBe('1 * 2 * 3')
   })
 
   test('#last()', () => {
-    expect(iter.chars('a', 'z').last()).toBe('z')
+    expect(ouro.chars('a', 'z').last()).toBe('z')
   })
 
   test('#nth()', () => {
-    expect(iter.chars('a', 'z').nth(0)).toBe('a')
-    expect(iter.chars('a', 'z').nth(1)).toBe('b')
-    expect(iter.chars('a', 'z').nth(2)).toBe('c')
-    expect(iter.chars('a', 'z').nth(-1)).toBeUndefined()
-    expect(iter.chars('a', 'z').nth(27)).toBeUndefined()
+    expect(ouro.chars('a', 'z').nth(0)).toBe('a')
+    expect(ouro.chars('a', 'z').nth(1)).toBe('b')
+    expect(ouro.chars('a', 'z').nth(2)).toBe('c')
+    expect(ouro.chars('a', 'z').nth(-1)).toBeUndefined()
+    expect(ouro.chars('a', 'z').nth(27)).toBeUndefined()
   })
 
   test('#product()', () => {
-    expect(iter.of().product()).toBe(0)
-    expect(iter.range(2, 4).product()).toBe(2 * 3 * 4)
-    expect(Number.isNaN(iter.chars('a', 'z').product())).toBe(true)
+    expect(ouro.of().product()).toBe(0)
+    expect(ouro.range(2, 4).product()).toBe(2 * 3 * 4)
+    expect(Number.isNaN(ouro.chars('a', 'z').product())).toBe(true)
   })
 
   test('#reduce()', () => {
-    const set = iter.range(1, 3).reduce((acc, next) => acc.add(next), new Set())
+    const set = ouro.range(1, 3).reduce((acc, next) => acc.add(next), new Set())
 
     expect(set.size).toBe(3)
     expect(set.has(1)).toBe(true)
@@ -252,25 +257,25 @@ describe('Methods', () => {
     {
       const fn = jest.fn(num => num > 2)
 
-      expect(iter.range(1, 5).some(fn)).toBe(true)
+      expect(ouro.range(1, 5).some(fn)).toBe(true)
       expect(fn).toHaveBeenCalledTimes(3)
     }
 
     {
       const fn = jest.fn(num => num > 10)
 
-      expect(iter.range(1, 5).some(fn)).toBe(false)
+      expect(ouro.range(1, 5).some(fn)).toBe(false)
       expect(fn).toHaveBeenCalledTimes(5)
     }
   })
 
   test('#sum()', () => {
-    expect(iter.of().sum()).toBe(0)
-    expect(iter.range(1, 4).sum()).toBe(1 + 2 + 3 + 4)
-    expect(Number.isNaN(iter.chars('a', 'z').sum())).toBe(true)
+    expect(ouro.of().sum()).toBe(0)
+    expect(ouro.range(1, 4).sum()).toBe(1 + 2 + 3 + 4)
+    expect(Number.isNaN(ouro.chars('a', 'z').sum())).toBe(true)
   })
 
   test('#toString()', () => {
-    expect(iter.of().toString()).toBe('[object Iter]')
+    expect(ouro.of().toString()).toBe('[object Ouro]')
   })
 })

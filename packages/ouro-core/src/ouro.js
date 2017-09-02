@@ -21,7 +21,7 @@ export interface FromIterator<T> {
   static from(source: Iterator<T>): FromIterator<T>,
 }
 
-export default class Iter<T> extends ProducerBase<T> {
+export default class Ouro<T> extends ProducerBase<T> {
   producer: Iterator<T>
 
   constructor(producer: Iterator<T>) {
@@ -29,9 +29,9 @@ export default class Iter<T> extends ProducerBase<T> {
     this.producer = producer
   }
 
-  chain<U>(producer: Iterable<U> | U): Iter<T | U> {
+  chain<U>(producer: Iterable<U> | U): Ouro<T | U> {
     const adapter = new ChainAdapter(this.producer, producer)
-    return new Iter(adapter)
+    return new Ouro(adapter)
   }
 
   collect(Target?: Class<FromIterator<T>> = Array): FromIterator<T> {
@@ -53,23 +53,23 @@ export default class Iter<T> extends ProducerBase<T> {
     return this.reduce(acc => acc + 1, 0)
   }
 
-  enumerate(): Iter<[number, T]> {
+  enumerate(): Ouro<[number, T]> {
     const adapter = new EnumerateAdapter(this.producer)
-    return new Iter(adapter)
+    return new Ouro(adapter)
   }
 
   every(fn: T => boolean): boolean {
     return this.find(item => !fn(item)) === undefined
   }
 
-  filterMap<U>(fn: T => ?U): Iter<U> {
+  filterMap<U>(fn: T => ?U): Ouro<U> {
     const adapter = new FilterMapAdapter(this.producer, fn)
-    return new Iter(adapter)
+    return new Ouro(adapter)
   }
 
-  filter(fn: T => boolean): Iter<T> {
+  filter(fn: T => boolean): Ouro<T> {
     const adapter = new FilterAdapter(this.producer, fn)
-    return new Iter(adapter)
+    return new Ouro(adapter)
   }
 
   find(fn: T => boolean): ?T {
@@ -80,12 +80,12 @@ export default class Iter<T> extends ProducerBase<T> {
     return this.take(1).reduce((_, next) => next)
   }
 
-  flatMap<U>(fn: T => Iterable<U> | U): Iter<U> {
+  flatMap<U>(fn: T => Iterable<U> | U): Ouro<U> {
     const adapter = new FlatMapAdapter(this.producer, fn)
-    return new Iter(adapter)
+    return new Ouro(adapter)
   }
 
-  flatten(): Iter<*> {
+  flatten(): Ouro<*> {
     return this.flatMap(item => item)
   }
 
@@ -107,9 +107,9 @@ export default class Iter<T> extends ProducerBase<T> {
     return this.reduce((_, next) => next)
   }
 
-  map<U>(fn: T => U): Iter<U> {
+  map<U>(fn: T => U): Ouro<U> {
     const adapter = new MapAdapter(this.producer, fn)
-    return new Iter(adapter)
+    return new Ouro(adapter)
   }
 
   next(): IteratorResult<T, void> {
@@ -117,7 +117,10 @@ export default class Iter<T> extends ProducerBase<T> {
   }
 
   nth(idx: number): ?T {
-    const [lastIdx, value] = this.enumerate().take(idx + 1).last() || []
+    const [lastIdx, value] =
+      this.enumerate()
+        .take(idx + 1)
+        .last() || []
 
     if (idx === lastIdx) {
       return value
@@ -143,14 +146,14 @@ export default class Iter<T> extends ProducerBase<T> {
     return this.reduce(fn, fn(acc, next.value))
   }
 
-  skip(amount: number): Iter<T> {
+  skip(amount: number): Ouro<T> {
     const adapter = new SkipAdapter(this.producer, amount)
-    return new Iter(adapter)
+    return new Ouro(adapter)
   }
 
-  skipWhile(fn: T => boolean): Iter<T> {
+  skipWhile(fn: T => boolean): Ouro<T> {
     const adapter = new SkipWhileAdapter(this.producer, fn)
-    return new Iter(adapter)
+    return new Ouro(adapter)
   }
 
   some(fn: T => boolean): boolean {
@@ -161,23 +164,23 @@ export default class Iter<T> extends ProducerBase<T> {
     return this.reduce((acc, item) => acc + +item, 0)
   }
 
-  take(amount: number): Iter<T> {
+  take(amount: number): Ouro<T> {
     const adapter = new TakeAdapter(this.producer, amount)
-    return new Iter(adapter)
+    return new Ouro(adapter)
   }
 
-  takeWhile(fn: T => boolean): Iter<T> {
+  takeWhile(fn: T => boolean): Ouro<T> {
     const adapter = new TakeWhileAdapter(this.producer, fn)
-    return new Iter(adapter)
+    return new Ouro(adapter)
   }
 
-  tap(fn: T => void): Iter<T> {
+  tap(fn: T => void): Ouro<T> {
     const adapter = new TapAdapter(this.producer, fn)
-    return new Iter(adapter)
+    return new Ouro(adapter)
   }
 
-  zip(producer?: Iterable<*> = this.producer): Iter<[T, *]> {
+  zip(producer?: Iterable<*> = this.producer): Ouro<[T, *]> {
     const adapter = new ZipAdapter(this.producer, producer)
-    return new Iter(adapter)
+    return new Ouro(adapter)
   }
 }
