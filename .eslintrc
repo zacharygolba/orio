@@ -42,6 +42,8 @@
       "only-multiline"
     ],
     "import/no-extraneous-dependencies": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
     "no-restricted-syntax": [
       "error",
       "ForInStatement",
