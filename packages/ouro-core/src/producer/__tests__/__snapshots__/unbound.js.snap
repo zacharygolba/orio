@@ -5,3 +5,16 @@ Unbound {
   "source":  {},
 }
 `;
+
+exports[`#drop() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#drop() 2`] = `
+Unbound {
+  "source":  {},
+}
+`;

@@ -32,6 +32,27 @@ Chars {
 }
 `;
 
+exports[`Chars <- #drop() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`Chars <- #drop() 2`] = `
+Chars {
+  "size": 3,
+  "source": Numbers {
+    "done": true,
+    "end": 0,
+    "size": 0,
+    "start": 0,
+    "state": 0,
+    "step": 0,
+  },
+}
+`;
+
 exports[`Chars <- #next() 1`] = `
 Object {
   "done": false,
@@ -65,6 +86,27 @@ exports[`Chars -> #@@iterator() 1`] = `"a"`;
 exports[`Chars -> #@@iterator() 2`] = `"b"`;
 
 exports[`Chars -> #@@iterator() 3`] = `"c"`;
+
+exports[`Chars -> #drop() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`Chars -> #drop() 2`] = `
+Chars {
+  "size": 3,
+  "source": Numbers {
+    "done": true,
+    "end": 0,
+    "size": 0,
+    "start": 0,
+    "state": 0,
+    "step": 0,
+  },
+}
+`;
 
 exports[`Chars -> #next() 1`] = `
 Object {
@@ -117,6 +159,24 @@ Numbers {
   "start": 9007199254740991,
   "state": 9007199254740991,
   "step": -1,
+}
+`;
+
+exports[`Numbers <- #drop() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`Numbers <- #drop() 2`] = `
+Numbers {
+  "done": true,
+  "end": 0,
+  "size": 0,
+  "start": 0,
+  "state": 0,
+  "step": 0,
 }
 `;
 
@@ -198,7 +258,25 @@ exports[`Numbers -> #constructor() 5`] = `
 Numbers {
   "done": true,
   "end": 0,
-  "size": NaN,
+  "size": 0,
+  "start": 0,
+  "state": 0,
+  "step": 0,
+}
+`;
+
+exports[`Numbers -> #drop() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`Numbers -> #drop() 2`] = `
+Numbers {
+  "done": true,
+  "end": 0,
+  "size": 0,
   "start": 0,
   "state": 0,
   "step": 0,

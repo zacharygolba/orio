@@ -5,16 +5,38 @@ import * as ouro from '../../'
 
 let subj
 
+const zip = (a, b) => {
+  const adapter = new Zip(a, b)
+
+  // $FlowIgnore
+  adapter.producerA.drop = jest.fn()
+  // $FlowIgnore
+  adapter.producerB.drop = jest.fn()
+
+  return adapter
+}
+
 beforeEach(() => {
   const producerA = ouro.repeat('test').producer
   const producerB = ouro.of(1, 2, 3).producer
-  subj = new Zip(producerA, producerB)
+  subj = zip(producerA, producerB)
+})
+
+afterEach(() => {
+  subj.producerA.drop.mockReset()
+  subj.producerB.drop.mockReset()
 })
 
 test('#@@iterator()', () => {
   for (const item of subj) {
     expect(item).toMatchSnapshot()
   }
+})
+
+test('#drop()', () => {
+  expect(subj.drop()).toBeUndefined()
+  expect(subj.producerA.drop).toHaveBeenCalled()
+  expect(subj.producerB.drop).toHaveBeenCalled()
 })
 
 describe('#next()', () => {
@@ -28,7 +50,7 @@ describe('#next()', () => {
   test('with a bound lhs and an unbound rhs', () => {
     const producerA = ouro.of(1, 2, 3).producer
     const producerB = ouro.repeat('test').producer
-    subj = new Zip(producerA, producerB)
+    subj = zip(producerA, producerB)
 
     expect(subj.next()).toMatchSnapshot()
     expect(subj.next()).toMatchSnapshot()
@@ -38,7 +60,7 @@ describe('#next()', () => {
 
   test('with a self reference to bound lhs', () => {
     const { producer } = ouro.of(1, 2, 3, 4)
-    subj = new Zip(producer, producer)
+    subj = zip(producer, producer)
 
     expect(subj.next()).toMatchSnapshot()
     expect(subj.next()).toMatchSnapshot()

@@ -21,6 +21,12 @@ describe('Indexed', () => {
         expect(item).toMatchSnapshot()
       }
     })
+
+    test('#drop()', () => {
+      expect(producer.drop()).toBeUndefined()
+      expect(producer.next()).toMatchSnapshot()
+      expect(producer).toMatchSnapshot()
+    })
   })
 
   describe('source string', () => {
@@ -40,6 +46,12 @@ describe('Indexed', () => {
       for (const item of producer) {
         expect(item).toMatchSnapshot()
       }
+    })
+
+    test('#drop()', () => {
+      expect(producer.drop()).toBeUndefined()
+      expect(producer.next()).toMatchSnapshot()
+      expect(producer).toMatchSnapshot()
     })
   })
 })

@@ -3,9 +3,11 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
+import type { Drop } from '../../types'
+
 @ToString
 @AsIterator
-export default class Numbers implements Iterator<number> {
+export default class Numbers implements Drop, Iterator<number> {
   /*:: @@iterator: () => Iterator<number> */
   done: boolean
   end: number
@@ -21,21 +23,27 @@ export default class Numbers implements Iterator<number> {
     this.size = Math.abs(start - end) + 1
 
     if (Number.isNaN(start) || Number.isNaN(end) || this.size === 0) {
-      this.done = true
-      this.end = 0
-      this.start = 0
-      this.step = 0
+      this.drop()
     } else if (start > end) {
       this.end = end
       this.start = Number.isFinite(start) ? start : Number.MAX_SAFE_INTEGER
       this.step = -1
+      this.state = this.start
     } else {
       this.end = Number.isFinite(end) ? end : Number.MAX_SAFE_INTEGER
       this.start = start
       this.step = 1
+      this.state = this.start
     }
+  }
 
-    this.state = this.start
+  drop(): void {
+    this.done = true
+    this.end = 0
+    this.size = 0
+    this.start = 0
+    this.state = 0
+    this.step = 0
   }
 
   next(): IteratorResult<number, void> {

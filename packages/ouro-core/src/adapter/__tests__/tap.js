@@ -8,15 +8,26 @@ let subj
 
 beforeEach(() => {
   const { producer } = ouro.of(1, 2, 3)
+
   subj = new Tap(producer, fn)
+  // $FlowIgnore
+  subj.producer.drop = jest.fn()
 })
 
-afterEach(fn.mockReset)
+afterEach(() => {
+  fn.mockReset()
+  subj.producer.drop.mockReset()
+})
 
 test('#@@iterator()', () => {
   for (const item of subj) {
     expect(item).toMatchSnapshot()
   }
+})
+
+test('#drop()', () => {
+  expect(subj.drop()).toBeUndefined()
+  expect(subj.producer.drop).toHaveBeenCalled()
 })
 
 test('#next()', () => {

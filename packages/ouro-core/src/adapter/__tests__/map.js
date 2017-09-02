@@ -7,13 +7,25 @@ let subj
 
 beforeEach(() => {
   const { producer } = ouro.of(1, 2, 3)
+
   subj = new Map(producer, value => value * 2)
+  // $FlowIgnore
+  subj.producer.drop = jest.fn()
+})
+
+afterEach(() => {
+  subj.producer.drop.mockReset()
 })
 
 test('#@@iterator()', () => {
   for (const item of subj) {
     expect(item).toMatchSnapshot()
   }
+})
+
+test('#drop()', () => {
+  expect(subj.drop()).toBeUndefined()
+  expect(subj.producer.drop).toHaveBeenCalled()
 })
 
 test('#next()', () => {
