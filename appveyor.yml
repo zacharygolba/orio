@@ -10,11 +10,12 @@ environment:
   nodejs_version: 8
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
-  - ps: yarn global add yarn
-  - ps: yarn global add lerna
-  - ps: yarn
+  - choco install yarn
+  - refreshenv
+  - yarn global add lerna
+  - yarn
   - yarn build
 test_script:
-  - ps: yarn lint
-  - ps: yarn flow
+  - yarn lint
+  - yarn flow
   - yarn test -- --coverage
