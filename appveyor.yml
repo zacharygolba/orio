@@ -13,7 +13,7 @@ install:
   - ps: choco upgrade yarn
   - ps: yarn global add lerna
   - ps: yarn
-  - ps: yarn build
+  - yarn build
 test_script:
   - ps: yarn lint
   - ps: yarn flow
