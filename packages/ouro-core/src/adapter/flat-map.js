@@ -5,6 +5,24 @@ import { AsIterator, ToString } from 'ouro-traits'
 
 import { createProducer } from '../producer'
 
+function exec<T, U>(adapter: FlatMapAdapter<T, U>): IteratorResult<U, void> {
+  let next = adapter.child ? adapter.child.next() : result.done()
+
+  if (!next.done) {
+    return next
+  }
+
+  next = adapter.parent.next()
+
+  if (next.done) {
+    return next
+  }
+
+  // eslint-disable-next-line no-param-reassign
+  adapter.child = createProducer(adapter.fn(next.value))
+  return exec(adapter)
+}
+
 @ToString
 @AsIterator
 export default class FlatMapAdapter<T, U> implements Iterator<U> {
@@ -19,19 +37,6 @@ export default class FlatMapAdapter<T, U> implements Iterator<U> {
   }
 
   next(): IteratorResult<U, void> {
-    let next = this.child ? this.child.next() : result.done()
-
-    if (next.done) {
-      next = this.parent.next()
-
-      if (next.done) {
-        return next
-      }
-
-      this.child = createProducer(this.fn(next.value))
-      return this.next()
-    }
-
-    return next
+    return exec(this)
   }
 }

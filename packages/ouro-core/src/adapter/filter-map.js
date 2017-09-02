@@ -3,6 +3,22 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
+function exec<T, U>(adapter: FilterMapAdapter<T, U>): IteratorResult<U, void> {
+  const next = adapter.producer.next()
+
+  if (next.done) {
+    return next
+  }
+
+  const value = adapter.fn(next.value)
+
+  if (value != null) {
+    return result.next(value)
+  }
+
+  return exec(adapter)
+}
+
 @ToString
 @AsIterator
 export default class FilterMapAdapter<T, U> implements Iterator<U> {
@@ -16,18 +32,6 @@ export default class FilterMapAdapter<T, U> implements Iterator<U> {
   }
 
   next(): IteratorResult<U, void> {
-    const next = this.producer.next()
-
-    if (next.done) {
-      return next
-    }
-
-    const value = this.fn(next.value)
-
-    if (value == null) {
-      return this.next()
-    }
-
-    return result.next(value)
+    return exec(this)
   }
 }

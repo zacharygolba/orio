@@ -22,6 +22,16 @@ export interface FromIterator<T> {
   static from(source: Iterator<T>): FromIterator<T>,
 }
 
+function reduce<T, U>(fn: (U, T) => U, acc: U, producer: Iterator<T>): U {
+  const next = producer.next()
+
+  if (next.done) {
+    return acc
+  }
+
+  return reduce(fn, fn(acc, next.value), producer)
+}
+
 @ToString
 @AsIterator
 export default class Ouro<T> implements Iterator<T> {
@@ -140,13 +150,7 @@ export default class Ouro<T> implements Iterator<T> {
   }
 
   reduce<U>(fn: (U, T) => U, acc: U): U {
-    const next = this.next()
-
-    if (next.done) {
-      return acc
-    }
-
-    return this.reduce(fn, fn(acc, next.value))
+    return reduce(fn, acc, this.producer)
   }
 
   skip(amount: number): Ouro<T> {
