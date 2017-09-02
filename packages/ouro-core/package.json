@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "devDependencies": {
+  "dependencies": {
     "ouro-traits": "^0.0.1"
   }
 }
