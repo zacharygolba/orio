@@ -11,6 +11,7 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
   - ps: yarn
+  - ps: yarn build
 test_script:
   - ps: yarn lint
   - ps: yarn flow
