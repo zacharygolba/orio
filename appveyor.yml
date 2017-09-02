@@ -10,6 +10,7 @@ environment:
   nodejs_version: 8
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
+  - ps: yarn global add lerna
   - ps: yarn
   - ps: yarn build
 test_script:
