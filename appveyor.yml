@@ -22,3 +22,4 @@ test_script:
   - yarn lint
   - yarn flow
   - yarn test -- --coverage
+  - yarn codecov
