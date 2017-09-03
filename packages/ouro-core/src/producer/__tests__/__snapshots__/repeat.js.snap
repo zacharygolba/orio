@@ -17,6 +17,6 @@ Object {
 exports[`#drop() 2`] = `
 Repeat {
   "done": true,
-  "value": undefined,
+  "value": "test",
 }
 `;
