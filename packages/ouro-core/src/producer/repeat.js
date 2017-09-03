@@ -19,8 +19,6 @@ export default class Repeat<T> implements Drop, Iterator<T> {
 
   drop(): void {
     this.done = true
-    // $FlowIgnore
-    this.value = undefined
   }
 
   next(): IteratorResult<T, void> {
