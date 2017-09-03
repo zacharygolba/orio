@@ -2,14 +2,6 @@
 
 import * as ouro from '../'
 
-test('#@@iterator()', () => {
-  const source = [1, 2, 3]
-
-  for (const value of ouro.from(source)) {
-    expect(source.includes(value)).toBe(true)
-  }
-})
-
 test('#collect()', () => {
   expect(ouro.from('test').collect()).toMatchSnapshot()
   expect(ouro.from('test').collect(Set)).toMatchSnapshot()

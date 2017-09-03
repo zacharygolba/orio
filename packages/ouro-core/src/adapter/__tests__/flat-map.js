@@ -22,12 +22,6 @@ afterEach(() => {
   subj.parent.drop.mockReset()
 })
 
-test('#@@iterator()', () => {
-  for (const item of subj) {
-    expect(item).toMatchSnapshot()
-  }
-})
-
 test('#drop()', () => {
   expect(subj.drop()).toBeUndefined()
   expect(subj.parent.drop).toHaveBeenCalled()

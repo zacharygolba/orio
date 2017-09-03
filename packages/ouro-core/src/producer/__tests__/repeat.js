@@ -13,19 +13,6 @@ test('#constructor()', () => {
   expect(producer).toMatchSnapshot()
 })
 
-test('#@@iterator()', () => {
-  let i = 0
-
-  for (const item of producer) {
-    if (i > 3) {
-      break
-    }
-
-    expect(item).toBe(ITEM)
-    i += 1
-  }
-})
-
 test('#drop()', () => {
   expect(producer.drop()).toBeUndefined()
   expect(producer.next()).toMatchSnapshot()

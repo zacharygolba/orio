@@ -19,12 +19,6 @@ describe('Numbers', () => {
       expect(new Numbers('dog', 'cat')).toMatchSnapshot()
     })
 
-    test('#@@iterator()', () => {
-      for (const item of producer) {
-        expect(item).toMatchSnapshot()
-      }
-    })
-
     test('#drop()', () => {
       expect(producer.drop()).toBeUndefined()
       expect(producer.next()).toMatchSnapshot()
@@ -47,12 +41,6 @@ describe('Numbers', () => {
     test('#constructor()', () => {
       expect(new Numbers(3, 1)).toMatchSnapshot()
       expect(new Numbers(Infinity, 1)).toMatchSnapshot()
-    })
-
-    test('#@@iterator()', () => {
-      for (const item of producer) {
-        expect(item).toMatchSnapshot()
-      }
     })
 
     test('#drop()', () => {
@@ -78,12 +66,6 @@ describe('Chars', () => {
       producer = new Chars('a', 'c')
     })
 
-    test('#@@iterator()', () => {
-      for (const item of producer) {
-        expect(item).toMatchSnapshot()
-      }
-    })
-
     test('#drop()', () => {
       expect(producer.drop()).toBeUndefined()
       expect(producer.next()).toMatchSnapshot()
@@ -106,12 +88,6 @@ describe('Chars', () => {
     test('#constructor()', () => {
       expect(producer).toMatchSnapshot()
       expect(new Chars()).toMatchSnapshot()
-    })
-
-    test('#@@iterator()', () => {
-      for (const item of producer) {
-        expect(item).toMatchSnapshot()
-      }
     })
 
     test('#drop()', () => {

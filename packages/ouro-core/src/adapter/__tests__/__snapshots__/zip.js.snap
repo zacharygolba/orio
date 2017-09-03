@@ -1,26 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`#@@iterator() 1`] = `
-Array [
-  "test",
-  1,
-]
-`;
-
-exports[`#@@iterator() 2`] = `
-Array [
-  "test",
-  2,
-]
-`;
-
-exports[`#@@iterator() 3`] = `
-Array [
-  "test",
-  3,
-]
-`;
-
 exports[`#next() with a bound lhs and an unbound rhs 1`] = `
 Object {
   "done": false,

@@ -2,6 +2,6 @@
 
 exports[`#constructor() 1`] = `
 Unbound {
-  "source":  {},
+  "source": Object {},
 }
 `;
