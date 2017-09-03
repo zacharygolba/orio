@@ -22,7 +22,7 @@ import type { Drop, FromIterator } from './types'
 
 @ToString
 @AsIterator
-export default class Ouro<T> implements Drop, Iterator<T> {
+export default class Iter<T> implements Drop, Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   producer: Drop & Iterator<T>
 
@@ -30,9 +30,9 @@ export default class Ouro<T> implements Drop, Iterator<T> {
     this.producer = producer
   }
 
-  chain<U>(producer: Iterable<U> | U): Ouro<T | U> {
+  chain<U>(producer: Iterable<U> | U): Iter<T | U> {
     const adapter = new Chain(this.producer, producer)
-    return new Ouro(adapter)
+    return new Iter(adapter)
   }
 
   collect(Target?: Class<FromIterator<T>> = Array): FromIterator<T> {
@@ -58,23 +58,23 @@ export default class Ouro<T> implements Drop, Iterator<T> {
     this.producer.drop()
   }
 
-  enumerate(): Ouro<[number, T]> {
+  enumerate(): Iter<[number, T]> {
     const adapter = new Enumerate(this.producer)
-    return new Ouro(adapter)
+    return new Iter(adapter)
   }
 
   every(fn: T => boolean): boolean {
     return this.find(item => !fn(item)) === undefined
   }
 
-  filterMap<U>(fn: T => ?U): Ouro<U> {
+  filterMap<U>(fn: T => ?U): Iter<U> {
     const adapter = new FilterMap(this.producer, fn)
-    return new Ouro(adapter)
+    return new Iter(adapter)
   }
 
-  filter(fn: T => boolean): Ouro<T> {
+  filter(fn: T => boolean): Iter<T> {
     const adapter = new Filter(this.producer, fn)
-    return new Ouro(adapter)
+    return new Iter(adapter)
   }
 
   find(fn: T => boolean): ?T {
@@ -85,12 +85,12 @@ export default class Ouro<T> implements Drop, Iterator<T> {
     return this.take(1).reduce((_, next) => next)
   }
 
-  flatMap<U>(fn: T => Iterable<U> | U): Ouro<U> {
+  flatMap<U>(fn: T => Iterable<U> | U): Iter<U> {
     const adapter = new FlatMap(this.producer, fn)
-    return new Ouro(adapter)
+    return new Iter(adapter)
   }
 
-  flatten(): Ouro<*> {
+  flatten(): Iter<*> {
     return this.flatMap(identity)
   }
 
@@ -112,9 +112,9 @@ export default class Ouro<T> implements Drop, Iterator<T> {
     return this.reduce((_, next) => next)
   }
 
-  map<U>(fn: T => U): Ouro<U> {
+  map<U>(fn: T => U): Iter<U> {
     const adapter = new Map(this.producer, fn)
-    return new Ouro(adapter)
+    return new Iter(adapter)
   }
 
   next(): IteratorResult<T, void> {
@@ -151,14 +151,14 @@ export default class Ouro<T> implements Drop, Iterator<T> {
     return reduce(fn, acc, this)
   }
 
-  skip(amount: number): Ouro<T> {
+  skip(amount: number): Iter<T> {
     const adapter = new Skip(this.producer, amount)
-    return new Ouro(adapter)
+    return new Iter(adapter)
   }
 
-  skipWhile(fn: T => boolean): Ouro<T> {
+  skipWhile(fn: T => boolean): Iter<T> {
     const adapter = new SkipWhile(this.producer, fn)
-    return new Ouro(adapter)
+    return new Iter(adapter)
   }
 
   some(fn: T => boolean): boolean {
@@ -169,28 +169,28 @@ export default class Ouro<T> implements Drop, Iterator<T> {
     return this.reduce((acc, item) => acc + +item, 0)
   }
 
-  take(amount: number): Ouro<T> {
+  take(amount: number): Iter<T> {
     const adapter = new Take(this.producer, amount)
-    return new Ouro(adapter)
+    return new Iter(adapter)
   }
 
-  takeWhile(fn: T => boolean): Ouro<T> {
+  takeWhile(fn: T => boolean): Iter<T> {
     const adapter = new TakeWhile(this.producer, fn)
-    return new Ouro(adapter)
+    return new Iter(adapter)
   }
 
-  tap(fn: T => void): Ouro<T> {
+  tap(fn: T => void): Iter<T> {
     const adapter = new Tap(this.producer, fn)
-    return new Ouro(adapter)
+    return new Iter(adapter)
   }
 
-  unique(fn?: T => * = identity): Ouro<T> {
+  unique(fn?: T => * = identity): Iter<T> {
     const adapter = new Unique(this.producer, fn)
-    return new Ouro(adapter)
+    return new Iter(adapter)
   }
 
-  zip(producer?: Iterable<*> = this.producer): Ouro<[T, *]> {
+  zip(producer?: Iterable<*> = this.producer): Iter<[T, *]> {
     const adapter = new Zip(this.producer, producer)
-    return new Ouro(adapter)
+    return new Iter(adapter)
   }
 }
