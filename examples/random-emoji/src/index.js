@@ -1,13 +1,14 @@
-// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved
-const ouro = require('ouro-core')
+// @flow
 
-const EMOJI = require('./emoji')
+import * as ouro from 'ouro-core'
+
+import EMOJI from './emoji'
 
 function randomIndex() {
   return Math.round(Math.random() * (EMOJI.length - 1))
 }
 
-module.exports = function randomEmoji() {
+export default function randomEmoji(): string {
   const magicNumber = randomIndex()
 
   return ouro

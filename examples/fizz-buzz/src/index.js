@@ -1,7 +1,8 @@
-// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved
-const ouro = require('ouro-core')
+// @flow
 
-module.exports = function fizzBuzz() {
+import * as ouro from 'ouro-core'
+
+export default function fizzBuzz(): Array<string> {
   return ouro
     .range(1, 100)
     .map(n => {

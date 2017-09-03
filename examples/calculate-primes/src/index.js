@@ -1,5 +1,6 @@
-// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved
-const ouro = require('ouro-core')
+// @flow
+
+import * as ouro from 'ouro-core'
 
 function isComposite(n) {
   const abs = Math.abs(n)
@@ -11,7 +12,7 @@ function isComposite(n) {
   return ouro.range(abs - 1, 2).some(div => abs % div === 0)
 }
 
-module.exports = function primes(size) {
+export default function primes(size: number): Array<number> {
   return ouro
     .range()
     .filter(n => !isComposite(n))
