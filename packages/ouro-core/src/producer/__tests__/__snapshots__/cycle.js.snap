@@ -22,3 +22,59 @@ Cycle {
   "state": 0,
 }
 `;
+
+exports[`#next() 1`] = `
+Object {
+  "done": false,
+  "value": "t",
+}
+`;
+
+exports[`#next() 2`] = `
+Object {
+  "done": false,
+  "value": "e",
+}
+`;
+
+exports[`#next() 3`] = `
+Object {
+  "done": false,
+  "value": "s",
+}
+`;
+
+exports[`#next() 4`] = `
+Object {
+  "done": false,
+  "value": "t",
+}
+`;
+
+exports[`#next() 5`] = `
+Object {
+  "done": false,
+  "value": "t",
+}
+`;
+
+exports[`#next() 6`] = `
+Object {
+  "done": false,
+  "value": "e",
+}
+`;
+
+exports[`#next() 7`] = `
+Object {
+  "done": false,
+  "value": "s",
+}
+`;
+
+exports[`#next() 8`] = `
+Object {
+  "done": false,
+  "value": "t",
+}
+`;

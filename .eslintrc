@@ -36,11 +36,6 @@
     }
   },
   "rules": {
-    "no-restricted-syntax": [
-      "error",
-      "ForInStatement",
-      "WithStatement"
-    ],
     "prettier/prettier": ["error", {
       "parser": "babylon",
       "semi": false,

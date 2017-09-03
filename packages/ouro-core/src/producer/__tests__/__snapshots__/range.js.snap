@@ -1,11 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Chars <- #@@iterator() 1`] = `"c"`;
-
-exports[`Chars <- #@@iterator() 2`] = `"b"`;
-
-exports[`Chars <- #@@iterator() 3`] = `"a"`;
-
 exports[`Chars <- #constructor() 1`] = `
 Chars {
   "size": 3,
@@ -81,12 +75,6 @@ Object {
 }
 `;
 
-exports[`Chars -> #@@iterator() 1`] = `"a"`;
-
-exports[`Chars -> #@@iterator() 2`] = `"b"`;
-
-exports[`Chars -> #@@iterator() 3`] = `"c"`;
-
 exports[`Chars -> #drop() 1`] = `
 Object {
   "done": true,
@@ -135,12 +123,6 @@ Object {
   "value": undefined,
 }
 `;
-
-exports[`Numbers <- #@@iterator() 1`] = `3`;
-
-exports[`Numbers <- #@@iterator() 2`] = `2`;
-
-exports[`Numbers <- #@@iterator() 3`] = `1`;
 
 exports[`Numbers <- #constructor() 1`] = `
 Numbers {
@@ -207,12 +189,6 @@ Object {
   "value": undefined,
 }
 `;
-
-exports[`Numbers -> #@@iterator() 1`] = `1`;
-
-exports[`Numbers -> #@@iterator() 2`] = `2`;
-
-exports[`Numbers -> #@@iterator() 3`] = `3`;
 
 exports[`Numbers -> #constructor() 1`] = `
 Numbers {

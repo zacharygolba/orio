@@ -13,21 +13,22 @@ test('#constructor()', () => {
   expect(producer).toMatchSnapshot()
 })
 
-test('#@@iterator()', () => {
-  let i = 0
-
-  for (const item of producer) {
-    if (i > SOURCE.length * 3) {
-      break
-    }
-
-    expect(SOURCE).toContain(item)
-    i += 1
-  }
-})
-
 test('#drop()', () => {
   expect(producer.drop()).toBeUndefined()
   expect(producer.next()).toMatchSnapshot()
   expect(producer).toMatchSnapshot()
+})
+
+test('#next()', () => {
+  // First cycle...
+  expect(producer.next()).toMatchSnapshot()
+  expect(producer.next()).toMatchSnapshot()
+  expect(producer.next()).toMatchSnapshot()
+  expect(producer.next()).toMatchSnapshot()
+
+  // Second cycle...
+  expect(producer.next()).toMatchSnapshot()
+  expect(producer.next()).toMatchSnapshot()
+  expect(producer.next()).toMatchSnapshot()
+  expect(producer.next()).toMatchSnapshot()
 })

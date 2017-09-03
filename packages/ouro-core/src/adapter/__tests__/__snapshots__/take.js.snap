@@ -1,11 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`#@@iterator() 1`] = `"test"`;
-
-exports[`#@@iterator() 2`] = `"test"`;
-
-exports[`#@@iterator() 3`] = `"test"`;
-
 exports[`#next() 1`] = `
 Object {
   "done": false,

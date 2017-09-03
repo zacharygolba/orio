@@ -1,26 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`#@@iterator() 1`] = `
-Array [
-  0,
-  1,
-]
-`;
-
-exports[`#@@iterator() 2`] = `
-Array [
-  1,
-  2,
-]
-`;
-
-exports[`#@@iterator() 3`] = `
-Array [
-  2,
-  3,
-]
-`;
-
 exports[`#next() 1`] = `
 Object {
   "done": false,

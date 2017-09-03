@@ -16,12 +16,6 @@ describe('Indexed', () => {
       expect(producer).toMatchSnapshot()
     })
 
-    test('#@@iterator()', () => {
-      for (const item of producer) {
-        expect(item).toMatchSnapshot()
-      }
-    })
-
     test('#drop()', () => {
       expect(producer.drop()).toBeUndefined()
       expect(producer.next()).toMatchSnapshot()
@@ -40,12 +34,6 @@ describe('Indexed', () => {
 
     test('#constructor()', () => {
       expect(producer).toMatchSnapshot()
-    })
-
-    test('#@@iterator()', () => {
-      for (const item of producer) {
-        expect(item).toMatchSnapshot()
-      }
     })
 
     test('#drop()', () => {
