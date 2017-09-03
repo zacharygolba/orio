@@ -10,7 +10,7 @@ import readdir from './utils/readdir'
 
 const EXAMPLES = path.join(__dirname, '..', 'examples')
 const PACKAGES = path.join(__dirname, '..', 'packages')
-const TESTS = ['**', '__tests__', '**'].join(path.sep)
+const TESTS = '**/__tests__/**'
 
 const BUILDING = chalk.bgYellow.black(' Building ')
 const COMPLETE = chalk.bgGreen.black(' Complete ')
