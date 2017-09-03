@@ -27,10 +27,12 @@ async function build(targetPath) {
       .arg(src)
       .arg('-d', lib)
       .arg('--ignore', TESTS)
+      .shell()
       .exec(),
     command('flow-copy-source')
       .arg('-i', TESTS)
       .arg(src, lib)
+      .shell()
       .exec(),
   ])
 }
@@ -91,6 +93,7 @@ async function main() {
   await command('rollup')
     .arg('-c')
     .env('NODE_ENV', 'release')
+    .shell()
     .exec()
 }
 
