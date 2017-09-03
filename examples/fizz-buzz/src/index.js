@@ -3,6 +3,7 @@
 import * as ouro from 'ouro-core'
 
 export default function fizzBuzz(): Array<string> {
+  // $FlowFixMe
   return ouro
     .range(1, 100)
     .map(n => {

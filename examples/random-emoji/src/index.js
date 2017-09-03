@@ -10,10 +10,15 @@ function randomIndex() {
 
 export default function randomEmoji(): string {
   const magicNumber = randomIndex()
-
-  return ouro
+  const result = ouro
     .from(EMOJI)
     .cycle()
     .filter(() => magicNumber === randomIndex())
     .first()
+
+  if (result == null) {
+    throw new Error('unreachable')
+  }
+
+  return result
 }

@@ -13,6 +13,7 @@ function isComposite(n) {
 }
 
 export default function primes(size: number): Array<number> {
+  // $FlowFixMe
   return ouro
     .range()
     .filter(n => !isComposite(n))
