@@ -6,17 +6,23 @@ import * as path from 'path'
 import chalk from 'chalk'
 
 import command from './utils/command'
+import onError from './utils/on-error'
 import readdir from './utils/readdir'
 
 const EXAMPLES = path.join(__dirname, '..', 'examples')
 const PACKAGES = path.join(__dirname, '..', 'packages')
 const TESTS = '**/__tests__/**'
 
-const BUILDING = chalk.bgYellow.black(' Building ')
-const COMPLETE = chalk.bgGreen.black(' Complete ')
-const FAILED = chalk.bgRed.black('  Failed  ')
+const BUILDING = chalk.bgYellow.black(' BUILDING ')
+const COMPLETE = chalk.bgGreen.black(' COMPLETE ')
+const FAILED = chalk.bgRed.black('  FAILED  ')
 
-const { stdout, stderr } = process
+const { stdout } = process
+
+const formatPath = absolutePath => {
+  const dirname = path.dirname(path.relative(process.cwd(), absolutePath))
+  return chalk.dim(dirname + path.sep) + path.basename(absolutePath)
+}
 
 async function build(targetPath) {
   const lib = path.join(targetPath, 'lib')
@@ -43,9 +49,9 @@ async function buildEach(cwd) {
     (promise, target) =>
       promise.then(() => {
         const absolutePath = path.join(cwd, target)
-        const relativePath = path.relative(process.cwd(), absolutePath)
+        const displayPath = formatPath(absolutePath)
 
-        stdout.write(`${BUILDING} ${relativePath}`)
+        stdout.write(`${BUILDING} ${displayPath}`)
 
         return build(absolutePath)
           .then(() => {
@@ -59,7 +65,7 @@ async function buildEach(cwd) {
               stdout.write(EOL)
             }
 
-            stdout.write(`${COMPLETE} ${relativePath}`)
+            stdout.write(`${COMPLETE} ${displayPath}`)
             stdout.write(EOL)
           })
           .catch(e => {
@@ -73,7 +79,7 @@ async function buildEach(cwd) {
               stdout.write(EOL)
             }
 
-            stdout.write(`${FAILED} ${relativePath}`)
+            stdout.write(`${FAILED} ${displayPath}`)
             stdout.write(EOL)
             stdout.write(EOL)
 
@@ -97,9 +103,4 @@ async function main() {
     .exec()
 }
 
-main().catch(e => {
-  stderr.write(e.stack || e.message)
-  stderr.write(EOL)
-  stderr.write(EOL)
-  process.exit(1)
-})
+main().catch(onError)

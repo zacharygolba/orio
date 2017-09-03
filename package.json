@@ -58,6 +58,7 @@
     "format": "eslint . --fix",
     "lint": "eslint .",
     "precommit": "lint-staged",
+    "prepublishOnly": "node -r babel-core/register scripts/prepublish.js",
     "test": "jest"
   },
   "workspaces": [
