@@ -1,3 +1,5 @@
+// @flow
+
 import * as path from 'path'
 
 import json from 'rollup-plugin-json'
@@ -5,16 +7,30 @@ import gzip from 'rollup-plugin-gzip'
 import babel from 'rollup-plugin-babel'
 import minify from 'rollup-plugin-babel-minify'
 import resolve from 'rollup-plugin-node-resolve'
+import license from 'rollup-plugin-license'
+import { stripIndents } from 'common-tags'
+
+import { version } from './lerna.json'
 
 const PACKAGES = path.join(__dirname, 'packages')
 
 const configFor = (name, provides = name, minified = false) => {
-  const plugins = [json(), babel(), resolve()]
   let ext = 'js'
+  const plugins = [
+    json(),
+    babel(),
+    resolve(),
+    license({
+      banner: stripIndents`
+        ${name} v${version} | (c) ${new Date().getFullYear()} Zachary Golba
+        Released under the MIT License.
+      `,
+    }),
+  ]
 
   if (minified) {
     ext = 'min.js'
-    plugins.push(minify(), gzip())
+    plugins.unshift(minify(), gzip())
   }
 
   return {
