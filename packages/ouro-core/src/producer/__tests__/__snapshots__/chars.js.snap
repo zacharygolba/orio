@@ -1,13 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`#constructor() 1`] = `
-Indexed {
-  "index": 0,
-  "source": Array [
-    1,
-    2,
-    3,
-  ],
+Chars {
+  "cursor": 0,
+  "source": "test",
 }
 `;
 
@@ -19,34 +15,41 @@ Object {
 `;
 
 exports[`#drop() 2`] = `
-Indexed {
-  "index": 0,
-  "source": Array [],
+Chars {
+  "cursor": 0,
+  "source": "",
 }
 `;
 
 exports[`#next() 1`] = `
 Object {
   "done": false,
-  "value": 1,
+  "value": "t",
 }
 `;
 
 exports[`#next() 2`] = `
 Object {
   "done": false,
-  "value": 2,
+  "value": "e",
 }
 `;
 
 exports[`#next() 3`] = `
 Object {
   "done": false,
-  "value": 3,
+  "value": "s",
 }
 `;
 
 exports[`#next() 4`] = `
+Object {
+  "done": false,
+  "value": "t",
+}
+`;
+
+exports[`#next() 5`] = `
 Object {
   "done": true,
   "value": undefined,

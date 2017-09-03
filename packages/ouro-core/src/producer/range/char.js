@@ -5,20 +5,20 @@ import { AsIterator, ToString } from 'ouro-traits'
 
 import type { Drop } from '../../types'
 
-import Numbers from './numbers'
+import NumberRange from './number'
 
 export const MIN_CHAR: string = String.fromCodePoint(0)
 export const MAX_CHAR: string = String.fromCodePoint(0x10ffff)
 
 @ToString
 @AsIterator
-export default class Chars implements Drop, Iterator<string> {
+export default class CharRange implements Drop, Iterator<string> {
   /*:: @@iterator: () => Iterator<string> */
-  source: Numbers
+  source: NumberRange
   size: number
 
   constructor(start?: string = MIN_CHAR, end?: string = MAX_CHAR) {
-    this.source = new Numbers(start.codePointAt(0), end.codePointAt(0))
+    this.source = new NumberRange(start.codePointAt(0), end.codePointAt(0))
     this.size = this.source.size
   }
 

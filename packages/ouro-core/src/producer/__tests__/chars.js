@@ -1,12 +1,12 @@
 // @flow
 
-import Cycle from '../cycle'
+import Chars from '../chars'
 
-const SOURCE = [1, 2, 3]
+const SOURCE = 'test'
 let producer
 
 beforeEach(() => {
-  producer = new Cycle(SOURCE)
+  producer = new Chars(SOURCE)
 })
 
 test('#constructor()', () => {
@@ -20,12 +20,8 @@ test('#drop()', () => {
 })
 
 test('#next()', () => {
-  // First cycle...
   expect(producer.next()).toMatchSnapshot()
   expect(producer.next()).toMatchSnapshot()
-  expect(producer.next()).toMatchSnapshot()
-
-  // Second cycle...
   expect(producer.next()).toMatchSnapshot()
   expect(producer.next()).toMatchSnapshot()
   expect(producer.next()).toMatchSnapshot()

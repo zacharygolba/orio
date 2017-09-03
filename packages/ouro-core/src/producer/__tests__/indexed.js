@@ -2,44 +2,26 @@
 
 import Indexed from '../indexed'
 
-describe('Indexed', () => {
-  describe('source array', () => {
-    let source
-    let producer
+const SOURCE = [1, 2, 3]
+let producer
 
-    beforeEach(() => {
-      source = [1, 2, 3]
-      producer = new Indexed(source)
-    })
+beforeEach(() => {
+  producer = new Indexed(SOURCE)
+})
 
-    test('#constructor()', () => {
-      expect(producer).toMatchSnapshot()
-    })
+test('#constructor()', () => {
+  expect(producer).toMatchSnapshot()
+})
 
-    test('#drop()', () => {
-      expect(producer.drop()).toBeUndefined()
-      expect(producer.next()).toMatchSnapshot()
-      expect(producer).toMatchSnapshot()
-    })
-  })
+test('#drop()', () => {
+  expect(producer.drop()).toBeUndefined()
+  expect(producer.next()).toMatchSnapshot()
+  expect(producer).toMatchSnapshot()
+})
 
-  describe('source string', () => {
-    let source
-    let producer
-
-    beforeEach(() => {
-      source = 'test'
-      producer = new Indexed(source)
-    })
-
-    test('#constructor()', () => {
-      expect(producer).toMatchSnapshot()
-    })
-
-    test('#drop()', () => {
-      expect(producer.drop()).toBeUndefined()
-      expect(producer.next()).toMatchSnapshot()
-      expect(producer).toMatchSnapshot()
-    })
-  })
+test('#next()', () => {
+  expect(producer.next()).toMatchSnapshot()
+  expect(producer.next()).toMatchSnapshot()
+  expect(producer.next()).toMatchSnapshot()
+  expect(producer.next()).toMatchSnapshot()
 })

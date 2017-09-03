@@ -1,4 +1,4 @@
 // @flow
 
-export { default as Chars } from './chars'
-export { default as Numbers } from './numbers'
+export { default as CharRange } from './char'
+export { default as NumberRange } from './number'

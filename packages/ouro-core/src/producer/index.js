@@ -2,16 +2,21 @@
 
 import type { Drop } from '../types'
 
+import Chars from './chars'
 import Indexed from './indexed'
 import Unbound from './unbound'
 
 export * from './range'
+export { default as Chars } from './chars'
 export { default as Cycle } from './cycle'
 export { default as Indexed } from './indexed'
 export { default as Repeat } from './repeat'
 export { default as Unbound } from './unbound'
 
-export function createProducer<T>(source: any): Drop & Iterator<T> {
+interface Producer<T> extends Drop, Iterator<T> {}
+type Source<T> = Array<T> | (Iterable<T> & { [key: string]: mixed }) | T
+
+export function createProducer<I>(source: Source<I>): Producer<I> {
   if (source == null) {
     return new Indexed([])
   }
@@ -21,12 +26,16 @@ export function createProducer<T>(source: any): Drop & Iterator<T> {
   }
 
   if (typeof source === 'string') {
-    return new Indexed(source)
+    return new Chars(source)
   }
 
-  if (typeof source[Symbol.iterator] === 'function') {
-    return new Unbound(source[Symbol.iterator]())
+  if (typeof source === 'object') {
+    const iterator = source[Symbol.iterator]
+
+    if (typeof iterator === 'function') {
+      return new Unbound(iterator.call(source))
+    }
   }
 
-  return new Indexed([source])
+  return new Indexed([(source: any)])
 }
