@@ -5,6 +5,7 @@
   "repository": "github:zacharygolba/iter.js",
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
+  "private": true,
   "dependencies": {
     "benchmark": "^2.1.4",
     "lazy.js": "^0.5.0",

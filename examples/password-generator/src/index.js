@@ -1,13 +1,17 @@
-// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved
-const ouro = require('ouro-core')
+// @flow
 
-const { LENGTH, PATTERN } = require('./consts')
+import * as ouro from 'ouro-core'
 
-module.exports = function generate(length = LENGTH, pattern = PATTERN) {
+export const LENGTH: number = 48
+export const PATTERN: RegExp = /[0-9A-Za-z]/
+
+export default function generate(
+  length?: number = LENGTH,
+  pattern?: RegExp = PATTERN,
+): string {
   return (
     ouro
-      .of()
-      .chain(ouro.chars('0', '9'))
+      .chars('0', '9')
       .chain(ouro.chars('A', 'Z'))
       .chain(ouro.chars('a', 'z'))
       .cycle()

@@ -2,7 +2,7 @@
   "name": "ouro-result",
   "version": "0.0.1",
   "description": "Factory functions for creating iterator result objects",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "module": "dist/index.es.js",
   "repository": "github:zacahrygolba/ouro",
   "author": "Zachary Golba <zachary.golba@postlight.com>",

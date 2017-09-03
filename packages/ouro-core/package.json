@@ -4,7 +4,7 @@
   "repository": "github:zacharygolba/ouro",
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "module": "dist/index.es.js",
   "dependencies": {
     "ouro-result": "^0.0.1",

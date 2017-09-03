@@ -36,6 +36,9 @@
     }
   },
   "rules": {
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": ["rollup.config.js", "scripts/**/*.js"]
+    }],
     "prettier/prettier": ["error", {
       "parser": "babylon",
       "semi": false,

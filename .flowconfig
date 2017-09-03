@@ -3,8 +3,6 @@
 .*/benches/.*
 .*/coverage/.*
 .*/dist/.*
-.*/examples/.*
-.*/node_modules/.*
 
 [include]
 
@@ -18,7 +16,6 @@ esproposal.decorators=ignore
 include_warnings=true
 
 module.use_strict=true
-module.name_mapper='^ouro-\(.*\)$' -> '<PROJECT_ROOT>/packages/ouro-\1/src/index.js'
 
 suppress_comment=\\(.\\|\n\\)*\\$ExpectError
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
