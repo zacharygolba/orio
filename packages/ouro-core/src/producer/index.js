@@ -8,7 +8,6 @@ import Unbound from './unbound'
 
 export * from './range'
 export { default as Chars } from './chars'
-export { default as Cycle } from './cycle'
 export { default as Indexed } from './indexed'
 export { default as Repeat } from './repeat'
 export { default as Unbound } from './unbound'

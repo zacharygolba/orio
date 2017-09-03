@@ -11,7 +11,8 @@ module.exports = function randomEmoji() {
   const magicNumber = randomIndex()
 
   return ouro
-    .cycle(EMOJI)
+    .from(EMOJI)
+    .cycle()
     .filter(() => magicNumber === randomIndex())
     .first()
 }

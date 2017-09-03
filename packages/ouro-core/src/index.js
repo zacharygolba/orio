@@ -6,7 +6,6 @@ import Iter from './iter'
 import {
   createProducer,
   CharRange,
-  Cycle,
   Indexed,
   NumberRange,
   Repeat,
@@ -16,11 +15,6 @@ export const VERSION: string = pkg.version
 
 export function chars(start?: string, end?: string): Iter<string> {
   const producer = new CharRange(start, end)
-  return new Iter(producer)
-}
-
-export function cycle<T>(source: Array<T>): Iter<T> {
-  const producer = new Cycle(source)
   return new Iter(producer)
 }
 
