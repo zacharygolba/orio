@@ -2,7 +2,7 @@
 
 import * as pkg from '../package.json'
 
-import Ouro from './ouro'
+import Iter from './iter'
 import {
   createProducer,
   Chars,
@@ -15,32 +15,32 @@ import type { IndexedCollection } from './types'
 
 export const VERSION: string = pkg.version
 
-export function chars(start?: string, end?: string): Ouro<string> {
+export function chars(start?: string, end?: string): Iter<string> {
   const producer = new Chars(start, end)
-  return new Ouro(producer)
+  return new Iter(producer)
 }
 
-export function cycle<T>(source: IndexedCollection<T>): Ouro<T> {
+export function cycle<T>(source: IndexedCollection<T>): Iter<T> {
   const producer = new Cycle(source)
-  return new Ouro(producer)
+  return new Iter(producer)
 }
 
-export function from<T>(source?: Iterable<T> | T = []): Ouro<T> {
+export function from<T>(source?: Iterable<T> | T = []): Iter<T> {
   const producer = createProducer(source)
-  return new Ouro(producer)
+  return new Iter(producer)
 }
 
-export function of<T>(...items: Array<T>): Ouro<T> {
+export function of<T>(...items: Array<T>): Iter<T> {
   const producer = new Indexed(items)
-  return new Ouro(producer)
+  return new Iter(producer)
 }
 
-export function repeat<T>(value: T): Ouro<T> {
+export function repeat<T>(value: T): Iter<T> {
   const producer = new Repeat(value)
-  return new Ouro(producer)
+  return new Iter(producer)
 }
 
-export function range(start?: number, end?: number): Ouro<number> {
+export function range(start?: number, end?: number): Iter<number> {
   const producer = new Numbers(start, end)
-  return new Ouro(producer)
+  return new Iter(producer)
 }

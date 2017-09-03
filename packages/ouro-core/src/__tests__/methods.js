@@ -134,5 +134,5 @@ test('#sum()', () => {
 })
 
 test('#toString()', () => {
-  expect(ouro.of().toString()).toBe('[object Ouro]')
+  expect(ouro.of().toString()).toBe('[object Iter]')
 })
