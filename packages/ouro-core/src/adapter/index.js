@@ -1,6 +1,7 @@
 // @flow
 
 export { default as Chain } from './chain'
+export { default as Cycle } from './cycle'
 export { default as Enumerate } from './enumerate'
 export { default as FilterMap } from './filter-map'
 export { default as Filter } from './filter'

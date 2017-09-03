@@ -2,6 +2,7 @@
 
 import {
   Chain,
+  Cycle,
   Enumerate,
   Filter,
   FilterMap,
@@ -31,6 +32,13 @@ test('#chain()', () => {
 
   subj.chain(source)
   expect(Chain).toHaveBeenLastCalledWith(subj.producer, source)
+})
+
+test('#cycle()', () => {
+  const subj = ouro.of(1, 2, 3)
+
+  subj.cycle()
+  expect(Cycle).toHaveBeenLastCalledWith(subj.producer)
 })
 
 test('#enumerate()', () => {

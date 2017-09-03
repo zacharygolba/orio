@@ -1,29 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`#constructor() 1`] = `
-Cycle {
-  "done": false,
-  "source": Array [
-    1,
-    2,
-    3,
-  ],
-  "state": 0,
-}
-`;
-
 exports[`#drop() 1`] = `
-Object {
+Cycle {
   "done": true,
-  "value": undefined,
+  "index": 0,
+  "items": Array [],
+  "producer": Indexed {
+    "drop": [Function],
+    "index": 0,
+    "source": Array [
+      1,
+      2,
+      3,
+    ],
+  },
+  "useProducer": true,
 }
 `;
 
 exports[`#drop() 2`] = `
-Cycle {
+Object {
   "done": true,
-  "source": Array [],
-  "state": 0,
+  "value": undefined,
 }
 `;
 
@@ -63,6 +61,27 @@ Object {
 `;
 
 exports[`#next() 6`] = `
+Object {
+  "done": false,
+  "value": 3,
+}
+`;
+
+exports[`#next() 7`] = `
+Object {
+  "done": false,
+  "value": 1,
+}
+`;
+
+exports[`#next() 8`] = `
+Object {
+  "done": false,
+  "value": 2,
+}
+`;
+
+exports[`#next() 9`] = `
 Object {
   "done": false,
   "value": 3,

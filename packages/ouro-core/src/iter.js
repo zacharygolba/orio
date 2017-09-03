@@ -4,6 +4,7 @@ import { AsIterator, ToString } from 'ouro-traits'
 
 import {
   Chain,
+  Cycle,
   Enumerate,
   Filter,
   FilterMap,
@@ -52,6 +53,11 @@ export default class Iter<T> implements Drop, Iterator<T> {
 
   count(): number {
     return this.reduce(acc => acc + 1, 0)
+  }
+
+  cycle(): Iter<T> {
+    const adapter = new Cycle(this.producer)
+    return new Iter(adapter)
   }
 
   drop(): void {
