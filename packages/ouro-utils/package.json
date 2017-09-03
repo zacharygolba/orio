@@ -1,0 +1,10 @@
+{
+  "name": "ouro-utils",
+  "version": "0.0.1",
+  "description": "Common utility functions to share between ouro packages",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "repository": "github:zacahrygolba/ouro",
+  "author": "Zachary Golba <zachary.golba@postlight.com>",
+  "license": "MIT"
+}

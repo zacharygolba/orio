@@ -1,5 +1,7 @@
 // @flow
 
+import { identity } from 'ouro-utils'
+
 import {
   Chain,
   Cycle,
@@ -16,11 +18,10 @@ import {
   Unique,
   Zip,
 } from '../adapter'
-import { identity } from '../utils'
 import * as ouro from '../'
 
+jest.mock('ouro-utils')
 jest.mock('../adapter')
-jest.mock('../utils')
 
 afterEach(() => {
   jest.resetAllMocks()
