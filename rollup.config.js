@@ -33,5 +33,6 @@ const configFor = (name, provides = name) => ({
 export default [
   configFor('ouro-result', 'result'),
   configFor('ouro-traits', 'traits'),
+  configFor('ouro-utils', 'utils'),
   configFor('ouro-core', 'ouro'),
 ]

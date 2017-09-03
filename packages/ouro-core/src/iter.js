@@ -1,6 +1,7 @@
 // @flow
 
 import { AsIterator, ToString } from 'ouro-traits'
+import { identity, reduce } from 'ouro-utils'
 
 import {
   Chain,
@@ -18,7 +19,6 @@ import {
   Unique,
   Zip,
 } from './adapter'
-import { identity, reduce } from './utils'
 import type { Drop, FromIterator } from './types'
 
 @ToString
