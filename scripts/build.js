@@ -16,7 +16,7 @@ const BUILDING = chalk.bgYellow.black(' Building ')
 const COMPLETE = chalk.bgGreen.black(' Complete ')
 const FAILED = chalk.bgRed.black('  Failed  ')
 
-/* eslint-disable no-console */
+const { stdout, stderr } = process
 
 async function build(targetPath) {
   const lib = path.join(targetPath, 'lib')
@@ -43,22 +43,38 @@ async function buildEach(cwd) {
         const absolutePath = path.join(cwd, target)
         const relativePath = path.relative(process.cwd(), absolutePath)
 
-        process.stdout.write(`${BUILDING} ${relativePath}`)
+        stdout.write(`${BUILDING} ${relativePath}`)
+
         return build(absolutePath)
           .then(() => {
-            // $FlowFixMe
-            process.stdout.clearLine()
-            // $FlowFixMe
-            process.stdout.cursorTo(0)
-            process.stdout.write(`${COMPLETE} ${relativePath}\n`)
+            if (typeof stdout.clearLine === 'function') {
+              stdout.clearLine()
+            }
+
+            if (typeof stdout.cursorTo === 'function') {
+              stdout.cursorTo(0)
+            } else {
+              stdout.write(EOL)
+            }
+
+            stdout.write(`${COMPLETE} ${relativePath}`)
+            stdout.write(EOL)
           })
           .catch(e => {
-            // $FlowFixMe
-            process.stdout.clearLine()
-            // $FlowFixMe
-            process.stdout.cursorTo(0)
-            process.stdout.write(`${FAILED} ${relativePath}`)
-            process.stdout.write(EOL)
+            if (typeof stdout.clearLine === 'function') {
+              stdout.clearLine()
+            }
+
+            if (typeof stdout.cursorTo === 'function') {
+              stdout.cursorTo(0)
+            } else {
+              stdout.write(EOL)
+            }
+
+            stdout.write(`${FAILED} ${relativePath}`)
+            stdout.write(EOL)
+            stdout.write(EOL)
+
             return Promise.reject(e)
           })
       }),
@@ -67,10 +83,10 @@ async function buildEach(cwd) {
 }
 
 async function main() {
-  process.stdout.write(EOL)
+  stdout.write(EOL)
   await buildEach(PACKAGES)
   await buildEach(EXAMPLES)
-  process.stdout.write(EOL)
+  stdout.write(EOL)
 
   await command('rollup')
     .arg('-c')
@@ -79,8 +95,8 @@ async function main() {
 }
 
 main().catch(e => {
-  console.error(e)
+  stderr.write(e.stack || e.message)
+  stderr.write(EOL)
+  stderr.write(EOL)
   process.exit(1)
 })
-
-/* eslint-enable no-console */
