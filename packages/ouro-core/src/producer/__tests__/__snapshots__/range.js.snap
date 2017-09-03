@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Chars <- #constructor() 1`] = `
-Chars {
+exports[`CharRange <- #constructor() 1`] = `
+CharRange {
   "size": 3,
   "source": Numbers {
     "end": 97,
@@ -13,8 +13,8 @@ Chars {
 }
 `;
 
-exports[`Chars <- #constructor() 2`] = `
-Chars {
+exports[`CharRange <- #constructor() 2`] = `
+CharRange {
   "size": 1114112,
   "source": Numbers {
     "end": 1114111,
@@ -26,15 +26,15 @@ Chars {
 }
 `;
 
-exports[`Chars <- #drop() 1`] = `
+exports[`CharRange <- #drop() 1`] = `
 Object {
   "done": true,
   "value": undefined,
 }
 `;
 
-exports[`Chars <- #drop() 2`] = `
-Chars {
+exports[`CharRange <- #drop() 2`] = `
+CharRange {
   "size": 3,
   "source": Numbers {
     "done": true,
@@ -47,43 +47,43 @@ Chars {
 }
 `;
 
-exports[`Chars <- #next() 1`] = `
+exports[`CharRange <- #next() 1`] = `
 Object {
   "done": false,
   "value": "c",
 }
 `;
 
-exports[`Chars <- #next() 2`] = `
+exports[`CharRange <- #next() 2`] = `
 Object {
   "done": false,
   "value": "b",
 }
 `;
 
-exports[`Chars <- #next() 3`] = `
+exports[`CharRange <- #next() 3`] = `
 Object {
   "done": false,
   "value": "a",
 }
 `;
 
-exports[`Chars <- #next() 4`] = `
+exports[`CharRange <- #next() 4`] = `
 Object {
   "done": true,
   "value": undefined,
 }
 `;
 
-exports[`Chars -> #drop() 1`] = `
+exports[`CharRange -> #drop() 1`] = `
 Object {
   "done": true,
   "value": undefined,
 }
 `;
 
-exports[`Chars -> #drop() 2`] = `
-Chars {
+exports[`CharRange -> #drop() 2`] = `
+CharRange {
   "size": 3,
   "source": Numbers {
     "done": true,
@@ -96,35 +96,35 @@ Chars {
 }
 `;
 
-exports[`Chars -> #next() 1`] = `
+exports[`CharRange -> #next() 1`] = `
 Object {
   "done": false,
   "value": "a",
 }
 `;
 
-exports[`Chars -> #next() 2`] = `
+exports[`CharRange -> #next() 2`] = `
 Object {
   "done": false,
   "value": "b",
 }
 `;
 
-exports[`Chars -> #next() 3`] = `
+exports[`CharRange -> #next() 3`] = `
 Object {
   "done": false,
   "value": "c",
 }
 `;
 
-exports[`Chars -> #next() 4`] = `
+exports[`CharRange -> #next() 4`] = `
 Object {
   "done": true,
   "value": undefined,
 }
 `;
 
-exports[`Numbers <- #constructor() 1`] = `
+exports[`NumberRange <- #constructor() 1`] = `
 Numbers {
   "end": 1,
   "size": 3,
@@ -134,7 +134,7 @@ Numbers {
 }
 `;
 
-exports[`Numbers <- #constructor() 2`] = `
+exports[`NumberRange <- #constructor() 2`] = `
 Numbers {
   "end": 1,
   "size": Infinity,
@@ -144,14 +144,14 @@ Numbers {
 }
 `;
 
-exports[`Numbers <- #drop() 1`] = `
+exports[`NumberRange <- #drop() 1`] = `
 Object {
   "done": true,
   "value": undefined,
 }
 `;
 
-exports[`Numbers <- #drop() 2`] = `
+exports[`NumberRange <- #drop() 2`] = `
 Numbers {
   "done": true,
   "end": 0,
@@ -162,35 +162,35 @@ Numbers {
 }
 `;
 
-exports[`Numbers <- #next() 1`] = `
+exports[`NumberRange <- #next() 1`] = `
 Object {
   "done": false,
   "value": 3,
 }
 `;
 
-exports[`Numbers <- #next() 2`] = `
+exports[`NumberRange <- #next() 2`] = `
 Object {
   "done": false,
   "value": 2,
 }
 `;
 
-exports[`Numbers <- #next() 3`] = `
+exports[`NumberRange <- #next() 3`] = `
 Object {
   "done": false,
   "value": 1,
 }
 `;
 
-exports[`Numbers <- #next() 4`] = `
+exports[`NumberRange <- #next() 4`] = `
 Object {
   "done": true,
   "value": undefined,
 }
 `;
 
-exports[`Numbers -> #constructor() 1`] = `
+exports[`NumberRange -> #constructor() 1`] = `
 Numbers {
   "end": 9007199254740991,
   "size": Infinity,
@@ -200,7 +200,7 @@ Numbers {
 }
 `;
 
-exports[`Numbers -> #constructor() 2`] = `
+exports[`NumberRange -> #constructor() 2`] = `
 Numbers {
   "end": 9007199254740991,
   "size": Infinity,
@@ -210,7 +210,7 @@ Numbers {
 }
 `;
 
-exports[`Numbers -> #constructor() 3`] = `
+exports[`NumberRange -> #constructor() 3`] = `
 Numbers {
   "end": 3,
   "size": 3,
@@ -220,7 +220,7 @@ Numbers {
 }
 `;
 
-exports[`Numbers -> #constructor() 4`] = `
+exports[`NumberRange -> #constructor() 4`] = `
 Numbers {
   "end": 9007199254740991,
   "size": Infinity,
@@ -230,7 +230,7 @@ Numbers {
 }
 `;
 
-exports[`Numbers -> #constructor() 5`] = `
+exports[`NumberRange -> #constructor() 5`] = `
 Numbers {
   "done": true,
   "end": 0,
@@ -241,14 +241,14 @@ Numbers {
 }
 `;
 
-exports[`Numbers -> #drop() 1`] = `
+exports[`NumberRange -> #drop() 1`] = `
 Object {
   "done": true,
   "value": undefined,
 }
 `;
 
-exports[`Numbers -> #drop() 2`] = `
+exports[`NumberRange -> #drop() 2`] = `
 Numbers {
   "done": true,
   "end": 0,
@@ -259,28 +259,28 @@ Numbers {
 }
 `;
 
-exports[`Numbers -> #next() 1`] = `
+exports[`NumberRange -> #next() 1`] = `
 Object {
   "done": false,
   "value": 1,
 }
 `;
 
-exports[`Numbers -> #next() 2`] = `
+exports[`NumberRange -> #next() 2`] = `
 Object {
   "done": false,
   "value": 2,
 }
 `;
 
-exports[`Numbers -> #next() 3`] = `
+exports[`NumberRange -> #next() 3`] = `
 Object {
   "done": false,
   "value": 3,
 }
 `;
 
-exports[`Numbers -> #next() 4`] = `
+exports[`NumberRange -> #next() 4`] = `
 Object {
   "done": true,
   "value": undefined,

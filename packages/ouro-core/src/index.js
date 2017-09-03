@@ -5,22 +5,21 @@ import * as pkg from '../package.json'
 import Iter from './iter'
 import {
   createProducer,
-  Chars,
+  CharRange,
   Cycle,
   Indexed,
-  Numbers,
+  NumberRange,
   Repeat,
 } from './producer'
-import type { IndexedCollection } from './types'
 
 export const VERSION: string = pkg.version
 
 export function chars(start?: string, end?: string): Iter<string> {
-  const producer = new Chars(start, end)
+  const producer = new CharRange(start, end)
   return new Iter(producer)
 }
 
-export function cycle<T>(source: IndexedCollection<T>): Iter<T> {
+export function cycle<T>(source: Array<T>): Iter<T> {
   const producer = new Cycle(source)
   return new Iter(producer)
 }
@@ -41,6 +40,6 @@ export function repeat<T>(value: T): Iter<T> {
 }
 
 export function range(start?: number, end?: number): Iter<number> {
-  const producer = new Numbers(start, end)
+  const producer = new NumberRange(start, end)
   return new Iter(producer)
 }

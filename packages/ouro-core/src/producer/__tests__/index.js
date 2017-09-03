@@ -1,7 +1,7 @@
 // @flow
 
 import Iter from '../../iter'
-import { createProducer, Indexed, Unbound } from '../'
+import { createProducer, Chars, Indexed, Unbound } from '../'
 
 describe('#createProducer()', () => {
   test('Array<T> => Indexed<T>', () => {
@@ -9,9 +9,9 @@ describe('#createProducer()', () => {
     expect(producer).toBeInstanceOf(Indexed)
   })
 
-  test('string => Indexed<T>', () => {
+  test('string => Chars', () => {
     const producer = createProducer('test')
-    expect(producer).toBeInstanceOf(Indexed)
+    expect(producer).toBeInstanceOf(Chars)
   })
 
   test('Map<K, V> => MapIterator<[K, V]>', () => {

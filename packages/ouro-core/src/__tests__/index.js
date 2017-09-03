@@ -1,6 +1,6 @@
 // @flow
 
-import { Chars, Cycle, Numbers } from '../producer'
+import { CharRange, Cycle, NumberRange } from '../producer'
 import Iter from '../iter'
 import * as ouro from '../'
 
@@ -12,7 +12,7 @@ test('.chars()', () => {
   {
     const iter = ouro.chars('a', 'z')
 
-    expect(iter.producer).toBeInstanceOf(Chars)
+    expect(iter.producer).toBeInstanceOf(CharRange)
   }
 })
 
@@ -47,7 +47,7 @@ test('.range()', () => {
   {
     const iter = ouro.range(1, 2)
 
-    expect(iter.producer).toBeInstanceOf(Numbers)
+    expect(iter.producer).toBeInstanceOf(NumberRange)
   }
 })
 

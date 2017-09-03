@@ -3,17 +3,17 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
-import type { Drop, IndexedCollection } from '../types'
+import type { Drop } from '../types'
 
 @ToString
 @AsIterator
 export default class Cycle<T> implements Drop, Iterator<T> {
   /*:: @@iterator: () => Iterator<T> */
   done: boolean
-  source: IndexedCollection<T>
+  source: Array<T>
   state: number
 
-  constructor(source: IndexedCollection<T>) {
+  constructor(source: Array<T>) {
     this.done = false
     this.source = source
     this.state = 0

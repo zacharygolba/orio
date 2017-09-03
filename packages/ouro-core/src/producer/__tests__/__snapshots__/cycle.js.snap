@@ -3,7 +3,11 @@
 exports[`#constructor() 1`] = `
 Cycle {
   "done": false,
-  "source": "test",
+  "source": Array [
+    1,
+    2,
+    3,
+  ],
   "state": 0,
 }
 `;
@@ -26,55 +30,41 @@ Cycle {
 exports[`#next() 1`] = `
 Object {
   "done": false,
-  "value": "t",
+  "value": 1,
 }
 `;
 
 exports[`#next() 2`] = `
 Object {
   "done": false,
-  "value": "e",
+  "value": 2,
 }
 `;
 
 exports[`#next() 3`] = `
 Object {
   "done": false,
-  "value": "s",
+  "value": 3,
 }
 `;
 
 exports[`#next() 4`] = `
 Object {
   "done": false,
-  "value": "t",
+  "value": 1,
 }
 `;
 
 exports[`#next() 5`] = `
 Object {
   "done": false,
-  "value": "t",
+  "value": 2,
 }
 `;
 
 exports[`#next() 6`] = `
 Object {
   "done": false,
-  "value": "e",
-}
-`;
-
-exports[`#next() 7`] = `
-Object {
-  "done": false,
-  "value": "s",
-}
-`;
-
-exports[`#next() 8`] = `
-Object {
-  "done": false,
-  "value": "t",
+  "value": 3,
 }
 `;
