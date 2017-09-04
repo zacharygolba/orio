@@ -1,8 +1,9 @@
 // @flow
 
-type IterFn<T: Object> = $PropertyType<T, '@@iterator'>
+type Target = { [key: string]: mixed }
+type IterFn<T: Target> = $PropertyType<T, '@@iterator'>
 
-function extractIteratorFn<T: Object>(target: T): IterFn<T> {
+function extractIteratorFn<T: Target>(target: T): IterFn<T> {
   return target[Symbol.iterator]
 }
 
