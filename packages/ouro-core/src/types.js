@@ -10,4 +10,4 @@ export interface FromIterator<T> {
 }
 
 export interface Producer<T> extends Drop, Iterator<T> {}
-export type Source<T> = Array<T> | (Iterable<T> & Object) | ?T
+export type Source<T> = Array<T> | Iterable<T> | ?T
