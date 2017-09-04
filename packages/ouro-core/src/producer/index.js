@@ -1,6 +1,6 @@
 // @flow
 
-import { isIterableObject, intoIterator } from 'ouro-utils'
+import { intoIterator } from 'ouro-utils'
 
 import type { Producer, Source } from '../types'
 
@@ -27,8 +27,12 @@ export function createProducer<+T>(source: Source<T>): Producer<T> {
     return new Indexed(source)
   }
 
-  if (isIterableObject(source)) {
-    return new Unbound(intoIterator(source))
+  {
+    const iterator = intoIterator(source)
+
+    if (iterator != null) {
+      return new Unbound(iterator)
+    }
   }
 
   if (typeof source === 'string') {

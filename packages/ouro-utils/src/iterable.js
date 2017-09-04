@@ -1,10 +1,16 @@
 // @flow
 
 type Target = { [key: string]: mixed }
-type IterFn<T: Target> = $PropertyType<T, '@@iterator'>
+type IterFn<T> = () => Iterator<T>
 
-function extractIteratorFn<T: Target>(target: T): IterFn<T> {
-  return target[Symbol.iterator]
+function extractIteratorFn<T: Target>(target: T): ?IterFn<*> {
+  const value = target[Symbol.iterator]
+
+  if (typeof value === 'function') {
+    return value
+  }
+
+  return undefined
 }
 
 export function isIterableObject(target: mixed): boolean %checks {
@@ -15,6 +21,14 @@ export function isIterableObject(target: mixed): boolean %checks {
   )
 }
 
-export function intoIterator<T: Object>(target: T): Iterator<*> {
-  return extractIteratorFn(target).call(target)
+export function intoIterator(target: mixed): ?Iterator<*> {
+  if (target != null && typeof target === 'object') {
+    const iterFn = extractIteratorFn(target)
+
+    if (typeof iterFn === 'function') {
+      return iterFn.call(target)
+    }
+  }
+
+  return undefined
 }
