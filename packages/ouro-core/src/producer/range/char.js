@@ -3,7 +3,7 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
-import type { Drop } from '../../types'
+import type { Producer } from '../../types'
 
 import NumberRange from './number'
 
@@ -12,7 +12,7 @@ export const MAX_CHAR: string = String.fromCodePoint(0x10ffff)
 
 @ToString
 @AsIterator
-export default class CharRange implements Drop, Iterator<string> {
+export default class CharRange implements Producer<string> {
   /*:: @@iterator: () => Iterator<string> */
   source: NumberRange
   size: number

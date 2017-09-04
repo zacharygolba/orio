@@ -10,6 +10,7 @@ import {
   NumberRange,
   Repeat,
 } from './producer'
+import type { Source } from './types'
 
 export const VERSION: string = pkg.version
 
@@ -18,8 +19,8 @@ export function chars(start?: string, end?: string): Iter<string> {
   return new Iter(producer)
 }
 
-export function from<T>(source?: Iterable<T> | T = []): Iter<T> {
-  const producer = createProducer(source)
+export function from<T>(source?: Source<T>): Iter<T> {
+  const producer = createProducer(source == null ? [] : source)
   return new Iter(producer)
 }
 

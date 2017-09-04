@@ -3,11 +3,11 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
-import type { Drop } from '../types'
+import type { Producer } from '../types'
 
 @ToString
 @AsIterator
-export default class Repeat<T> implements Drop, Iterator<T> {
+export default class Repeat<T> implements Producer<T> {
   /*:: @@iterator: () => Iterator<T> */
   done: boolean
   value: T

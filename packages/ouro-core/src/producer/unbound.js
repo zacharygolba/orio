@@ -1,15 +1,15 @@
 // @flow
 
 import { AsIterator, ToString } from 'ouro-traits'
-import type { Drop } from '../types'
+import type { Producer } from '../types'
 
 @ToString
 @AsIterator
-export default class Unbound<T> implements Drop, Iterator<T> {
+export default class Unbound<T> implements Producer<T> {
   /*:: @@iterator: () => Iterator<T> */
-  source: (Drop & Iterator<T>) | Iterator<T>
+  source: Producer<T> | Iterator<T>
 
-  constructor(source: Iterator<T>) {
+  constructor(source: Producer<T> | Iterator<T>) {
     this.source = source
   }
 

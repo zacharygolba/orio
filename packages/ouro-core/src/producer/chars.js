@@ -3,11 +3,11 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
-import type { Drop } from '../types'
+import type { Producer } from '../types'
 
 @ToString
 @AsIterator
-export default class Chars implements Drop, Iterator<*> {
+export default class Chars implements Producer<*> {
   /*:: @@iterator: () => Iterator<string> */
   cursor: number
   source: string

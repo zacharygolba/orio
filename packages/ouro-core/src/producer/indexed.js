@@ -3,11 +3,11 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
-import type { Drop } from '../types'
+import type { Producer } from '../types'
 
 @ToString
 @AsIterator
-export default class Indexed<T> implements Drop, Iterator<T> {
+export default class Indexed<T> implements Producer<T> {
   /*:: @@iterator: () => Iterator<T> */
   index: number
   source: Array<T>

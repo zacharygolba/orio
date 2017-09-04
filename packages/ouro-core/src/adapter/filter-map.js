@@ -3,7 +3,7 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
-import type { Drop } from '../types'
+import type { Producer } from '../types'
 
 function exec<T, U>(adapter: FilterMap<T, U>): IteratorResult<U, void> {
   const next = adapter.producer.next()
@@ -23,12 +23,12 @@ function exec<T, U>(adapter: FilterMap<T, U>): IteratorResult<U, void> {
 
 @ToString
 @AsIterator
-export default class FilterMap<T, U> implements Drop, Iterator<U> {
+export default class FilterMap<T, U> implements Producer<U> {
   /*:: @@iterator: () => Iterator<U> */
   fn: T => ?U
-  producer: Drop & Iterator<T>
+  producer: Producer<T>
 
-  constructor(producer: Drop & Iterator<T>, fn: T => ?U) {
+  constructor(producer: Producer<T>, fn: T => ?U) {
     this.fn = fn
     this.producer = producer
   }

@@ -1,6 +1,6 @@
 // @flow
 
-import type { Drop } from '../types'
+import type { Producer, Source } from '../types'
 
 import Chars from './chars'
 import Indexed from './indexed'
@@ -11,9 +11,6 @@ export { default as Chars } from './chars'
 export { default as Indexed } from './indexed'
 export { default as Repeat } from './repeat'
 export { default as Unbound } from './unbound'
-
-interface Producer<T> extends Drop, Iterator<T> {}
-type Source<T> = Array<T> | (Iterable<T> & { [key: string]: mixed }) | T
 
 export function createProducer<I>(source: Source<I>): Producer<I> {
   if (source == null) {

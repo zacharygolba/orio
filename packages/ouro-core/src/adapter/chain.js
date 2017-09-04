@@ -4,16 +4,16 @@ import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
 import { createProducer } from '../producer'
-import type { Drop } from '../types'
+import type { Producer, Source } from '../types'
 
 @ToString
 @AsIterator
-export default class Chain<T, U> implements Drop, Iterator<T | U> {
+export default class Chain<T, U> implements Producer<T | U> {
   /*:: @@iterator: () => Iterator<T | U> */
-  producerA: Drop & Iterator<T>
-  producerB: Drop & Iterator<U>
+  producerA: Producer<T>
+  producerB: Producer<U>
 
-  constructor(producerA: Drop & Iterator<T>, producerB: Iterable<U> | U) {
+  constructor(producerA: Producer<T>, producerB: Source<U>) {
     this.producerA = producerA
     this.producerB = createProducer(producerB)
   }

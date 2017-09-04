@@ -19,20 +19,20 @@ import {
   Unique,
   Zip,
 } from './adapter'
-import type { Drop, FromIterator } from './types'
+import type { Producer, FromIterator, Source } from './types'
 
 @ToString
 @AsIterator
-export default class Iter<T> implements Drop, Iterator<T> {
+export default class Iter<T> implements Producer<T> {
   /*:: @@iterator: () => Iterator<T> */
-  producer: Drop & Iterator<T>
+  producer: Producer<T>
 
-  constructor(producer: Drop & Iterator<T>) {
+  constructor(producer: Producer<T>) {
     this.producer = producer
   }
 
-  chain<U>(producer: Iterable<U> | U): Iter<T | U> {
-    const adapter = new Chain(this.producer, producer)
+  chain<U>(source: Source<U>): Iter<T | U> {
+    const adapter = new Chain(this.producer, source)
     return new Iter(adapter)
   }
 
@@ -91,7 +91,7 @@ export default class Iter<T> implements Drop, Iterator<T> {
     return this.take(1).reduce((_, next) => next)
   }
 
-  flatMap<U>(fn: T => Iterable<U> | U): Iter<U> {
+  flatMap<U>(fn: T => Source<U>): Iter<U> {
     const adapter = new FlatMap(this.producer, fn)
     return new Iter(adapter)
   }
@@ -195,8 +195,8 @@ export default class Iter<T> implements Drop, Iterator<T> {
     return new Iter(adapter)
   }
 
-  zip(producer?: Iterable<*> = this.producer): Iter<[T, *]> {
-    const adapter = new Zip(this.producer, producer)
+  zip(source?: Source<*> = this.producer): Iter<[T, *]> {
+    const adapter = new Zip(this.producer, source)
     return new Iter(adapter)
   }
 }
