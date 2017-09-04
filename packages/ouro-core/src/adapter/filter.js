@@ -2,7 +2,7 @@
 
 import { AsIterator, ToString } from 'ouro-traits'
 
-import type { Drop } from '../types'
+import type { Producer } from '../types'
 
 function exec<T>(adapter: Filter<T>): IteratorResult<T, void> {
   const next = adapter.producer.next()
@@ -16,12 +16,12 @@ function exec<T>(adapter: Filter<T>): IteratorResult<T, void> {
 
 @ToString
 @AsIterator
-export default class Filter<T> implements Drop, Iterator<T> {
+export default class Filter<T> implements Producer<T> {
   /*:: @@iterator: () => Iterator<T> */
   fn: T => boolean
-  producer: Drop & Iterator<T>
+  producer: Producer<T>
 
-  constructor(producer: Drop & Iterator<T>, fn: T => boolean) {
+  constructor(producer: Producer<T>, fn: T => boolean) {
     this.fn = fn
     this.producer = producer
   }

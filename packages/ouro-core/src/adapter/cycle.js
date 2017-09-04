@@ -3,19 +3,19 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
-import type { Drop } from '../types'
+import type { Producer } from '../types'
 
 @ToString
 @AsIterator
-export default class Cycle<T> implements Drop, Iterator<T> {
+export default class Cycle<T> implements Producer<T> {
   /*:: @@iterator: () => Iterator<T> */
   done: boolean
   index: number
   items: Array<T>
-  producer: Drop & Iterator<T>
+  producer: Producer<T>
   useProducer: boolean
 
-  constructor(producer: Drop & Iterator<T>) {
+  constructor(producer: Producer<T>) {
     this.done = false
     this.index = 0
     this.items = []

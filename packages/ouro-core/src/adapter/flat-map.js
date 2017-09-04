@@ -3,7 +3,7 @@
 import { AsIterator, ToString } from 'ouro-traits'
 
 import { createProducer } from '../producer'
-import type { Drop } from '../types'
+import type { Producer, Source } from '../types'
 
 function exec<T, U>(adapter: FlatMap<T, U>): IteratorResult<U, void> {
   {
@@ -33,13 +33,13 @@ function exec<T, U>(adapter: FlatMap<T, U>): IteratorResult<U, void> {
 
 @ToString
 @AsIterator
-export default class FlatMap<T, U> implements Drop, Iterator<U> {
+export default class FlatMap<T, U> implements Producer<U> {
   /*:: @@iterator: () => Iterator<U> */
-  child: ?(Drop & Iterator<U>)
-  fn: T => Iterable<U> | U
-  parent: Drop & Iterator<T>
+  child: ?Producer<U>
+  fn: T => Source<U>
+  parent: Producer<T>
 
-  constructor(producer: Drop & Iterator<T>, fn: T => Iterable<U> | U) {
+  constructor(producer: Producer<T>, fn: T => Source<U>) {
     this.fn = fn
     this.parent = producer
   }

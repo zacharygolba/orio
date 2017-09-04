@@ -3,16 +3,16 @@
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
 
-import type { Drop } from '../types'
+import type { Producer } from '../types'
 
 @ToString
 @AsIterator
-export default class TakeWhile<T> implements Drop, Iterator<T> {
+export default class TakeWhile<T> implements Producer<T> {
   /*:: @@iterator: () => Iterator<T> */
   fn: T => boolean
-  producer: Drop & Iterator<T>
+  producer: Producer<T>
 
-  constructor(producer: Drop & Iterator<T>, fn: T => boolean) {
+  constructor(producer: Producer<T>, fn: T => boolean) {
     this.fn = fn
     this.producer = producer
   }
