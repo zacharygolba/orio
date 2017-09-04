@@ -77,7 +77,7 @@ test('#flatten()', () => {
   const subj = ouro.range()
 
   subj.flatten()
-  expect(FlatMap).toHaveBeenLastCalledWith(subj.producer, expect.any(Function))
+  expect(FlatMap).toHaveBeenLastCalledWith(subj.producer, identity)
 })
 
 test('#map()', () => {
