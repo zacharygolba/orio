@@ -1720,7 +1720,7 @@ eslint-plugin-import@^2.7.0:
     minimatch "^3.0.3"
     read-pkg-up "^2.0.0"
 
-eslint-plugin-jest@21.0.0:
+eslint-plugin-jest@^21.0.0:
   version "21.0.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.0.0.tgz#7ba4cab39b54dbafa1e3b2a73b42afccea325efe"
 
@@ -3167,7 +3167,7 @@ jest-validate@^21.0.0:
     leven "^2.1.0"
     pretty-format "^21.0.0"
 
-jest@21.0.0:
+jest@^21.0.0:
   version "21.0.0"
   resolved "https://registry.yarnpkg.com/jest/-/jest-21.0.0.tgz#6b1536b73ea1a4fa2f0904d26f32949c39cf4690"
   dependencies:
