@@ -2,10 +2,8 @@
 
 exports[`CharRange <- #constructor() 1`] = `
 CharRange {
-  "size": 3,
   "source": Numbers {
     "end": 97,
-    "size": 3,
     "start": 99,
     "state": 99,
     "step": -1,
@@ -15,10 +13,8 @@ CharRange {
 
 exports[`CharRange <- #constructor() 2`] = `
 CharRange {
-  "size": 1114112,
   "source": Numbers {
     "end": 1114111,
-    "size": 1114112,
     "start": 0,
     "state": 0,
     "step": 1,
@@ -35,11 +31,9 @@ Object {
 
 exports[`CharRange <- #drop() 2`] = `
 CharRange {
-  "size": 3,
   "source": Numbers {
     "done": true,
     "end": 0,
-    "size": 0,
     "start": 0,
     "state": 0,
     "step": 0,
@@ -84,11 +78,9 @@ Object {
 
 exports[`CharRange -> #drop() 2`] = `
 CharRange {
-  "size": 3,
   "source": Numbers {
     "done": true,
     "end": 0,
-    "size": 0,
     "start": 0,
     "state": 0,
     "step": 0,
@@ -127,7 +119,6 @@ Object {
 exports[`NumberRange <- #constructor() 1`] = `
 Numbers {
   "end": 1,
-  "size": 3,
   "start": 3,
   "state": 3,
   "step": -1,
@@ -137,7 +128,6 @@ Numbers {
 exports[`NumberRange <- #constructor() 2`] = `
 Numbers {
   "end": 1,
-  "size": Infinity,
   "start": 9007199254740991,
   "state": 9007199254740991,
   "step": -1,
@@ -155,7 +145,6 @@ exports[`NumberRange <- #drop() 2`] = `
 Numbers {
   "done": true,
   "end": 0,
-  "size": 0,
   "start": 0,
   "state": 0,
   "step": 0,
@@ -193,7 +182,6 @@ Object {
 exports[`NumberRange -> #constructor() 1`] = `
 Numbers {
   "end": 9007199254740991,
-  "size": Infinity,
   "start": 0,
   "state": 0,
   "step": 1,
@@ -203,7 +191,6 @@ Numbers {
 exports[`NumberRange -> #constructor() 2`] = `
 Numbers {
   "end": 9007199254740991,
-  "size": Infinity,
   "start": 1,
   "state": 1,
   "step": 1,
@@ -213,7 +200,6 @@ Numbers {
 exports[`NumberRange -> #constructor() 3`] = `
 Numbers {
   "end": 3,
-  "size": 3,
   "start": 1,
   "state": 1,
   "step": 1,
@@ -223,7 +209,6 @@ Numbers {
 exports[`NumberRange -> #constructor() 4`] = `
 Numbers {
   "end": 9007199254740991,
-  "size": Infinity,
   "start": 1,
   "state": 1,
   "step": 1,
@@ -234,7 +219,6 @@ exports[`NumberRange -> #constructor() 5`] = `
 Numbers {
   "done": true,
   "end": 0,
-  "size": 0,
   "start": 0,
   "state": 0,
   "step": 0,
@@ -252,7 +236,6 @@ exports[`NumberRange -> #drop() 2`] = `
 Numbers {
   "done": true,
   "end": 0,
-  "size": 0,
   "start": 0,
   "state": 0,
   "step": 0,

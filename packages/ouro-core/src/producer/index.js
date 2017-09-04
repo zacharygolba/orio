@@ -3,18 +3,22 @@
 import type { Producer, Source } from '../types'
 
 import Chars from './chars'
+import Empty from './empty'
 import Indexed from './indexed'
+import Once from './once'
 import Unbound from './unbound'
 
 export * from './range'
 export { default as Chars } from './chars'
+export { default as Empty } from './empty'
 export { default as Indexed } from './indexed'
+export { default as Once } from './once'
 export { default as Repeat } from './repeat'
 export { default as Unbound } from './unbound'
 
-export function createProducer<I>(source: Source<I>): Producer<I> {
+export function createProducer<+T>(source: Source<T>): Producer<T> {
   if (source == null) {
-    return new Indexed([])
+    return new Empty()
   }
 
   if (Array.isArray(source)) {
@@ -33,5 +37,5 @@ export function createProducer<I>(source: Source<I>): Producer<I> {
     }
   }
 
-  return new Indexed([(source: any)])
+  return new Once((source: any))
 }

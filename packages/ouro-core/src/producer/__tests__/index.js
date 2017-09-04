@@ -1,7 +1,7 @@
 // @flow
 
 import Iter from '../../iter'
-import { createProducer, Chars, Indexed, Unbound } from '../'
+import { createProducer, Chars, Empty, Indexed, Once, Unbound } from '../'
 
 describe('#createProducer()', () => {
   test('Array<T> => Indexed<T>', () => {
@@ -44,20 +44,20 @@ describe('#createProducer()', () => {
     expect(producer).toBeInstanceOf(Unbound)
   })
 
-  test('null | void => Indexed<T>', () => {
+  test('null | void => Empty', () => {
     const producer = createProducer()
 
-    expect(producer).toBeInstanceOf(Indexed)
+    expect(producer).toBeInstanceOf(Empty)
   })
 
   // prettier-ignore
   ;[1, true, Symbol('test'), {}].forEach(source => {
     const type = String(source)
 
-    test(`${type} => Indexed<${type}>`, () => {
+    test(`${type} => Once<${type}>`, () => {
       const producer = createProducer(source)
 
-      expect(producer).toBeInstanceOf(Indexed)
+      expect(producer).toBeInstanceOf(Once)
       expect(producer.next()).toEqual(
         expect.objectContaining({
           value: source,
