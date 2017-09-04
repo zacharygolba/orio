@@ -43,6 +43,11 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "shx": "^0.2.2"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "^ouro-(.+)$": "<rootDir>/packages/ouro-$1/src/index.js"
+    }
+  },
   "lint-staged": {
     "*.js": [
       "eslint --fix",
