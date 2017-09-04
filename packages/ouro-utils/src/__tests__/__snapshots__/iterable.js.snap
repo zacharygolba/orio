@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`.intoIterator() 1`] = `Object {}`;
+
+exports[`.intoIterator() 2`] = `Object {}`;

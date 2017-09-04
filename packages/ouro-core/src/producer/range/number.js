@@ -11,18 +11,15 @@ export default class Numbers implements Producer<number> {
   /*:: @@iterator: () => Iterator<number> */
   done: boolean
   end: number
-  size: number
   start: number
   state: number
   step: number
 
   constructor(s?: number = 0, e?: number = Infinity) {
-    const start = Number(s)
-    const end = Number(e)
+    const start = +s
+    const end = +e
 
-    this.size = Math.abs(start - end) + 1
-
-    if (Number.isNaN(start) || Number.isNaN(end) || this.size === 0) {
+    if (Number.isNaN(start) || Number.isNaN(end)) {
       this.drop()
     } else if (start > end) {
       this.end = end
@@ -40,7 +37,6 @@ export default class Numbers implements Producer<number> {
   drop(): void {
     this.done = true
     this.end = 0
-    this.size = 0
     this.start = 0
     this.state = 0
     this.step = 0

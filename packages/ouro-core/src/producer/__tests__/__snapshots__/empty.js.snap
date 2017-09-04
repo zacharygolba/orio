@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#constructor() 1`] = `Empty {}`;
+
+exports[`#drop() 1`] = `
+Empty {
+  "value": undefined,
+}
+`;
+
+exports[`#next() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#next() 2`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;

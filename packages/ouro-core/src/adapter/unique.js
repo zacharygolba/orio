@@ -4,7 +4,7 @@ import { AsIterator, ToString } from 'ouro-traits'
 
 import type { Producer } from '../types'
 
-function exec<T>(adapter: Unique<T>): IteratorResult<T, void> {
+function exec<T, U>(adapter: Unique<T, U>): IteratorResult<T, void> {
   const next = adapter.producer.next()
 
   if (next.done) {
@@ -23,13 +23,13 @@ function exec<T>(adapter: Unique<T>): IteratorResult<T, void> {
 
 @ToString
 @AsIterator
-export default class Unique<T> implements Producer<T> {
+export default class Unique<T, U> implements Producer<T> {
   /*:: @@iterator: () => Iterator<T> */
-  fn: T => *
-  history: Set<T>
+  fn: T => U | T
+  history: Set<U | T>
   producer: Producer<T>
 
-  constructor(producer: Producer<T>, fn: T => *) {
+  constructor(producer: Producer<T>, fn: T => U | T) {
     this.fn = fn
     this.history = new Set()
     this.producer = producer

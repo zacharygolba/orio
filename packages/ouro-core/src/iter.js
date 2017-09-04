@@ -190,7 +190,7 @@ export default class Iter<T> implements Producer<T> {
     return new Iter(adapter)
   }
 
-  unique(fn?: T => * = identity): Iter<T> {
+  unique<U>(fn?: T => U | T = identity): Iter<T> {
     const adapter = new Unique(this.producer, fn)
     return new Iter(adapter)
   }

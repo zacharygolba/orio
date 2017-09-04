@@ -10,9 +10,9 @@ import type { Producer } from '../types'
 export default class Indexed<T> implements Producer<T> {
   /*:: @@iterator: () => Iterator<T> */
   index: number
-  source: Array<T>
+  source: $ReadOnlyArray<T>
 
-  constructor(source: Array<T>) {
+  constructor(source: $ReadOnlyArray<T>) {
     this.index = 0
     this.source = source
   }
