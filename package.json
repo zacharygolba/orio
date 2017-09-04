@@ -29,7 +29,7 @@
     "flow-copy-source": "^1.2.1",
     "flow-typed": "^2.1.5",
     "husky": "^0.14.3",
-    "jest": "^20.0.4",
+    "jest": "^21.0.0",
     "jest-cli": "^20.0.4",
     "lerna": "^2.1.2",
     "lint-staged": "^4.0.4",
@@ -42,6 +42,11 @@
     "rollup-plugin-license": "^0.5.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "shx": "^0.2.2"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^ouro-(.+)$": "<rootDir>/packages/ouro-$1/src/index.js"
+    }
   },
   "lint-staged": {
     "*.js": [
