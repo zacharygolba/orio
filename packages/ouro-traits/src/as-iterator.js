@@ -1,7 +1,7 @@
 // @flow
 
-export default function AsIterator<T>(Target: Class<T>): Class<T> {
-  function iterator(): T {
+function AsIterator<T, I: Iterator<T>>(Target: Class<I>): Class<I> {
+  function iterator(): I {
     return this
   }
 
@@ -15,3 +15,5 @@ export default function AsIterator<T>(Target: Class<T>): Class<T> {
 
   return Target
 }
+
+export default AsIterator

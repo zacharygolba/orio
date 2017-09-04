@@ -24,7 +24,7 @@ export function from<T>(source?: Source<T>): Iter<T> {
   return new Iter(producer)
 }
 
-export function of<T>(...items: Array<T>): Iter<T> {
+export function of<T>(...items: $ReadOnlyArray<T>): Iter<T> {
   const producer = new Indexed(items)
   return new Iter(producer)
 }

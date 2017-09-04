@@ -1,9 +1,9 @@
 // @flow
 
 type Target = { [key: string]: mixed }
-type IterFn<T> = () => Iterator<T>
+type IterFn<+T> = () => Iterator<T>
 
-function extractIteratorFn<T: Target>(target: T): ?IterFn<*> {
+function extractIteratorFn<+T: Target>(target: T): ?IterFn<*> {
   const value = target[Symbol.iterator]
 
   if (typeof value === 'function') {
