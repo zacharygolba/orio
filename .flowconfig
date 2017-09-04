@@ -13,7 +13,9 @@
 all=warn
 
 [options]
+experimental.const_params=true
 esproposal.decorators=ignore
+
 include_warnings=true
 
 module.use_strict=true

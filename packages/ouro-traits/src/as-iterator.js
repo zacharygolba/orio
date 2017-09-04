@@ -1,17 +1,19 @@
 // @flow
 
-function iterator() {
-  return this
-}
+function AsIterator<T, I: Iterator<T>>(Target: Class<I>): Class<I> {
+  function iterator(): I {
+    return this
+  }
 
-Object.defineProperty(iterator, 'name', {
-  value: '[Symbol.iterator]',
-})
+  Reflect.defineProperty(iterator, 'name', {
+    value: '[Symbol.iterator]',
+  })
 
-export default function AsIterator<T>(Target: Class<T>): Class<T> {
-  Object.defineProperty(Target.prototype, Symbol.iterator, {
+  Reflect.defineProperty(Target.prototype, Symbol.iterator, {
     value: iterator,
   })
 
   return Target
 }
+
+export default AsIterator

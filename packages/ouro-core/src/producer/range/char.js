@@ -15,11 +15,9 @@ export const MAX_CHAR: string = String.fromCodePoint(0x10ffff)
 export default class CharRange implements Producer<string> {
   /*:: @@iterator: () => Iterator<string> */
   source: NumberRange
-  size: number
 
   constructor(start?: string = MIN_CHAR, end?: string = MAX_CHAR) {
     this.source = new NumberRange(start.codePointAt(0), end.codePointAt(0))
-    this.size = this.source.size
   }
 
   drop(): void {

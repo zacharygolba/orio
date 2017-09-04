@@ -1,6 +1,6 @@
 // @flow
 
-function reduce<T, U>(fn: (U, T) => U, acc: U, source: Iterator<T>): U {
+function reduce<+T, +U>(fn: (U, T) => U, acc: U, source: Iterator<T>): U {
   const next = source.next()
 
   if (next.done) {
