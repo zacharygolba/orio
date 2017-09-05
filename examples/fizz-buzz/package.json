@@ -7,6 +7,6 @@
   "private": true,
   "main": "lib/index.js",
   "dependencies": {
-    "ouro-core": "^0.0.1-alpha.1"
+    "ouro-core": "0.0.1-alpha.1"
   }
 }
