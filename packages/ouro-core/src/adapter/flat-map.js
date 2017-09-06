@@ -1,9 +1,9 @@
 // @flow
 
 import { AsIterator, ToString } from 'ouro-traits'
+import type { Producer, Source } from 'ouro-types'
 
 import { createProducer } from '../producer'
-import type { Producer, Source } from '../types'
 
 function exec<T, U>(adapter: FlatMap<T, U>): IteratorResult<U, void> {
   {

@@ -1,8 +1,7 @@
 // @flow
 
 import { intoIterator } from 'ouro-utils'
-
-import type { Producer, Source } from '../types'
+import type { Producer, Source } from 'ouro-types'
 
 import Chars from './chars'
 import Empty from './empty'

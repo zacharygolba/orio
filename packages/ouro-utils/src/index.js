@@ -1,5 +1,7 @@
 // @flow
 
+export * from './consts'
 export * from './iterable'
 export { default as identity } from './identity'
-export { default as reduce } from './reduce'
+export * from './reduce'
+export * from './thenable'

@@ -2,6 +2,7 @@
 
 import { AsIterator, ToString } from 'ouro-traits'
 import { identity, reduce } from 'ouro-utils'
+import type { Producer, FromIterator, Source } from 'ouro-types'
 
 import {
   Chain,
@@ -19,7 +20,6 @@ import {
   Unique,
   Zip,
 } from './adapter'
-import type { Producer, FromIterator, Source } from './types'
 
 @ToString
 @AsIterator

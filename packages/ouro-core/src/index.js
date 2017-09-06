@@ -1,5 +1,7 @@
 // @flow
 
+import type { Source } from 'ouro-types'
+
 import * as pkg from '../package.json'
 
 import Iter from './iter'
@@ -10,7 +12,6 @@ import {
   NumberRange,
   Repeat,
 } from './producer'
-import type { Source } from './types'
 
 export const VERSION: string = pkg.version
 

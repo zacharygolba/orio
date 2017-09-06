@@ -2,9 +2,9 @@
 
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
+import type { Producer, Source } from 'ouro-types'
 
 import { createProducer } from '../producer'
-import type { Producer, Source } from '../types'
 
 @ToString
 @AsIterator

@@ -1,13 +1,47 @@
 // @flow
 
-import AsIterator from '../as-iterator'
+import { AsAsyncIterator, AsIterator } from '../as-iterator'
 
-// $FlowIgnore
-const Target = AsIterator(class Subject {})
+const AsyncTarget = AsAsyncIterator(
+  class {
+    /*:: @@asyncIterator: () => $AsyncIterator<*, void, void> */
 
-test('it adds an @@iterator method to a class', () => {
-  const subj = new Target()
+    next(): Promise<IteratorResult<*, void>> {
+      return Promise.resolve({
+        done: false,
+        value: this,
+      })
+    }
+  },
+)
 
+const SyncTarget = AsIterator(
+  class {
+    /*:: @@iterator: () => Iterator<*> */
+
+    next(): IteratorResult<*, void> {
+      return {
+        done: false,
+        value: this,
+      }
+    }
+  },
+)
+
+test('@AsAsyncIterator', () => {
+  const subj = new AsyncTarget()
+
+  // $ExpectError
+  AsAsyncIterator(class {})
+  // $FlowIgnore
+  expect(subj[Symbol.asyncIterator]()).toBe(subj)
+})
+
+test('@AsIterator', () => {
+  const subj = new SyncTarget()
+
+  // $ExpectError
+  AsIterator(class {})
   // $FlowIgnore
   expect(subj[Symbol.iterator]()).toBe(subj)
 })

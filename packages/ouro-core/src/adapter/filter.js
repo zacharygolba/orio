@@ -1,8 +1,7 @@
 // @flow
 
 import { AsIterator, ToString } from 'ouro-traits'
-
-import type { Producer } from '../types'
+import type { Producer } from 'ouro-types'
 
 function exec<T>(adapter: Filter<T>): IteratorResult<T, void> {
   const next = adapter.producer.next()
