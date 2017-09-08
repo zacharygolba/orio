@@ -29,7 +29,7 @@
     "flow-copy-source": "1.2.1",
     "flow-typed": "2.1.5",
     "husky": "0.14.3",
-    "jest": "21.0.1",
+    "jest": "21.0.2",
     "jest-cli": "20.0.4",
     "lerna": "2.1.2",
     "lint-staged": "4.1.3",
