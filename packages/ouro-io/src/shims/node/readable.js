@@ -7,9 +7,8 @@ import { setImmediate } from 'ouro-utils'
 import type { AsyncIteratorResult, ReadableSource } from 'ouro-types'
 
 type Callback = () => void
-type Result = AsyncIteratorResult<Uint8Array, void>
 
-export default class ReadableWrapper implements ReadableSource<Uint8Array> {
+export default class ReadableWrapper<T> implements ReadableSource<T> {
   pipe: ReadablePipe
 
   constructor(source: Readable) {
@@ -22,7 +21,7 @@ export default class ReadableWrapper implements ReadableSource<Uint8Array> {
     this.pipe.destroy()
   }
 
-  read(): Result {
+  read(): AsyncIteratorResult<T, void> {
     return poll(this.pipe)
   }
 }
@@ -48,11 +47,11 @@ class ReadablePipe extends PassThrough {
   }
 }
 
-async function poll(source: ReadablePipe): Result {
-  const value = source.read()
+async function poll<T>(source: ReadablePipe): AsyncIteratorResult<T, void> {
+  const value: any = source.read()
 
-  if (value instanceof Buffer) {
-    return result.next(new Uint8Array(value))
+  if (value != null) {
+    return result.next(value)
   }
 
   if (source.error) {

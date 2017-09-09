@@ -1,31 +1,28 @@
 // @flow
 
 import { Writable } from 'stream'
+import { promisify } from 'util'
 
 import type { WritableDest } from 'ouro-types'
 
-type Chunk = Uint8Array | number
-
-export default class WritableWrapper implements WritableDest<Chunk> {
+export default class WritableWrapper<T> implements WritableDest<T> {
   dest: Writable
+  writeChunk: T => Promise<void>
 
   constructor(dest: Writable) {
     this.dest = dest
+    this.writeChunk = promisify(dest.write).bind(dest)
   }
 
   abort(): void {
     this.dest.end()
   }
 
-  write(chunk: Chunk): Promise<void> {
-    return new Promise(resolve => {
-      if (chunk instanceof Uint8Array) {
-        this.dest.write(Buffer.from(chunk), resolve)
-      } else if (typeof chunk === 'number') {
-        this.dest.write(Buffer.allocUnsafe(1).fill(chunk), resolve)
-      } else {
-        throw new Error('Unimplemented')
-      }
-    })
+  async write(chunk: T): Promise<void> {
+    if (chunk instanceof Uint8Array) {
+      await this.writeChunk(Buffer.from(chunk))
+    } else {
+      await this.writeChunk(chunk)
+    }
   }
 }

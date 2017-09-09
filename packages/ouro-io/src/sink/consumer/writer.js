@@ -16,7 +16,7 @@ export default class Writer<T> implements AsyncConsumer<T> {
     this.dest.abort()
   }
 
-  write(chunk: T): Promise<void> {
-    return this.dest.write(chunk)
+  async write(chunk: T): Promise<void> {
+    await this.dest.write(chunk)
   }
 }
