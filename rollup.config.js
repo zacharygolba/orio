@@ -54,14 +54,16 @@ const configFor = (name, provides = name, minified = false) => {
 }
 
 export default [
-  configFor('ouro-result', 'result', true),
-  configFor('ouro-result', 'result'),
-  configFor('ouro-traits', 'traits', true),
-  configFor('ouro-traits', 'traits'),
-  configFor('ouro-utils', 'utils', true),
-  configFor('ouro-utils', 'utils'),
-  configFor('ouro-core', 'ouro', true),
-  configFor('ouro-core', 'ouro'),
-  configFor('ouro-io', 'io'),
-  configFor('ouro-io', 'io', true),
+  configFor('orio-result', 'result', true),
+  configFor('orio-result', 'result'),
+  configFor('orio-traits', 'traits', true),
+  configFor('orio-traits', 'traits'),
+  configFor('orio-utils', 'utils', true),
+  configFor('orio-utils', 'utils'),
+  configFor('orio-stream', 'io'),
+  configFor('orio-stream', 'io', true),
+  configFor('orio-iter', 'iter'),
+  configFor('orio-iter', 'iter', true),
+  configFor('orio-core', 'orio', true),
+  configFor('orio-core', 'orio'),
 ]

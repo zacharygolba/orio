@@ -1,2 +1,2 @@
-# ouro
-[![CircleCI branch](https://img.shields.io/circleci/project/github/zacharygolba/ouro/master.svg?style=flat-square)](https://circleci.com/gh/zacharygolba/ouro/tree/master) [![AppVeyor](https://img.shields.io/appveyor/ci/zacharygolba/ouro/master.svg?style=flat-square)](https://ci.appveyor.com/project/zacharygolba/ouro/branch/master) [![Codecov branch](https://img.shields.io/codecov/c/github/zacharygolba/ouro/master.svg?style=flat-square)](https://codecov.io/gh/zacharygolba/ouro)
+# orio
+[![CircleCI branch](https://img.shields.io/circleci/project/github/zacharygolba/orio/master.svg?style=flat-square)](https://circleci.com/gh/zacharygolba/orio/tree/master) [![AppVeyor](https://img.shields.io/appveyor/ci/zacharygolba/orio/master.svg?style=flat-square)](https://ci.appveyor.com/project/zacharygolba/orio/branch/master) [![Codecov branch](https://img.shields.io/codecov/c/github/zacharygolba/orio/master.svg?style=flat-square)](https://codecov.io/gh/zacharygolba/orio)

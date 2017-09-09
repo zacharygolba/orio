@@ -1,9 +1,9 @@
 // @flow
 
-import * as ouro from 'ouro-core'
+import * as orio from 'orio'
 
 export default function fizzBuzz(): Array<string> {
-  return ouro
+  return orio
     .range(1, 100)
     .map(n => {
       if (n % 15 === 0) {
