@@ -19,11 +19,11 @@ export default class TaskProducer<T> implements AsyncProducer<T> {
     this.task = task.then(createProducer)
   }
 
-  next(): AsyncIteratorResult<T, void> {
-    return this.task.then(producer => producer.next())
-  }
-
   drop(): void {
     this.task.then(producer => producer.drop())
+  }
+
+  next(): AsyncIteratorResult<T, void> {
+    return this.task.then(producer => producer.next())
   }
 }

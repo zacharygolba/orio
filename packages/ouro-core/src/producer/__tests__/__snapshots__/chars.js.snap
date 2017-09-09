@@ -2,8 +2,8 @@
 
 exports[`#constructor() 1`] = `
 Chars {
-  "cursor": 0,
-  "source": "test",
+  "done": false,
+  "source": Object {},
 }
 `;
 
@@ -16,8 +16,8 @@ Object {
 
 exports[`#drop() 2`] = `
 Chars {
-  "cursor": 0,
-  "source": "",
+  "done": true,
+  "source": Object {},
 }
 `;
 

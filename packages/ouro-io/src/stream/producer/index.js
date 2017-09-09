@@ -1,29 +1,44 @@
 // @flow
 
-import { intoIterator } from 'ouro-utils'
+import { intoAsyncIterator, intoIterator } from 'ouro-utils'
 import type { AsyncProducer, AsyncSource } from 'ouro-types'
+
+import * as nodeStream from '../../shims/node'
+import * as webStream from '../../shims/web'
 
 import Chars from './chars'
 import Empty from './empty'
 import Indexed from './indexed'
 import Once from './once'
+import Reader from './reader'
 import Task from './task'
 import Unbound from './unbound'
 
-export { default as Chars } from './chars'
-export { default as Empty } from './empty'
-export { default as Indexed } from './indexed'
-export { default as Once } from './once'
-export { default as Task } from './task'
-export { default as Unbound } from './unbound'
+export { Chars, Empty, Indexed, Once, Reader, Task, Unbound }
 
-export function createProducer<+T>(source: AsyncSource<T>): AsyncProducer<T> {
+export function createProducer<T>(source: AsyncSource<T>): AsyncProducer<T> {
   if (source == null) {
     return new Empty()
   }
 
   if (source instanceof Promise) {
     return new Task(source)
+  }
+
+  if (webStream.isReadable(source)) {
+    return new Reader(webStream.getReader(source))
+  }
+
+  if (nodeStream.isReadable(source)) {
+    return new Reader(nodeStream.wrapReadable(source))
+  }
+
+  {
+    const iterator = intoAsyncIterator(source)
+
+    if (iterator != null) {
+      return new Unbound(iterator)
+    }
   }
 
   if (Array.isArray(source)) {

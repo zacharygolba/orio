@@ -1,6 +1,6 @@
 // @flow
 
 export * from './convert'
+export * from './drop'
 export * from './iterator'
-export * from './producer'
-export * from './thenable'
+export * from './stream'

@@ -3,11 +3,15 @@
 import { AsAsyncIterator, ToString } from 'ouro-traits'
 import { identity, reduceAsync } from 'ouro-utils'
 import type {
+  AsyncDest,
   AsyncProducer,
   AsyncIteratorResult,
   FromIterator,
   AsyncSource,
 } from 'ouro-types'
+
+import * as sink from '../sink'
+import type { Sink } from '../sink'
 
 import {
   Chain,
@@ -47,15 +51,17 @@ export default class Stream<T> implements AsyncProducer<T> {
     return new Stream(adapter)
   }
 
-  collect(Target?: Class<FromIterator<T>> = Array): Promise<FromIterator<T>> {
-    if (Target === Array) {
-      return this.reduce((acc, next) => {
-        acc.push(next)
-        return acc
-      }, [])
+  async collect<C: FromIterator<T>>(Target?: Class<C>): Promise<C> {
+    const items = await this.reduce((acc, next) => {
+      acc.push(next)
+      return acc
+    }, [])
+
+    if (Target === Array || Target == null) {
+      return items
     }
 
-    throw new Error('unimplemented')
+    return new Target(items)
   }
 
   count(): Promise<number> {
@@ -132,7 +138,10 @@ export default class Stream<T> implements AsyncProducer<T> {
   }
 
   async next(): AsyncIteratorResult<T, void> {
-    const next = await this.producer.next()
+    const next = await this.producer.next().catch(e => {
+      this.drop()
+      return Promise.reject(e)
+    })
 
     if (next.done) {
       this.drop()
@@ -152,6 +161,10 @@ export default class Stream<T> implements AsyncProducer<T> {
     }
 
     return undefined
+  }
+
+  pipe(dest: AsyncDest): Sink<*> {
+    return sink.from(dest).push(this)
   }
 
   async product(): Promise<number> {

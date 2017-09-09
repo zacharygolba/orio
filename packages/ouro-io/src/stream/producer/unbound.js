@@ -1,15 +1,26 @@
 // @flow
 
 import { AsAsyncIterator, ToString } from 'ouro-traits'
-import type { AsyncProducer, AsyncIteratorResult, Producer } from 'ouro-types'
+import type {
+  AsyncProducer,
+  AsyncIterator,
+  AsyncIteratorResult,
+  Producer,
+} from 'ouro-types'
+
+type UnboundSource<T> =
+  | AsyncProducer<T>
+  | Producer<T>
+  | AsyncIterator<T>
+  | Iterator<T>
 
 @ToString
 @AsAsyncIterator
 export default class Unbound<T> implements AsyncProducer<T> {
   /*:: @@asyncIterator: () => $AsyncIterator<T, void, void> */
-  source: AsyncProducer<T> | Producer<T> | Iterator<T>
+  source: UnboundSource<T>
 
-  constructor(source: AsyncProducer<T> | Producer<T> | Iterator<T>) {
+  constructor(source: UnboundSource<T>) {
     this.source = source
   }
 

@@ -1,5 +1,7 @@
 // @flow
 
+import { ASYNC_ITERATOR } from 'ouro-utils'
+
 import { AsAsyncIterator, AsIterator } from '../as-iterator'
 
 const AsyncTarget = AsAsyncIterator(
@@ -34,7 +36,7 @@ test('@AsAsyncIterator', () => {
   // $ExpectError
   AsAsyncIterator(class {})
   // $FlowIgnore
-  expect(subj[Symbol.asyncIterator]()).toBe(subj)
+  expect(subj[ASYNC_ITERATOR]()).toBe(subj)
 })
 
 test('@AsIterator', () => {

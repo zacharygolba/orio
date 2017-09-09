@@ -8,27 +8,24 @@ import type { Producer } from 'ouro-types'
 @AsIterator
 export default class Chars implements Producer<*> {
   /*:: @@iterator: () => Iterator<string> */
-  cursor: number
-  source: string
+  done: boolean
+  source: Iterator<string>
 
   constructor(source: string) {
-    this.cursor = 0
-    this.source = source
+    this.done = false
+    // $FlowFixMe
+    this.source = source[Symbol.iterator]()
   }
 
   drop(): void {
-    this.cursor = 0
-    this.source = ''
+    this.done = true
   }
 
   next(): IteratorResult<string, void> {
-    const { cursor, source } = this
-
-    if (cursor >= source.length) {
+    if (this.done) {
       return result.done()
     }
 
-    this.cursor += 1
-    return result.next(source.substr(cursor, 1))
+    return this.source.next()
   }
 }

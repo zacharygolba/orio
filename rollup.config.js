@@ -62,6 +62,6 @@ export default [
   configFor('ouro-utils', 'utils'),
   configFor('ouro-core', 'ouro', true),
   configFor('ouro-core', 'ouro'),
-  configFor('ouro-stream', 'stream'),
-  configFor('ouro-stream', 'stream', true),
+  configFor('ouro-io', 'io'),
+  configFor('ouro-io', 'io', true),
 ]

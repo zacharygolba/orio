@@ -42,6 +42,11 @@
     "import/no-extraneous-dependencies": ["error", {
       "devDependencies": ["rollup.config.js", "scripts/**/*.js"]
     }],
+    "no-unused-vars": ["error", {
+      "argsIgnorePattern": "_",
+      "varsIgnorePattern": "_"
+    }],
+    "no-use-before-define": "off",
     "prettier/prettier": ["error", {
       "parser": "babylon",
       "semi": false,
