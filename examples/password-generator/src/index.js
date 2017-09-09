@@ -1,6 +1,6 @@
 // @flow
 
-import * as orio from 'orio'
+import { iter } from 'orio'
 
 export const LENGTH: number = 48
 export const PATTERN: RegExp = /[0-9A-Za-z]/
@@ -10,10 +10,10 @@ export default function generate(
   pattern?: RegExp = PATTERN,
 ): string {
   return (
-    orio
+    iter
       .chars('0', '9')
-      .chain(orio.chars('A', 'Z'))
-      .chain(orio.chars('a', 'z'))
+      .chain(iter.chars('A', 'Z'))
+      .chain(iter.chars('a', 'z'))
       .cycle()
       // filter chars that don't match the input pattern (default: [0-9A-Za-z])
       .filter(char => pattern.test(char))
