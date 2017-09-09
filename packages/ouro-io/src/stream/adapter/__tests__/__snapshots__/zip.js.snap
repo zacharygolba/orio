@@ -36,18 +36,18 @@ Object {
   "done": false,
   "value": Array [
     1,
-    TaskProducer {
-      "drop": [Function],
-      "task": Promise {},
-    },
+    2,
   ],
 }
 `;
 
 exports[`#next() with a self reference to lhs 2`] = `
 Object {
-  "done": true,
-  "value": undefined,
+  "done": false,
+  "value": Array [
+    3,
+    4,
+  ],
 }
 `;
 
