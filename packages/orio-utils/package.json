@@ -1,0 +1,13 @@
+{
+  "name": "orio-utils",
+  "version": "0.0.1-alpha.0",
+  "description": "Common utility functions to share between orio packages",
+  "main": "lib/index.js",
+  "module": "dist/index.es.js",
+  "repository": "github:zacahrygolba/orio",
+  "author": "Zachary Golba <zachary.golba@postlight.com>",
+  "license": "MIT",
+  "dependencies": {
+    "orio-types": "0.0.1-alpha.0"
+  }
+}

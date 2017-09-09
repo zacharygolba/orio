@@ -1,6 +1,6 @@
 // @flow
 
-import * as ouro from 'ouro-core'
+import * as orio from 'orio'
 
 function isComposite(n) {
   const abs = Math.abs(n)
@@ -9,11 +9,11 @@ function isComposite(n) {
     return false
   }
 
-  return ouro.range(abs - 1, 2).some(div => abs % div === 0)
+  return orio.range(abs - 1, 2).some(div => abs % div === 0)
 }
 
 export default function primes(size: number): Array<number> {
-  return ouro
+  return orio
     .range()
     .filter(n => !isComposite(n))
     .take(size)

@@ -1,0 +1,10 @@
+{
+  "name": "orio-result",
+  "version": "0.0.1-alpha.0",
+  "description": "Factory functions for creating iterator result objects",
+  "main": "lib/index.js",
+  "module": "dist/index.es.js",
+  "repository": "github:zacahrygolba/orio",
+  "author": "Zachary Golba <zachary.golba@postlight.com>",
+  "license": "MIT"
+}

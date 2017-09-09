@@ -1,9 +1,9 @@
 // @flow
 
-import * as ouro from 'ouro-core'
+import * as orio from 'orio'
 
 export default function factorial(n: number): number {
-  return ouro
+  return orio
     .range(n === 0 ? 1 : Math.abs(n), 1)
     .takeWhile(Number.isFinite)
     .product()

@@ -1,6 +1,6 @@
 // @flow
 
-import * as ouro from 'ouro-core'
+import * as orio from 'orio'
 
 import EMOJI from './emoji'
 
@@ -10,7 +10,7 @@ function randomIndex() {
 
 export default function randomEmoji(): string {
   const magicNumber = randomIndex()
-  const result = ouro
+  const result = orio
     .from(EMOJI)
     .cycle()
     .filter(() => magicNumber === randomIndex())

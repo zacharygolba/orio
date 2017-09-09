@@ -1,8 +1,8 @@
 {
-  "name": "ouro",
+  "name": "orio-build",
   "private": true,
   "version": "0.0.1",
-  "repository": "github:zacharygolba/ouro",
+  "repository": "github:zacharygolba/orio",
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
   "devDependencies": {
@@ -45,7 +45,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "ouro-(.+)$": "<rootDir>/packages/ouro-$1/src/index.js"
+      "orio-(.+)$": "<rootDir>/packages/orio-$1/src/index.js"
     }
   },
   "lint-staged": {
