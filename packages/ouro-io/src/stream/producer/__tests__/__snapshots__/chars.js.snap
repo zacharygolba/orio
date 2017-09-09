@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#constructor() 1`] = `
+Chars {
+  "cursor": 0,
+  "source": "test",
+}
+`;
+
+exports[`#drop() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#drop() 2`] = `
+Chars {
+  "cursor": 0,
+  "source": "",
+}
+`;
+
+exports[`#next() 1`] = `
+Object {
+  "done": false,
+  "value": "t",
+}
+`;
+
+exports[`#next() 2`] = `
+Object {
+  "done": false,
+  "value": "e",
+}
+`;
+
+exports[`#next() 3`] = `
+Object {
+  "done": false,
+  "value": "s",
+}
+`;
+
+exports[`#next() 4`] = `
+Object {
+  "done": false,
+  "value": "t",
+}
+`;
+
+exports[`#next() 5`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;

@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#collect() 1`] = `
+Array [
+  "t",
+  "e",
+  "s",
+  "t",
+]
+`;
+
+exports[`#collect() 2`] = `
+Set {
+  "t",
+  "e",
+  "s",
+}
+`;
+
+exports[`#collect() 3`] = `
+Map {
+  0 => "t",
+  1 => "e",
+  2 => "s",
+  3 => "t",
+}
+`;
+
+exports[`#next() success 1`] = `
+Object {
+  "done": false,
+  "value": "t",
+}
+`;
+
+exports[`#next() success 2`] = `
+Object {
+  "done": false,
+  "value": "e",
+}
+`;
+
+exports[`#next() success 3`] = `
+Object {
+  "done": false,
+  "value": "s",
+}
+`;
+
+exports[`#next() success 4`] = `
+Object {
+  "done": false,
+  "value": "t",
+}
+`;
+
+exports[`#next() success 5`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;

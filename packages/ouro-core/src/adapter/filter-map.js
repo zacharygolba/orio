@@ -2,8 +2,7 @@
 
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
-
-import type { Producer } from '../types'
+import type { Producer } from 'ouro-types'
 
 function exec<T, U>(adapter: FilterMap<T, U>): IteratorResult<U, void> {
   const next = adapter.producer.next()

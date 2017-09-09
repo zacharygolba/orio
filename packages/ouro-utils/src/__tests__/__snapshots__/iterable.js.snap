@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`.intoAsyncIterator() 1`] = `
+Object {
+  "next": [Function],
+}
+`;
+
+exports[`.intoAsyncIterator() 2`] = `
+Object {
+  "done": false,
+  "value": "test",
+}
+`;
+
 exports[`.intoIterator() 1`] = `Object {}`;
 
 exports[`.intoIterator() 2`] = `Object {}`;

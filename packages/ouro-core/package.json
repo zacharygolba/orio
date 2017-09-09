@@ -9,6 +9,7 @@
   "dependencies": {
     "ouro-result": "0.0.1-alpha.1",
     "ouro-traits": "0.0.1-alpha.1",
+    "ouro-types": "0.0.1-alpha.1",
     "ouro-utils": "0.0.1-alpha.1"
   }
 }

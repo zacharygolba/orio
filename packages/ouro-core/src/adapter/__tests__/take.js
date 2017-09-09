@@ -7,14 +7,13 @@ let subj
 
 beforeEach(() => {
   const { producer } = ouro.repeat('test')
-
   subj = new Take(producer, 3)
-  // $FlowIgnore
-  subj.producer.drop = jest.fn()
+
+  jest.spyOn(subj.producer, 'drop')
 })
 
 afterEach(() => {
-  subj.producer.drop.mockReset()
+  jest.resetAllMocks()
 })
 
 test('#drop()', () => {

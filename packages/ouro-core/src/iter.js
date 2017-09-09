@@ -2,6 +2,7 @@
 
 import { AsIterator, ToString } from 'ouro-traits'
 import { identity, reduce } from 'ouro-utils'
+import type { Producer, FromIterator, Source } from 'ouro-types'
 
 import {
   Chain,
@@ -19,7 +20,6 @@ import {
   Unique,
   Zip,
 } from './adapter'
-import type { Producer, FromIterator, Source } from './types'
 
 @ToString
 @AsIterator
@@ -36,8 +36,8 @@ export default class Iter<T> implements Producer<T> {
     return new Iter(adapter)
   }
 
-  collect(Target?: Class<FromIterator<T>> = Array): FromIterator<T> {
-    if (Target === Array) {
+  collect<C: FromIterator<T>>(Target?: Class<C>): * {
+    if (Target === Array || Target == null) {
       return this.reduce((acc, next) => {
         acc.push(next)
         return acc

@@ -1,7 +1,12 @@
 // @flow
 
-function AsIterator<T, I: Iterator<T>>(Target: Class<I>): Class<I> {
-  function iterator(): I {
+import { ASYNC_ITERATOR } from 'ouro-utils'
+import type { AsyncIterator } from 'ouro-types'
+
+type Target = AsyncIterator<*> | Iterator<*>
+
+export function AsIterator<T: Target>(Klass: Class<T>): Class<T> {
+  function iterator(): T {
     return this
   }
 
@@ -9,11 +14,25 @@ function AsIterator<T, I: Iterator<T>>(Target: Class<I>): Class<I> {
     value: '[Symbol.iterator]',
   })
 
-  Reflect.defineProperty(Target.prototype, Symbol.iterator, {
+  Reflect.defineProperty(Klass.prototype, Symbol.iterator, {
     value: iterator,
   })
 
-  return Target
+  return Klass
 }
 
-export default AsIterator
+export function AsAsyncIterator<T: Target>(Klass: Class<T>): Class<T> {
+  function asyncIterator(): T {
+    return this
+  }
+
+  Reflect.defineProperty(asyncIterator, 'name', {
+    value: '[Symbol.asyncIterator]',
+  })
+
+  Reflect.defineProperty(Klass.prototype, ASYNC_ITERATOR, {
+    value: asyncIterator,
+  })
+
+  return Klass
+}

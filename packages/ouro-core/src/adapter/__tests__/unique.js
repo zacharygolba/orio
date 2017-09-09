@@ -11,12 +11,13 @@ beforeEach(() => {
 
   fn = jest.fn(item => item)
   subj = new Unique(producer, fn)
-  // $FlowIgnore
-  subj.producer.drop = jest.fn()
+
+  jest.spyOn(subj.producer, 'drop')
 })
 
 afterEach(() => {
   fn.mockClear()
+  jest.resetAllMocks()
 })
 
 test('#drop()', () => {

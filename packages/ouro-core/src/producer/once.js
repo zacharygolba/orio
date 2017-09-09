@@ -2,8 +2,7 @@
 
 import * as result from 'ouro-result'
 import { AsIterator, ToString } from 'ouro-traits'
-
-import type { Producer } from '../types'
+import type { Producer } from 'ouro-types'
 
 @ToString
 @AsIterator

@@ -8,17 +8,14 @@ let subj
 beforeEach(() => {
   const producerA = ouro.of(1, 2, 3).producer
   const producerB = ouro.of(4, 5, 6).producer
-
   subj = new Chain(producerA, producerB)
-  // $FlowIgnore
-  subj.producerA.drop = jest.fn()
-  // $FlowIgnore
-  subj.producerB.drop = jest.fn()
+
+  jest.spyOn(subj.producerA, 'drop')
+  jest.spyOn(subj.producerB, 'drop')
 })
 
 afterEach(() => {
-  subj.producerA.drop.mockReset()
-  subj.producerB.drop.mockReset()
+  jest.resetAllMocks()
 })
 
 test('#drop()', () => {
