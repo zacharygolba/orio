@@ -1,0 +1,15 @@
+{
+  "name": "orio-stream",
+  "version": "0.0.1-alpha.0",
+  "repository": "github:zacharygolba/orio",
+  "author": "Zachary Golba <zachary.golba@postlight.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "dist/index.es.js",
+  "dependencies": {
+    "orio-result": "0.0.1-alpha.0",
+    "orio-traits": "0.0.1-alpha.0",
+    "orio-types": "0.0.1-alpha.0",
+    "orio-utils": "0.0.1-alpha.0"
+  }
+}

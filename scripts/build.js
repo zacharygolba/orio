@@ -44,7 +44,9 @@ async function build(targetPath) {
 }
 
 async function buildEach(cwd) {
-  const targets = await readdir(cwd)
+  let targets = await readdir(cwd)
+  targets = targets.filter(target => !target.startsWith('.'))
+
   await targets.reduce(
     (promise, target) =>
       promise.then(() => {

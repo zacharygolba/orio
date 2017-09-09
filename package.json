@@ -1,8 +1,8 @@
 {
-  "name": "ouro",
+  "name": "orio-build",
   "private": true,
   "version": "0.0.1",
-  "repository": "github:zacharygolba/ouro",
+  "repository": "github:zacharygolba/orio",
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
   "devDependencies": {
@@ -23,7 +23,7 @@
     "eslint-config-prettier": "2.4.0",
     "eslint-plugin-flowtype": "2.35.1",
     "eslint-plugin-import": "2.7.0",
-    "eslint-plugin-jest": "21.0.0",
+    "eslint-plugin-jest": "21.0.2",
     "eslint-plugin-prettier": "2.2.0",
     "flow-bin": "0.54.1",
     "flow-copy-source": "1.2.1",
@@ -45,7 +45,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "ouro-(.+)$": "<rootDir>/packages/ouro-$1/src/index.js"
+      "orio-(.+)$": "<rootDir>/packages/orio-$1/src/index.js"
     }
   },
   "lint-staged": {

@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#drop() 1`] = `
+Cycle {
+  "done": true,
+  "index": 0,
+  "items": Array [],
+  "producer": TaskProducer {
+    "drop": [Function],
+    "task": Promise {},
+  },
+  "useProducer": true,
+}
+`;
+
+exports[`#drop() 2`] = `Promise {}`;
+
+exports[`#next() 1`] = `
+Object {
+  "done": false,
+  "value": 1,
+}
+`;
+
+exports[`#next() 2`] = `
+Object {
+  "done": false,
+  "value": 2,
+}
+`;
+
+exports[`#next() 3`] = `
+Object {
+  "done": false,
+  "value": 3,
+}
+`;
+
+exports[`#next() 4`] = `
+Object {
+  "done": false,
+  "value": 1,
+}
+`;
+
+exports[`#next() 5`] = `
+Object {
+  "done": false,
+  "value": 2,
+}
+`;
+
+exports[`#next() 6`] = `
+Object {
+  "done": false,
+  "value": 3,
+}
+`;
+
+exports[`#next() 7`] = `
+Object {
+  "done": false,
+  "value": 1,
+}
+`;
+
+exports[`#next() 8`] = `
+Object {
+  "done": false,
+  "value": 2,
+}
+`;
+
+exports[`#next() 9`] = `
+Object {
+  "done": false,
+  "value": 3,
+}
+`;

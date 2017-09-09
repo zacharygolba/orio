@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#constructor() 1`] = `
+Reader {
+  "source": Object {
+    "cancel": [Function],
+    "read": [Function],
+  },
+}
+`;
+
+exports[`#next() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;

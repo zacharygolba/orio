@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#constructor() 1`] = `
+Repeat {
+  "done": false,
+  "value": "test",
+}
+`;
+
+exports[`#drop() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#drop() 2`] = `
+Repeat {
+  "done": true,
+  "value": "test",
+}
+`;
+
+exports[`#next() 1`] = `
+Object {
+  "done": false,
+  "value": "test",
+}
+`;
+
+exports[`#next() 2`] = `
+Object {
+  "done": false,
+  "value": "test",
+}
+`;
+
+exports[`#next() 3`] = `
+Object {
+  "done": false,
+  "value": "test",
+}
+`;
+
+exports[`#next() 4`] = `
+Object {
+  "done": false,
+  "value": "test",
+}
+`;
+
+exports[`#next() 5`] = `
+Object {
+  "done": false,
+  "value": "test",
+}
+`;
+
+exports[`#next() 6`] = `
+Object {
+  "done": false,
+  "value": "test",
+}
+`;

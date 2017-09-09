@@ -19,8 +19,11 @@ esproposal.decorators=ignore
 include_warnings=true
 
 module.use_strict=true
-module.name_mapper='^ouro-\(.*\)$' -> '<PROJECT_ROOT>/packages/ouro-\1/src/index.js'
+module.name_mapper='^orio$' -> '<PROJECT_ROOT>/packages/orio-core/src/index.js'
+module.name_mapper='^orio-\(.*\)$' -> '<PROJECT_ROOT>/packages/orio-\1/src/index.js'
 
 suppress_comment=\\(.\\|\n\\)*\\$ExpectError
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
 suppress_comment=\\(.\\|\n\\)*\\$FlowIgnore
+
+unsafe.enable_getters_and_setters=true

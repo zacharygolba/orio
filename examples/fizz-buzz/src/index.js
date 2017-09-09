@@ -1,10 +1,9 @@
 // @flow
 
-import * as ouro from 'ouro-core'
+import { iter } from 'orio'
 
 export default function fizzBuzz(): Array<string> {
-  // $FlowFixMe
-  return ouro
+  return iter
     .range(1, 100)
     .map(n => {
       if (n % 15 === 0) {
