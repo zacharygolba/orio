@@ -19,6 +19,7 @@ esproposal.decorators=ignore
 include_warnings=true
 
 module.use_strict=true
+module.name_mapper='^orio$' -> '<PROJECT_ROOT>/packages/orio-core/src/index.js'
 module.name_mapper='^orio-\(.*\)$' -> '<PROJECT_ROOT>/packages/orio-\1/src/index.js'
 
 suppress_comment=\\(.\\|\n\\)*\\$ExpectError

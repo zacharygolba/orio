@@ -1,9 +1,9 @@
 // @flow
 
-import * as orio from 'orio'
+import { iter } from 'orio'
 
 export default function fizzBuzz(): Array<string> {
-  return orio
+  return iter
     .range(1, 100)
     .map(n => {
       if (n % 15 === 0) {
