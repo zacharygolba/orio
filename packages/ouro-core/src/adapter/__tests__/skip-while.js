@@ -7,14 +7,13 @@ let subj
 
 beforeEach(() => {
   const { producer } = ouro.of(1, 2, 3, 4, 5, 6)
-
   subj = new SkipWhile(producer, value => value <= 3)
-  // $FlowIgnore
-  subj.producer.drop = jest.fn()
+
+  jest.spyOn(subj.producer, 'drop')
 })
 
 afterEach(() => {
-  subj.producer.drop.mockReset()
+  jest.resetAllMocks()
 })
 
 test('#drop()', () => {

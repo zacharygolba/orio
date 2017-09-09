@@ -8,8 +8,7 @@ let subj
 const cycle = producer => {
   const adapter = new Cycle(producer)
 
-  // $FlowIgnore
-  adapter.producer.drop = jest.fn()
+  jest.spyOn(adapter.producer, 'drop')
   return adapter
 }
 
@@ -19,7 +18,7 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-  subj.producer.drop.mockReset()
+  jest.resetAllMocks()
 })
 
 test('#drop()', () => {

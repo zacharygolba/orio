@@ -3,49 +3,62 @@
 import Unique from '../unique'
 import { createProducer } from '../../producer'
 
-let fn
-let subj
+const fn = jest.fn(item => item)
 
-beforeEach(() => {
+const unique = () => {
   const producer = createProducer(Promise.resolve([1, 2, 1, 3, 2, 3]))
+  const adapter = new Unique(producer, fn)
 
-  fn = jest.fn(item => item)
-  subj = new Unique(producer, fn)
-  // $FlowIgnore
-  subj.producer.drop = jest.fn()
-})
-
-afterEach(() => {
-  fn.mockClear()
-})
+  jest.spyOn(adapter.producer, 'drop')
+  return adapter
+}
 
 test('#drop()', () => {
+  const subj = unique()
+
   expect(subj.drop()).toBeUndefined()
   expect(subj.history.size).toBe(0)
   expect(subj.producer.drop).toHaveBeenCalled()
 })
 
-test('#next()', async () => {
-  {
-    const next = await subj.next()
+describe('#next()', () => {
+  let subj
 
-    expect(next).toMatchSnapshot()
-    expect(fn).toHaveBeenLastCalledWith(next.value)
-  }
+  beforeAll(() => {
+    subj = unique()
+  })
 
-  {
-    const next = await subj.next()
+  beforeEach(() => {
+    fn.mockClear()
+  })
 
-    expect(next).toMatchSnapshot()
-    expect(fn).toHaveBeenLastCalledWith(next.value)
-  }
+  test('call #1', async () => {
+    const result = await subj.next()
 
-  {
-    const next = await subj.next()
+    expect(result).toMatchSnapshot()
+    expect(fn).toHaveBeenLastCalledWith(result.value)
+  })
 
-    expect(next).toMatchSnapshot()
-    expect(fn).toHaveBeenLastCalledWith(next.value)
-  }
+  test('call #2', async () => {
+    const result = await subj.next()
 
-  expect(subj.next()).toMatchSnapshot()
+    expect(result).toMatchSnapshot()
+    expect(fn).toHaveBeenLastCalledWith(result.value)
+  })
+
+  test('call #3', async () => {
+    const result = await subj.next()
+
+    expect(result).toMatchSnapshot()
+    expect(fn).toHaveBeenLastCalledWith(result.value)
+  })
+
+  test('call #4', async () => {
+    const { done, value } = await subj.next()
+
+    expect(done).toBe(true)
+    expect(value).toBeUndefined()
+    expect(fn).toHaveBeenCalledWith(3)
+    expect(fn).toHaveBeenCalledWith(2)
+  })
 })

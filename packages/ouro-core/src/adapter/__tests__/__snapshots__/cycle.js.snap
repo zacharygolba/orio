@@ -8,11 +8,7 @@ Cycle {
   "producer": Indexed {
     "drop": [Function],
     "index": 0,
-    "source": Array [
-      1,
-      2,
-      3,
-    ],
+    "source": Array [],
   },
   "useProducer": true,
 }

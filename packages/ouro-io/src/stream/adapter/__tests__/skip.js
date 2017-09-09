@@ -7,14 +7,13 @@ let subj
 
 beforeEach(() => {
   const producer = createProducer(Promise.resolve([1, 2, 3, 4, 5, 6]))
-
   subj = new Skip(producer, 3)
-  // $FlowIgnore
-  subj.producer.drop = jest.fn()
+
+  jest.spyOn(subj.producer, 'drop')
 })
 
 afterEach(() => {
-  subj.producer.drop.mockReset()
+  jest.resetAllMocks()
 })
 
 test('#drop()', () => {

@@ -1,24 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`#next() 1`] = `
+exports[`#next() call #1 1`] = `
 Object {
   "done": false,
   "value": 1,
 }
 `;
 
-exports[`#next() 2`] = `
+exports[`#next() call #2 1`] = `
 Object {
   "done": false,
   "value": 2,
 }
 `;
 
-exports[`#next() 3`] = `
+exports[`#next() call #3 1`] = `
 Object {
   "done": false,
   "value": 3,
 }
 `;
-
-exports[`#next() 4`] = `Promise {}`;

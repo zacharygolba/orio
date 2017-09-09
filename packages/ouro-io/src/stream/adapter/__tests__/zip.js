@@ -8,10 +8,8 @@ let subj
 const zip = (a, b) => {
   const adapter = new Zip(a, b)
 
-  // $FlowIgnore
-  adapter.producerA.drop = jest.fn()
-  // $FlowIgnore
-  adapter.producerB.drop = jest.fn()
+  jest.spyOn(adapter.producerA, 'drop')
+  jest.spyOn(adapter.producerB, 'drop')
 
   return adapter
 }
@@ -23,8 +21,7 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-  subj.producerA.drop.mockReset()
-  subj.producerB.drop.mockReset()
+  jest.resetAllMocks()
 })
 
 test('#drop()', () => {

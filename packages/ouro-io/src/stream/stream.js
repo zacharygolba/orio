@@ -83,8 +83,8 @@ export default class Stream<T> implements AsyncProducer<T> {
   }
 
   async every(fn: T => Promise<boolean> | boolean): Promise<boolean> {
-    const item = await this.find(i => !fn(i))
-    return item !== undefined
+    const item = await this.find(async i => !await fn(i))
+    return item === undefined
   }
 
   filterMap<U>(fn: T => Promise<?U> | ?U): Stream<U> {
@@ -140,7 +140,7 @@ export default class Stream<T> implements AsyncProducer<T> {
   async next(): AsyncIteratorResult<T, void> {
     const next = await this.producer.next().catch(e => {
       this.drop()
-      return Promise.reject(e)
+      throw e
     })
 
     if (next.done) {
@@ -169,8 +169,8 @@ export default class Stream<T> implements AsyncProducer<T> {
 
   async product(): Promise<number> {
     const [lhs, rhs] = await Promise.all([
-      this.next().then(value => +value || 0),
-      this.next().then(value => +value || 0),
+      this.next().then(({ value }) => +value || 0),
+      this.next().then(({ value }) => +value || 0),
     ])
 
     return this.reduce((acc, item) => acc * +item, lhs * rhs)

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#constructor() 1`] = `
+Once {
+  "done": false,
+  "value": "test",
+}
+`;
+
+exports[`#drop() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#drop() 2`] = `
+Once {
+  "done": true,
+  "value": "test",
+}
+`;
+
+exports[`#next() 1`] = `
+Object {
+  "done": false,
+  "value": "test",
+}
+`;
+
+exports[`#next() 2`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;

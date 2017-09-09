@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#constructor() 1`] = `
+Unbound {
+  "done": false,
+  "source": Empty {},
+}
+`;
+
+exports[`#drop() with an async producer 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#drop() with an iterable 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#next() 1`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#next() 2`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;

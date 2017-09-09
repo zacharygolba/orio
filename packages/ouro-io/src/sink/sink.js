@@ -20,11 +20,6 @@ export default class Sink<T> implements AsyncConsumer<T> {
     this.consumer.drop()
   }
 
-  push(producer: AsyncSource<T>): Sink<T> {
-    this.producer = this.producer.chain(producer)
-    return this
-  }
-
   flush(): Promise<Sink<T>> {
     return this.producer
       .forEach(chunk => this.consumer.write(chunk))
@@ -36,6 +31,11 @@ export default class Sink<T> implements AsyncConsumer<T> {
         this.drop()
         return Promise.reject(e)
       })
+  }
+
+  push(producer: AsyncSource<T>): Sink<T> {
+    this.producer = this.producer.chain(producer)
+    return this
   }
 
   write(chunk: T): Promise<void> {

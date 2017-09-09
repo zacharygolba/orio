@@ -8,8 +8,7 @@ let subj
 const flatMap = producer => {
   const adapter = new FlatMap(producer, item => Promise.resolve([item, item]))
 
-  // $FlowIgnore
-  adapter.parent.drop = jest.fn()
+  jest.spyOn(adapter.parent, 'drop')
   return adapter
 }
 
@@ -19,7 +18,7 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-  subj.parent.drop.mockReset()
+  jest.resetAllMocks()
 })
 
 test('#drop()', () => {

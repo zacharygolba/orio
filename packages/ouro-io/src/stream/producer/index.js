@@ -5,6 +5,7 @@ import type { AsyncProducer, AsyncSource } from 'ouro-types'
 
 import * as nodeStream from '../../shims/node'
 import * as webStream from '../../shims/web'
+import Stream from '../stream'
 
 import Chars from './chars'
 import Empty from './empty'
@@ -23,6 +24,10 @@ export function createProducer<T>(source: AsyncSource<T>): AsyncProducer<T> {
 
   if (source instanceof Promise) {
     return new Task(source)
+  }
+
+  if (source instanceof Stream) {
+    return source.producer
   }
 
   if (webStream.isReadable(source)) {

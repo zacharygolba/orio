@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#constructor() 1`] = `
+Sink {
+  "consumer": Writer {
+    "dest": WritableWrapper {
+      "dest": Writable {
+        "_events": Object {},
+        "_eventsCount": 0,
+        "_maxListeners": undefined,
+        "_writableState": WritableState {
+          "bufferProcessing": false,
+          "bufferedRequest": null,
+          "bufferedRequestCount": 0,
+          "corked": 0,
+          "corkedRequestsFree": Object {
+            "entry": null,
+            "finish": [Function],
+            "next": null,
+          },
+          "decodeStrings": true,
+          "defaultEncoding": "utf8",
+          "destroyed": false,
+          "ended": false,
+          "ending": false,
+          "errorEmitted": false,
+          "finalCalled": false,
+          "finished": false,
+          "highWaterMark": 16384,
+          "lastBufferedRequest": null,
+          "length": 0,
+          "needDrain": false,
+          "objectMode": false,
+          "onwrite": [Function],
+          "pendingcb": 0,
+          "prefinished": false,
+          "sync": true,
+          "writecb": null,
+          "writelen": 0,
+          "writing": false,
+        },
+        "_write": [Function],
+        "_writev": [Function],
+        "domain": null,
+        "writable": true,
+      },
+      "writeChunk": [Function],
+    },
+    "drop": [Function],
+  },
+  "producer": Stream {
+    "chain": [Function],
+    "producer": Empty {},
+  },
+}
+`;
