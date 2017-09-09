@@ -1,10 +1,12 @@
 // @flow
 
+import { ToString } from 'ouro-traits'
 import type { AsyncConsumer, AsyncSource } from 'ouro-types'
 
 import * as stream from '../stream'
 import type { Stream } from '../stream'
 
+@ToString
 export default class Sink<T> implements AsyncConsumer<T> {
   consumer: AsyncConsumer<T>
   producer: Stream<T>

@@ -3,11 +3,13 @@
 import { PassThrough, Readable } from 'stream'
 
 import * as result from 'ouro-result'
+import { ToString } from 'ouro-traits'
 import { setImmediate } from 'ouro-utils'
 import type { AsyncIteratorResult, ReadableSource } from 'ouro-types'
 
 type Callback = () => void
 
+@ToString
 export default class ReadableWrapper<T> implements ReadableSource<T> {
   pipe: ReadablePipe
 
