@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#next() with a bound lhs > rhs 1`] = `
+Object {
+  "done": false,
+  "value": Array [
+    1,
+    "test",
+  ],
+}
+`;
+
+exports[`#next() with a bound lhs > rhs 2`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#next() with a bound lhs > rhs 3`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#next() with a bound lhs > rhs 4`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#next() with a self reference to lhs 1`] = `
+Object {
+  "done": false,
+  "value": Array [
+    1,
+    2,
+  ],
+}
+`;
+
+exports[`#next() with a self reference to lhs 2`] = `
+Object {
+  "done": false,
+  "value": Array [
+    3,
+    4,
+  ],
+}
+`;
+
+exports[`#next() with a self reference to lhs 3`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#next() with a self reference to lhs 4`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
+
+exports[`#next() with an lhs == rhs 1`] = `
+Object {
+  "done": false,
+  "value": Array [
+    "test",
+    1,
+  ],
+}
+`;
+
+exports[`#next() with an lhs == rhs 2`] = `
+Object {
+  "done": false,
+  "value": Array [
+    "test",
+    2,
+  ],
+}
+`;
+
+exports[`#next() with an lhs == rhs 3`] = `
+Object {
+  "done": false,
+  "value": Array [
+    "test",
+    3,
+  ],
+}
+`;
+
+exports[`#next() with an lhs == rhs 4`] = `
+Object {
+  "done": true,
+  "value": undefined,
+}
+`;
