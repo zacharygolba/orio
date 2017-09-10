@@ -8,3 +8,4 @@ if (asyncIterator == null) {
 }
 
 export const ASYNC_ITERATOR: Symbol = asyncIterator
+export const HAS_SET_IMMEDIATE: boolean = typeof setImmediate === 'function'

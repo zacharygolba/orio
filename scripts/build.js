@@ -11,7 +11,6 @@ import readdir from './utils/readdir'
 
 const EXAMPLES = path.join(__dirname, '..', 'examples')
 const PACKAGES = path.join(__dirname, '..', 'packages')
-const TESTS = '**/__tests__/**'
 
 const BUILDING = chalk.bgYellow.black(' BUILDING ')
 const COMPLETE = chalk.bgGreen.black(' COMPLETE ')
@@ -32,11 +31,12 @@ async function build(targetPath) {
     command('babel')
       .arg(src)
       .arg('-d', lib)
-      .arg('--ignore', TESTS)
+      .arg('--ignore', '**/__mocks__/**,**/__tests__/**')
       .shell()
       .exec(),
     command('flow-copy-source')
-      .arg('-i', TESTS)
+      .arg('-i', '**/__mocks__/**')
+      .arg('-i', '**/__tests__/**')
       .arg(src, lib)
       .shell()
       .exec(),
@@ -100,8 +100,11 @@ async function main() {
 
   await command('rollup')
     .arg('-c')
+    .arg('--silent')
     .env('NODE_ENV', 'release')
     .shell()
+    .stdout('inherit')
+    .stderr('inherit')
     .exec()
 }
 

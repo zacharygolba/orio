@@ -7,13 +7,11 @@ let writableBrandCheck = (_: mixed): boolean %checks => false
 
 if (typeof ReadableStream !== 'undefined') {
   readableBrandCheck = (value: mixed): boolean %checks =>
-    // eslint-disable-next-line no-undef
     value instanceof ReadableStream
 }
 
 if (typeof WritableStream !== 'undefined') {
   writableBrandCheck = (value: mixed): boolean %checks =>
-    // eslint-disable-next-line no-undef
     value instanceof WritableStream
 }
 
