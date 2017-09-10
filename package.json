@@ -42,12 +42,17 @@
     "rollup-plugin-json": "2.3.0",
     "rollup-plugin-license": "0.5.0",
     "rollup-plugin-node-resolve": "3.0.0",
-    "shx": "0.2.2"
+    "shx": "0.2.2",
+    "web-streams-polyfill": "1.3.2"
   },
   "jest": {
     "moduleNameMapper": {
+      "^orio$": "<rootDir>/packages/orio-core/src/index.js",
       "orio-(.+)$": "<rootDir>/packages/orio-$1/src/index.js"
-    }
+    },
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
+    ]
   },
   "lint-staged": {
     "*.js": [
