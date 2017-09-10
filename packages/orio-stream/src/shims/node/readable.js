@@ -4,7 +4,7 @@ import { PassThrough, Readable } from 'stream'
 
 import * as result from 'orio-result'
 import { ToString } from 'orio-traits'
-import { setImmediate } from 'orio-utils'
+import { timers } from 'orio-utils'
 import type { AsyncIteratorResult, ReadableSource } from 'orio-types'
 
 type Callback = () => void
@@ -64,6 +64,6 @@ async function poll<T>(source: ReadablePipe): AsyncIteratorResult<T, void> {
     return result.done()
   }
 
-  await setImmediate()
+  await timers.immediate()
   return poll(source)
 }

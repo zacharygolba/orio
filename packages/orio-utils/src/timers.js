@@ -1,11 +1,19 @@
 // @flow
 
-let timer = setTimeout
+import { HAS_SET_IMMEDIATE } from './consts'
 
-if (typeof module !== 'undefined' && module.exports) {
-  timer = global.setImmediate
+type ImmediateFn = Function => void
+
+let immediateFn: ImmediateFn = fn => {
+  setTimeout(fn, 0)
 }
 
-export function setImmediate(): Promise<void> {
-  return new Promise(resolve => timer(resolve))
+if (HAS_SET_IMMEDIATE) {
+  immediateFn = fn => {
+    setImmediate(fn)
+  }
+}
+
+export function immediate(): Promise<void> {
+  return new Promise(resolve => immediateFn(resolve))
 }
