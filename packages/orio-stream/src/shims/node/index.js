@@ -5,6 +5,8 @@ import { Readable, Writable } from 'stream'
 import ReadableWrapper from './readable'
 import WritableWrapper from './writable'
 
+export type { ReadableWrapper, WritableWrapper }
+
 export function isReadable(value: mixed): boolean %checks {
   return value instanceof Readable
 }

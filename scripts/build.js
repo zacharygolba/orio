@@ -100,8 +100,11 @@ async function main() {
 
   await command('rollup')
     .arg('-c')
+    .arg('--silent')
     .env('NODE_ENV', 'release')
     .shell()
+    .stdout('inherit')
+    .stderr('inherit')
     .exec()
 }
 
