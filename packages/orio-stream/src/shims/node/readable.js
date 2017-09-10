@@ -4,7 +4,7 @@ import { PassThrough, Readable } from 'stream'
 
 import * as result from 'orio-result'
 import { ToString } from 'orio-traits'
-import { setImmediate } from 'orio-utils'
+import { timers } from 'orio-utils'
 import type { AsyncIteratorResult, ReadableSource } from 'orio-types'
 
 type Callback = () => void
@@ -12,15 +12,34 @@ type Callback = () => void
 @ToString
 export default class ReadableWrapper<T> implements ReadableSource<T> {
   pipe: ReadablePipe
+  source: Readable
 
   constructor(source: Readable) {
-    this.pipe = new ReadablePipe()
-    source.pipe(this.pipe).once('error', () => this.cancel())
+    const handleError = () => this.cancel()
+    const pipe = new ReadablePipe()
+
+    this.pipe = pipe
+    this.source = source
+
+    source
+      .once('error', handleError)
+      .pipe(pipe)
+      .once('error', handleError)
   }
 
   cancel(): void {
-    // $FlowFixMe
-    this.pipe.destroy()
+    const { pipe, source } = this
+
+    pipe.removeAllListeners()
+    source.unpipe(pipe)
+
+    if (typeof pipe.destroy === 'function') {
+      pipe.destroy()
+    }
+
+    if (typeof source.destroy === 'function') {
+      source.destroy()
+    }
   }
 
   read(): AsyncIteratorResult<T, void> {
@@ -34,9 +53,15 @@ class ReadablePipe extends PassThrough {
 
   constructor() {
     super({})
+
     this.pause()
+
     this.done = false
     this.error = undefined
+
+    this.once('error', e => {
+      this.error = e
+    })
   }
 
   end(
@@ -49,21 +74,21 @@ class ReadablePipe extends PassThrough {
   }
 }
 
-async function poll<T>(source: ReadablePipe): AsyncIteratorResult<T, void> {
-  const value: any = source.read()
+async function poll<T>(pipe: ReadablePipe): AsyncIteratorResult<T, void> {
+  const value: any = pipe.read()
+
+  if (pipe.error) {
+    throw pipe.error
+  }
 
   if (value != null) {
     return result.next(value)
   }
 
-  if (source.error) {
-    throw source.error
-  }
-
-  if (source.done) {
+  if (pipe.done) {
     return result.done()
   }
 
-  await setImmediate()
-  return poll(source)
+  await timers.immediate()
+  return poll(pipe)
 }

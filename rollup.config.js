@@ -2,22 +2,36 @@
 
 import * as path from 'path'
 
-import json from 'rollup-plugin-json'
-import gzip from 'rollup-plugin-gzip'
 import babel from 'rollup-plugin-babel'
+import gzip from 'rollup-plugin-gzip'
+import license from 'rollup-plugin-license'
 import minify from 'rollup-plugin-babel-minify'
 import resolve from 'rollup-plugin-node-resolve'
-import license from 'rollup-plugin-license'
+import progress from 'rollup-plugin-progress'
 import { stripIndents } from 'common-tags'
 
 import { version } from './lerna.json'
 
 const PACKAGES = path.join(__dirname, 'packages')
+const INTERNAL = path.join(process.cwd(), 'internal')
+
+const nodeStubs = {
+  resolveId: (importee /*: string */, _ /*: string */) => {
+    switch (importee) {
+      case 'stream':
+        return path.join(INTERNAL, 'stubs', 'stream.js')
+      case 'util':
+        return path.join(INTERNAL, 'stubs', 'util.js')
+      default:
+        return undefined
+    }
+  },
+}
 
 const configFor = (name, provides = name, minified = false) => {
   let ext = 'js'
   const plugins = [
-    json(),
+    nodeStubs,
     babel(),
     resolve(),
     license({
@@ -26,6 +40,7 @@ const configFor = (name, provides = name, minified = false) => {
         Released under the MIT License.
       `,
     }),
+    progress(),
   ]
 
   if (minified) {

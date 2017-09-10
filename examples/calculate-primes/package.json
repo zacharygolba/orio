@@ -1,12 +1,12 @@
 {
   "name": "calculate-primes",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "repository": "github:zacharygolba/iter.js",
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
   "private": true,
   "main": "lib/index.js",
   "dependencies": {
-    "orio": "^0.0.1-alpha.2"
+    "orio": "^0.0.1-alpha.3"
   }
 }

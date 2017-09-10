@@ -1,6 +1,6 @@
 {
   "name": "orio-utils",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "Common utility functions to share between orio packages",
   "main": "lib/index.js",
   "module": "dist/index.es.js",

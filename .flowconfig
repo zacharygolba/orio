@@ -14,7 +14,9 @@ all=warn
 
 [options]
 experimental.const_params=true
+
 esproposal.decorators=ignore
+esproposal.export_star_as=enable
 
 include_warnings=true
 
