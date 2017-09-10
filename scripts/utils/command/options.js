@@ -21,7 +21,7 @@ const defaultValue = () => ({
   env: new Environment(),
   program: '',
   shell: false,
-  stdio: ['pipe', 'pipe', 'pipe'],
+  stdio: ['pipe', 'pipe', 'inherit'],
 })
 
 export default function optionsFor(command: Command): Options {

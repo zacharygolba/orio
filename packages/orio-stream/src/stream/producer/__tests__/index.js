@@ -15,9 +15,20 @@ import {
 } from '../'
 
 describe('#createProducer()', () => {
+  test('null | void => Empty', () => {
+    const producer = createProducer()
+    expect(producer).toBeInstanceOf(Empty)
+  })
+
   test('Promise<T> => Task<T>', () => {
     const producer = createProducer(Promise.resolve())
     expect(producer).toBeInstanceOf(Task)
+  })
+
+  test('ReadableStream => Reader<T>', () => {
+    const source = new ReadableStream()
+    const producer = createProducer(source)
+    expect(producer).toBeInstanceOf(Reader)
   })
 
   test('Readable => Reader<T>', () => {
@@ -44,12 +55,6 @@ describe('#createProducer()', () => {
   test('Iterable<T> => Unbound<T>', () => {
     const producer = createProducer(new Map().entries())
     expect(producer).toBeInstanceOf(Unbound)
-  })
-
-  test('null | void => Empty', () => {
-    const producer = createProducer()
-
-    expect(producer).toBeInstanceOf(Empty)
   })
 
   // prettier-ignore
