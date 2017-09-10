@@ -1,11 +1,17 @@
 // @flow
 
-let timer = setTimeout
+type ImmediateFn = Function => void
 
-if (typeof module !== 'undefined' && module.exports) {
-  timer = global.setImmediate
+let immediateFn: ImmediateFn = fn => {
+  setTimeout(fn, 0)
 }
 
-export function setImmediate(): Promise<void> {
-  return new Promise(resolve => timer(resolve))
+if (typeof setImmediate === 'function') {
+  immediateFn = fn => {
+    setImmediate(fn)
+  }
+}
+
+export function immediate(): Promise<void> {
+  return new Promise(resolve => immediateFn(resolve))
 }

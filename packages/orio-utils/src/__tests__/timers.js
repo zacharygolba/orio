@@ -2,6 +2,19 @@
 
 import * as timers from '../timers'
 
-test('.setImmediate()', async () => {
-  expect(await timers.setImmediate()).toBeUndefined()
+beforeAll(() => {
+  jest.useFakeTimers()
+})
+
+afterEach(() => {
+  jest.clearAllTimers()
+})
+
+test('.immediate()', async () => {
+  const handle = timers.immediate()
+
+  jest.runAllImmediates()
+
+  expect(setImmediate).toHaveBeenCalled()
+  expect(await handle).toBeUndefined()
 })
