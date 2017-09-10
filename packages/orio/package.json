@@ -1,13 +1,13 @@
 {
   "name": "orio",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "repository": "github:zacharygolba/orio",
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
   "main": "lib/index.js",
   "module": "dist/index.es.js",
   "dependencies": {
-    "orio-async": "^0.0.1-alpha.3",
+    "orio-async": "^0.0.1-alpha.4",
     "orio-iter": "^0.0.1-alpha.3"
   }
 }
