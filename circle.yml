@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: node:8
+      - image: zacharygolba/orio
         environment:
           YARN_VERSION: '1.0.1'
     working_directory: ~/orio
