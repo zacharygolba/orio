@@ -24,6 +24,7 @@
   "plugins": [
     "tailcall-optimization",
     "transform-decorators-legacy",
+    "transform-export-extensions",
     "transform-flow-strip-types"
   ]
 }
