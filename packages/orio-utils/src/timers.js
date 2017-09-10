@@ -1,12 +1,14 @@
 // @flow
 
+import { HAS_SET_IMMEDIATE } from './consts'
+
 type ImmediateFn = Function => void
 
 let immediateFn: ImmediateFn = fn => {
   setTimeout(fn, 0)
 }
 
-if (typeof setImmediate === 'function') {
+if (HAS_SET_IMMEDIATE) {
   immediateFn = fn => {
     setImmediate(fn)
   }
