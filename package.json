@@ -48,7 +48,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "^orio$": "<rootDir>/packages/orio-core/src/index.js",
+      "^orio$": "<rootDir>/packages/orio/src/index.js",
       "orio-(.+)$": "<rootDir>/packages/orio-$1/src/index.js"
     },
     "setupFiles": [
