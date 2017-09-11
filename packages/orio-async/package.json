@@ -1,13 +1,15 @@
 {
-  "name": "orio",
-  "version": "0.0.1-alpha.3",
+  "name": "orio-async",
+  "version": "0.0.1-alpha.4",
   "repository": "github:zacharygolba/orio",
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
   "main": "lib/index.js",
   "module": "dist/index.es.js",
   "dependencies": {
-    "orio-iter": "^0.0.1-alpha.3",
-    "orio-stream": "^0.0.1-alpha.3"
+    "orio-result": "^0.0.1-alpha.2",
+    "orio-traits": "^0.0.1-alpha.3",
+    "orio-types": "^0.0.1-alpha.2",
+    "orio-utils": "^0.0.1-alpha.3"
   }
 }
