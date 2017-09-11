@@ -7,5 +7,6 @@ RUN cd /tmp \
     && curl -o- -L https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --import \
     && curl -fSLO --compressed https://yarnpkg.com/latest.tar.gz \
     && curl -fSLO --compressed https://yarnpkg.com/latest.tar.gz.asc \
+    && gpg --batch --verify latest.tar.gz.asc latest.tar.gz \
     && tar zvxf latest.tar.gz -C /opt/yarn --strip-components=1 \
     && rm -rf /tmp/*
