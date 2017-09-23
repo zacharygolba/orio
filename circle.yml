@@ -13,7 +13,7 @@ jobs:
           keys:
             - dependency-cache-
       - run:
-          name: Install Dependencies
+          name: Install
           command: yarn && yarn lerna link
       - save_cache:
           key: dependency-cache-{{ epoch }}
@@ -23,19 +23,19 @@ jobs:
           name: Greenkeeper Lockfile Update
           command: greenkeeper-lockfile-update
       - run:
-          name: Build Project
-          command: yarn build
-      - run:
           name: Lint
           command: yarn lint
       - run:
-          name: Check Types
+          name: Flow
           command: yarn flow
+      - run:
+          name: Build
+          command: yarn build
       - run:
           name: Test
           command: yarn test --coverage
       - run:
-          name: Report Coverage
+          name: Coverage
           command: yarn codecov
       - run:
           name: Greenkeeper Lockfile Upload
