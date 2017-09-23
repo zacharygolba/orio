@@ -5,6 +5,13 @@ version: '{build}'
 branches:
   only:
     - master
+cache:
+  - C:\ProgramData\chocolatey\bin -> appveyor.yml
+  - C:\ProgramData\chocolatey\lib -> appveyor.yml
+  - '%APPDATA%\ESLint'
+  - '%APPDATA%\Jest'
+  - '%APPDATA%\Yarn'
+  - node_modules
 platform: x64
 environment:
   nodejs_version: 8
@@ -16,7 +23,7 @@ install:
   - yarn lerna link
   - yarn build
 test_script:
-  - yarn lint
+  - yarn lint --cache --cache-location %APPDATA%\ESLint
   - yarn flow
-  - yarn test --coverage
+  - yarn test --coverage --cacheDirectory %APPDATA%\Jest
   - yarn codecov
