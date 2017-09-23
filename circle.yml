@@ -15,9 +15,10 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            yarn global add greenkeeper-lockfile@1 && \
-            yarn && \
-            yarn build
+            yarn global add greenkeeper-lockfile@1 \
+            && yarn \
+            && yarn lerna link \
+            && yarn build
       - save_cache:
           key: dependency-cache-{{ epoch }}
           paths:

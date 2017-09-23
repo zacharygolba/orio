@@ -7,7 +7,7 @@ import type { AsyncProducer, AsyncIteratorResult } from 'orio-types'
 @ToString
 @AsAsyncIterator
 export default class Map<T, U> implements AsyncProducer<U> {
-  /*:: @@iterator: () => $AsyncIterator<U, void, void> */
+  /*:: @@asyncIterator: () => $AsyncIterator<U, void, void> */
   fn: T => Promise<U> | U
   producer: AsyncProducer<T>
 

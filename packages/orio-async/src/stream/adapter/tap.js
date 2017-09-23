@@ -6,7 +6,7 @@ import type { AsyncProducer, AsyncIteratorResult } from 'orio-types'
 @ToString
 @AsAsyncIterator
 export default class Tap<T> implements AsyncProducer<T> {
-  /*:: @@iterator: () => $AsyncIterator<T, void, void> */
+  /*:: @@asyncIterator: () => $AsyncIterator<T, void, void> */
   fn: T => Promise<void> | void
   producer: AsyncProducer<T>
 
