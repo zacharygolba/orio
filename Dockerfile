@@ -1,12 +1,13 @@
-FROM node:8
+FROM node:8-alpine
 
 RUN cd /tmp \
-    && apt-get update \
-    && apt-get install -y libelf1 \
-    && rm -rf /opt/yarn/* \
-    && curl -o- -L https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --import \
-    && curl -fSLO --compressed https://yarnpkg.com/latest.tar.gz \
-    && curl -fSLO --compressed https://yarnpkg.com/latest.tar.gz.asc \
-    && gpg --batch --verify latest.tar.gz.asc latest.tar.gz \
-    && tar zvxf latest.tar.gz -C /opt/yarn --strip-components=1 \
+    && apk update \
+    && apk upgrade \
+    && apk add --no-cache --virtual .build-deps curl ca-certificates openssl \
+    && curl -o /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub \
+    && curl -fLSO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.25-r0/glibc-2.25-r0.apk \
+    && apk add g++ git glibc-2.25-r0.apk make openssh python \
+    && yarn global add greenkeeper-lockfile@1 \
+    && apk del --no-cache .build-deps \
+    && yarn cache clean \
     && rm -rf /tmp/*
