@@ -13,6 +13,7 @@ install:
   - choco install yarn
   - refreshenv
   - yarn
+  - yarn lerna link
   - yarn build
 test_script:
   - yarn lint
