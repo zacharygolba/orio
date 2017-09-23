@@ -13,15 +13,15 @@ import { stripIndents } from 'common-tags'
 import { version } from './lerna.json'
 
 const PACKAGES = path.join(__dirname, 'packages')
-const INTERNAL = path.join(process.cwd(), 'internal')
+const PRIVATE = path.join(process.cwd(), 'private')
 
 const nodeStubs = {
   resolveId: (importee /*: string */, _ /*: string */) => {
     switch (importee) {
       case 'stream':
-        return path.join(INTERNAL, 'stubs', 'stream.js')
+        return path.join(PRIVATE, 'stubs', 'stream.js')
       case 'util':
-        return path.join(INTERNAL, 'stubs', 'util.js')
+        return path.join(PRIVATE, 'stubs', 'util.js')
       default:
         return undefined
     }

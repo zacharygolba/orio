@@ -5,6 +5,10 @@ version: '{build}'
 branches:
   only:
     - master
+cache:
+  - '%APPDATA%\ESLint'
+  - '%APPDATA%\Jest'
+  - '%LOCALAPPDATA%\Yarn'
 platform: x64
 environment:
   nodejs_version: 8
@@ -13,9 +17,10 @@ install:
   - choco install yarn
   - refreshenv
   - yarn
+  - yarn lerna link
   - yarn build
 test_script:
-  - yarn lint
+  - yarn lint --cache --cache-location %APPDATA%\ESLint
   - yarn flow
-  - yarn test --coverage
+  - yarn test --coverage --cacheDirectory %APPDATA%\Jest
   - yarn codecov
