@@ -32,21 +32,26 @@ test('#chain()', () => {
   const subj = orio.of(1, 2, 3)
 
   subj.chain(source)
-  expect(Chain).toHaveBeenLastCalledWith(subj.producer, source)
+  expect(Chain).toHaveBeenLastCalledWith(
+    expect.objectContaining(subj.producer),
+    source,
+  )
 })
 
 test('#cycle()', () => {
   const subj = orio.of(1, 2, 3)
 
   subj.cycle()
-  expect(Cycle).toHaveBeenLastCalledWith(subj.producer)
+  expect(Cycle).toHaveBeenLastCalledWith(expect.objectContaining(subj.producer))
 })
 
 test('#enumerate()', () => {
   const subj = orio.range()
 
   subj.enumerate()
-  expect(Enumerate).toHaveBeenLastCalledWith(subj.producer)
+  expect(Enumerate).toHaveBeenLastCalledWith(
+    expect.objectContaining(subj.producer),
+  )
 })
 
 test('#filter()', () => {
@@ -54,7 +59,10 @@ test('#filter()', () => {
   const fn = jest.fn()
 
   subj.filter(fn)
-  expect(Filter).toHaveBeenLastCalledWith(subj.producer, fn)
+  expect(Filter).toHaveBeenLastCalledWith(
+    expect.objectContaining(subj.producer),
+    fn,
+  )
 })
 
 test('#filterMap()', () => {
@@ -62,7 +70,10 @@ test('#filterMap()', () => {
   const fn = jest.fn()
 
   subj.filterMap(fn)
-  expect(FilterMap).toHaveBeenLastCalledWith(subj.producer, fn)
+  expect(FilterMap).toHaveBeenLastCalledWith(
+    expect.objectContaining(subj.producer),
+    fn,
+  )
 })
 
 test('#flatMap()', () => {
@@ -70,14 +81,20 @@ test('#flatMap()', () => {
   const fn = jest.fn()
 
   subj.flatMap(fn)
-  expect(FlatMap).toHaveBeenLastCalledWith(subj.producer, fn)
+  expect(FlatMap).toHaveBeenLastCalledWith(
+    expect.objectContaining(subj.producer),
+    fn,
+  )
 })
 
 test('#flatten()', () => {
   const subj = orio.range()
 
   subj.flatten()
-  expect(FlatMap).toHaveBeenLastCalledWith(subj.producer, identity)
+  expect(FlatMap).toHaveBeenLastCalledWith(
+    expect.objectContaining(subj.producer),
+    identity,
+  )
 })
 
 test('#map()', () => {
@@ -85,14 +102,20 @@ test('#map()', () => {
   const fn = jest.fn()
 
   subj.map(fn)
-  expect(Map).toHaveBeenLastCalledWith(subj.producer, fn)
+  expect(Map).toHaveBeenLastCalledWith(
+    expect.objectContaining(subj.producer),
+    fn,
+  )
 })
 
 test('#skip()', () => {
   const subj = orio.range()
 
   subj.skip(3)
-  expect(Skip).toHaveBeenLastCalledWith(subj.producer, 3)
+  expect(Skip).toHaveBeenLastCalledWith(
+    expect.objectContaining(subj.producer),
+    3,
+  )
 })
 
 test('#skipWhile()', () => {
@@ -100,14 +123,20 @@ test('#skipWhile()', () => {
   const fn = jest.fn()
 
   subj.skipWhile(fn)
-  expect(SkipWhile).toHaveBeenLastCalledWith(subj.producer, fn)
+  expect(SkipWhile).toHaveBeenLastCalledWith(
+    expect.objectContaining(subj.producer),
+    fn,
+  )
 })
 
 test('#take()', () => {
   const subj = orio.range()
 
   subj.take(5)
-  expect(Take).toHaveBeenLastCalledWith(subj.producer, 5)
+  expect(Take).toHaveBeenLastCalledWith(
+    expect.objectContaining(subj.producer),
+    5,
+  )
 })
 
 test('#takeWhile()', () => {
@@ -115,7 +144,10 @@ test('#takeWhile()', () => {
   const fn = jest.fn()
 
   subj.takeWhile(fn)
-  expect(TakeWhile).toHaveBeenLastCalledWith(subj.producer, fn)
+  expect(TakeWhile).toHaveBeenLastCalledWith(
+    expect.objectContaining(subj.producer),
+    fn,
+  )
 })
 
 test('#tap()', () => {
@@ -123,7 +155,10 @@ test('#tap()', () => {
   const fn = jest.fn()
 
   subj.tap(fn)
-  expect(Tap).toHaveBeenLastCalledWith(subj.producer, fn)
+  expect(Tap).toHaveBeenLastCalledWith(
+    expect.objectContaining(subj.producer),
+    fn,
+  )
 })
 
 test('#unique()', () => {
@@ -132,14 +167,20 @@ test('#unique()', () => {
     const fn = jest.fn()
 
     subj.unique(fn)
-    expect(Unique).toHaveBeenLastCalledWith(subj.producer, fn)
+    expect(Unique).toHaveBeenLastCalledWith(
+      expect.objectContaining(subj.producer),
+      fn,
+    )
   }
 
   {
     const subj = orio.range()
 
     subj.unique()
-    expect(Unique).toHaveBeenLastCalledWith(subj.producer, identity)
+    expect(Unique).toHaveBeenLastCalledWith(
+      expect.objectContaining(subj.producer),
+      identity,
+    )
   }
 })
 
@@ -149,13 +190,19 @@ test('#zip()', () => {
     const subj = orio.range()
 
     subj.zip(source)
-    expect(Zip).toHaveBeenLastCalledWith(subj.producer, source)
+    expect(Zip).toHaveBeenLastCalledWith(
+      expect.objectContaining(subj.producer),
+      expect.objectContaining(source),
+    )
   }
 
   {
     const subj = orio.range()
 
     subj.zip()
-    expect(Zip).toHaveBeenLastCalledWith(subj.producer, subj.producer)
+    expect(Zip).toHaveBeenLastCalledWith(
+      expect.objectContaining(subj.producer),
+      expect.objectContaining(subj.producer),
+    )
   }
 })
