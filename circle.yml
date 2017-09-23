@@ -14,19 +14,17 @@ jobs:
             - dependency-cache-
       - run:
           name: Install Dependencies
-          command: |
-            yarn \
-            && yarn lerna link \
-            && yarn build
+          command: yarn && yarn lerna link
       - save_cache:
           key: dependency-cache-{{ epoch }}
           paths:
-            - ~/.cache/yarn
-            - ~/.yarn
-            - ~/.yarn-cache
+            - /usr/local/share/.cache/yarn
       - run:
           name: Greenkeeper Lockfile Update
           command: greenkeeper-lockfile-update
+      - run:
+          name: Build Project
+          command: yarn build
       - run:
           name: Lint
           command: yarn lint
