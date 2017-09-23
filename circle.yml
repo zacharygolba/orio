@@ -21,7 +21,7 @@ jobs:
           command: yarn build
       - run:
           name: Lint
-          command: yarn lint
+          command: yarn lint --cache --cache-location /usr/local/share/.cache/eslint
       - run:
           name: Flow
           command: yarn flow
@@ -37,5 +37,6 @@ jobs:
       - save_cache:
           key: cache-{{ epoch }}
           paths:
+            - /usr/local/share/.cache/eslint
             - /usr/local/share/.cache/jest
             - /usr/local/share/.cache/yarn
