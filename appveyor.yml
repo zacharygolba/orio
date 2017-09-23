@@ -14,7 +14,6 @@ cache:
 platform: x64
 environment:
   nodejs_version: 8
-  APPVEYOR_CACHE_SKIP_RESTORE: true
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
   - choco install yarn
