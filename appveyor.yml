@@ -10,11 +10,11 @@ cache:
   - C:\ProgramData\chocolatey\lib -> appveyor.yml
   - '%APPDATA%\ESLint'
   - '%APPDATA%\Jest'
-  - '%APPDATA%\Yarn'
-  - node_modules
+  - '%LOCALAPPDATA%\Yarn'
 platform: x64
 environment:
   nodejs_version: 8
+  APPVEYOR_CACHE_SKIP_RESTORE: true
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
   - choco install yarn
