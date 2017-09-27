@@ -31,7 +31,7 @@
     "flow-typed": "2.1.5",
     "husky": "0.14.3",
     "jest": "21.1.0",
-    "jest-cli": "21.1.0",
+    "jest-cli": "21.2.0",
     "lerna": "2.2.0",
     "lint-staged": "4.2.2",
     "prettier": "1.7.0",
