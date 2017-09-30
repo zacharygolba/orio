@@ -1,94 +1,94 @@
 // @flow
 
-import { PassThrough, Readable } from 'stream'
+import { Readable } from 'stream'
 
 import * as result from 'orio-result'
 import { ToString } from 'orio-traits'
-import { timers } from 'orio-utils'
 import type { AsyncIteratorResult, ReadableSource } from 'orio-types'
-
-type Callback = () => void
 
 @ToString
 export default class ReadableWrapper<T> implements ReadableSource<T> {
-  pipe: ReadablePipe
+  done: boolean
+  error: ?Error
   source: Readable
+  handleEnd: () => void
+  handleError: Error => void
 
   constructor(source: Readable) {
-    const handleError = () => this.cancel()
-    const pipe = new ReadablePipe()
-
-    this.pipe = pipe
+    this.done = false
+    this.error = null
     this.source = source
+    this.handleEnd = () => this.cancel()
+    this.handleError = e => {
+      this.error = e
+      this.cancel()
+    }
 
-    source
-      .once('error', handleError)
-      .pipe(pipe)
-      .once('error', handleError)
+    source.once('end', this.handleEnd).once('error', this.handleError)
   }
 
   cancel(): void {
-    const { pipe, source } = this
+    this.done = true
 
-    pipe.removeAllListeners()
-    source.unpipe(pipe)
+    this.source.removeListener('error', this.handleEnd)
+    this.source.removeListener('error', this.handleError)
 
-    if (typeof pipe.destroy === 'function') {
-      pipe.destroy()
-    }
-
-    if (typeof source.destroy === 'function') {
-      source.destroy()
+    if (typeof this.source.destroy === 'function') {
+      this.source.destroy()
     }
   }
 
   read(): AsyncIteratorResult<T, void> {
-    return poll(this.pipe)
-  }
-}
+    if (this.done && this.error != null) {
+      return Promise.reject(this.error)
+    } else if (this.done) {
+      return Promise.resolve({
+        done: true,
+        value: undefined,
+      })
+    } else if (this.source.closed === true) {
+      this.cancel()
+      return this.read()
+    }
 
-class ReadablePipe extends PassThrough {
-  error: ?Error
-  done: boolean
+    return new Promise((resolve, reject) => {
+      let handleData = null
+      let handleEnd = null
+      let handleError = null
 
-  constructor() {
-    super({})
+      const cleanup = () => {
+        if (handleData != null) {
+          this.source.removeListener('data', handleData)
+        }
 
-    this.pause()
+        if (handleEnd != null) {
+          this.source.removeListener('end', handleEnd)
+        }
 
-    this.done = false
-    this.error = undefined
+        if (handleError != null) {
+          this.source.removeListener('error', handleError)
+        }
+      }
 
-    this.once('error', e => {
-      this.error = e
+      handleData = value => {
+        cleanup()
+        resolve(result.next(value))
+      }
+
+      handleEnd = () => {
+        this.cancel()
+        resolve(result.done())
+      }
+
+      handleError = e => {
+        cleanup()
+        reject(e)
+      }
+
+      this.source
+        .once('data', handleData)
+        .once('error', handleError)
+        .once('end', handleEnd)
     })
   }
-
-  end(
-    chunk?: Buffer | string | Callback,
-    encoding?: string | Callback,
-    callback?: Callback,
-  ): void {
-    super.end(chunk, encoding, callback)
-    this.done = true
-  }
-}
-
-async function poll<T>(pipe: ReadablePipe): AsyncIteratorResult<T, void> {
-  const value: any = pipe.read()
-
-  if (pipe.error) {
-    throw pipe.error
-  }
-
-  if (value != null) {
-    return result.next(value)
-  }
-
-  if (pipe.done) {
-    return result.done()
-  }
-
-  await timers.immediate()
-  return poll(pipe)
 }

@@ -25,18 +25,10 @@ beforeEach(() => {
   )
 
   jest.spyOn(wrapper, 'cancel')
-  jest.spyOn(wrapper.source, 'unpipe')
-  jest.spyOn(wrapper.pipe, 'removeAllListeners')
-})
-
-test('#constructor()', () => {
-  expect(wrapper).toMatchSnapshot()
 })
 
 test('#cancel()', async () => {
   expect(() => wrapper.cancel()).not.toThrow()
-  expect(wrapper.source.unpipe).toHaveBeenCalled()
-  expect(wrapper.pipe.removeAllListeners).toHaveBeenCalled()
 
   {
     const { done, value } = await wrapper.read()
@@ -63,7 +55,6 @@ describe('#read()', () => {
   test('failure', async () => {
     const error = new Error('test')
 
-    wrapper.pipe.emit('error', error)
     await wrapper.read().catch(e => {
       expect(e).toBe(error)
       expect(wrapper.cancel).toHaveBeenCalled()
