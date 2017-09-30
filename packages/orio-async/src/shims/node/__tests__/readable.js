@@ -4,39 +4,34 @@ import { Readable } from 'stream'
 
 import ReadableWrapper from '../readable'
 
-let data: Buffer
-let wrapper: ReadableWrapper<Buffer>
+const failureSource = e =>
+  new Readable({
+    read() {
+      this.emit('error', e)
+    },
+  })
 
-beforeEach(() => {
+const successSource = (data = Buffer.allocUnsafe(0)) => {
   let offset = 0
 
-  data = Buffer.from('Hello World')
-  wrapper = new ReadableWrapper(
-    new Readable({
-      read(size) {
-        if (offset >= data.length) {
-          this.push(null)
-        } else {
-          this.push(data.slice(offset, offset + size))
-          offset += size
-        }
-      },
-    }),
-  )
-
-  jest.spyOn(wrapper, 'cancel')
-  jest.spyOn(wrapper.source, 'unpipe')
-  jest.spyOn(wrapper.pipe, 'removeAllListeners')
-})
-
-test('#constructor()', () => {
-  expect(wrapper).toMatchSnapshot()
-})
+  return new Readable({
+    read(size) {
+      if (data.length === 0) {
+        this.emit('end')
+      } else if (offset >= data.length) {
+        this.push(null)
+      } else {
+        this.push(data.slice(offset, offset + size))
+        offset += size
+      }
+    },
+  })
+}
 
 test('#cancel()', async () => {
+  const wrapper = new ReadableWrapper(successSource())
+
   expect(() => wrapper.cancel()).not.toThrow()
-  expect(wrapper.source.unpipe).toHaveBeenCalled()
-  expect(wrapper.pipe.removeAllListeners).toHaveBeenCalled()
 
   {
     const { done, value } = await wrapper.read()
@@ -47,33 +42,62 @@ test('#cancel()', async () => {
 
 describe('#read()', () => {
   test('success', async () => {
+    const data = Buffer.from('Hello World')
+    let wrapper = new ReadableWrapper(successSource(data))
+
     {
       const { done, value } = await wrapper.read()
+
       expect(done).toBe(false)
       expect(value).toEqual(data)
     }
 
     {
       const { done, value } = await wrapper.read()
+
+      expect(done).toBe(true)
+      expect(value).toBeUndefined()
+    }
+
+    {
+      // A source that ends in-flight should not cause an infinite loop.
+      wrapper = new ReadableWrapper(successSource())
+      const { done, value } = await wrapper.read()
+
+      expect(done).toBe(true)
+      expect(value).toBeUndefined()
+    }
+
+    {
+      // A consumed source should not cause an infinite loop.
+      wrapper = new ReadableWrapper(wrapper.source)
+      const { done, value } = await wrapper.read()
+
       expect(done).toBe(true)
       expect(value).toBeUndefined()
     }
   })
 
-  test('failure', async () => {
+  test('early failure', async () => {
     const error = new Error('test')
+    const wrapper = new ReadableWrapper(successSource(Buffer.alloc(0)))
 
-    wrapper.pipe.emit('error', error)
+    jest.spyOn(wrapper, 'cancel')
+
+    wrapper.source.emit('error', error)
+
     await wrapper.read().catch(e => {
       expect(e).toBe(error)
       expect(wrapper.cancel).toHaveBeenCalled()
     })
   })
 
-  test('upstream failure', async () => {
+  test('in-flight failure', async () => {
     const error = new Error('test')
+    const wrapper = new ReadableWrapper(failureSource(error))
 
-    wrapper.source.emit('error', error)
+    jest.spyOn(wrapper, 'cancel')
+
     await wrapper.read().catch(e => {
       expect(e).toBe(error)
       expect(wrapper.cancel).toHaveBeenCalled()
