@@ -30,12 +30,11 @@ export default class ReadableWrapper<T> implements ReadableSource<T> {
   cancel(): void {
     this.done = true
 
-    this.source.removeListener('error', this.handleEnd)
+    this.source.removeListener('end', this.handleEnd)
     this.source.removeListener('error', this.handleError)
 
-    if (typeof this.source.destroy === 'function') {
-      this.source.destroy()
-    }
+    // $FlowIgnore
+    this.source.destroy()
   }
 
   read(): AsyncIteratorResult<T, void> {
@@ -46,7 +45,7 @@ export default class ReadableWrapper<T> implements ReadableSource<T> {
         done: true,
         value: undefined,
       })
-    } else if (this.source.closed === true) {
+    } else if (this.source.readable === false) {
       this.cancel()
       return this.read()
     }
@@ -57,17 +56,12 @@ export default class ReadableWrapper<T> implements ReadableSource<T> {
       let handleError = null
 
       const cleanup = () => {
-        if (handleData != null) {
-          this.source.removeListener('data', handleData)
-        }
-
-        if (handleEnd != null) {
-          this.source.removeListener('end', handleEnd)
-        }
-
-        if (handleError != null) {
-          this.source.removeListener('error', handleError)
-        }
+        // $FlowIgnore
+        this.source.removeListener('data', handleData)
+        // $FlowIgnore
+        this.source.removeListener('end', handleEnd)
+        // $FlowIgnore
+        this.source.removeListener('error', handleError)
       }
 
       handleData = value => {
