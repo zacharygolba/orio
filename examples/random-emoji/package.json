@@ -1,12 +1,12 @@
 {
   "name": "emoji-roulette",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.5",
   "repository": "github:zacharygolba/iter.js",
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
   "private": true,
   "main": "lib/index.js",
   "dependencies": {
-    "orio": "^0.0.1-alpha.4"
+    "orio": "^0.0.1-alpha.5"
   }
 }

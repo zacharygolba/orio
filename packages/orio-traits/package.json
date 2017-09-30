@@ -1,6 +1,6 @@
 {
   "name": "orio-traits",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.5",
   "description": "Common decorators to share between orio packages",
   "main": "lib/index.js",
   "module": "dist/index.es.js",
@@ -8,7 +8,7 @@
   "author": "Zachary Golba <zachary.golba@postlight.com>",
   "license": "MIT",
   "dependencies": {
-    "orio-types": "^0.0.1-alpha.2",
-    "orio-utils": "^0.0.1-alpha.3"
+    "orio-types": "^0.0.1-alpha.5",
+    "orio-utils": "^0.0.1-alpha.5"
   }
 }
