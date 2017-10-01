@@ -15,7 +15,7 @@ function merge(a: Uint8Array, b: Uint8Array): Uint8Array {
 }
 
 @ToString
-export default class ReadableWrapper<T> implements ReadableSource<T> {
+export default class ReadableWrapper implements ReadableSource<Uint8Array> {
   data: Uint8Array
   done: boolean
   error: ?Error
@@ -41,7 +41,7 @@ export default class ReadableWrapper<T> implements ReadableSource<T> {
     }
 
     source
-      .once('data', this.handleData)
+      .on('data', this.handleData)
       .once('end', this.handleEnd)
       .once('error', this.handleError)
   }
@@ -55,23 +55,23 @@ export default class ReadableWrapper<T> implements ReadableSource<T> {
 
     // $FlowIgnore
     this.source.destroy()
-
-    process.nextTick(() => {
-      setImmediate(() => {
-        this.data = new Uint8Array(0)
-      })
-    })
   }
 
-  async read(): AsyncIteratorResult<T, void> {
+  async read(): AsyncIteratorResult<Uint8Array, void> {
     if (this.done && this.error != null) {
       throw this.error
-    } else if (this.done) {
+    }
+
+    if (this.done) {
       return result.done()
-    } else if (this.source.readable === false) {
+    }
+
+    if (this.source.readable === false) {
       this.cancel()
       return this.read()
-    } else if (this.data.length > 0) {
+    }
+
+    if (this.data.length > 0) {
       return result.next(this.take())
     }
 
