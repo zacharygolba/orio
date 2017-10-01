@@ -49,7 +49,7 @@ describe('#read()', () => {
       const { done, value } = await wrapper.read()
 
       expect(done).toBe(false)
-      expect(value).toEqual(data)
+      expect(value).toEqual(new Uint8Array(data))
     }
 
     {

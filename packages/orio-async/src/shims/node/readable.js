@@ -6,48 +6,73 @@ import * as result from 'orio-result'
 import { ToString } from 'orio-traits'
 import type { AsyncIteratorResult, ReadableSource } from 'orio-types'
 
+function merge(a: Uint8Array, b: Uint8Array): Uint8Array {
+  const buf = new Uint8Array(a.length + b.length)
+
+  buf.set(a)
+  buf.set(b, a.length)
+  return buf
+}
+
 @ToString
 export default class ReadableWrapper<T> implements ReadableSource<T> {
+  data: Uint8Array
   done: boolean
   error: ?Error
   source: Readable
+  handleData: Uint8Array => void
   handleEnd: () => void
   handleError: Error => void
 
   constructor(source: Readable) {
+    this.data = new Uint8Array(0)
     this.done = false
     this.error = null
     this.source = source
     this.handleEnd = () => this.cancel()
+
+    this.handleData = data => {
+      this.data = merge(this.data, data)
+    }
+
     this.handleError = e => {
       this.error = e
       this.cancel()
     }
 
-    source.once('end', this.handleEnd).once('error', this.handleError)
+    source
+      .once('data', this.handleData)
+      .once('end', this.handleEnd)
+      .once('error', this.handleError)
   }
 
   cancel(): void {
     this.done = true
 
+    this.source.removeListener('data', this.handleData)
     this.source.removeListener('end', this.handleEnd)
     this.source.removeListener('error', this.handleError)
 
     // $FlowIgnore
     this.source.destroy()
+
+    process.nextTick(() => {
+      setImmediate(() => {
+        this.data = new Uint8Array(0)
+      })
+    })
   }
 
-  read(): AsyncIteratorResult<T, void> {
+  async read(): AsyncIteratorResult<T, void> {
     if (this.done && this.error != null) {
-      return Promise.reject(this.error)
+      throw this.error
     } else if (this.done) {
-      return Promise.resolve({
-        done: true,
-        value: undefined,
-      })
+      return result.done()
     } else if (this.source.readable === false) {
       this.cancel()
       return this.read()
+    } else if (this.data.length > 0) {
+      return result.next(this.take())
     }
 
     return new Promise((resolve, reject) => {
@@ -64,14 +89,20 @@ export default class ReadableWrapper<T> implements ReadableSource<T> {
         this.source.removeListener('error', handleError)
       }
 
-      handleData = value => {
+      handleData = () => {
         cleanup()
-        resolve(result.next(value))
+        setImmediate(() => {
+          const chunk = this.take()
+          resolve(result.next(chunk))
+        })
       }
 
       handleEnd = () => {
-        this.cancel()
-        resolve(result.done())
+        cleanup()
+        setImmediate(() => {
+          const chunk = this.take()
+          resolve(chunk.length ? result.next(chunk) : result.done())
+        })
       }
 
       handleError = e => {
@@ -84,5 +115,12 @@ export default class ReadableWrapper<T> implements ReadableSource<T> {
         .once('error', handleError)
         .once('end', handleEnd)
     })
+  }
+
+  take(bytes?: number = this.data.length): Uint8Array {
+    const chunk = this.data.slice(0, bytes)
+
+    this.data = this.data.slice(bytes)
+    return chunk
   }
 }
