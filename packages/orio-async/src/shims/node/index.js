@@ -15,7 +15,7 @@ export function isWritable(value: mixed): boolean %checks {
   return value instanceof Writable
 }
 
-export function wrapReadable(source: any): ReadableWrapper<*> {
+export function wrapReadable(source: any): ReadableWrapper {
   return new ReadableWrapper(source)
 }
 
