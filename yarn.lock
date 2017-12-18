@@ -586,9 +586,9 @@ babel-plugin-syntax-trailing-function-commas@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-6.22.0.tgz#ba0360937f8d06e40180a43fe0d5616fff532cf3"
 
-babel-plugin-tailcall-optimization@1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/babel-plugin-tailcall-optimization/-/babel-plugin-tailcall-optimization-1.0.11.tgz#74072e57a365da27fbf7722cc1c553e71caf45e5"
+babel-plugin-tailcall-optimization@1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/babel-plugin-tailcall-optimization/-/babel-plugin-tailcall-optimization-1.0.12.tgz#e4a17c68f2da43422e275fcc594cbf1d2f026ade"
 
 babel-plugin-transform-async-to-generator@^6.22.0:
   version "6.24.1"
