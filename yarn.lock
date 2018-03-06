@@ -1317,9 +1317,9 @@ commander@^2.11.0, commander@^2.8.1, commander@^2.9.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
 
-commenting@1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/commenting/-/commenting-1.0.4.tgz#d140af32634fcbdee4d71396934c1fcdac147e50"
+commenting@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/commenting/-/commenting-1.0.5.tgz#3104d542cac8a4f27b3d51438f4b80431fe4526b"
 
 common-tags@1.4.0:
   version "1.4.0"
@@ -3393,7 +3393,11 @@ lodash.templatesettings@^4.0.0:
   dependencies:
     lodash._reinterpolate "~3.0.0"
 
-lodash@4.17.4, lodash@^4.0.0, lodash@^4.1.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
+lodash@4.17.5:
+  version "4.17.5"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
+
+lodash@^4.0.0, lodash@^4.1.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -3578,7 +3582,11 @@ modify-values@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/modify-values/-/modify-values-1.0.0.tgz#e2b6cdeb9ce19f99317a53722f3dbf5df5eaaab2"
 
-moment@2.18.1, moment@^2.6.0:
+moment@2.21.0:
+  version "2.21.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.21.0.tgz#2a114b51d2a6ec9e6d83cf803f838a878d8a023a"
+
+moment@^2.6.0:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
@@ -4308,15 +4316,15 @@ rollup-plugin-json@2.3.0:
   dependencies:
     rollup-pluginutils "^2.0.1"
 
-rollup-plugin-license@0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-license/-/rollup-plugin-license-0.5.0.tgz#5e707375fb58d29575253a0d28e97e41882682f7"
+rollup-plugin-license@0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-license/-/rollup-plugin-license-0.6.0.tgz#d8e5e75ac0fcb5a7af7c5d89a644ef42f05f48a4"
   dependencies:
-    commenting "1.0.4"
-    lodash "4.17.4"
+    commenting "1.0.5"
+    lodash "4.17.5"
     magic-string "0.22.4"
     mkdirp "0.5.1"
-    moment "2.18.1"
+    moment "2.21.0"
 
 rollup-plugin-node-resolve@3.0.0:
   version "3.0.0"
